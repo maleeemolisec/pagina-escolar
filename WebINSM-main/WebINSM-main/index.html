@@ -2154,20 +2154,26 @@
 			@media (max-width: 768px) {
 				/* Header */
 				.header-main {
-					padding: 15px 20px;
+					padding: 12px 16px;
 				}
 				.header-main nav ul li:not(:last-child) {
 					display: none;
 				}
 				.header-main .menu-icon {
-					display: block;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 40px;
+					height: 40px;
+					border-radius: 10px;
+					background: rgba(255, 255, 255, 0.08);
 				}
 				.brand-text-desktop {
 					display: none;
 				}
 				.brand-text-mobile {
 					display: inline;
-					font-size: 1.2em;
+					font-size: 1.1em;
 					font-weight: bold;
 				}
 
@@ -2175,6 +2181,55 @@
 					font-size: 0.9em;
 					max-width: 200px;
 					line-height: 1.2;
+				}
+				.header-main .logo img {
+					height: 42px;
+					margin-right: 8px;
+				}
+				.side-menu-content {
+					width: min(82vw, 320px);
+					padding: 20px 18px 18px;
+				}
+				.side-menu-header {
+					margin-bottom: 14px;
+				}
+				.side-menu-header h3 {
+					font-size: 1.4em;
+				}
+				.side-menu-links {
+					display: none;
+				}
+				.side-menu-shortcuts {
+					margin-top: 8px;
+					padding-top: 12px;
+				}
+				.side-menu-shortcuts h4 {
+					display: none;
+				}
+				.shortcut-grid {
+					display: flex;
+					flex-direction: column;
+					gap: 0;
+				}
+				.shortcut-item {
+					padding: 16px 6px;
+					border: none;
+					border-bottom: 1px solid #ececec;
+					border-radius: 0;
+					background: transparent;
+					font-size: 1.05em;
+					font-weight: 600;
+					color: #1f1f1f;
+					min-height: 0;
+				}
+				.shortcut-item i {
+					display: none;
+				}
+				.shortcut-item:last-child {
+					border-bottom: none;
+				}
+				.side-menu-footer {
+					display: none;
 				}
 
 				/* Hero Section - Centered for Impact */
@@ -2777,19 +2832,21 @@
 				</ul>
 
 				<div class="side-menu-shortcuts">
-					<h4>Accesos Globales</h4>
 					<div class="shortcut-grid">
 						<a href="index.html" class="shortcut-item">
-							<i class="fas fa-home"></i> Inicio
+							Inicio
 						</a>
 						<a href="NuestroColegio.html" class="shortcut-item">
-							<i class="fas fa-university"></i> Nuestro Colegio
+							Institución
+						</a>
+						<a href="NivelSecundario.html" class="shortcut-item">
+							Niveles
 						</a>
 						<a href="Proyectos.html" class="shortcut-item">
-							<i class="fas fa-project-diagram"></i> Proyectos
+							Proyectos
 						</a>
 						<a href="Contacto.html" class="shortcut-item">
-							<i class="fas fa-envelope"></i> Contacto
+							Contacto
 						</a>
 					</div>
 				</div>
