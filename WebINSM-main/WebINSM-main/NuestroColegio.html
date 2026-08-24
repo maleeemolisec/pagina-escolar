@@ -1,0 +1,1949 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Nuestro Colegio | INSM</title>
+		<meta
+			name="description"
+			content="Conocé la trayectoria, el carisma y la propuesta educativa del Instituto Nuestra Señora de la Merced en Arroyito, Córdoba."
+		/>
+		<style>
+			/* --- Fuentes --- */
+			@font-face {
+				font-family: 'Heuristica';
+				src: url('fonts/Heuristica-Regular.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+			@font-face {
+				font-family: 'Heuristica';
+				src: url('fonts/Heuristica-Bold.ttf') format('truetype');
+				font-weight: bold;
+				font-style: normal;
+			}
+			@font-face {
+				font-family: 'ProximaNova';
+				src: url('fonts/ProximaNova-Regular.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				overflow-x: hidden;
+				margin: 0;
+				padding: 0;
+				position: relative;
+			}
+
+			html {
+				scroll-behavior: smooth;
+				scrollbar-gutter: stable; /* RESERVA EL ESPACIO PARA EVITAR EL SALTO DEL CONTENIDO AL BLOQUEAR EL SCROLL */
+				overscroll-behavior-y: none; /* Evita que el fondo se separe y rebote de forma extraña */
+			}
+
+			body {
+				font-family: 'Heuristica', serif;
+				color: #333;
+				background-color: #ffffff;
+				animation: fadeInPage 0.5s ease-in-out;
+			}
+
+			body.fade-out {
+				opacity: 0;
+				transition: opacity 0.5s ease-in-out;
+			}
+
+			body.no-scroll,
+			html.no-scroll {
+				overflow: hidden !important;
+				touch-action: none;
+			}
+
+			/* --- Menú Lateral de Navegación Rápida (Slider) --- */
+			.side-menu {
+				position: fixed;
+				top: 0;
+				right: 0;
+				width: 100%;
+				height: 100vh;
+				z-index: 2000;
+				visibility: hidden;
+				pointer-events: none;
+				overflow: hidden;
+				transition: visibility 0.6s;
+			}
+
+			.side-menu.active {
+				visibility: visible;
+				pointer-events: all;
+				transition: none;
+			}
+
+			.side-menu-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.4);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+				opacity: 0;
+				transition: opacity 0.6s ease;
+			}
+
+			.side-menu.active .side-menu-overlay {
+				opacity: 1;
+			}
+
+			.side-menu-content {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 400px;
+				height: 100%;
+				height: 100dvh;
+				background: #ffffff;
+				transform: translateX(110%);
+				transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+				padding: 40px;
+				box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15);
+				display: flex;
+				flex-direction: column;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+
+			.side-menu.active .side-menu-content {
+				transform: translateX(0);
+			}
+
+			.side-menu-header {
+				margin-bottom: 30px;
+				border-bottom: 2px solid #f39c12;
+				padding-bottom: 15px;
+				flex-shrink: 0;
+			}
+
+			.side-menu-header h3 {
+				font-family: 'Heuristica', serif;
+				font-size: 1.8em;
+				color: #cf0621;
+				margin: 0;
+				font-weight: normal;
+			}
+
+			.side-menu-links {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				flex-grow: 1; 
+				overflow-y: auto;
+				overflow-x: hidden;
+				padding-right: 10px;
+				scrollbar-width: thin;
+				scrollbar-color: #f39c12 #f4f6f8;
+				scrollbar-gutter: stable;
+			}
+
+			.side-menu-links::-webkit-scrollbar {
+				width: 8px;
+				display: block !important;
+			}
+			.side-menu-links::-webkit-scrollbar-track {
+				background: #f4f6f8 !important;
+				border-radius: 10px;
+			}
+			.side-menu-links::-webkit-scrollbar-thumb {
+				background-color: #f39c12 !important;
+				border-radius: 10px;
+				border: 2px solid #f4f6f8;
+			}
+
+			.side-menu-links li {
+				margin-bottom: 8px;
+				opacity: 0;
+				transform: translateX(40px);
+				transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			@media (min-width: 769px) {
+				.side-menu-shortcuts,
+				.side-menu-footer {
+					display: none;
+				}
+			}
+
+			.side-menu.active .side-menu-links li {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			.side-menu.active .side-menu-links li:nth-child(1) { transition-delay: 0.15s; }
+			.side-menu.active .side-menu-links li:nth-child(2) { transition-delay: 0.20s; }
+			.side-menu.active .side-menu-links li:nth-child(3) { transition-delay: 0.25s; }
+
+			.side-menu-links li a {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				padding: 12px 15px;
+				text-decoration: none;
+				color: #555;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				border-radius: 12px;
+				transition: all 0.3s ease;
+			}
+
+			.side-menu-links li a i {
+				width: 24px;
+				text-align: center;
+				color: #f39c12;
+				font-size: 1.2em;
+			}
+
+			@media (hover: hover) {
+				.side-menu-links li a:hover {
+					background-color: #f4f6f8;
+					color: #cf0621;
+					padding-left: 20px;
+				}
+				.side-menu-links li a:hover i {
+					color: #cf0621;
+					transform: scale(1.2);
+				}
+				.shortcut-item:hover {
+					background: #ffffff;
+					border-color: #cf0621;
+					color: #cf0621;
+					transform: translateY(-2px);
+					box-shadow: 0 4px 10px rgba(207, 6, 33, 0.1);
+				}
+			}
+
+			.side-menu-shortcuts {
+				margin-top: auto;
+				padding-top: 20px;
+				border-top: 1px solid #eee;
+				flex-shrink: 0;
+			}
+
+			.side-menu-shortcuts h4 {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 0.85em;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: #999;
+				margin: 0 0 15px 0;
+			}
+
+			.shortcut-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 10px;
+				align-items: stretch;
+			}
+
+			.shortcut-item {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px;
+				background: #f8f9fa;
+				border-radius: 10px;
+				text-decoration: none;
+				color: #666;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 0.9em;
+				transition: all 0.3s ease;
+				border: 1px solid transparent;
+				min-height: 54px;
+				box-sizing: border-box;
+			}
+
+			.shortcut-item i { color: #f39c12; font-size: 1.1em; flex-shrink: 0; }
+
+			.side-menu-footer {
+				margin-top: 20px;
+				flex-shrink: 0;
+			}
+
+			.back-home-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				padding: 14px;
+				background-color: #f39c12;
+				color: white;
+				text-decoration: none;
+				font-family: 'ProximaNova', sans-serif;
+				font-weight: bold;
+				border-radius: 50px;
+				transition: all 0.3s ease;
+			}
+
+			@media (max-width: 1024px) { .side-menu-content { width: 380px; padding: 30px; } }
+			@media (max-width: 768px) { .side-menu-content { width: 340px; padding: 25px; } }
+			@media (max-width: 480px) { .side-menu-content { width: 88%; padding: 20px; } }
+
+			/* --- Menú Lateral de Navegación Rápida (Slider) --- */
+			.side-menu {
+				position: fixed;
+				top: 0;
+				right: 0;
+				width: 100%;
+				height: 100vh;
+				z-index: 2000;
+				visibility: hidden;
+				pointer-events: none;
+				overflow: hidden;
+				transition: visibility 0.6s;
+			}
+
+			.side-menu.active {
+				visibility: visible;
+				pointer-events: all;
+				transition: none;
+			}
+
+			.side-menu-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.4);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+				opacity: 0;
+				transition: opacity 0.6s ease;
+			}
+
+			.side-menu.active .side-menu-overlay {
+				opacity: 1;
+			}
+
+			.side-menu-content {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 400px;
+				height: 100%;
+				height: 100dvh;
+				background: #ffffff;
+				transform: translateX(110%);
+				transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+				padding: 40px;
+				box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15);
+				display: flex;
+				flex-direction: column;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+
+			.side-menu.active .side-menu-content {
+				transform: translateX(0);
+			}
+
+			.side-menu-header {
+				margin-bottom: 30px;
+				border-bottom: 2px solid #f39c12;
+				padding-bottom: 15px;
+				flex-shrink: 0;
+			}
+
+			.side-menu-header h3 {
+				font-family: 'Heuristica', serif;
+				font-size: 1.8em;
+				color: #cf0621;
+				margin: 0;
+				font-weight: normal;
+			}
+
+			.side-menu-links {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				flex-grow: 1; 
+				overflow-y: auto;
+				overflow-x: hidden;
+				padding-right: 10px;
+				scrollbar-width: thin;
+				scrollbar-color: #f39c12 #f4f6f8;
+				scrollbar-gutter: stable;
+			}
+
+			.side-menu-links::-webkit-scrollbar {
+				width: 8px;
+				display: block !important;
+			}
+			.side-menu-links::-webkit-scrollbar-track {
+				background: #f4f6f8 !important;
+				border-radius: 10px;
+			}
+			.side-menu-links::-webkit-scrollbar-thumb {
+				background-color: #f39c12 !important;
+				border-radius: 10px;
+				border: 2px solid #f4f6f8;
+			}
+
+			.side-menu-links li {
+				margin-bottom: 8px;
+				opacity: 0;
+				transform: translateX(40px);
+				transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			@media (min-width: 769px) {
+				.side-menu-shortcuts,
+				.side-menu-footer {
+					display: none;
+				}
+			}
+
+			.side-menu.active .side-menu-links li {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			.side-menu.active .side-menu-links li:nth-child(1) { transition-delay: 0.15s; }
+			.side-menu.active .side-menu-links li:nth-child(2) { transition-delay: 0.20s; }
+			.side-menu.active .side-menu-links li:nth-child(3) { transition-delay: 0.25s; }
+
+			.side-menu-links li a {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				padding: 12px 15px;
+				text-decoration: none;
+				color: #555;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				border-radius: 12px;
+				transition: all 0.3s ease;
+			}
+
+			.side-menu-links li a i {
+				width: 24px;
+				text-align: center;
+				color: #f39c12;
+				font-size: 1.2em;
+			}
+
+			@media (hover: hover) {
+				.side-menu-links li a:hover {
+					background-color: #f4f6f8;
+					color: #cf0621;
+					padding-left: 20px;
+				}
+				.side-menu-links li a:hover i {
+					color: #cf0621;
+					transform: scale(1.2);
+				}
+				.shortcut-item:hover {
+					background: #ffffff;
+					border-color: #cf0621;
+					color: #cf0621;
+					transform: translateY(-2px);
+					box-shadow: 0 4px 10px rgba(207, 6, 33, 0.1);
+				}
+			}
+
+			.side-menu-shortcuts {
+				margin-top: auto;
+				padding-top: 20px;
+				border-top: 1px solid #eee;
+				flex-shrink: 0;
+			}
+
+			.side-menu-shortcuts h4 {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 0.85em;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: #999;
+				margin: 0 0 15px 0;
+			}
+
+			.shortcut-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 10px;
+				align-items: stretch;
+			}
+
+			.shortcut-item {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px;
+				background: #f8f9fa;
+				border-radius: 10px;
+				text-decoration: none;
+				color: #666;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 0.9em;
+				transition: all 0.3s ease;
+				border: 1px solid transparent;
+				min-height: 54px;
+				box-sizing: border-box;
+			}
+
+			.shortcut-item i { color: #f39c12; font-size: 1.1em; flex-shrink: 0; }
+
+			.side-menu-footer {
+				margin-top: 20px;
+				flex-shrink: 0;
+			}
+
+			.back-home-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				padding: 14px;
+				background-color: #f39c12;
+				color: white;
+				text-decoration: none;
+				font-family: 'ProximaNova', sans-serif;
+				font-weight: bold;
+				border-radius: 50px;
+				transition: all 0.3s ease;
+			}
+
+			@media (max-width: 1024px) { .side-menu-content { width: 380px; padding: 30px; } }
+			@media (max-width: 768px) { .side-menu-content { width: 340px; padding: 25px; } }
+			@media (max-width: 480px) { .side-menu-content { width: 88%; padding: 20px; } }
+
+			@keyframes fadeInPage {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+
+            /* --- CORRECCIÓN DE SCROLL --- */
+			section {
+				scroll-margin-top: 80px;
+			}
+
+			/* --- Header --- */
+			.header-main {
+				background-color: rgba(26, 79, 141, 0.25);
+				backdrop-filter: blur(5px);
+				-webkit-backdrop-filter: blur(5px);
+				color: white;
+				padding: 15px 30px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 100;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+				transition: all 0.3s ease;
+			}
+			.header-main .logo {
+				display: flex;
+				align-items: center;
+				font-size: 1.5em;
+				font-weight: bold;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+			}
+			.header-main .logo a {
+				display: flex;
+				align-items: center;
+				text-decoration: none;
+				color: white;
+				transition: none;
+			}
+			.header-main .logo img {
+				height: 50px;
+				margin-right: 10px;
+			}
+			.header-main nav ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				gap: 25px;
+				align-items: center;
+			}
+			.header-main nav ul li:not(:last-child)::after {
+				content: '│';
+				color: rgba(130, 163, 189, 0.8);
+				margin-left: 25px;
+				font-weight: bold;
+			}
+			.header-main nav ul li a {
+				text-decoration: none;
+				color: white;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1em;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+				transition: color 0.3s ease;
+				position: relative;
+				padding-bottom: 5px;
+			}
+			.header-main nav ul li:not(:last-child) a::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
+				transform: scaleX(0);
+				transform-origin: left;
+				transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			}
+			.header-main nav ul li:not(:last-child) a:hover::after {
+				transform: scaleX(1);
+			}
+			.header-main nav ul li a:hover {
+				color: #f39c12;
+			}
+			.header-main .menu-icon {
+				font-size: 1.3em;
+				cursor: pointer;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+			}
+
+			/* --- Menú desplegable Estilo Móvil (Tipo App) --- */
+			.dropdown-menu {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100vh;
+				background-color: #ffffff;
+				z-index: 2000;
+				display: block;
+				transform: translateX(100%);
+				transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+				overflow-y: auto;
+			}
+			.dropdown-menu.show {
+				transform: translateX(0);
+			}
+			.mobile-menu-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 20px;
+				border-bottom: 1px solid #f0f0f0;
+				background-color: #fff;
+				position: sticky;
+				top: 0;
+				z-index: 10;
+			}
+			.mobile-menu-logo {
+				display: flex;
+				align-items: center;
+				font-size: 1.2em;
+				font-weight: bold;
+				color: #333;
+			}
+			.mobile-menu-logo img {
+				height: 40px;
+				margin-right: 10px;
+				width: auto;
+			}
+			.close-menu-btn {
+				background: none;
+				border: none;
+				font-size: 1.5em;
+				color: #cf0621;
+				cursor: pointer;
+				padding: 5px;
+				display: flex;
+				align-items: center;
+			}
+			.mobile-menu-list {
+				list-style: none;
+				padding: 0;
+				margin: 10px 0 0 0;
+			}
+			.mobile-menu-list li a {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 18px 25px;
+				text-decoration: none;
+				color: #333;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				transition: background-color 0.2s;
+			}
+			.mobile-menu-list li a:hover {
+				background-color: #f9f9f9;
+				color: #cf0621;
+			}
+			.mobile-menu-list li a i {
+				color: #f39c12;
+				font-size: 0.9em;
+			}
+			.mobile-menu-highlight {
+				margin-top: 10px;
+				border-top: 8px solid #f39c12;
+				padding-top: 10px;
+				padding-bottom: 40px;
+			}
+			.mobile-menu-highlight h4 {
+				padding: 15px 25px 5px 25px;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1em;
+				color: #cf0621;
+				font-weight: normal;
+				margin: 0;
+			}
+			.mobile-menu-highlight a {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 18px 25px;
+				text-decoration: none;
+				color: #333;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				font-weight: 600;
+			}
+			.mobile-menu-highlight a.highlight-red {
+				color: #cf0621;
+			}
+
+			/* --- Hero Section --- */
+			.hero-section {
+				position: relative;
+				width: 100%;
+				height: 100vh;
+				height: 100dvh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding-left: 8%;
+				box-sizing: border-box;
+				text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+				overflow: hidden; /* Necesario para el zoom del fondo */
+			}
+
+			/* Imagen de Fondo con Zoom */
+			.hero-section::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: url('img/entrada.png') no-repeat center center;
+				background-size: cover;
+				z-index: 0;
+				transform: scale(var(--hero-scale, 1));
+				will-change: transform;
+				transition: transform 0.3s ease-out;
+			}
+
+			/* Gradiente Oscuro */
+			.hero-section::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(to right, rgba(70, 68, 68, 0.5), rgba(0, 0, 0, 0));
+				z-index: 1;
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 2;
+			}
+
+			.hero-line-1,
+			.hero-line-2 {
+				display: block;
+			}
+
+			.hero-content p {
+				font-size: 1.05em;
+				margin-top: 5px;
+				max-width: 500px;
+				color: white;
+				font-style: italic;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				cursor: pointer;
+				visibility: hidden; /* Hidden initially, shown by JS */
+			}
+
+			.hero-content h1 {
+				font-size: 5.5em;
+				margin: 0;
+				line-height: 1.1;
+				font-weight: normal;
+				color: white;
+				visibility: hidden; /* Hidden initially, shown by JS */
+			}
+
+			@keyframes riseIn {
+				0% {
+					transform: translateY(120%) scaleY(1.05);
+					opacity: 0;
+				}
+				60% {
+					transform: translateY(-6%) scaleY(0.95);
+					opacity: 1;
+				}
+				80% {
+					transform: translateY(2%) scaleY(1.02);
+				}
+				100% {
+					transform: translateY(0) scaleY(1);
+					opacity: 1; /* Ensure text remains visible */
+				}
+			}
+
+			.letter {
+				display: inline-block;
+				opacity: 0;
+				white-space: pre;
+			}
+
+			.hero-arrow {
+				width: 145px;
+				height: 2px;
+				background-color: white;
+				position: relative;
+				transition: width 0.8s ease;
+				align-self: flex-start;
+				transform-origin: left;
+			}
+
+			.hero-arrow::after {
+				content: '';
+				position: absolute;
+				right: -8px;
+				top: -4px;
+				width: 0;
+				height: 0;
+				border-left: 10px solid white;
+				border-top: 5px solid transparent;
+				border-bottom: 5px solid transparent;
+				transition: transform 0.3s ease;
+			}
+
+			.hero-content p:hover .hero-arrow {
+				width: 165px;
+			}
+
+			.hero-content p:hover .hero-arrow::after {
+				transform: scale(1.2);
+			}
+
+			/* --- Secciones de Contenido --- */
+			.section-white {
+				padding: 100px 20px;
+				background-color: #ffffff;
+			}
+            .section-gray {
+				padding: 100px 20px;
+				background-color: #f4f6f8;
+			}
+			.content-container {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+			.content-block h2 {
+				font-family: 'Heuristica', serif;
+				font-size: 2.6em;
+				color: #cf0621;
+				margin: 0 0 40px 0;
+				font-weight: normal;
+				line-height: 1.1;
+				border-bottom: 2px solid #f39c12;
+				padding-bottom: 10px;
+				display: inline-block;
+			}
+
+            /* --- LÍNEA DE TIEMPO VERTICAL --- */
+            .v-timeline {
+                position: relative;
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 40px 0;
+            }
+            .v-timeline::after {
+                content: '';
+                position: absolute;
+                width: 4px;
+                background-color: #e0e0e0;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                margin-left: -2px;
+                z-index: 1;
+            }
+            .v-progress-line {
+                position: absolute;
+                width: 4px;
+                background-color: #cf0621;
+                top: 0;
+                left: 50%;
+                margin-left: -2px;
+                z-index: 2;
+                height: 0%;
+                transition: height 0.1s linear;
+            }
+            .v-item {
+                padding: 10px 40px;
+                position: relative;
+                background-color: inherit;
+                width: 50%;
+                opacity: 0.2;
+                transform: translateY(30px);
+                transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 3;
+            }
+            .v-item.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .v-item.left { left: 0; }
+            .v-item.right { left: 50%; }
+            .v-dot {
+                position: absolute;
+                width: 24px;
+                height: 24px;
+                right: -12px;
+                background-color: #fff;
+                border: 4px solid #e0e0e0;
+                top: 20px;
+                border-radius: 50%;
+                z-index: 10;
+                transition: all 0.4s ease;
+            }
+            .v-item.right .v-dot { left: -12px; }
+            .v-item.active .v-dot {
+                background-color: #f39c12;
+                border-color: #cf0621;
+                transform: scale(1.2);
+                box-shadow: 0 0 15px rgba(207, 6, 33, 0.4);
+            }
+            .v-content {
+                padding: 30px;
+                background-color: #ffffff;
+                position: relative;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            }
+            .v-year {
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                font-size: 1.8em;
+                color: #f39c12;
+                margin-bottom: 10px;
+                display: block;
+            }
+            .v-image {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+            .v-content h3 {
+                font-family: 'Heuristica', serif;
+                font-size: 1.8em;
+                color: #cf0621;
+                margin-bottom: 15px;
+                font-weight: normal;
+                line-height: 1.2;
+            }
+            .v-content p {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.05em;
+                line-height: 1.6;
+                color: #666;
+                text-align: justify;
+            }
+
+            /* --- Misión y Valores (Tarjetas) --- */
+            .values-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                width: 100%;
+            }
+            .value-card {
+                background-color: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                flex: 0 0 calc((100% - 40px) / 3);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 30px;
+                transition: all 0.3s ease;
+                box-sizing: border-box;
+                text-align: center;
+                box-shadow: none;
+                gap: 15px;
+            }
+            @media (max-width: 992px) {
+                .value-card { flex: 0 0 calc((100% - 20px) / 2); }
+            }
+            @media (max-width: 600px) {
+                .value-card { flex: 0 0 100%; }
+            }
+            
+            @media (hover: hover) {
+                .value-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    border-color: #cf0621;
+                }
+                .value-card:hover .value-icon {
+                    transform: scale(1.1);
+                    color: #cf0621;
+                }
+            }
+            .value-card.touch-active {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                border-color: #cf0621;
+            }
+            .value-card.touch-active .value-icon {
+                transform: scale(1.1);
+                color: #cf0621;
+            }
+
+            .value-icon {
+                font-size: 3em;
+                color: #f39c12;
+                margin-bottom: 15px;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .value-card h4 {
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                color: #555;
+                font-size: 1.4em;
+                margin: 5px 0 10px 0;
+            }
+            .value-card p {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1em;
+                line-height: 1.5;
+                color: #6b6b6b;
+                margin: 0;
+            }
+
+            /* --- OTROS BLOQUES --- */
+            .content-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 60px;
+				align-items: center;
+			}
+			.content-body p {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.15em;
+				line-height: 1.8;
+				margin-bottom: 20px;
+				color: #555;
+			}
+            .content-image img {
+				width: 100%;
+				border-radius: 12px;
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+			}
+
+			/* --- Footer --- */
+			.footer {
+				background-color: #cf0621;
+				color: #ffffff;
+				padding: 80px 20px 20px 20px;
+				font-family: 'ProximaNova', sans-serif;
+				position: relative;
+			}
+			.footer-container {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				max-width: 1200px;
+				margin: 0 auto;
+				width: 100%;
+				gap: 30px;
+			}
+			.footer-column {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				text-align: left;
+			}
+			.footer-column-wrapper {
+				width: 100%;
+				max-width: 400px;
+			}
+			.footer-column h3 {
+				color: #f39c12;
+				font-size: 1.4em;
+				margin-bottom: 25px;
+				position: relative;
+				font-weight: normal;
+				font-family: 'Heuristica', serif;
+				white-space: nowrap;
+			}
+			.footer-column h3::after {
+				content: '';
+				display: block;
+				width: 50px;
+				height: 2px;
+				background-color: #cf0621;
+				margin-top: 8px;
+			}
+			.footer-column ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.footer-column ul li {
+				margin-bottom: 15px;
+			}
+			.footer-column ul li a {
+				color: #fff;
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+			@media (hover: hover) {
+				.footer-column ul li a:hover {
+					color: #f39c12;
+					text-decoration: none;
+				}
+			}
+			.contact-info p {
+				margin: 0 0 10px 0;
+				line-height: 1.5;
+				white-space: nowrap; /* Evita que el número de teléfono salte a la siguiente línea */
+			}
+			.contact-info a {
+				color: #fff;
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+			@media (hover: hover) {
+				.contact-info a:hover {
+					color: #f39c12;
+					text-decoration: none;
+				}
+			}
+			.social-icons {
+				display: flex;
+				gap: 15px;
+				margin-top: 25px;
+			}
+			.social-icons a {
+				color: #f39c12;
+				font-size: 1.5em;
+				transition: all 0.3s ease;
+				display: inline-block; /* Ensure transform works */
+			}
+			@media (hover: hover) {
+				.social-icons a:hover {
+					color: #fff;
+					transform: scale(1.2);
+				}
+			}
+			.footer-map-container {
+				position: relative;
+			}
+			.footer-map-container img {
+				width: 100%;
+				height: auto;
+			}
+			.get-directions {
+				margin-top: 20px;
+			}
+
+			/* Animación Ripple adaptada */
+			@keyframes ripple {
+				0% {
+					transform: scale(1);
+					opacity: 0.8;
+				}
+				100% {
+					transform: scale(1.3, 1.5);
+					opacity: 0;
+				}
+			}
+
+			.get-directions a {
+				display: inline-block;
+				padding: 12px 25px;
+				border: 1px solid #f39c12;
+				color: #fff;
+				text-decoration: none;
+				border-radius: 5px;
+				transition:
+					background-color 0.3s ease,
+					border-color 0.3s ease;
+			}
+
+			@media (hover: hover) {
+				.get-directions a:hover {
+					background-color: #f39c12;
+					border-color: #f39c12;
+				}
+			}
+			.footer-bottom {
+				border-top: 1px solid #cf0621;
+				padding-top: 20px;
+				margin-top: 50px;
+				text-align: center;
+				font-size: 0.9em;
+			}
+			.footer-bottom-links a {
+				color: #f39c12;
+				margin: 0 10px;
+				text-decoration: none;
+			}
+			@media (hover: hover) {
+				.footer-bottom-links a:hover {
+					text-decoration: underline;
+				}
+			}
+			.footer-bottom-logos {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+				margin-top: 10px;
+			}
+			.footer-bottom-logos img {
+				height: 40px;
+				filter: grayscale(100%);
+				opacity: 0.6;
+			}
+
+			/* --- Responsive Brand Text & Icon Logic --- */
+			.brand-text-desktop { display: inline; white-space: nowrap; }
+			.brand-text-mobile { display: none; }
+
+			@media (max-width: 1000px) {
+				.brand-text-desktop { display: none; }
+				.brand-text-mobile { display: inline; font-weight: bold; font-size: 1.2em; }
+				.header-main .logo span { font-size: 1.2em; }
+			}
+
+			/* --- TABLET (Portrait & Landscape) --- */
+			@media (min-width: 601px) and (max-width: 1366px) and (pointer: coarse) {
+				.section-white,
+				.section-gray {
+					padding-left: 40px;
+					padding-right: 40px;
+				}
+			}
+
+			/* --- Responsive --- */
+			@media (max-width: 1024px) {
+				.v-timeline::after, .v-progress-line { 
+					left: 50%; 
+					margin-left: -2px;
+				}
+				.v-item { 
+					width: 100%; 
+					padding: 40px 15px; 
+					left: 0 !important; 
+				}
+				.v-dot { 
+					left: 50% !important; 
+					right: auto !important;
+					margin-left: -12px;
+					top: -12px;
+				}
+				.v-content {
+					text-align: center;
+				}
+				.v-content p {
+					text-align: center;
+				}
+			}
+
+			@media (max-width: 992px) {
+				.hero-content h1 {
+					font-size: 5em;
+				}
+				.footer-container {
+					flex-direction: column;
+					gap: 50px;
+					align-items: center;
+				}
+				.footer-column {
+					width: 100%;
+					align-items: center;
+					text-align: center;
+				}
+				.footer-column h3 {
+					margin-bottom: 20px;
+				}
+				.footer-column ul li {
+					margin-bottom: 12px;
+				}
+				.footer-column-wrapper {
+					max-width: 100%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+				}
+				.footer-column h3::after {
+					margin: 8px auto 0 auto;
+				}
+				.social-icons {
+					justify-content: center;
+				}
+			}
+
+			@media (max-width: 768px) {
+				.header-main { padding: 15px 20px; }
+				.header-main nav ul li:not(:last-child) { display: none; }
+				.header-main .menu-icon { display: block; }
+				.brand-text-desktop { display: none; }
+				.brand-text-mobile { display: inline; font-size: 1.2em; font-weight: bold; }
+				.header-main .logo span { font-size: 0.9em; max-width: 200px; line-height: 1.2; }
+				
+				/* Hero Section - Centered for Impact */
+				.hero-section {
+					padding: 0 20px 0 8%;
+					justify-content: center;
+					align-items: flex-start;
+					text-align: left;
+				}
+				.hero-content h1 {
+					font-size: 3.5em;
+				}
+				.hero-content p {
+					align-items: flex-start;
+					margin: 0;
+				}
+				.hero-arrow {
+					margin-top: 5px;
+					align-self: flex-start;
+				}
+
+				.content-grid { grid-template-columns: 1fr; gap: 40px; }
+				/* Footer Responsive */
+				.footer {
+					padding: 60px 20px;
+				}
+			}
+
+			/* Mobile (max-width: 600px) */
+			@media (max-width: 600px) {
+				.footer-container {
+					gap: 45px; /* Más compacto para móvil */
+				}
+				.footer-column h3 {
+					margin-bottom: 15px;
+				}
+				.footer-column ul li {
+					margin-bottom: 10px;
+				}
+				.contact-info p {
+					margin-bottom: 8px;
+				}
+			}
+		</style>
+		<link rel="icon" href="img/favicon.ico" type="image/ico" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	</head>
+	<body>
+		<header>
+			<div class="header-main">
+				<div class="logo">
+					<a href="index.html">
+						<img src="img/favicon.ico" alt="Logo INSM" />
+						<span class="brand-text-desktop">Instituto Nuestra Señora de la Merced</span>
+						<span class="brand-text-mobile">INSM</span>
+					</a>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="NuestroColegio.html">Nuestro Colegio</a></li>
+						<li><a href="Proyectos.html">Proyectos</a></li>
+						<li><a href="Contacto.html">Contacto</a></li>
+						<li class="menu-icon" onclick="toggleSideMenu()"><i class="fas fa-bars"></i></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<div class="dropdown-menu" id="dropdownMenu">
+			<div class="mobile-menu-header">
+				<div class="mobile-menu-logo">
+					<img src="img/favicon.ico" alt="Logo INSM" />
+					<span>INSM</span>
+				</div>
+				<button class="close-menu-btn" onclick="toggleMenu()">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+			<ul class="mobile-menu-list">
+				<li><a href="index.html"><span>Inicio</span><i class="fas fa-chevron-right"></i></a></li>
+				<li><a href="NuestroColegio.html"><span>Nuestro Colegio</span><i class="fas fa-chevron-right"></i></a></li>
+				<li><a href="Proyectos.html"><span>Proyectos</span><i class="fas fa-chevron-right"></i></a></li>
+				<li><a href="Contacto.html"><span>Contacto</span><i class="fas fa-chevron-right"></i></a></li>
+			</ul>
+			<div class="mobile-menu-highlight">
+				<h4>Niveles</h4>
+				<a href="NivelInicial.html"><span>Inicial</span><i class="fas fa-chevron-right"></i></a>
+				<a href="NivelPrimario.html"><span>Primaria</span><i class="fas fa-chevron-right"></i></a>
+				<a href="NivelSecundario.html"><span>Secundaria</span><i class="fas fa-chevron-right"></i></a>
+				<a href="NivelTerciario.html"><span>Superior</span><i class="fas fa-chevron-right"></i></a>
+			</div>
+		</div>
+
+		<main>
+			<section class="hero-section">
+				<div class="hero-content">
+					<h1>
+						<span class="hero-line-1">Nuestro</span>
+						<span class="hero-line-2">Colegio</span>
+					</h1>
+					<p>
+                        <a href="#quienes-somos" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+						    Un legado de educación y fe que se escribe día a día.
+						    <span class="hero-arrow"></span>
+                        </a>
+					</p>
+				</div>
+			</section>
+
+			<!-- SECCIÓN BLANCA: QUIÉNES SOMOS -->
+			<section id="quienes-somos" class="section-white">
+				<div class="content-container">
+					<div class="content-block">
+						<h2>Quiénes Somos</h2>
+						<div class="content-grid">
+							<div class="content-body">
+								<p>
+									El Instituto Nuestra Señora de la Merced nace el 1º de octubre de 1887, 
+                                    fruto de la vocación del <strong>Padre José León Torres</strong>. 
+                                    Junto a diez religiosas, inició la misión de formar corazón y conciencia, 
+                                    priorizando la educación femenina en un contexto de exclusión histórica.
+								</p>
+							</div>
+							<div class="content-image">
+								<img src="img/entrada copy.png" alt="Institucional INSM" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECCIÓN GRIS: TRAYECTORIA (OCUPA TODO EL ANCHO) -->
+			<section id="trayectoria" class="section-gray">
+				<div class="content-container">
+					<div class="content-block" style="margin-bottom: 0;">
+						<h2>Nuestra Trayectoria</h2>
+						<div class="v-timeline" id="vTimeline">
+							<div class="v-progress-line" id="vProgress"></div>
+							
+							<div class="v-item left">
+								<div class="v-dot"></div>
+								<div class="v-content">
+									<span class="v-year">1887</span>
+									<img src="img/entrada.png" class="v-image" alt="Fundación">
+									<h3>Fundación de la Obra</h3>
+									<p>Inicia la Congregación de Hermanas Terceras Mercedarias, marcando el inicio de un camino educativo basado en la redención.</p>
+								</div>
+							</div>
+
+							<div class="v-item right">
+								<div class="v-dot"></div>
+								<div class="v-content">
+									<span class="v-year">1917</span>
+									<img src="img/Historia.jpg" class="v-image" alt="Primaria">
+									<h3>Santa María de Cervellón</h3>
+									<p>La escuela primaria se establece bajo el nombre de nuestra santa, consolidando la presencia mercedaria en Arroyito.</p>
+								</div>
+							</div>
+
+							<div class="v-item left">
+								<div class="v-dot"></div>
+								<div class="v-content">
+									<span class="v-year">1960</span>
+									<img src="img/20250806_092322.jpg" class="v-image" alt="Secundario">
+									<h3>Creación del Secundario</h3>
+									<p>Se inaugura el Instituto para brindar educación media, abriendo nuevas oportunidades para la juventud de la región.</p>
+								</div>
+							</div>
+
+							<div class="v-item right">
+								<div class="v-dot"></div>
+								<div class="v-content">
+									<span class="v-year">1997</span>
+									<img src="img/21 de septiembre.jpg" class="v-image" alt="Mixto">
+									<h3>Matrícula Mixta</h3>
+									<p>El colegio se transforma en una institución mixta, integrando varones y adaptándose a las nuevas realidades sociales.</p>
+								</div>
+							</div>
+
+							<div class="v-item left">
+								<div class="v-dot"></div>
+								<div class="v-content">
+									<span class="v-year">2022</span>
+									<img src="img/sala2.jpg" class="v-image" alt="Informática">
+									<h3>Especialidad en Informática</h3>
+									<p>Se lanza la orientación en Informática, preparando a nuestros alumnos para los retos del mundo tecnológico actual.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECCIÓN BLANCA: MISIÓN Y VALORES -->
+			<section id="mision" class="section-white">
+				<div class="content-container">
+					<div class="content-block">
+						<h2>Misión y Valores</h2>
+						<div class="content-body" style="margin-bottom: 40px;">
+							<p>
+								Nuestra gestión se basa en la evangelización de la cultura, capaz de generar 
+								procesos propios en interacción, participación e interdependencia. Buscamos 
+								que cada miembro de nuestra comunidad educativa sea un testimonio vivo de los 
+								valores mercedarios.
+							</p>
+						</div>
+						<div class="values-grid">
+							<div class="value-card">
+								<div class="value-icon"><i class="fas fa-hands-helping"></i></div>
+								<h4>Interacción</h4>
+								<p>Fomentamos un vínculo pedagógico cercano y personalizado, basado en el respeto mutuo y el acompañamiento constante.</p>
+							</div>
+							<div class="value-card">
+								<div class="value-icon"><i class="fas fa-users"></i></div>
+								<h4>Participación</h4>
+								<p>Promovemos una comunidad activa y unida, donde el alumno es el verdadero protagonista de su propio aprendizaje.</p>
+							</div>
+							<div class="value-card">
+								<div class="value-icon"><i class="fas fa-hand-holding-heart"></i></div>
+								<h4>Solidaridad</h4>
+								<p>Vivimos el carisma mercedario a través de acciones concretas de servicio y compromiso con nuestro entorno social.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-column contact-info">
+					<div class="footer-column-wrapper">
+						<h3>Contactanos</h3>
+						<p><strong>Nivel Inicial:</strong> <a href="tel:+543576408967">+54 (3576) 408-967</a></p>
+						<p><strong>Nivel Primario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+						<p>
+							<strong>Nivel Secundario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a>
+						</p>
+						<p><strong>Nivel Terciario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+						<div class="social-icons">
+							<a href="https://www.facebook.com/insm.nivelsuperior.1/?locale=es_LA" target="_blank"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a href="https://www.youtube.com/@INSM.DIGITAL" target="_blank"
+								><i class="fab fa-youtube"></i
+							></a>
+							<a href="https://www.tiktok.com/@insm.digital" target="_blank"
+								><i class="fab fa-tiktok"></i
+							></a>
+							<a href="https://www.instagram.com/mercedariasarroyito/" target="_blank"
+								><i class="fab fa-instagram"></i
+							></a>
+						</div>
+					</div>
+				</div>
+				<div class="footer-column">
+					<div class="footer-column-wrapper">
+						<h3>Enlaces Útiles</h3>
+						<ul>
+							<li><a href="NivelInicial.html">Nivel Inicial</a></li>
+							<li><a href="NivelPrimario.html">Nivel Primario</a></li>
+							<li><a href="NivelSecundario.html">Nivel Secundario</a></li>
+							<li><a href="NivelTerciario.html">Nivel Terciario</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-column">
+					<div class="footer-column-wrapper">
+						<h3>Encuentranos</h3>
+						<p>
+							9 de Julio 465, Arroyito, Córdoba. Tradición y excelencia mercedaria.
+						</p>
+						<div class="get-directions">
+							<a href="https://maps.app.goo.gl/aSiY8qYsQPtb2uJy7" target="_blank">Obtener Direcciones</a>
+						</div>
+						<div class="footer-map-container"></div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<div class="footer-bottom-links">
+					<span>© 1985 INSM</span>
+					<span>|</span>
+					<a href="#">Políticas & Manuales</a>
+					<span>|</span>
+					<a href="#">Privacidad</a>
+					<span>|</span>
+					<a href="#">Cookies</a>
+				</div>
+				<div class="footer-bottom-links" style="margin-top: 8px;">
+					<span>Desarrollada por <span style="color: #f39c12;">Nazareno</span> y <span style="color: #f39c12;">Eugenio</span></span>
+				</div>
+				<div class="footer-bottom-logos"></div>
+			</div>
+		</footer>
+
+		<div class="side-menu" id="sideMenu">
+			<div class="side-menu-overlay" onclick="toggleSideMenu()"></div>
+			<div class="side-menu-content">
+				<div class="side-menu-header">
+					<h3>Índice de Sección</h3>
+				</div>
+				<ul class="side-menu-links">
+					<li>
+						<a href="#quienes-somos" onclick="toggleSideMenu()">
+							<i class="fas fa-landmark"></i> Quiénes Somos
+						</a>
+					</li>
+					<li>
+						<a href="#trayectoria" onclick="toggleSideMenu()">
+							<i class="fas fa-history"></i> Nuestra Trayectoria
+						</a>
+					</li>
+					<li>
+						<a href="#mision" onclick="toggleSideMenu()">
+							<i class="fas fa-bullseye"></i> Misión y Valores
+						</a>
+					</li>
+				</ul>
+
+				<div class="side-menu-shortcuts">
+					<h4>Accesos Globales</h4>
+					<div class="shortcut-grid">
+						<a href="index.html" class="shortcut-item">
+							<i class="fas fa-home"></i> Inicio
+						</a>
+						<a href="NuestroColegio.html" class="shortcut-item">
+							<i class="fas fa-university"></i> Nuestro Colegio
+						</a>
+						<a href="Proyectos.html" class="shortcut-item">
+							<i class="fas fa-project-diagram"></i> Proyectos
+						</a>
+						<a href="Contacto.html" class="shortcut-item">
+							<i class="fas fa-envelope"></i> Contacto
+						</a>
+					</div>
+				</div>
+
+				<div class="side-menu-footer">
+					<a href="Contacto.html" class="back-home-btn">Inscripciones 2026</a>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		// --- Animación Hero (Letra por Letra) ---
+			function runHeroAnimation() {
+				const heroContent = document.querySelector('.hero-content');
+				if (!heroContent) return;
+
+				const heroH1 = heroContent.querySelector('h1');
+				const paragraph = heroContent.querySelector('p');
+
+				if (!heroH1 || !paragraph) return;
+
+				// Hacer visibles los contenedores
+				heroH1.style.visibility = 'visible';
+				paragraph.style.visibility = 'visible';
+
+				// Solo envolver letras si no se ha hecho antes
+				if (heroH1.querySelectorAll('.letter').length === 0) {
+					const wrapLetters = (node) => {
+						if (node.nodeType === Node.TEXT_NODE) {
+							const text = node.textContent.trim();
+							if (!text) return;
+							const fragment = document.createDocumentFragment();
+							[...node.textContent].forEach((char) => {
+								const span = document.createElement('span');
+								span.textContent = char;
+								span.className = 'letter';
+								fragment.appendChild(span);
+							});
+							node.parentNode.replaceChild(fragment, node);
+						} else if (node.nodeType === Node.ELEMENT_NODE) {
+							Array.from(node.childNodes).forEach(wrapLetters);
+						}
+					};
+					wrapLetters(heroH1);
+				}
+
+				// Reiniciar y Aplicar Animación con Stagger
+				const letters = heroH1.querySelectorAll('.letter');
+				let delay = 100;
+				const stagger = 40;
+
+				letters.forEach((letter) => {
+					letter.style.animation = 'none';
+					void letter.offsetWidth; // Force reflow
+					letter.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay}ms both`;
+					delay += stagger;
+				});
+
+				paragraph.style.animation = 'none';
+				void paragraph.offsetWidth; // Force reflow
+				paragraph.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay + 200}ms both`;
+			}
+
+			document.addEventListener('DOMContentLoaded', runHeroAnimation);
+
+			// --- Efecto Parallax / Zoom al hacer Scroll (Hero Section) ---
+			document.addEventListener(
+				'scroll',
+				() => {
+					const sideMenu = document.getElementById('sideMenu');
+					if (sideMenu && sideMenu.classList.contains('active')) return;
+
+					const heroSection = document.querySelector('.hero-section');
+					if (!heroSection) return;
+
+					const scrollPosition = Math.max(0, window.scrollY);
+					const windowHeight = window.innerHeight;
+
+					// Solo calcular si estamos cerca del Hero (optimización)
+					if (scrollPosition <= windowHeight) {
+						// Zoom lineal suave: escala de forma constante y fluida
+						const scale = 1 + scrollPosition * 0.00015;
+						heroSection.style.setProperty('--hero-scale', scale);
+					}
+				},
+				{ passive: true }
+			);
+
+			// --- Lógica del Slider Lateral (Índice) ---
+			function toggleSideMenu() {
+				const sideMenu = document.getElementById('sideMenu');
+				const linksContainer = document.querySelector('.side-menu-links');
+				if (sideMenu) {
+					const isActive = sideMenu.classList.toggle('active');
+					
+					// Bloqueo de scroll en HTML y BODY para máxima compatibilidad
+					document.documentElement.classList.toggle('no-scroll');
+					document.body.classList.toggle('no-scroll');
+
+					if (isActive && linksContainer) {
+						// Asegurar que el scrollbar se reconozca inmediatamente
+						linksContainer.scrollTop = 1;
+						linksContainer.scrollTop = 0;
+					}
+				}
+			}
+
+			// Vincular el icono de menú del header al slider
+			document.addEventListener('DOMContentLoaded', () => {
+				const menuIcon = document.querySelector('.header-main .menu-icon');
+				if (menuIcon) {
+					// Reemplazamos la lógica anterior por la del slider
+					menuIcon.removeAttribute('onclick');
+					menuIcon.addEventListener('click', toggleSideMenu);
+				}
+			});
+
+			// Cerrar con tecla Escape
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') {
+					const sideMenu = document.getElementById('sideMenu');
+					if (sideMenu && sideMenu.classList.contains('active')) {
+						sideMenu.classList.remove('active');
+						document.documentElement.classList.remove('no-scroll');
+						document.body.classList.remove('no-scroll');
+					}
+				}
+			});
+
+			// --- Lógica del Menú Desplegable (Global para móvil) ---
+			function toggleMenu() {
+				const menu = document.getElementById('dropdownMenu');
+				if (menu) menu.classList.toggle('show');
+			}
+
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') {
+					const menu = document.getElementById('dropdownMenu');
+					if (menu) menu.classList.remove('show');
+				}
+			});
+
+		function scrollToTopSmooth() {
+				const startPosition = window.pageYOffset;
+				const duration = 1200;
+				let startTime = null;
+
+				function animation(currentTime) {
+					if (startTime === null) startTime = currentTime;
+					const timeElapsed = currentTime - startTime;
+					const progress = Math.min(timeElapsed / duration, 1);
+					const ease = progress < 0.5 ? 8 * progress * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 4) / 2;
+					window.scrollTo(0, startPosition * (1 - ease));
+					if (progress < 1) requestAnimationFrame(animation);
+				}
+				requestAnimationFrame(animation);
+			}
+
+			document.addEventListener('DOMContentLoaded', () => {
+				runHeroAnimation();
+
+				// Verificación de IDs Críticos del DOM
+				const criticalIDs = ['dropdownMenu', 'vTimeline', 'vProgress'];
+				criticalIDs.forEach(id => {
+					if (!document.getElementById(id)) {
+						console.error(`Error: El contenedor esencial con ID '${id}' no fue encontrado en el DOM.`);
+					}
+				});
+
+				const vTimeline = document.getElementById('vTimeline');
+				const vProgress = document.getElementById('vProgress');
+				const vItems = document.querySelectorAll('.v-item');
+
+				function updateProgress() {
+					const scrollPos = window.scrollY + (window.innerHeight / 1.5);
+					if (vTimeline) {
+						const timelineTop = vTimeline.offsetTop;
+						const timelineHeight = vTimeline.offsetHeight;
+						let progressHeight = scrollPos - timelineTop;
+						if (progressHeight < 0) progressHeight = 0;
+						if (progressHeight > timelineHeight) progressHeight = timelineHeight;
+						const percentage = (progressHeight / timelineHeight) * 100;
+						vProgress.style.height = `${percentage}%`;
+
+						vItems.forEach(item => {
+							const itemTop = item.offsetTop + timelineTop;
+							if (scrollPos > itemTop) {
+								item.classList.add('active');
+							} else {
+								item.classList.remove('active');
+							}
+						});
+					}
+				}
+
+				window.addEventListener('scroll', updateProgress, { passive: true });
+				updateProgress();
+				const links = document.querySelectorAll('a');
+				links.forEach(link => {
+					link.addEventListener('click', function(e) {
+						const href = this.getAttribute('href');
+						if (href && !href.startsWith('#') && !link.onclick && !href.includes('mailto:') && !href.includes('tel:') && this.getAttribute('target') !== '_blank') {
+							// Ignorar si el usuario presionó una tecla de modificación para abrir en nueva pestaña
+							if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+
+							e.preventDefault();
+							// Esperamos 120ms para que la animación física de pulsado se complete visualmente
+							setTimeout(() => {
+								document.body.classList.add('fade-out');
+								setTimeout(() => {
+									window.location.href = href;
+								}, 500); // 500ms exactos para completar la transición de opacidad en CSS
+							}, 120);
+						}
+					});
+				});
+
+				const isMobileView = () => window.innerWidth <= 1024 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+				if (isMobileView()) {
+					const cardSelectors = '.value-card';
+					const allCards = document.querySelectorAll(cardSelectors);
+					let deselectTimeout = null;
+
+					const clearDeselectTimer = () => {
+						if (deselectTimeout) {
+							clearTimeout(deselectTimeout);
+							deselectTimeout = null;
+						}
+					};
+
+					document.addEventListener('click', (e) => {
+						const card = e.target.closest(cardSelectors);
+						if (!card) {
+							allCards.forEach(c => c.classList.remove('touch-active'));
+							clearDeselectTimer();
+							return;
+						}
+
+						allCards.forEach(c => {
+							if (c !== card) c.classList.remove('touch-active');
+						});
+
+						const wasActive = card.classList.contains('touch-active');
+						clearDeselectTimer();
+
+						if (!wasActive) {
+							card.classList.add('touch-active');
+							// Auto deseleccionar después de 3 segundos (3000ms)
+							deselectTimeout = setTimeout(() => {
+								card.classList.remove('touch-active');
+							}, 3000);
+						} else {
+							card.classList.remove('touch-active');
+						}
+					});
+				}
+
+				// Prevenir el arrastre predeterminado (Ghost Images) en TODAS las imágenes y tarjetas
+				document.addEventListener('dragstart', (e) => {
+					if (e.target.tagName === 'IMG' || e.target.closest('.v-item') || e.target.closest('.value-card')) {
+						e.preventDefault();
+					}
+				});
+			});
+
+            if ('history' in window && 'scrollRestoration' in history) {
+				history.scrollRestoration = 'manual';
+			}
+
+			window.addEventListener('pageshow', function (event) {
+				if (event.persisted) {
+					// Si la página se carga desde el historial (bfcache)
+					document.body.classList.remove('fade-out');
+					
+					// Forzamos el reinicio de la animación de entrada
+					document.body.style.animation = 'none';
+					void document.body.offsetWidth; // Truco para forzar el reflujo del DOM
+					document.body.style.animation = ''; // Restablece la animación definida en el CSS
+					
+					// Reiniciar animaciones del Hero
+					runHeroAnimation();
+				}
+			});
+		</script>
+	</body>
+</html>

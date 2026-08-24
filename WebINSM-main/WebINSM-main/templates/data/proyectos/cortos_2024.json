@@ -1,0 +1,43 @@
+{
+    "hero": {
+        "titleLine1": "Premios Torres",
+        "titleLine2": "Edición 2024",
+        "backgroundImage": "../img/premios_torres_2024_portada.png"
+    },
+    "general": {
+        "date": "07 de Noviembre 2024",
+        "summary": "\"Premios Torres 2024 fue un proyecto audiovisual realizado por la Promoción 2024 de la especialidad de Informática, basado en la adaptación de cuentos de la literatura argentina en formato de cortometrajes.\"",
+        "detail": "Los Premios Torres 2024 fueron un proyecto desarrollado por los estudiantes de la Promoción 2024 de la especialidad de Informática, quienes realizaron cortometrajes inspirados en cuentos de la literatura argentina. A través del lenguaje audiovisual, los alumnos adaptaron relatos clásicos y contemporáneos, combinando narrativa, tecnología y creatividad.<br><br>El proyecto contó con el acompañamiento y la guía de las profesoras Anahí Botta, Ayelén Juan y Romina Brizzio, quienes orientaron a los estudiantes en las distintas etapas de producción. La propuesta culminó en una instancia de exhibición y premiación que celebró el trabajo colaborativo y el compromiso artístico de los participantes.",
+        "image": "../img/premios_torres_2024_intro.jpg"
+    },
+    "academic": {
+        "value1": "Promoción 2024 Informática",
+        "value2": "Prof. Botta · Prof. Juan · Prof. Brizzio",
+        "value3": "Informática",
+        "icon3": "fas fa-film"
+    },
+    "gallery": [
+        "../img/la_decada_invisible.jpg",
+        "../img/el_patio_del_vecino.jpg",
+        "../img/luz_mala.jpg",
+        "../img/el_precio_de_la_muerte.jpg",
+        "../img/adela.jpg",
+        "../img/la_tentacion.jpg"
+    ],
+    "videos": [
+        "https://www.youtube.com/embed/ihKbcjiUfhk",
+        "https://www.youtube.com/embed/ZFALvRtvZW4",
+        "https://www.youtube.com/embed/789GbosxlTw",
+        "https://www.youtube.com/embed/c4-eXAy6cy8",
+        "https://www.youtube.com/embed/Cm8AUN2VoJ0",
+        "https://www.youtube.com/embed/kIv_LXGu_Vo"
+    ],
+    "resources": [
+        {
+            "url": "https://www.instagram.com/premiostorres.insm/",
+            "title": "Premios Torres",
+            "subtitle": "Seguimiento del proyecto",
+            "icon": "fab fa-instagram"
+        }
+    ]
+}

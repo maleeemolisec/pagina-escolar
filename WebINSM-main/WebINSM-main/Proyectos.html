@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Insm - Proyectos</title>
+        <style>
+            /* --- Fuentes --- */
+            @font-face {
+                font-family: 'Heuristica';
+                src: url('fonts/Heuristica-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Heuristica';
+                src: url('fonts/Heuristica-Bold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'ProximaNova';
+                src: url('fonts/ProximaNova-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            /* --- Estilos Generales y Transiciones --- */
+            html, body {
+                width: 100%;
+                overflow-x: hidden;
+                margin: 0;
+                padding: 0;
+                position: relative;
+            }
+            html {
+                scroll-behavior: smooth;
+                scrollbar-gutter: stable; /* RESERVA EL ESPACIO PARA EVITAR EL SALTO DEL CONTENIDO AL BLOQUEAR EL SCROLL */
+                overscroll-behavior-y: none; /* Evita que el fondo se separe y rebote de forma extraña */
+            }
+            body {
+                font-family: 'Heuristica', serif;
+                color: #333;
+                background-color: #f4f6f8;
+                animation: fadeInPage 0.5s ease-in-out;
+            }
+            body.fade-out {
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            body.no-scroll,
+            html.no-scroll {
+                overflow: hidden !important;
+                touch-action: none;
+            }
+
+            /* --- Menú Lateral de Navegación Rápida (Slider) --- */
+            .side-menu {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: 2000;
+                visibility: hidden;
+                pointer-events: none;
+                overflow: hidden;
+                transition: visibility 0.6s;
+            }
+
+            .side-menu.active {
+                visibility: visible;
+                pointer-events: all;
+                transition: none;
+            }
+
+            .side-menu-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                opacity: 0;
+                transition: opacity 0.6s ease;
+            }
+
+            .side-menu.active .side-menu-overlay {
+                opacity: 1;
+            }
+
+            .side-menu-content {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 400px;
+                height: 100%;
+                height: 100dvh;
+                background: #ffffff;
+                transform: translateX(110%);
+                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: 40px;
+                box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15);
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+
+            .side-menu.active .side-menu-content {
+                transform: translateX(0);
+            }
+
+            .side-menu-header {
+                margin-bottom: 30px;
+                border-bottom: 2px solid #f39c12;
+                padding-bottom: 15px;
+                flex-shrink: 0;
+            }
+
+            .side-menu-header h3 {
+                font-family: 'Heuristica', serif;
+                font-size: 1.8em;
+                color: #cf0621;
+                margin: 0;
+                font-weight: normal;
+            }
+
+            .side-menu-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                flex-grow: 1; 
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding-right: 10px;
+                scrollbar-width: thin;
+                scrollbar-color: #f39c12 #f4f6f8;
+                scrollbar-gutter: stable;
+            }
+
+            .side-menu-links::-webkit-scrollbar {
+                width: 8px;
+                display: block !important;
+            }
+            .side-menu-links::-webkit-scrollbar-track {
+                background: #f4f6f8 !important;
+                border-radius: 10px;
+            }
+            .side-menu-links::-webkit-scrollbar-thumb {
+                background-color: #f39c12 !important;
+                border-radius: 10px;
+                border: 2px solid #f4f6f8;
+            }
+
+            .side-menu-links li {
+                margin-bottom: 8px;
+                opacity: 0;
+                transform: translateX(40px);
+                transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            @media (min-width: 769px) {
+                .side-menu-shortcuts,
+                .side-menu-footer {
+                    display: none;
+                }
+            }
+
+            .side-menu.active .side-menu-links li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .side-menu.active .side-menu-links li:nth-child(1) { transition-delay: 0.15s; }
+            .side-menu.active .side-menu-links li:nth-child(2) { transition-delay: 0.20s; }
+
+            .side-menu-links li a {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                padding: 12px 15px;
+                text-decoration: none;
+                color: #555;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.1em;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+            }
+
+            .side-menu-links li a i {
+                width: 24px;
+                text-align: center;
+                color: #f39c12;
+                font-size: 1.2em;
+            }
+
+            @media (hover: hover) {
+                .side-menu-links li a:hover {
+                    background-color: #f4f6f8;
+                    color: #cf0621;
+                    padding-left: 20px;
+                }
+                .side-menu-links li a:hover i {
+                    color: #cf0621;
+                    transform: scale(1.2);
+                }
+                .shortcut-item:hover {
+                    background: #ffffff;
+                    border-color: #cf0621;
+                    color: #cf0621;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 10px rgba(207, 6, 33, 0.1);
+                }
+            }
+
+            .side-menu-shortcuts {
+                margin-top: auto;
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+                flex-shrink: 0;
+            }
+
+            .side-menu-shortcuts h4 {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.85em;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #999;
+                margin: 0 0 15px 0;
+            }
+
+            .shortcut-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .shortcut-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px;
+                background: #f8f9fa;
+                border-radius: 10px;
+                text-decoration: none;
+                color: #666;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.9em;
+                transition: all 0.3s ease;
+                border: 1px solid transparent;
+                min-height: 54px;
+                box-sizing: border-box;
+            }
+
+            .shortcut-item i { color: #f39c12; font-size: 1.1em; flex-shrink: 0; }
+
+            .side-menu-footer {
+                margin-top: 20px;
+                flex-shrink: 0;
+            }
+
+            .back-home-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 14px;
+                background-color: #f39c12;
+                color: white;
+                text-decoration: none;
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+            }
+
+            @media (max-width: 1024px) { .side-menu-content { width: 380px; padding: 30px; } }
+            @media (max-width: 768px) { .side-menu-content { width: 340px; padding: 25px; } }
+            @media (max-width: 480px) { .side-menu-content { width: 88%; padding: 20px; } }
+
+            @keyframes fadeInPage {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            /* --- Header --- */
+            .header-main {
+                background-color: rgba(26, 79, 141, 0.25);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                color: white;
+                padding: 15px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            .header-main .logo a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: white;
+                font-size: 1.5em;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .header-main .logo img {
+                height: 50px;
+                margin-right: 10px;
+            }
+            .header-main nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 25px;
+                align-items: center;
+            }
+            .header-main nav ul li:not(:last-child)::after {
+                content: '│';
+                color: rgba(130, 163, 189, 0.8);
+                margin-left: 25px;
+                font-weight: bold;
+            }
+            .header-main nav ul li a {
+                text-decoration: none;
+                color: white;
+                font-family: 'ProximaNova', sans-serif;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                transition: color 0.3s ease;
+                position: relative;
+                padding-bottom: 5px;
+            }
+            .header-main nav ul li:not(:last-child) a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            .header-main nav ul li:not(:last-child) a:hover::after {
+                transform: scaleX(1);
+            }
+            .header-main nav ul li a:hover {
+                color: #f39c12;
+            }
+            .header-main .menu-icon {
+                font-size: 1.3em;
+                cursor: pointer;
+            }
+
+            /* --- Responsive Brand Text & Icon Logic --- */
+            .brand-text-desktop {
+                display: inline;
+                white-space: nowrap;
+            }
+            .brand-text-mobile {
+                display: none;
+            }
+
+            /* --- Hero Section --- */
+            .hero-section {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                height: 100dvh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 8%;
+                box-sizing: border-box;
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+                overflow: hidden; /* Necesario para el zoom del fondo */
+            }
+
+            /* Imagen de Fondo con Zoom */
+            .hero-section::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('img/Noticias.jpg') no-repeat center center;
+                background-size: cover;
+                z-index: 0;
+                transform: scale(var(--hero-scale, 1));
+                will-change: transform;
+                transition: transform 0.3s ease-out;
+            }
+
+            /* Gradiente Oscuro */
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, rgba(70, 68, 68, 0.5), rgba(0, 0, 0, 0));
+                z-index: 1;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .hero-line-1,
+            .hero-line-2 {
+                display: block;
+            }
+
+            .hero-content p {
+                font-size: 1.05em;
+                margin-top: 5px;
+                max-width: 500px;
+                color: white;
+                font-style: italic;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                cursor: pointer;
+                visibility: hidden; /* Hidden initially, shown by JS */
+            }
+
+            .hero-content h1 {
+                font-size: 5.5em;
+                margin: 0;
+                line-height: 1.1;
+                font-weight: normal;
+                color: white;
+                visibility: hidden; /* Hidden initially, shown by JS */
+            }
+
+            @keyframes riseIn {
+                0% {
+                    transform: translateY(120%) scaleY(1.05);
+                    opacity: 0;
+                }
+                60% {
+                    transform: translateY(-6%) scaleY(0.95);
+                    opacity: 1;
+                }
+                80% {
+                    transform: translateY(2%) scaleY(1.02);
+                }
+                100% {
+                    transform: translateY(0) scaleY(1);
+                    opacity: 1; /* Ensure text remains visible */
+                }
+            }
+
+            .letter {
+                display: inline-block;
+                opacity: 0;
+                white-space: pre;
+            }
+
+            .hero-arrow {
+                width: 145px;
+                height: 2px;
+                background-color: white;
+                position: relative;
+                transition: width 0.8s ease;
+                align-self: flex-start;
+                transform-origin: left;
+            }
+
+            .hero-arrow::after {
+                content: '';
+                position: absolute;
+                right: -8px;
+                top: -4px;
+                width: 0;
+                height: 0;
+                border-left: 10px solid white;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                transition: transform 0.3s ease;
+            }
+
+            .hero-content p:hover .hero-arrow {
+                width: 165px;
+            }
+
+            .hero-content p:hover .hero-arrow::after {
+                transform: scale(1.2);
+            }
+
+            /* --- Sección de la Grilla de Proyectos --- */
+            .news-page-section {
+                padding: 40px 40px 80px 40px; 
+                background-color: #ffffff;
+                scroll-margin-top: 80px;
+            }
+
+            /* --- Filtros y Buscador (Estilo INSM) --- */
+            .filters-container {
+                max-width: 1200px;
+                margin: 0 auto 40px auto;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: flex-start;
+                align-items: center;
+            }
+
+            .filter-input-group {
+                display: flex;
+                flex: 1;
+                min-width: 280px;
+                position: relative;
+            }
+
+            .filter-input, .filter-select {
+                width: 100%;
+                padding: 12px 20px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1em;
+                color: #333 !important;
+                background-color: #f4f6f8 !important; /* Mismo gris que las tarjetas */
+                border: none;
+                border-radius: 50px;
+                outline: none;
+                box-shadow: none;
+                transition: none; /* Evitar parpadeos de color */
+            }
+
+            /* Asegurar que el color se mantenga en TODOS los estados posibles */
+            .filter-input:hover, .filter-input:focus, .filter-input:active,
+            .filter-select:hover, .filter-select:focus, .filter-select:active,
+            .filter-input:-webkit-autofill,
+            .filter-input:-webkit-autofill:hover, 
+            .filter-input:-webkit-autofill:focus {
+                background-color: #f4f6f8 !important;
+                color: #333 !important;
+                outline: none;
+                -webkit-text-fill-color: #333 !important;
+                transition: background-color 5000s ease-in-out 0s; /* Bloquea cambios de autofill */
+            }
+
+            .filter-input {
+                padding-right: 40px; 
+            }
+
+            .filter-select {
+                display: none !important;
+            }
+
+            /* --- Custom Select Dropdowns --- */
+            .custom-select-wrapper {
+                position: relative;
+                flex: 0 1 200px;
+                min-width: 150px;
+                user-select: none;
+            }
+
+            .custom-select-trigger {
+                width: 100%;
+                padding: 12px 20px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1em;
+                color: #333 !important;
+                background-color: #f4f6f8 !important; /* Mismo gris que las tarjetas y buscador */
+                border: none;
+                border-radius: 50px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+                box-sizing: border-box;
+                transition: background-color 0.2s ease;
+            }
+
+            .custom-select-trigger:hover {
+                background-color: #e8ebed !important;
+            }
+
+            .custom-select-trigger span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 10px;
+            }
+
+            .custom-select-trigger i {
+                font-size: 0.8em;
+                transition: transform 0.3s ease;
+                color: #333;
+            }
+
+            .custom-select-wrapper.active .custom-select-trigger i {
+                transform: rotate(180deg);
+            }
+
+            .custom-select-options {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                right: 0;
+                background-color: #ffffff;
+                border-radius: 16px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                border: 1px solid #e1e8ed;
+                z-index: 99;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                max-height: 250px;
+                overflow-y: auto;
+                padding: 6px 0;
+            }
+
+            .custom-select-wrapper.active .custom-select-options {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .custom-select-option {
+                padding: 10px 20px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.95em;
+                color: #333;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                text-align: left;
+            }
+
+            .custom-select-option:hover {
+                background-color: #f4f6f8;
+                color: #333;
+            }
+
+            .custom-select-option.selected {
+                background-color: #e8ebed;
+                color: #333;
+                font-weight: bold;
+            }
+
+            /* Scrollbar personalizada para el menú de opciones */
+            .custom-select-options::-webkit-scrollbar {
+                width: 6px;
+            }
+            .custom-select-options::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            .custom-select-options::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 10px;
+            }
+            .custom-select-options::-webkit-scrollbar-thumb:hover {
+                background: #999;
+            }
+
+            /* Estilo para la cruz de borrar */
+            .clear-icon {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #999;
+                cursor: pointer;
+                font-size: 1em;
+                display: none;
+            }
+
+            /* --- Grid de Proyectos (Estética index.html) --- */
+            .projects-grid {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+            }
+
+            .projects-card {
+                background: #f4f6f8;
+                border-radius: 12px;
+                text-decoration: none;
+                color: inherit;
+                display: block;
+                overflow: hidden;
+                /* Aceleración de Hardware */
+                will-change: transform, box-shadow;
+                transform: translate3d(0, 0, 0);
+                backface-visibility: hidden;
+                transition:
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            @media (hover: hover) {
+                .projects-card:hover {
+                    transform: translate3d(0, -8px, 0);
+                    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+                }
+            }
+
+            .projects-card:active {
+                transform: scale(0.98) translate3d(0, 2px, 0);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition:
+                    transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* Respuesta táctil rápida y suave */
+            }
+
+            @media (hover: hover) {
+                .projects-card:active {
+                    transform: scale(0.98) translate3d(0, -2px, 0);
+                }
+            }
+
+            .projects-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .projects-card-content {
+                padding: 30px;
+            }
+
+            .projects-card .date {
+                font-size: 0.9em;
+                color: #838383;
+                margin-bottom: 10px;
+                font-family: 'ProximaNova', sans-serif;
+            }
+
+            .projects-card h4 {
+                font-size: 1.8em;
+                margin: 0 0 15px 0;
+                font-family: 'Heuristica', serif;
+                color: #f39c12;
+                word-break: normal;
+                overflow-wrap: break-word;
+                hyphens: manual;
+                -webkit-hyphens: manual;
+                text-align: left;
+                line-height: 1.2;
+            }
+
+            .projects-card p {
+                color: #6b6b6b;
+                line-height: 1.6;
+                margin: 0;
+                /* Eliminado font-family ProximaNova para heredar Heuristica como en index.html */
+                word-break: normal;
+                overflow-wrap: break-word;
+                hyphens: manual;
+                -webkit-hyphens: manual;
+                text-align: left;
+            }
+
+            /* Mensaje de carga y sin resultados */
+            .loading-msg, .no-results-msg { 
+                text-align: center; color: #666; font-family: 'ProximaNova', sans-serif; grid-column: 1 / -1; margin-top: 50px;
+            }
+            .no-results-msg {
+                font-size: 1.2em;
+                font-style: italic;
+            }
+
+            /* --- Botón Ver Más --- */
+            .view-more-container {
+                text-align: center;
+                margin-top: 50px;
+                display: none;
+            }
+            .view-more-btn {
+                background-color: transparent;
+                color: #ffffff;
+                background-color: #f39c12;
+                border: 2px solid #f39c12;
+                padding: 12px 35px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.1em;
+                font-weight: bold;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .view-more-btn:hover {
+                color: #ffffff;
+                background-color: #cf0621;
+                border: 2px solid #cf0621;
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            /* --- Footer --- */
+            .footer {
+                background-color: #cf0621;
+                color: #ffffff;
+                padding: 80px 20px 20px 20px;
+                font-family: 'ProximaNova', sans-serif;
+                position: relative;
+            }
+            .footer-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                max-width: 1200px;
+                margin: 0 auto;
+                width: 100%;
+                gap: 30px;
+            }
+            .footer-column {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            .footer-column-wrapper {
+                width: 100%;
+                max-width: 400px;
+            }
+            .footer-column h3 {
+                color: #f39c12;
+                font-size: 1.4em;
+                margin-bottom: 25px;
+                position: relative;
+                font-weight: normal;
+                font-family: 'Heuristica', serif;
+                white-space: nowrap;
+            }
+            .footer-column h3::after {
+                content: '';
+                display: block;
+                width: 50px;
+                height: 2px;
+                background-color: #cf0621;
+                margin-top: 8px;
+            }
+            .footer-column ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .footer-column ul li {
+                margin-bottom: 15px;
+            }
+            .footer-column ul li a {
+                color: #fff;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            @media (hover: hover) {
+                .footer-column ul li a:hover {
+                    color: #f39c12;
+                    text-decoration: none;
+                }
+            }
+            .contact-info p {
+                margin: 0 0 10px 0;
+                line-height: 1.5;
+                white-space: nowrap; /* Evita que el número de teléfono salte a la siguiente línea */
+            }
+            .contact-info a {
+                color: #fff;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            @media (hover: hover) {
+                .contact-info a:hover {
+                    color: #f39c12;
+                    text-decoration: none;
+                }
+            }
+            .social-icons {
+                display: flex;
+                gap: 15px;
+                margin-top: 25px;
+            }
+            .social-icons a {
+                color: #f39c12;
+                font-size: 1.5em;
+                transition: all 0.3s ease;
+                display: inline-block; /* Ensure transform works */
+            }
+            @media (hover: hover) {
+                .social-icons a:hover {
+                    color: #fff;
+                    transform: scale(1.2);
+                }
+            }
+            .footer-map-container {
+                position: relative;
+            }
+            .footer-map-container img {
+                width: 100%;
+                height: auto;
+            }
+            .get-directions {
+                margin-top: 20px;
+            }
+
+            /* Animación Ripple adaptada */
+            @keyframes ripple {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.8;
+                }
+                100% {
+                    transform: scale(1.3, 1.5);
+                    opacity: 0;
+                }
+            }
+
+            .get-directions a {
+                display: inline-block;
+                padding: 12px 25px;
+                border: 1px solid #f39c12;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition:
+                    background-color 0.3s ease,
+                    border-color 0.3s ease;
+            }
+
+            @media (hover: hover) {
+                .get-directions a:hover {
+                    background-color: #f39c12;
+                    border-color: #f39c12;
+                }
+            }
+            .footer-bottom {
+                border-top: 1px solid #cf0621;
+                padding-top: 20px;
+                margin-top: 50px;
+                text-align: center;
+                font-size: 0.9em;
+            }
+            .footer-bottom-links a {
+                color: #f39c12;
+                margin: 0 10px;
+                text-decoration: none;
+            }
+            @media (hover: hover) {
+                .footer-bottom-links a:hover {
+                    text-decoration: underline;
+                }
+            }
+            .footer-bottom-logos {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                margin-top: 10px;
+            }
+            .footer-bottom-logos img {
+                height: 40px;
+                filter: grayscale(100%);
+                opacity: 0.6;
+            }
+
+            /* --- Responsive Design --- */
+            @media (max-width: 1000px) {
+                .brand-text-desktop {
+                    display: none;
+                }
+                .brand-text-mobile {
+                    display: inline;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                }
+                .header-main .logo span {
+                    font-size: 1.2em; /* Increase size for INSM */
+                }
+            }
+            
+            /* Versión Tablet Vertical (Portrait) */
+            @media (min-width: 769px) and (max-width: 1024px) {
+                .header-main {
+                    padding: 15px 20px;
+                }
+                .header-main .logo a {
+                    font-size: 1.2em;
+                }
+                .header-main nav ul {
+                    gap: 15px;
+                }
+                .header-main nav ul li:not(:last-child)::after {
+                    margin-left: 15px;
+                }
+
+                .filters-container {
+                    display: flex;
+                    gap: 15px;
+                    justify-content: space-between;
+                }
+                .filter-input-group {
+                    flex: 0 0 calc(50% - 10px); /* Ocupa la mitad del espacio */
+                }
+                .filter-select,
+                .custom-select-wrapper {
+                    flex: 0 0 calc(25% - 10px); /* Cada uno ocupa un cuarto */
+                    min-width: 0;
+                }
+            }
+
+            @media (max-width: 992px) {
+                .hero-content h1 {
+                    font-size: 5em;
+                }
+                .footer-container {
+                    flex-direction: column;
+                    gap: 50px;
+                    align-items: center;
+                }
+                .footer-column {
+                    width: 100%;
+                    align-items: center;
+                    text-align: center;
+                }
+                .footer-column h3 {
+                    margin-bottom: 20px;
+                }
+                .footer-column ul li {
+                    margin-bottom: 12px;
+                }
+                .footer-column-wrapper {
+                    max-width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .footer-column h3::after {
+                    margin: 8px auto 0 auto;
+                }
+                .social-icons {
+                    justify-content: center;
+                }
+            }
+
+            /* Versión Móvil */
+            @media (max-width: 768px) {
+                /* Header responsivo de index.html */
+                .header-main {
+                    padding: 15px 20px;
+                }
+                .header-main nav ul li:not(:last-child) {
+                    display: none;
+                }
+                .header-main .menu-icon {
+                    display: block;
+                }
+                .brand-text-desktop {
+                    display: none;
+                }
+                .brand-text-mobile {
+                    display: inline;
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+                .header-main .logo span {
+                    font-size: 0.9em;
+                    max-width: 200px;
+                    line-height: 1.2;
+                }
+
+                /* Hero Section - Centered for Impact */
+                .hero-section {
+                    padding: 0 20px 0 8%;
+                    justify-content: center;
+                    align-items: flex-start;
+                    text-align: left;
+                }
+                .hero-content h1 {
+                    font-size: 3.5em;
+                }
+                .hero-content p {
+                    align-items: flex-start;
+                    margin: 0;
+                }
+                .hero-arrow {
+                    margin-top: 5px;
+                    align-self: flex-start;
+                }
+
+                .news-page-section { padding: 60px 20px; }
+                .filters-container { flex-direction: column; align-items: stretch; }
+                .filter-select, .custom-select-wrapper { flex: 1; }
+                .news-grid-full { grid-template-columns: 1fr; }
+                /* Footer Responsive */
+                .footer {
+                    padding: 60px 20px;
+                }
+            }
+
+            /* Mobile (max-width: 600px) */
+            @media (max-width: 600px) {
+                .footer-container {
+                    gap: 45px; /* Más compacto para móvil */
+                }
+                .footer-column h3 {
+                    margin-bottom: 15px;
+                }
+                .footer-column ul li {
+                    margin-bottom: 10px;
+                }
+                .contact-info p {
+                    margin-bottom: 8px;
+                }
+            }
+        </style>
+        <link rel="icon" href="img/favicon.ico" type="image/ico" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+    </head>
+    <body>
+        <header>
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/favicon.ico" alt="Logo INSM" />
+                        <span class="brand-text-desktop">Instituto Nuestra Señora de la Merced</span>
+                        <span class="brand-text-mobile">INSM</span>
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="NuestroColegio.html">Nuestro Colegio</a></li>
+                        <li><a href="Proyectos.html">Proyectos</a></li>
+                        <li><a href="Contacto.html">Contacto</a></li>
+                        <li class="menu-icon" onclick="toggleSideMenu()"><i class="fas fa-bars"></i></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>
+                        <span class="hero-line-1">Proyectos</span>
+                    </h1>
+                    <p>
+                        <a
+                            href="#proyectos-seccion"
+                            style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;"
+                        >
+                            Descubrí
+                            <span class="hero-arrow"></span>
+                        </a>
+                    </p>
+                </div>
+            </section>
+
+            <section class="news-page-section" id="proyectos-seccion">
+                
+                <div class="filters-container" id="filtros-proyectos">
+                    <div class="filter-input-group">
+                        <input type="text" id="search-input" class="filter-input" placeholder="Buscar proyectos por título..." />
+                        <i id="clear-search" class="fas fa-times clear-icon"></i>
+                    </div>
+                    <select id="month-select" class="filter-select">
+                        <option value="all">Todos los meses</option>
+                        <option value="01">Enero</option>
+                        <option value="02">Febrero</option>
+                        <option value="03">Marzo</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Mayo</option>
+                        <option value="06">Junio</option>
+                        <option value="07">Julio</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <select id="year-select" class="filter-select">
+                        <option value="all">Todos los años</option>
+                        </select>
+                </div>
+
+                <div id="projects-grid" class="projects-grid">
+                    <div class="loading-msg">Cargando proyectos...</div>
+                </div>
+                
+                <div class="view-more-container">
+                    <button class="view-more-btn">Ver más</button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-column contact-info">
+                    <div class="footer-column-wrapper">
+                        <h3>Contactanos</h3>
+                        <p><strong>Nivel Inicial:</strong> <a href="tel:+543576408967">+54 (3576) 408-967</a></p>
+                        <p><strong>Nivel Primario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+                        <p>
+                            <strong>Nivel Secundario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a>
+                        </p>
+                        <p><strong>Nivel Terciario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/insm.nivelsuperior.1/?locale=es_LA" target="_blank"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="https://www.youtube.com/@INSM.DIGITAL" target="_blank"
+                                ><i class="fab fa-youtube"></i
+                            ></a>
+                            <a href="https://www.tiktok.com/@insm.digital" target="_blank"
+                                ><i class="fab fa-tiktok"></i
+                            ></a>
+                            <a href="https://www.instagram.com/mercedariasarroyito/" target="_blank"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-column-wrapper">
+                        <h3>Enlaces Útiles</h3>
+                        <ul>
+                            <li><a href="NivelInicial.html">Nivel Inicial</a></li>
+                            <li><a href="NivelPrimario.html">Nivel Primario</a></li>
+                            <li><a href="NivelSecundario.html">Nivel Secundario</a></li>
+                            <li><a href="NivelTerciario.html">Nivel Terciario</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-column-wrapper">
+                        <h3>Encuentranos</h3>
+                        <p>
+                            9 de Julio 465, Arroyito, Córdoba. Tradición y excelencia mercedaria.
+                        </p>
+                        <div class="get-directions">
+                            <a href="https://maps.app.goo.gl/aSiY8qYsQPtb2uJy7" target="_blank">Obtener Direcciones</a>
+                        </div>
+                        <div class="footer-map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <span>© 1985 INSM</span>
+                    <span>|</span>
+                    <a href="#">Políticas & Manuales</a>
+                    <span>|</span>
+                    <a href="#">Privacidad</a>
+                    <span>|</span>
+                    <a href="#">Cookies</a>
+                </div>
+                <div class="footer-bottom-links" style="margin-top: 8px;">
+                    <span>Desarrollada por <span style="color: #f39c12;">Nazareno</span> y <span style="color: #f39c12;">Eugenio</span></span>
+                </div>
+                <div class="footer-bottom-logos"></div>
+            </div>
+        </footer>
+
+        <div class="side-menu" id="sideMenu">
+            <div class="side-menu-overlay" onclick="toggleSideMenu()"></div>
+            <div class="side-menu-content">
+                <div class="side-menu-header">
+                    <h3>Índice de Sección</h3>
+                </div>
+                <ul class="side-menu-links">
+                    <li>
+                        <a href="#proyectos-seccion" onclick="toggleSideMenu()">
+                            <i class="fas fa-th-large"></i> Lista de Proyectos
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="side-menu-shortcuts">
+                    <h4>Accesos Globales</h4>
+                    <div class="shortcut-grid">
+                        <a href="index.html" class="shortcut-item">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                        <a href="NuestroColegio.html" class="shortcut-item">
+                            <i class="fas fa-university"></i> Nuestro Colegio
+                        </a>
+                        <a href="Proyectos.html" class="shortcut-item">
+                            <i class="fas fa-project-diagram"></i> Proyectos
+                        </a>
+                        <a href="Contacto.html" class="shortcut-item">
+                            <i class="fas fa-envelope"></i> Contacto
+                        </a>
+                    </div>
+                </div>
+
+                <div class="side-menu-footer">
+                    <a href="Contacto.html" class="back-home-btn">Inscripciones 2026</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // --- Animación Hero (Letra por Letra) ---
+            function runHeroAnimation() {
+                const heroContent = document.querySelector('.hero-content');
+                if (!heroContent) return;
+
+                const heroH1 = heroContent.querySelector('h1');
+                const paragraph = heroContent.querySelector('p');
+
+                if (!heroH1 || !paragraph) return;
+
+                // Hacer visibles los contenedores
+                heroH1.style.visibility = 'visible';
+                paragraph.style.visibility = 'visible';
+
+                // Solo envolver letras si no se ha hecho antes
+                if (heroH1.querySelectorAll('.letter').length === 0) {
+                    const wrapLetters = (node) => {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            const text = node.textContent.trim();
+                            if (!text) return;
+                            const fragment = document.createDocumentFragment();
+                            [...node.textContent].forEach((char) => {
+                                const span = document.createElement('span');
+                                span.textContent = char;
+                                span.className = 'letter';
+                                fragment.appendChild(span);
+                            });
+                            node.parentNode.replaceChild(fragment, node);
+                        } else if (node.nodeType === Node.ELEMENT_NODE) {
+                            Array.from(node.childNodes).forEach(wrapLetters);
+                        }
+                    };
+                    wrapLetters(heroH1);
+                }
+
+                // Reiniciar y Aplicar Animación con Stagger
+                const letters = heroH1.querySelectorAll('.letter');
+                let delay = 100;
+                const stagger = 40;
+
+                letters.forEach((letter) => {
+                    letter.style.animation = 'none';
+                    void letter.offsetWidth; // Force reflow
+                    letter.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay}ms both`;
+                    delay += stagger;
+                });
+
+                paragraph.style.animation = 'none';
+                void paragraph.offsetWidth; // Force reflow
+                paragraph.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay + 200}ms both`;
+            }
+
+            // --- Efecto Parallax / Zoom al hacer Scroll (Hero Section) ---
+            document.addEventListener(
+                'scroll',
+                () => {
+                    const sideMenu = document.getElementById('sideMenu');
+                    if (sideMenu && sideMenu.classList.contains('active')) return;
+
+                    const heroSection = document.querySelector('.hero-section');
+                    if (!heroSection) return;
+
+                    const scrollPosition = Math.max(0, window.scrollY);
+                    const windowHeight = window.innerHeight;
+
+                    // Solo calcular si estamos cerca del Hero (optimización)
+                    if (scrollPosition <= windowHeight) {
+                        // Zoom lineal suave: escala de forma constante y fluida
+                        const scale = 1 + scrollPosition * 0.00015;
+                        heroSection.style.setProperty('--hero-scale', scale);
+                    }
+                },
+                { passive: true }
+            );
+
+            // --- Lógica para la Transición entre Páginas ---
+            if ('history' in window && 'scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted) {
+                    // Si la página se carga desde el historial (bfcache)
+                    document.body.classList.remove('fade-out');
+                    
+                    // Forzamos el reinicio de la animación de entrada
+                    document.body.style.animation = 'none';
+                    void document.body.offsetWidth;
+                    document.body.style.animation = '';
+                    
+                    runHeroAnimation();
+                }
+            });
+
+            // --- Lógica del Slider Lateral (Índice) ---
+            function toggleSideMenu() {
+                const sideMenu = document.getElementById('sideMenu');
+                const linksContainer = document.querySelector('.side-menu-links');
+                if (sideMenu) {
+                    const isActive = sideMenu.classList.toggle('active');
+                    
+                    // Bloqueo de scroll en HTML y BODY para máxima compatibilidad
+                    document.documentElement.classList.toggle('no-scroll');
+                    document.body.classList.toggle('no-scroll');
+
+                    if (isActive && linksContainer) {
+                        // Asegurar que el scrollbar se reconozca inmediatamente
+                        linksContainer.scrollTop = 1;
+                        linksContainer.scrollTop = 0;
+                    }
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                runHeroAnimation();
+
+                // Vincular el icono de menú del header al slider
+                const menuIcon = document.querySelector('.header-main .menu-icon');
+                if (menuIcon) {
+                    menuIcon.removeAttribute('onclick');
+                    menuIcon.addEventListener('click', toggleSideMenu);
+                }
+
+                // Cerrar con tecla Escape
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape') {
+                        const sideMenu = document.getElementById('sideMenu');
+                        if (sideMenu && sideMenu.classList.contains('active')) {
+                            sideMenu.classList.remove('active');
+                            document.documentElement.classList.remove('no-scroll');
+                            document.body.classList.remove('no-scroll');
+                        }
+                    }
+                });
+                
+                const projectsContainer = document.getElementById('projects-grid');
+                const loadMoreBtn = document.querySelector('.view-more-btn');
+                const loadMoreContainer = document.querySelector('.view-more-container');
+                
+                // Inputs de filtro y Cruz
+                const searchInput = document.getElementById('search-input');
+                const clearSearchBtn = document.getElementById('clear-search'); // Botón Cruz
+                const monthSelect = document.getElementById('month-select');
+                const yearSelect = document.getElementById('year-select');
+
+                // Verificación de IDs Críticos del DOM
+                const criticalIDs = [
+                    'projects-grid', 'search-input', 'clear-search', 
+                    'month-select', 'year-select'
+                ];
+                criticalIDs.forEach(id => {
+                    if (!document.getElementById(id)) {
+                        console.error(`Error: El contenedor esencial con ID '${id}' no fue encontrado en el DOM.`);
+                    }
+                });
+
+                let allProjects = []; 
+                let filteredProjects = []; 
+                let currentVisibleCount = 0;
+                const INITIAL_LIMIT = 9;
+                const LOAD_MORE_INCREMENT = 6;
+
+                // --- Funciones de Utilidad y Buscador Fuzzy ---
+                const levenshteinDistance = (s1, s2) => {
+                    const m = s1.length;
+                    const n = s2.length;
+                    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+                    for (let i = 0; i <= m; i++) dp[i][0] = i;
+                    for (let j = 0; j <= n; j++) dp[0][j] = j;
+                    for (let i = 1; i <= m; i++) {
+                        for (let j = 1; j <= n; j++) {
+                            if (s1[i - 1] === s2[j - 1]) {
+                                dp[i][j] = dp[i - 1][j - 1];
+                            } else {
+                                dp[i][j] = Math.min(
+                                    dp[i - 1][j] + 1,
+                                    dp[i][j - 1] + 1,
+                                    dp[i - 1][j - 1] + 1
+                                );
+                            }
+                        }
+                    }
+                    return dp[m][n];
+                };
+
+                const normalizeText = (text) => {
+                    if (!text) return '';
+                    const clean = text.replace(/&shy;/g, '').replace(/\u00AD/g, '');
+                    return clean.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                };
+
+                const matchesFuzzy = (project, query) => {
+                    if (!query) return true;
+                    
+                    const queryNorm = normalizeText(query);
+                    const queryTokens = queryNorm.split(/\s+/).filter(t => t.length > 0);
+                    if (queryTokens.length === 0) return true;
+                    
+                    const titleNorm = normalizeText(project.title || '');
+                    const summaryNorm = normalizeText(project.summary || '');
+                    
+                    const titleWords = titleNorm.split(/\s+/).filter(w => w.length > 0);
+                    const summaryWords = summaryNorm.split(/\s+/).filter(w => w.length > 0);
+                    const allWords = [...titleWords, ...summaryWords];
+                    
+                    return queryTokens.every(token => {
+                        if (titleNorm.includes(token) || summaryNorm.includes(token)) return true;
+                        
+                        return allWords.some(word => {
+                            if (word.startsWith(token) || token.startsWith(word)) return true;
+                            
+                            const len = token.length;
+                            if (len > 3) {
+                                const maxDist = len > 6 ? 2 : 1;
+                                return levenshteinDistance(token, word) <= maxDist;
+                            }
+                            return false;
+                        });
+                    });
+                };
+
+                const debounce = (func, delay) => {
+                    let timeoutId;
+                    return function (...args) {
+                        clearTimeout(timeoutId);
+                        timeoutId = setTimeout(() => func.apply(this, args), delay);
+                    };
+                };
+
+                // Función para medir y procesar palabras largas con precisión dinámica (Sincronizado con index.html)
+                const processLongWords = (text, fontStyle, containerWidth) => {
+                    if (!text) return '';
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    context.font = fontStyle;
+                    
+                    // El margen de seguridad (padding real de la tarjeta + espacio para el guion)
+                    const safeWidth = containerWidth - 85; 
+
+                    return text
+                        .split(' ')
+                        .map((word) => {
+                            const metrics = context.measureText(word);
+                            // REGLA: Si la palabra no cabe en una línea vacía del contenedor actual, aplicamos guiones
+                            if (metrics.width > safeWidth) {
+                                let parts = [];
+                                // Dividir la palabra en fragmentos
+                                for (let i = 0; i < word.length; i += 5) {
+                                    parts.push(word.substring(i, i + 5));
+                                }
+                                return parts.join('&shy;');
+                            }
+                            return word;
+                        })
+                        .join(' ');
+                };
+
+                const renderProjects = (projects) => {
+                    if (projects.length === 0) return;
+
+                    // Calculamos el ancho actual de una tarjeta basado en el grid real
+                    const gridWidth = projectsContainer.offsetWidth;
+                    const isMobile = window.innerWidth <= 768;
+                    const cardWidth = isMobile ? gridWidth : (gridWidth / Math.max(1, Math.floor(gridWidth / 350)));
+
+                    projects.forEach((proj) => {
+                        // Validación de campos críticos del JSON
+                        const required = ['id', 'title', 'image', 'date', 'summary', 'displayDate'];
+                        required.forEach(field => {
+                            if (proj[field] === undefined || proj[field] === null) {
+                                console.error(`Error: El proyecto con ID '${proj.id || 'desconocido'}' no tiene el campo '${field}' definido.`);
+                            }
+                        });
+
+                        const card = document.createElement('a');
+                        card.href = `templates/Proyecto.html?id=${proj.id}`;
+                        card.className = 'projects-card'; 
+
+                        const maxChars = 200;
+                        let summary = proj.summary || '';
+                        if (summary.length > maxChars) {
+                            summary = summary.substring(0, maxChars).trim() + '...';
+                        }
+
+                        // Medición usando la tipografía Heuristica real del sitio
+                        const safeTitle = processLongWords(proj.title || 'Sin Título', 'bold 28px Heuristica', cardWidth);
+                        const safeSummary = processLongWords(summary, '16px Heuristica', cardWidth);
+
+                        card.innerHTML = `
+                            <img src="${proj.image || ''}" alt="${proj.title || ''}" loading="lazy" />
+                            <div class="projects-card-content">
+                                <p class="date">${proj.displayDate || ''}</p>
+                                <h4>${safeTitle}</h4>
+                                <p>${safeSummary}</p>
+                            </div>
+                        `;
+                        projectsContainer.appendChild(card);
+                    });
+                };
+
+                const showNextBatch = () => {
+                    const nextBatch = filteredProjects.slice(currentVisibleCount, currentVisibleCount + LOAD_MORE_INCREMENT);
+                    renderProjects(nextBatch);
+                    currentVisibleCount += nextBatch.length;
+
+                    if (currentVisibleCount >= filteredProjects.length) {
+                        loadMoreContainer.style.display = 'none';
+                    } else {
+                        loadMoreContainer.style.display = 'block';
+                    }
+                };
+
+                // Lógica de Filtrado
+                const applyFilters = () => {
+                    const searchTerm = searchInput.value.trim();
+                    const selectedMonth = monthSelect.value;
+                    const selectedYear = yearSelect.value;
+
+                    // Mostrar/Ocultar Cruz según si hay texto
+                    if (clearSearchBtn) {
+                        if (searchTerm.length > 0) {
+                            clearSearchBtn.style.display = 'block';
+                        } else {
+                            clearSearchBtn.style.display = 'none';
+                        }
+                    }
+
+                    filteredProjects = allProjects.filter(proj => {
+                        const matchesSearch = matchesFuzzy(proj, searchTerm);
+                        
+                        const date = proj.date || '0000-00-00';
+                        const dateParts = date.split('-'); // [YYYY, MM, DD]
+                        const projYear = dateParts[0];
+                        const projMonth = dateParts[1];
+
+                        const matchesMonth = selectedMonth === 'all' || projMonth === selectedMonth;
+                        const matchesYear = selectedYear === 'all' || projYear === selectedYear;
+
+                        return matchesSearch && matchesMonth && matchesYear;
+                    });
+
+                    // Reiniciar vista
+                    projectsContainer.innerHTML = '';
+                    currentVisibleCount = 0;
+
+                    if (filteredProjects.length === 0) {
+                        projectsContainer.innerHTML = '<div class="no-results-msg">No se encontraron proyectos con estos criterios.</div>';
+                        if (loadMoreContainer) loadMoreContainer.style.display = 'none';
+                    } else {
+                        const initialBatch = filteredProjects.slice(0, INITIAL_LIMIT);
+                        renderProjects(initialBatch);
+                        currentVisibleCount = initialBatch.length;
+
+                        if (loadMoreContainer) {
+                            if (filteredProjects.length > INITIAL_LIMIT) {
+                                loadMoreContainer.style.display = 'block';
+                            } else {
+                                loadMoreContainer.style.display = 'none';
+                            }
+                        }
+                    }
+                };
+
+                // Lógica para la cruz de borrado
+                if (clearSearchBtn) {
+                    clearSearchBtn.addEventListener('click', () => {
+                        searchInput.value = ''; // Borrar texto
+                        clearSearchBtn.style.display = 'none'; // Ocultar cruz
+                        applyFilters(); // Re-aplicar filtros (mostrar todo)
+                        searchInput.focus(); // Devolver foco al input
+                    });
+                }
+
+                // --- Inicialización de Listas Desplegables Personalizadas ---
+                const initCustomSelect = (selectId) => {
+                    const select = document.getElementById(selectId);
+                    if (!select) return;
+
+                    // Ocultar select original
+                    select.style.display = 'none';
+
+                    // Evitar duplicados
+                    let wrapper = document.getElementById(`custom-wrapper-${selectId}`);
+                    if (wrapper) {
+                        wrapper.remove();
+                    }
+
+                    wrapper = document.createElement('div');
+                    wrapper.id = `custom-wrapper-${selectId}`;
+                    wrapper.className = 'custom-select-wrapper';
+
+                    const trigger = document.createElement('div');
+                    trigger.className = 'custom-select-trigger';
+                    
+                    const triggerText = document.createElement('span');
+                    triggerText.textContent = select.options[select.selectedIndex]?.text || '';
+                    trigger.appendChild(triggerText);
+
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-chevron-down';
+                    trigger.appendChild(icon);
+
+                    const optionsContainer = document.createElement('div');
+                    optionsContainer.className = 'custom-select-options';
+
+                    const updateOptions = () => {
+                        optionsContainer.innerHTML = '';
+                        Array.from(select.options).forEach((opt) => {
+                            const optionDiv = document.createElement('div');
+                            optionDiv.className = 'custom-select-option';
+                            if (opt.selected) {
+                                optionDiv.classList.add('selected');
+                            }
+                            optionDiv.textContent = opt.text;
+                            optionDiv.dataset.value = opt.value;
+
+                            optionDiv.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                
+                                optionsContainer.querySelectorAll('.custom-select-option').forEach(el => el.classList.remove('selected'));
+                                optionDiv.classList.add('selected');
+
+                                triggerText.textContent = opt.text;
+                                select.value = opt.value;
+                                
+                                select.dispatchEvent(new Event('change'));
+                                wrapper.classList.remove('active');
+                            });
+
+                            optionsContainer.appendChild(optionDiv);
+                        });
+                    };
+
+                    updateOptions();
+
+                    trigger.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+                            if (w !== wrapper) w.classList.remove('active');
+                        });
+                        wrapper.classList.toggle('active');
+                    });
+
+                    wrapper.appendChild(trigger);
+                    wrapper.appendChild(optionsContainer);
+                    
+                    select.parentNode.insertBefore(wrapper, select.nextSibling);
+
+                    select.rebuildCustomSelect = updateOptions;
+                    select.updateTriggerText = () => {
+                        triggerText.textContent = select.options[select.selectedIndex]?.text || '';
+                    };
+                };
+
+                // Registrar cierre al hacer clic afuera
+                document.addEventListener('click', () => {
+                    document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('active'));
+                });
+
+                // Inicializar dropdowns iniciales
+                initCustomSelect('month-select');
+                initCustomSelect('year-select');
+
+                const populateYearSelect = (projects) => {
+                    const years = new Set();
+                    projects.forEach(proj => {
+                        const date = proj.date || '';
+                        const year = date.split('-')[0];
+                        if (year) years.add(year);
+                    });
+                    
+                    const sortedYears = Array.from(years).sort((a, b) => b - a);
+
+                    sortedYears.forEach(year => {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.textContent = year;
+                        if (yearSelect) yearSelect.appendChild(option);
+                    });
+                };
+
+                fetch('templates/data/index-proyectos.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            console.error('Error: No se pudo cargar el archivo templates/data/index-proyectos.json');
+                            throw new Error("No se encontró el índice de proyectos");
+                        }
+                        return response.json();
+                    })
+                    .then(projects => {
+                        allProjects = projects.sort((a, b) => new Date(b.date) - new Date(a.date));
+                        filteredProjects = [...allProjects];
+                        populateYearSelect(allProjects);
+                        
+                        // Sincronizar el dropdown personalizado de años una vez cargados los datos
+                        if (yearSelect && yearSelect.rebuildCustomSelect) {
+                            yearSelect.rebuildCustomSelect();
+                        }
+                        
+                        projectsContainer.innerHTML = '';
+                        applyFilters(); 
+
+                        if (searchInput) searchInput.addEventListener('input', debounce(applyFilters, 250));
+                        if (monthSelect) monthSelect.addEventListener('change', applyFilters);
+                        if (yearSelect) yearSelect.addEventListener('change', applyFilters);
+                        if (loadMoreBtn) loadMoreBtn.addEventListener('click', showNextBatch);
+                    })
+                    .catch(error => {
+                        console.error('Error detallado en la carga de proyectos:', error);
+                    });
+
+                // 2. Click en párrafo Hero
+                const heroPara = document.querySelector('.hero-content p');
+                if (heroPara) {
+                    heroPara.addEventListener('click', () => {
+                        const targetSection = document.querySelector('.news-page-section');
+                        if (targetSection) {
+                            targetSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                }
+
+                // 3. TRANSICIÓN ENTRE PÁGINAS (Enlaces)
+                const links = document.querySelectorAll('a');
+                links.forEach((link) => {
+                    link.addEventListener('click', function (e) {
+                        const href = this.getAttribute('href');
+                        if (
+                            href &&
+                            !href.startsWith('#') &&
+                            !link.onclick &&
+                            !href.includes('mailto:') &&
+                            !href.includes('tel:') &&
+                            this.getAttribute('target') !== '_blank'
+                        ) {
+                            // Ignorar si el usuario presionó una tecla de modificación para abrir en nueva pestaña
+                            if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+
+                            e.preventDefault();
+                            // Esperamos 120ms para que la animación física de pulsado se complete visualmente
+                            setTimeout(() => {
+                                document.body.classList.add('fade-out');
+                                setTimeout(() => {
+                                    window.location.href = href;
+                                }, 500); // 500ms exactos para completar la transición de opacidad en CSS
+                            }, 120);
+                        }
+                    });
+                });
+
+                // Prevenir el arrastre predeterminado
+                document.addEventListener('dragstart', (e) => {
+                    if (e.target.tagName === 'IMG' || e.target.closest('.projects-card')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            function toggleMenu() {
+                const menu = document.getElementById('dropdownMenu');
+                if (menu) menu.classList.toggle('show');
+            }
+        </script>
+    </body>
+</html>

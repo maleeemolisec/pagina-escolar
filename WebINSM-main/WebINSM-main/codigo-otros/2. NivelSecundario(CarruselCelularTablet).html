@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Referencia - Nuestro Personal</title>
+        <style>
+            /* --- Fuentes --- */
+            @font-face {
+                font-family: 'Heuristica';
+                src: url('fonts/Heuristica-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'ProximaNova';
+                src: url('fonts/ProximaNova-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            :root {
+                --staff-item-w: 288px;
+                --staff-item-h: 486px;
+                --staff-active-w: 320px;
+                --staff-active-h: 540px;
+                --staff-gap: 30px;
+            }
+
+            html, body {
+                margin: 0;
+                font-family: 'Heuristica', serif;
+                color: #333;
+                background-color: #f4f6f8;
+                padding: 0; 
+                overflow-x: hidden;
+                width: 100%;
+                touch-action: pan-y; /* Previene deslizamiento horizontal de la página */
+            }
+
+            body {
+                padding: 50px 0;
+            }
+
+            .content-container {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .content-block h2 {
+                font-family: 'Heuristica', serif;
+                font-size: 2.6em;
+                color: #cf0621;
+                margin: 0 0 20px 40px; /* Margen para alinearse */
+                font-weight: normal;
+                border-bottom: 2px solid #f39c12;
+                padding-bottom: 10px;
+                display: inline-block;
+            }
+
+            /* --- Estilo: Nuestro Personal (Refined Strip Carousel) --- */
+            .staff-carousel-track.notransition,
+            .staff-carousel-track.notransition .staff-carousel-item {
+                transition: none !important;
+            }
+            
+            /* DESKTOP LAYOUT (Default / Original) */
+            .staff-layout-grid {
+                display: grid;
+                grid-template-columns: 35% 65%;
+                gap: 0; 
+                margin-top: 0px;
+                height: 650px; 
+                position: relative;
+                width: 100%;
+            }
+
+            .staff-left-panel {
+                padding: 40px 40px 40px 40px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background: #ffffff;
+                z-index: 10;
+            }
+
+            .staff-active-info {
+                margin-bottom: 40px;
+                opacity: 1;
+                transition: opacity 0.3s ease;
+            }
+
+            .staff-active-info h3 {
+                font-family: 'Heuristica', serif;
+                font-size: 3.2em;
+                color: #333;
+                margin: 0 0 15px 0;
+                line-height: 1.1;
+            }
+
+            .staff-active-info span {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.3em;
+                color: #f39c12;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                display: block;
+                position: relative;
+                padding-left: 15px;
+            }
+            .staff-active-info span::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 4px;
+                height: 100%;
+                background-color: #cf0621;
+            }
+
+            .staff-nav-controls {
+                display: flex;
+                gap: 15px;
+            }
+
+            .staff-nav-btn {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #f0f0f0;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: #333;
+                font-size: 1.1em;
+            }
+
+            .staff-nav-btn:hover {
+                background-color: #cf0621;
+                color: white;
+            }
+
+            .staff-carousel-viewport {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+            }
+
+            .staff-carousel-track {
+                display: flex;
+                height: 100%; 
+                align-items: center;
+                transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+                will-change: transform;
+                padding-left: 60px; /* Padding Desktop Original */
+            }
+
+            .staff-carousel-item {
+                flex: 0 0 var(--staff-item-w); 
+                width: var(--staff-item-w);
+                height: var(--staff-item-h); 
+                margin-right: var(--staff-gap); /* FIXED GAP */
+                position: relative;
+                transition: all 0.5s ease;
+                opacity: 0.3; 
+                border-radius: 16px; 
+                overflow: hidden;
+            }
+
+            .staff-carousel-item.active {
+                flex: 0 0 var(--staff-active-w);
+                width: var(--staff-active-w);
+                height: var(--staff-active-h);
+                margin-right: var(--staff-gap); /* FIXED GAP */
+                opacity: 1;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.25); 
+                z-index: 5;
+            }
+
+            .staff-carousel-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 16px;
+            }
+
+            /* --- MOBILE / TABLET VERTICAL (< 1024px) --- */
+            @media (max-width: 1024px) {
+                :root {
+                    /* TABLET: Tamaño intermedio para mejor armonía */
+                    --staff-item-w: 340px;
+                    --staff-item-h: 574px;
+                    --staff-active-w: 380px;
+                    --staff-active-h: 641px;
+                }
+            }
+
+            @media (max-width: 600px) {
+                :root {
+                    /* MÓVIL: Imágenes punto intermedio */
+                    --staff-item-w: 260px;
+                    --staff-item-h: 439px;
+                    --staff-active-w: 290px;
+                    --staff-active-h: 489px;
+                }
+            }
+
+            @media (max-width: 1024px) {
+                body {
+                    padding: 100px 0; /* Igualar espaciado de secciones de NivelSecundario.html */
+                }
+                .content-block h2 {
+                    text-align: left; /* Alineado a la izquierda como en desktop */
+                    display: inline-block;
+                    margin: 0 0 20px 40px; /* Ajustado a 20px para total consistencia con NivelSecundario.html */
+                    border-bottom: 2px solid #f39c12;
+                    position: relative;
+                }
+                .content-block h2::after {
+                    display: none; /* Quitamos la línea centrada de móvil */
+                }
+
+                .staff-layout-grid {
+                    display: flex;
+                    flex-direction: column; /* Imágenes arriba, Texto abajo */
+                    gap: 30px;
+                    height: auto;
+                }
+
+                .staff-carousel-viewport {
+                    order: 1; /* Imágenes primero */
+                    height: 680px; /* Ajustado para tarjeta de 641px + sombras */
+                    overflow: visible; /* Permitir ver las laterales */
+                }
+
+                .staff-carousel-track {
+                    padding-left: 0; /* Centrado por JS */
+                }
+
+                .staff-left-panel {
+                    order: 2; /* Texto después */
+                    padding: 0 20px 40px 20px;
+                    align-items: center;
+                    text-align: center;
+                    background: transparent;
+                }
+
+                .staff-active-info h3 { font-size: 2.5em; }
+                
+                .staff-active-info {
+                    margin-bottom: 20px; /* Aumentado levemente de 15px a 25px */
+                }
+
+                .staff-active-info span { 
+                    padding-left: 0;
+                }
+                .staff-active-info span::before { display: none; }
+                
+                .staff-nav-controls {
+                    justify-content: center;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .staff-layout-grid {
+                    gap: 10px; /* Reducido levemente de 15px a 10px */
+                }
+                .staff-carousel-viewport {
+                    height: 540px; /* Ajustado para nuevas dimensiones activas (489px + sombras) */
+                }
+            }
+        </style>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="content-container">
+            <div id="personal" class="content-block">
+                <h2>Nuestro Personal</h2>
+                
+                <div class="staff-layout-grid">
+                    <div class="staff-left-panel">
+                        <div class="staff-active-info" id="staffInfoBox">
+                            <h3 id="staffActiveName">Marisa Brisio</h3>
+                            <span id="staffActiveRole">Directora</span>
+                        </div>
+                        
+                        <div class="staff-nav-controls">
+                            <button class="staff-nav-btn" id="btnPrevStaff"><i class="fas fa-arrow-left"></i></button>
+                            <button class="staff-nav-btn" id="btnNextStaff"><i class="fas fa-arrow-right"></i></button>
+                            <button class="staff-nav-btn" id="btnPauseStaff"><i class="fas fa-pause"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="staff-carousel-viewport" id="staffViewport">
+                        <div class="staff-carousel-track" id="staffTrack">
+                            <div class="staff-carousel-item" data-name="Marisa Brisio" data-role="Directora">
+                                <img src="img/NivelInicial_Directivo.png" alt="Marisa Brisio" class="staff-carousel-img">
+                            </div>
+                            <div class="staff-carousel-item" data-name="Adela" data-role="Secretaria">
+                                <img src="img/adela.jpg" alt="Adela" class="staff-carousel-img">
+                            </div>
+                            <div class="staff-carousel-item" data-name="Prof. Juan Pérez" data-role="Coordinador de Curso">
+                                <img src="img/sala2.jpg" alt="Prof. Juan Pérez" class="staff-carousel-img">
+                            </div>
+                            <div class="staff-carousel-item" data-name="Lic. María García" data-role="Gabinete Psicopedagógico">
+                                <img src="img/img1_eme_2025.png" alt="Lic. María García" class="staff-carousel-img">
+                            </div>
+                            <div class="staff-carousel-item" data-name="Prof. Carlos López" data-role="Educación Física">
+                                <img src="img/Deporte 1.jpg" alt="Prof. Carlos López" class="staff-carousel-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const track = document.getElementById('staffTrack');
+                const btnPrev = document.getElementById('btnPrevStaff');
+                const btnNext = document.getElementById('btnNextStaff');
+                const btnPause = document.getElementById('btnPauseStaff');
+
+                const infoBox = document.getElementById('staffInfoBox');
+                const activeName = document.getElementById('staffActiveName');
+                const activeRole = document.getElementById('staffActiveRole');
+
+                if (!track) return;
+
+                const originalItems = Array.from(document.querySelectorAll('.staff-carousel-item'));
+                if (originalItems.length === 0) return;
+
+                // Propiedades Dinámicas (Leídas de CSS)
+                let itemWidth, itemGap, activeItemWidth, step;
+
+                const updateDimensions = () => {
+                    const style = getComputedStyle(document.documentElement);
+                    itemWidth = parseFloat(style.getPropertyValue('--staff-item-w'));
+                    itemGap = parseFloat(style.getPropertyValue('--staff-gap'));
+                    activeItemWidth = parseFloat(style.getPropertyValue('--staff-active-w'));
+                    step = itemWidth + itemGap;
+                };
+
+                updateDimensions();
+
+                // Clones para infinito
+                originalItems.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    clone.classList.add('clone');
+                    clone.removeAttribute('id'); 
+                    track.appendChild(clone);
+                });
+                originalItems.slice().reverse().forEach(item => {
+                    const clone = item.cloneNode(true);
+                    clone.classList.add('clone');
+                    clone.removeAttribute('id');
+                    track.insertBefore(clone, track.firstChild);
+                });
+
+                let allItems = Array.from(document.querySelectorAll('.staff-carousel-item'));
+                const totalOriginals = originalItems.length;
+                
+                let currentIndex = totalOriginals; 
+                let isTransitioning = false;
+                let autoPlayInterval;
+                let isPlaying = true;
+
+                // Función para obtener Offset según dispositivo
+                const getOffset = () => {
+                    if (window.innerWidth <= 1024) {
+                        // Modo Móvil/Tablet: Centrado Absoluto
+                        const viewport = document.querySelector('.staff-carousel-viewport');
+                        const vw = viewport.clientWidth;
+                        // Centrar el Item Activo (320px)
+                        return (vw / 2) - (activeItemWidth / 2);
+                    } else {
+                        // Modo Desktop: Padding CSS controla el inicio (0 offset extra JS)
+                        return 0;
+                    }
+                };
+
+                const updateCarousel = () => {
+                    const currentItem = allItems[currentIndex];
+                    const offset = getOffset();
+                    
+                    // Cálculo de posición
+                    // Desktop: 0 - index * step (Padding CSS 60px lo empuja)
+                    // Mobile: CenterOffset - index * step (Padding CSS 0)
+                    track.style.transform = `translateX(${offset - (currentIndex * step)}px)`;
+
+                    allItems.forEach(i => i.classList.remove('active'));
+                    if(currentItem) currentItem.classList.add('active');
+
+                    if (currentItem) {
+                        infoBox.style.opacity = '0';
+                        setTimeout(() => {
+                            activeName.textContent = currentItem.dataset.name;
+                            activeRole.textContent = currentItem.dataset.role;
+                            infoBox.style.opacity = '1';
+                        }, 200);
+                    }
+                };
+
+                // Inicializar
+                updateCarousel();
+
+                // Listener Resize para ajustar centrado en móvil
+                window.addEventListener('resize', () => {
+                    track.classList.add('notransition');
+                    updateDimensions();
+                    updateCarousel();
+                    track.offsetHeight;
+                    track.classList.remove('notransition');
+                });
+
+                const nextSlide = () => {
+                    if (currentIndex >= allItems.length - 1) {
+                        track.classList.add('notransition');
+                        currentIndex -= totalOriginals;
+                        updateCarousel();
+                        track.offsetHeight;
+                        track.classList.remove('notransition');
+                    }
+                    // Pequeño delay para permitir que el navegador procese el salto si hubo
+                    requestAnimationFrame(() => {
+                        isTransitioning = true;
+                        currentIndex++;
+                        updateCarousel();
+                    });
+                };
+
+                const prevSlide = () => {
+                    if (currentIndex <= 0) {
+                        track.classList.add('notransition');
+                        currentIndex += totalOriginals;
+                        updateCarousel();
+                        track.offsetHeight;
+                        track.classList.remove('notransition');
+                    }
+                    requestAnimationFrame(() => {
+                        isTransitioning = true;
+                        currentIndex--;
+                        updateCarousel();
+                    });
+                };
+
+                track.addEventListener('transitionend', (e) => {
+                    if (e.target !== track || e.propertyName !== 'transform') return;
+                    isTransitioning = false;
+                    let snap = false;
+                    let nextIndex = currentIndex;
+                    if (currentIndex >= totalOriginals * 2) {
+                        nextIndex = currentIndex - totalOriginals;
+                        snap = true;
+                    } else if (currentIndex < totalOriginals) {
+                        nextIndex = currentIndex + totalOriginals;
+                        snap = true;
+                    }
+                    if (snap) {
+                        track.classList.add('notransition');
+                        currentIndex = nextIndex;
+                        updateCarousel();
+                        void track.offsetWidth;
+                        track.classList.remove('notransition');
+                    }
+                });
+
+                btnNext.addEventListener('click', () => {
+                    nextSlide();
+                    if(isPlaying) resetTimer();
+                });
+
+                btnPrev.addEventListener('click', () => {
+                    prevSlide();
+                    if(isPlaying) resetTimer();
+                });
+
+                btnPause.addEventListener('click', () => {
+                    const icon = btnPause.querySelector('i');
+                    if(isPlaying) {
+                        clearInterval(autoPlayInterval);
+                        isPlaying = false;
+                        icon.classList.remove('fa-pause');
+                        icon.classList.add('fa-play');
+                    } else {
+                        startTimer();
+                        isPlaying = true;
+                        icon.classList.remove('fa-play');
+                        icon.classList.add('fa-pause');
+                    }
+                });
+
+                const startTimer = () => {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = setInterval(nextSlide, 4000);
+                };
+
+                const resetTimer = () => {
+                    clearInterval(autoPlayInterval);
+                    startTimer();
+                };
+
+                document.querySelectorAll('.staff-carousel-img').forEach(img => {
+                    img.addEventListener('dragstart', e => e.preventDefault());
+                });
+
+                allItems.forEach((item) => {
+                    item.style.cursor = 'pointer';
+                    item.addEventListener('click', () => {
+                        const clickedIndex = allItems.indexOf(item);
+                        if (clickedIndex !== currentIndex) {
+                            currentIndex = clickedIndex;
+                            updateCarousel();
+                            if(isPlaying) resetTimer();
+                        }
+                    });
+                });
+
+                const viewport = document.getElementById('staffViewport');
+                let startPos = 0;
+                let isDragging = false;
+
+                viewport.addEventListener('mousedown', (e) => {
+                    startPos = e.clientX;
+                    isDragging = true;
+                    viewport.style.cursor = 'grabbing';
+                });
+                
+                viewport.addEventListener('mouseup', (e) => {
+                    if(!isDragging) return;
+                    isDragging = false;
+                    viewport.style.cursor = 'default';
+                    const diff = e.clientX - startPos;
+                    if (diff < -30) { 
+                        nextSlide();
+                        if(isPlaying) resetTimer();
+                    } else if (diff > 30) { 
+                        prevSlide();
+                        if(isPlaying) resetTimer();
+                    }
+                });
+
+                viewport.addEventListener('mouseleave', () => {
+                    if(isDragging) {
+                        isDragging = false;
+                        viewport.style.cursor = 'default';
+                    }
+                });
+
+                viewport.addEventListener('touchstart', (e) => {
+                    startPos = e.touches[0].clientX;
+                }, {passive: true});
+
+                viewport.addEventListener('touchend', (e) => {
+                    const diff = e.changedTouches[0].clientX - startPos;
+                    if (diff < -30) {
+                        nextSlide();
+                        if(isPlaying) resetTimer();
+                    } else if (diff > 30) {
+                        prevSlide();
+                        if(isPlaying) resetTimer();
+                    }
+                });
+
+                allItems[currentIndex].classList.add('active');
+                startTimer();
+            });
+        </script>
+    </body>
+</html>

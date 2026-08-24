@@ -1,0 +1,50 @@
+[
+    {
+        "id": "evento_2025",
+        "title": "Evento: Donde nace la magia",
+        "date": "2025-11-27",
+        "displayDate": "27 de Noviembre",
+        "summary": "El tradicional desfile de fin de año se transformó en una noche mágica con moda, música y actuaciones de toda la escuela.",
+        "image": "img/Cooperativa 1.jpg"
+    },
+    {
+        "id": "evento_2024",
+        "title": "Evento: Espejos de Cultura",
+        "date": "2024-12-5",
+        "displayDate": "5 de Diciembre",
+        "summary": "El tradicional desfile de fin de año se transformó en una noche mágica con moda, música y actuaciones de toda la escuela.",
+        "image": "img/Cooperativa 1.jpg"
+    },
+    {
+        "id": "evento_2023",
+        "title": "Evento: Fashion Blooms",
+        "date": "2023-12-6",
+        "displayDate": "6 de Diciembre",
+        "summary": "El tradicional desfile de fin de año se transformó en una noche mágica con moda, música y actuaciones de toda la escuela.",
+        "image": "img/historia.jpg"
+    },
+    {
+        "id": "revista_eme_2025",
+        "title": "Revista EME · Edición N° 17",
+        "date": "2025-11-19",
+        "displayDate": "19 de Noviembre",
+        "summary": "La Promoción 2025 de Humanidades produjo la edición N° 17 de la Revista EME, reflejando meses de trabajo, reflexión y producción colectiva.",
+        "image": "img/Screenshot 2025-12-22 161503.png"
+    },
+    {
+        "id": "cortos_2024",
+        "title": "Premios Torres · Edición 2024",
+        "date": "2024-11-07",
+        "displayDate": "7 de Noviembre",
+        "summary": "La Promoción 2024 de Informática realizó cortometrajes basados en cuentos argentinos en el marco del proyecto Premios Torres.",
+        "image": "img/Screenshot 2025-12-23 120617.png"
+    },
+    {
+        "id": "revista_eme_2024",
+        "title": "Revista EME · Edición N° 16",
+        "date": "2024-11-20",
+        "displayDate": "20 de Noviembre",
+        "summary": "La Promoción 2024 de Humanidades produjo la edición N° 16 de la Revista EME, reflejando meses de trabajo, reflexión y producción colectiva.",
+        "image": "img/Cooperativa 1.jpg"
+    }
+]

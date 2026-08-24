@@ -1,0 +1,3528 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Instituto Nuestra Señora de la Merced | INSM</title>
+		<meta
+			name="description"
+			content="Instituto Nuestra Señora de la Merced en Arroyito, Córdoba. Ofrecemos educación integral de calidad desde Nivel Inicial hasta Terciario, con una comunidad comprometida con los valores mercedarios y la excelencia académica."
+		/>
+		<meta
+			name="keywords"
+			content="INSM,Insm,insm, Instituto Nuestra Señora de la Merced, educación, colegio, escuela, Arroyito, Córdoba, nivel inicial, primaria, secundaria, terciario, formación docente, valores mercedarios, Santa Maria del Cervellon"
+		/>
+		<meta name="author" content="Instituto Nuestra Señora de la Merced" />
+		<meta name="robots" content="index, follow" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Instituto Nuestra Señora de la Merced | INSM" />
+		<meta
+			property="og:description"
+			content="Comunidad educativa en Arroyito, Córdoba. Formación integral en valores y excelencia académica para todos los niveles educativos."
+		/>
+		<meta property="og:image" content="img/entrada.png" />
+
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content="Instituto Nuestra Señora de la Merced | INSM" />
+		<meta
+			property="twitter:description"
+			content="Comunidad educativa en Arroyito, Córdoba. Formación integral en valores y excelencia académica para todos los niveles educativos."
+		/>
+		<meta property="twitter:image" content="img/entrada.png" />
+
+		<style>
+			/* --- Fuentes --- */
+			@font-face {
+				font-family: 'Heuristica';
+				src: url('fonts/Heuristica-Regular.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+
+			@font-face {
+				font-family: 'Heuristica';
+				src: url('fonts/Heuristica-Bold.ttf') format('truetype');
+				font-weight: bold;
+				font-style: normal;
+			}
+
+			@font-face {
+				font-family: 'ProximaNova';
+				src: url('fonts/ProximaNova-Regular.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			/* Optimizaciones táctiles para móviles y tablets */
+			a, button, [role="button"], 
+			.projects-card, .level-tab, .testimonial-btn, 
+			.unity-start-btn, .unity-close-btn, .view-more-btn, 
+			.shortcut-item, .back-home-btn, .side-menu-links li a, 
+			.social-icons a, .get-directions a {
+				-webkit-tap-highlight-color: transparent;
+				touch-action: manipulation;
+			}
+
+			html,
+			body {
+				width: 100%;
+				overflow-x: hidden;
+				margin: 0;
+				padding: 0;
+				position: relative;
+			}
+
+			html {
+				scroll-behavior: smooth;
+				scrollbar-gutter: stable; /* Previene el salto de layout al ocultar el scrollbar */
+				overscroll-behavior-y: none; /* Evita que el fondo se separe y rebote de forma extraña */
+			}
+
+			body {
+				font-family: 'Heuristica', serif;
+				color: #333;
+				animation: fadeInPage 0.5s ease-in-out;
+			}
+
+			body.fade-out {
+				opacity: 0;
+				transition: opacity 0.25s ease-in-out;
+			}
+
+			body.no-scroll,
+			html.no-scroll {
+				overflow: hidden !important;
+				touch-action: none;
+			}
+
+			@keyframes fadeInPage {
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+
+			/* --- CORRECCIÓN DE SCROLL (Para que el menú fijo no tape el título) --- */
+			section {
+				scroll-margin-top: 80px; /* Ajuste para dejar espacio arriba al navegar */
+			}
+
+			/* --- Menú Lateral de Navegación Rápida (Slider) --- */
+			.side-menu {
+				position: fixed;
+				top: 0;
+				right: 0;
+				width: 100%;
+				height: 100vh;
+				z-index: 2000;
+				visibility: hidden;
+				pointer-events: none;
+				overflow: hidden;
+				transition: visibility 0.6s; /* Permite que la animación de salida termine antes de ocultar */
+			}
+
+			.side-menu.active {
+				visibility: visible;
+				pointer-events: all;
+				transition: none; /* Aparece instantáneamente al activar */
+			}
+
+			.side-menu-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.4);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+				opacity: 0;
+				transition: opacity 0.6s ease; /* Sincronizado con el panel */
+			}
+
+			.side-menu.active .side-menu-overlay {
+				opacity: 1;
+			}
+
+			.side-menu-content {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 400px;
+				height: 100%;
+				height: 100dvh;
+				background: #ffffff;
+				transform: translateX(110%);
+				transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Curva más suave y orgánica */
+				padding: 40px;
+				box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15);
+				display: flex;
+				flex-direction: column;
+				box-sizing: border-box;
+				overflow: hidden; /* BLOQUEO DE SCROLL EN EL PANEL PRINCIPAL */
+			}
+
+			.side-menu.active .side-menu-content {
+				transform: translateX(0);
+			}
+
+			.side-menu-header {
+				margin-bottom: 30px;
+				border-bottom: 2px solid #f39c12;
+				padding-bottom: 15px;
+				flex-shrink: 0;
+			}
+
+			.side-menu-header h3 {
+				font-family: 'Heuristica', serif;
+				font-size: 1.8em;
+				color: #cf0621;
+				margin: 0;
+				font-weight: normal;
+			}
+
+			.side-menu-links {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				flex-grow: 1;
+				overflow-y: auto; /* SE MUESTRA SOLO SI ES NECESARIO */
+				overflow-x: hidden;
+				padding-right: 10px;
+				scrollbar-width: thin; /* Firefox */
+				scrollbar-color: #f39c12 #f4f6f8; /* Firefox */
+				scrollbar-gutter: stable; /* RESERVA EL ESPACIO PARA EVITAR SALTOS */
+			}
+
+			/* --- Scrollbar personalizada visible SIN interacción cuando es necesaria --- */
+			.side-menu-links::-webkit-scrollbar {
+				width: 8px;
+				display: block !important;
+			}
+			.side-menu-links::-webkit-scrollbar-track {
+				background: #f4f6f8 !important; /* Fondo sólido para evitar que el SO la oculte */
+				border-radius: 10px;
+			}
+			.side-menu-links::-webkit-scrollbar-thumb {
+				background-color: #f39c12 !important;
+				border-radius: 10px;
+				border: 2px solid #f4f6f8;
+			}
+
+			.side-menu-links li {
+				margin-bottom: 8px;
+				opacity: 0;
+				transform: translateX(40px);
+				transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			/* --- Ocultar Accesos Globales en Desktop y Tablet (ya están en el header) --- */
+			@media (min-width: 769px) {
+				.side-menu-shortcuts,
+				.side-menu-footer {
+					display: none;
+				}
+			}
+
+			.side-menu.active .side-menu-links li {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			/* Delays restaurados para animación escalonada */
+			.side-menu.active .side-menu-links li:nth-child(1) {
+				transition-delay: 0.15s;
+			}
+			.side-menu.active .side-menu-links li:nth-child(2) {
+				transition-delay: 0.20s;
+			}
+			.side-menu.active .side-menu-links li:nth-child(3) {
+				transition-delay: 0.25s;
+			}
+			.side-menu.active .side-menu-links li:nth-child(4) {
+				transition-delay: 0.30s;
+			}
+			.side-menu.active .side-menu-links li:nth-child(5) {
+				transition-delay: 0.35s;
+			}
+			.side-menu-links li a {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				padding: 12px 15px;
+				text-decoration: none;
+				color: #555;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				border-radius: 12px;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					background-color 0.25s ease,
+					color 0.25s ease,
+					padding-left 0.25s ease;
+			}
+
+			.side-menu-links li a i {
+				width: 24px;
+				text-align: center;
+				color: #f39c12;
+				font-size: 1.2em;
+			}
+
+			/* --- HOVERS: Solo para Computadoras --- */
+			@media (hover: hover) {
+				.side-menu-links li a:hover {
+					background-color: #f4f6f8;
+					color: #cf0621;
+					padding-left: 20px;
+				}
+				.side-menu-links li a:hover i {
+					color: #cf0621;
+					transform: scale(1.2);
+				}
+				.shortcut-item:hover {
+					background: #ffffff;
+					border-color: #cf0621;
+					color: #cf0621;
+					transform: translateY(-2px);
+					box-shadow: 0 4px 10px rgba(207, 6, 33, 0.1);
+				}
+				.shortcut-item:hover i {
+					color: #cf0621;
+				}
+				.shortcut-item:active,
+				.shortcut-item.active-press {
+					background: #ffffff;
+					border-color: #cf0621;
+					color: #cf0621;
+				}
+				.back-home-btn:hover {
+					background-color: #cf0621;
+					transform: translate3d(0, -2px, 0);
+					box-shadow: 0 5px 15px rgba(207, 6, 33, 0.2);
+				}
+				.back-home-btn:active,
+				.back-home-btn.active-press {
+					background-color: #cf0621;
+				}
+			}
+
+			/* Feedback táctil suave para móviles y tablets */
+			.side-menu-links li a:active,
+			.side-menu-links li a.active-press {
+				background-color: #f0f0f0;
+				opacity: 0.8;
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition:
+					background-color 0.15s ease,
+					transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.shortcut-item:active,
+			.shortcut-item.active-press {
+				background-color: #f0f0f0;
+				opacity: 0.8;
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+				transition:
+					transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.back-home-btn:active,
+			.back-home-btn.active-press {
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				transition:
+					transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.shortcut-item:active,
+				.shortcut-item.active-press {
+					transform: scale(0.95) translate3d(0, 0, 0);
+				}
+				.back-home-btn:active,
+				.back-home-btn.active-press {
+					transform: scale(0.95) translate3d(0, 0, 0);
+				}
+			}
+
+			/* --- Accesos Rápidos Globales --- */
+			.side-menu-shortcuts {
+				margin-top: auto; /* ANCLAJE AL FONDO */
+				padding-top: 20px;
+				border-top: 1px solid #eee;
+				flex-shrink: 0;
+			}
+
+			.side-menu-shortcuts h4 {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 0.85em;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: #999;
+				margin: 0 0 15px 0;
+			}
+
+			.shortcut-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 10px;
+				align-items: stretch;
+			}
+
+			.shortcut-item {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px;
+				background: #f8f9fa;
+				border-radius: 10px;
+				text-decoration: none;
+				color: #666;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 0.9em;
+				border: 1px solid transparent;
+				min-height: 54px; /* Unifica el tamaño vertical */
+				box-sizing: border-box;
+				/* Aceleración de Hardware */
+				will-change: transform, box-shadow;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.shortcut-item i {
+				color: #f39c12;
+				font-size: 1.1em;
+				flex-shrink: 0;
+			}
+
+			.side-menu-footer {
+				margin-top: 20px;
+				flex-shrink: 0;
+			}
+
+			.back-home-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				padding: 14px;
+				background-color: #f39c12;
+				color: white;
+				text-decoration: none;
+				font-family: 'ProximaNova', sans-serif;
+				font-weight: bold;
+				border-radius: 50px;
+				/* Aceleración de Hardware */
+				will-change: transform, box-shadow;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			/* Adaptabilidad de tamaños finales */
+			@media (max-width: 1024px) {
+				.side-menu-content {
+					width: 380px;
+					padding: 30px;
+				}
+			}
+			@media (max-width: 768px) {
+				.side-menu-content {
+					width: 340px;
+					padding: 25px;
+				}
+			}
+			@media (max-width: 480px) {
+				.side-menu-content {
+					width: 88%;
+					padding: 20px;
+				}
+			}
+
+			/* --- Animaciones de entrada --- */
+			@keyframes fadeInDown {
+				from {
+					opacity: 0;
+					transform: translateY(-20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes fadeInLeft {
+				from {
+					opacity: 0;
+					transform: translateX(-20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			@keyframes fadeInRight {
+				from {
+					opacity: 0;
+					transform: translateX(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+
+			/* --- Header --- */
+			.header-main {
+				background-color: rgba(26, 79, 141, 0.25); /* Fondo 75% transparente */
+				backdrop-filter: blur(5px); /* Efecto de desenfoque para mejor legibilidad */
+				-webkit-backdrop-filter: blur(5px); /* Soporte para Safari */
+				color: white;
+				padding: 15px 30px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				position: fixed; /* Cambiado de absolute a fixed */
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 100;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Sutil borde inferior */
+				transition: all 0.3s ease; /* Transición suave para cambios */
+			}
+			.header-main .logo {
+				display: flex;
+				align-items: center;
+				font-size: 1.5em;
+				font-weight: bold;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mejor legibilidad */
+			}
+			.header-main .logo a {
+				display: flex;
+				align-items: center;
+				text-decoration: none;
+				color: white;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.header-main .logo a:hover {
+				color: white; /* Mantiene el color original */
+			}
+			.header-main .logo a:active,
+			.header-main .logo a.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.header-main .logo img {
+				height: 50px;
+				margin-right: 10px;
+			}
+			.header-main nav ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				gap: 25px;
+				align-items: center;
+			}
+			.header-main nav ul li:not(:last-child)::after {
+				content: '│';
+				color: rgba(130, 163, 189, 0.8);
+				margin-left: 25px;
+				font-weight: bold;
+			}
+			.header-main nav ul li a {
+				text-decoration: none;
+				color: white;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1em;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mejor legibilidad */
+				position: relative;
+				padding-bottom: 5px;
+				display: inline-block;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				transition:
+					color 0.3s ease,
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.header-main nav ul li a:active,
+			.header-main nav ul li a.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			/* Animación de línea inferior para enlaces del menú */
+			.header-main nav ul li:not(:last-child) a::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
+				transform: scaleX(0);
+				transform-origin: left;
+				transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			}
+			.header-main nav ul li:not(:last-child) a:hover::after {
+				transform: scaleX(1);
+			}
+			.header-main nav ul li a:hover {
+				color: #f39c12;
+			}
+			.header-main .menu-icon {
+				font-size: 1.3em;
+				cursor: pointer;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+				display: inline-block;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.header-main .menu-icon:active,
+			.header-main .menu-icon.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.hero-section {
+				position: relative;
+				width: 100%;
+				height: 100vh;
+				height: 100dvh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding-left: 8%;
+				box-sizing: border-box;
+				text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+				overflow: hidden; /* Necesario para el zoom del fondo */
+			}
+
+			/* Imagen de Fondo con Zoom */
+			.hero-section::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: url('img/20250806_092322.jpg') no-repeat center center;
+				background-size: cover;
+				z-index: 0;
+				transform: scale(var(--hero-scale, 1));
+				will-change: transform;
+				transition: transform 0.3s ease-out;
+			}
+
+			/* Gradiente Oscuro */
+			.hero-section::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(to right, rgba(70, 68, 68, 0.5), rgba(0, 0, 0, 0));
+				z-index: 1;
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 2;
+			}
+
+			.hero-line-1,
+			.hero-line-2 {
+				display: block;
+			}
+
+			.hero-content p {
+				font-size: 1.05em;
+				margin-top: 5px;
+				max-width: 500px;
+				color: white;
+				font-style: italic;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				cursor: pointer;
+				visibility: hidden; /* Hidden initially, shown by JS */
+			}
+
+			.hero-content h1 {
+				font-size: 5.5em;
+				margin: 0;
+				line-height: 1.1;
+				font-weight: normal;
+				color: white;
+				visibility: hidden; /* Hidden initially, shown by JS */
+			}
+
+			@keyframes riseIn {
+				0% {
+					transform: translateY(120%) scaleY(1.05);
+					opacity: 0;
+				}
+				60% {
+					transform: translateY(-6%) scaleY(0.95);
+					opacity: 1;
+				}
+				80% {
+					transform: translateY(2%) scaleY(1.02);
+				}
+				100% {
+					transform: translateY(0) scaleY(1);
+					opacity: 1; /* Ensure text remains visible */
+				}
+			}
+
+			.letter {
+				display: inline-block;
+				opacity: 0;
+				white-space: pre;
+			}
+
+			.hero-arrow {
+				width: 145px;
+				height: 2px;
+				background-color: white;
+				position: relative;
+				transition: width 0.8s ease;
+				align-self: flex-start;
+				transform-origin: left;
+			}
+
+			.hero-arrow::after {
+				content: '';
+				position: absolute;
+				right: -8px;
+				top: -4px;
+				width: 0;
+				height: 0;
+				border-left: 10px solid white;
+				border-top: 5px solid transparent;
+				border-bottom: 5px solid transparent;
+				transition: transform 0.3s ease;
+			}
+
+			.hero-content p:hover .hero-arrow {
+				width: 165px;
+			}
+
+			.hero-content p:hover .hero-arrow::after {
+				transform: scale(1.2);
+			}
+
+			/* --- NUEVA SECCIÓN: NUESTRO COLEGIO --- */
+			.college-section {
+				padding: 100px 20px;
+				background-color: #ffffff;
+				display: flex;
+				justify-content: center;
+			}
+
+			.college-container {
+				max-width: 1200px;
+				width: 100%;
+				display: flex;
+				gap: 80px;
+				align-items: center;
+			}
+
+			.college-text {
+				flex: 1;
+				padding-right: 20px;
+			}
+
+			.college-text h2 {
+				font-family: 'Heuristica', serif;
+				font-size: 3.5em;
+				color: #cf0621; /* Color rojo institucional */
+				margin: 0 0 25px 0;
+				font-weight: normal;
+				line-height: 1.1;
+			}
+
+			.college-text p {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				color: #666;
+				line-height: 1.6;
+				margin-bottom: 30px;
+			}
+
+			.college-features {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 40px 0;
+			}
+
+			.college-features li {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.05em;
+				color: #444;
+				margin-bottom: 15px;
+				padding-left: 25px;
+				position: relative;
+			}
+
+			.college-features li::before {
+				content: '•';
+				color: #cf0621; /* Punto rojo */
+				font-size: 1.5em;
+				position: absolute;
+				left: 0;
+				top: -5px;
+			}
+
+			/* Galería estilo mosaico */
+			.college-gallery {
+				flex: 1;
+				display: flex;
+				gap: 20px;
+				height: 600px; /* Altura fija para controlar la proporción */
+			}
+
+			.gallery-col {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			.gallery-col img {
+				width: 100%;
+				border-radius: 16px;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+			}
+
+			.gallery-col img:hover {
+				transform: scale(1.02);
+			}
+
+			/* Control de alturas para imitar la referencia - Más irregular */
+			/* Columna Izquierda: Destaca la del medio (tipo Estatua de la Libertad en ref) */
+			.col-1 img:nth-child(1) {
+				height: 25%;
+			}
+			.col-1 img:nth-child(2) {
+				height: 50%;
+			} /* La más alta del conjunto */
+			.col-1 img:nth-child(3) {
+				height: 20%;
+			}
+
+			/* Columna Derecha: Alturas variadas y desfasadas respecto a la izquierda */
+			.col-2 img:nth-child(1) {
+				height: 35%;
+			}
+			.col-2 img:nth-child(2) {
+				height: 25%;
+			}
+			.col-2 img:nth-child(3) {
+				height: 35%;
+			}
+
+			/* --- Sección de Niveles Educativos --- */
+			.levels-section {
+				padding: 80px 20px;
+				background-color: #f4f6f8;
+				text-align: center;
+			}
+
+			.levels-container {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.levels-title h2 {
+				font-size: 0.8em;
+				text-transform: uppercase;
+				letter-spacing: 0.2em;
+				color: #666;
+				margin: 0 0 10px 0;
+				font-family: 'ProximaNova', sans-serif;
+			}
+
+			.levels-title h3 {
+				font-size: 3.5em;
+				color: #cf0621;
+				margin: 0 0 60px 0;
+				font-weight: normal;
+				font-family: 'Heuristica', serif;
+			}
+
+			/* Pestañas de niveles */
+			.level-tabs {
+				display: flex;
+				justify-content: center;
+				gap: 0;
+				border-bottom: 2px solid #e0e0e0;
+				margin-bottom: 60px;
+			}
+
+			.level-tab {
+				background: none;
+				border: none;
+				font-size: 1.3em;
+				font-family: 'ProximaNova', sans-serif;
+				padding: 20px 40px;
+				color: #666;
+				cursor: pointer;
+				border-bottom: 3px solid transparent;
+				position: relative;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					border-bottom-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.level-tab.active {
+				color: #cf0621;
+				border-bottom-color: #f39c12;
+			}
+
+			.level-tab:hover {
+				color: #f39c12;
+			}
+
+			.level-tab:active,
+			.level-tab.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* Respuesta táctil rápida y suave */
+			}
+
+			/* Contenido de pestañas */
+			.level-content {
+				display: none;
+				animation: fadeInUp 0.5s ease-out;
+			}
+
+			.level-content.active {
+				display: block;
+			}
+
+			.level-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 60px;
+				align-items: center;
+			}
+
+			.level-image img {
+				width: 100%;
+				border-radius: 12px;
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+			}
+
+			.level-info {
+				text-align: left;
+			}
+
+			.level-info h4 {
+				font-size: 3.5em;
+				color: #cf0621;
+				margin: 0 0 10px 0;
+				font-family: 'Heuristica', serif;
+			}
+
+			.level-info .age {
+				font-size: 1.5em;
+				color: #666;
+				margin: 0 0 20px 0;
+				font-family: 'ProximaNova', sans-serif;
+			}
+
+			.level-info p {
+				font-size: 1.1em;
+				color: #666;
+				line-height: 1.6;
+				margin: 0 0 30px 0;
+				text-align: justify;
+			}
+
+			.arrow-link {
+				display: inline-flex;
+				align-items: center;
+				color: #f39c12;
+				text-decoration: none;
+				font-family: 'ProximaNova', sans-serif;
+				font-weight: 500;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.arrow-link:hover {
+				transform: translateX(5px) translate3d(0, 0, 0);
+			}
+
+			.arrow-link:active,
+			.arrow-link.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.arrow-link i {
+				margin-left: 8px;
+				transition: transform 0.3s ease;
+			}
+
+			/* Controles para la galería de niveles en móvil */
+			.level-controls {
+				display: none;
+				justify-content: center;
+				gap: 15px;
+				margin-top: 40px;
+			}
+
+			@media (max-width: 768px) {
+				.level-controls {
+					display: flex;
+				}
+				.level-tabs {
+					display: none;
+				}
+			}
+
+			/* --- Sección de Proyectos --- */
+			.projects-section {
+				padding: 80px 20px;
+				background-color: #ffffff;
+				color: white;
+			}
+
+			.projects-container {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.projects-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 60px;
+			}
+
+			.projects-header h3 {
+				font-size: 3.5em;
+				margin: 0;
+				font-family: 'Heuristica', serif;
+				color: #cf0621;
+			}
+
+			.projects-header .arrow-link {
+				color: #f39c12;
+			}
+
+			.projects-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+				gap: 30px;
+			}
+
+			.projects-card {
+				background: #f4f6f8;
+				border-radius: 12px;
+				text-decoration: none;
+				color: inherit;
+				display: block;
+				overflow: hidden;
+				/* Aceleración de Hardware */
+				will-change: transform, box-shadow;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			@media (hover: hover) {
+				.projects-card:hover {
+					transform: translate3d(0, -8px, 0);
+					box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+				}
+			}
+
+			.projects-card:active,
+			.projects-card.active-press {
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				transition:
+					transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* Respuesta táctil rápida y suave */
+			}
+
+			@media (hover: hover) {
+				.projects-card:active,
+				.projects-card.active-press {
+					transform: scale(0.95) translate3d(0, -2px, 0);
+				}
+			}
+
+			.projects-card img {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+				pointer-events: none; /* Asegura que los eventos táctiles se propaguen al contenedor en móviles */
+			}
+
+			.projects-card-content {
+				padding: 30px;
+			}
+
+			.projects-card .date {
+				font-size: 0.9em;
+				color: #838383;
+				margin-bottom: 10px;
+				font-family: 'ProximaNova', sans-serif;
+			}
+
+			.projects-card h4 {
+				font-size: 1.8em;
+				margin: 0 0 15px 0;
+				font-family: 'Heuristica', serif;
+				color: #f39c12;
+				/* Regla: Salto de palabra completa por defecto. Guion manual solo si desborda. */
+				word-break: normal;
+				overflow-wrap: break-word;
+				hyphens: manual;
+				-webkit-hyphens: manual;
+				text-align: left;
+			}
+
+			.projects-card p {
+				color: #6b6b6b;
+				line-height: 1.6;
+				margin: 0;
+				/* Regla: Salto de palabra completa por defecto. Guion manual solo si desborda. */
+				word-break: normal;
+				overflow-wrap: break-word;
+				hyphens: manual;
+				-webkit-hyphens: manual;
+				text-align: left;
+			}
+
+			/* --- Sección de Testimonios --- */
+			.testimonials-section {
+				padding: 80px 20px;
+				background-color: #ffffff;
+			}
+
+			.testimonials-container {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.testimonials-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 80px;
+				align-items: center;
+			}
+
+			.testimonial-text {
+				position: relative;
+			}
+
+			.quote-icon {
+				font-size: 4em;
+				color: #cf0621;
+				opacity: 0.2;
+				position: absolute;
+				top: -30px;
+				left: -20px;
+			}
+
+			/* Contenedor para los slides de texto */
+			#testimonial-text-container {
+				display: grid;
+				align-items: start;
+				overflow: hidden;
+				transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+				/* Altura dinámica basada en el contenido */
+			}
+
+			.testimonial-slide {
+				grid-area: 1 / 1;
+				width: 100%;
+				opacity: 0;
+				transform: translateX(30px);
+				transition:
+					opacity 0.5s ease-in-out,
+					transform 0.5s ease-in-out;
+				pointer-events: none;
+			}
+
+			.testimonial-slide.active {
+				opacity: 1;
+				transform: translateX(0);
+				pointer-events: auto;
+			}
+
+			.testimonial-quote {
+				font-size: 2.2em;
+				line-height: 1.4;
+				margin: 0 0 30px 0;
+				font-family: 'Heuristica', serif;
+				color: #2c3e50;
+			}
+
+			.testimonial-author {
+				font-size: 1.3em;
+				font-weight: bold;
+				margin: 0 0 5px 0;
+				color: #f39c12;
+				font-family: 'ProximaNova', sans-serif;
+				position: relative;
+			}
+
+			.testimonial-role {
+				color: #666;
+				margin: 0;
+				font-family: 'ProximaNova', sans-serif;
+			}
+
+			.testimonial-controls {
+				display: flex;
+				gap: 15px;
+				margin-top: 60px; /* Aumentado para mayor separación */
+			}
+
+			.testimonial-btn {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-color: #f0f0f0;
+				border: none;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				color: #333;
+				font-size: 1.1em;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			@media (hover: hover) {
+				.testimonial-btn:hover {
+					background-color: #cf0621;
+					color: white;
+				}
+				.testimonial-btn:active,
+				.testimonial-btn.active-press {
+					background-color: #cf0621;
+					color: white;
+				}
+			}
+			.testimonial-btn:active,
+			.testimonial-btn.active-press {
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* Respuesta táctil rápida y suave */
+			}
+
+			.testimonial-btn i.fa-pause,
+			.testimonial-btn i.fa-play {
+				font-size: 0.85em;
+				opacity: 0.9;
+			}
+
+			.testimonial-images {
+				position: relative;
+				height: 480px;
+			}
+
+			.testimonial-img {
+				position: absolute;
+				width: 66%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 12px;
+				transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+			}
+
+			.close-menu {
+				color: white;
+				font-size: 1.5em;
+				cursor: pointer;
+				background: none;
+				border: none;
+			}
+			.menu-content {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 1px;
+				height: calc(100vh - 80px);
+				background-color: rgba(150, 150, 150, 0.25);
+				backdrop-filter: blur(5px);
+			}
+			.menu-section {
+				background-color: rgba(150, 150, 150, 0.25);
+				backdrop-filter: blur(5px);
+				padding: 30px 20px;
+				display: flex;
+				flex-direction: column;
+			}
+			.menu-section h3 {
+				color: #cf0621;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.4em;
+				margin: 0 0 20px 0;
+				font-weight: bold;
+				padding-bottom: 10px;
+				position: relative;
+				display: inline-block;
+				cursor: pointer;
+			}
+			.menu-section h3::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 0;
+				height: 2px;
+				background-color: #f39c12;
+				transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+			}
+			.menu-section h3:hover::after {
+				width: 100%;
+			}
+			.menu-section ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				flex-grow: 1;
+			}
+			.menu-section ul li {
+				margin-bottom: 12px;
+			}
+			.menu-section ul li a {
+				color: rgb(255, 255, 255);
+				text-decoration: none;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1em;
+				transition: color 0.2s ease;
+				background: none;
+				padding: 0;
+			}
+			.menu-section ul li a:hover {
+				color: #f39c12;
+				text-decoration: underline;
+			}
+
+			/* --- Menú desplegable Estilo Móvil (Tipo App) --- */
+			.dropdown-menu {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100vh;
+				background-color: #ffffff;
+				z-index: 2000;
+				display: block; /* Siempre en el DOM, controlado por transform */
+				transform: translateX(100%); /* Oculto a la derecha */
+				transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+				overflow-y: auto;
+			}
+
+			.dropdown-menu.show {
+				transform: translateX(0);
+			}
+
+			.mobile-menu-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 20px;
+				border-bottom: 1px solid #f0f0f0;
+				background-color: #fff;
+				position: sticky;
+				top: 0;
+				z-index: 10;
+			}
+
+			.mobile-menu-logo {
+				display: flex;
+				align-items: center;
+				font-size: 1.2em;
+				font-weight: bold;
+				color: #333;
+			}
+
+			.mobile-menu-logo img {
+				height: 40px; /* Tamaño ajustado para móvil */
+				margin-right: 10px;
+				width: auto;
+			}
+
+			.close-menu-btn {
+				background: none;
+				border: none;
+				font-size: 1.5em; /* Tamaño similar a la X de la imagen */
+				color: #cf0621;
+				cursor: pointer;
+				padding: 5px;
+				display: flex;
+				align-items: center;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.close-menu-btn:active,
+			.close-menu-btn.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.mobile-menu-list {
+				list-style: none;
+				padding: 0;
+				margin: 10px 0 0 0;
+			}
+
+			.mobile-menu-list li a {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 18px 25px;
+				text-decoration: none;
+				color: #333;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				transition: background-color 0.2s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+			}
+
+			.mobile-menu-list li a:active,
+			.mobile-menu-list li a.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.mobile-menu-list li a:hover {
+				background-color: #f9f9f9;
+				color: #cf0621;
+			}
+
+			.mobile-menu-list li a i {
+				color: #f39c12;
+				font-size: 0.9em;
+			}
+
+			.mobile-menu-list li a:hover i {
+				color: #cf0621;
+			}
+
+			.mobile-menu-highlight {
+				margin-top: 10px;
+				border-top: 8px solid #f39c12; /* Separador grueso estilo móvil con color secundario */
+				padding-top: 10px;
+				padding-bottom: 40px;
+			}
+
+			.mobile-menu-highlight h4 {
+				padding: 15px 25px 5px 25px;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1em;
+				color: #cf0621;
+				font-weight: normal;
+				margin: 0;
+			}
+
+			.mobile-menu-highlight a {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 18px 25px;
+				text-decoration: none;
+				color: #333;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				font-weight: 600; /* Un poco más grueso */
+				transition: background-color 0.2s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+			}
+
+			.mobile-menu-highlight a:active,
+			.mobile-menu-highlight a.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			.mobile-menu-highlight a.highlight-red {
+				color: #cf0621;
+			}
+
+			.mobile-menu-highlight a:hover {
+				background-color: #f9f9f9;
+			}
+
+			/* --- Footer --- */
+			.footer {
+				background-color: #cf0621;
+				color: #ffffff;
+				padding: 80px 20px 20px 20px;
+				font-family: 'ProximaNova', sans-serif;
+				position: relative;
+			}
+			.footer-container {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				max-width: 1200px;
+				margin: 0 auto;
+				width: 100%;
+				gap: 30px;
+			}
+			.footer-column {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				text-align: left;
+			}
+			.footer-column-wrapper {
+				width: 100%;
+				max-width: 400px;
+			}
+			.footer-column h3 {
+				color: #f39c12;
+				font-size: 1.4em;
+				margin-bottom: 25px;
+				position: relative;
+				font-weight: normal;
+				font-family: 'Heuristica', serif;
+				white-space: nowrap;
+			}
+			.footer-column h3::after {
+				content: '';
+				display: block;
+				width: 50px;
+				height: 2px;
+				background-color: #cf0621;
+				margin-top: 8px;
+			}
+			.footer-column ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.footer-column ul li {
+				margin-bottom: 15px;
+			}
+			.footer-column ul li a {
+				color: #fff;
+				text-decoration: none;
+				transition: color 0.3s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				display: inline-block;
+			}
+			.footer-column ul li a:active,
+			.footer-column ul li a.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.footer-column ul li a:hover {
+					color: #f39c12;
+					text-decoration: none;
+				}
+			}
+			.contact-info p {
+				margin: 0 0 10px 0;
+				line-height: 1.5;
+				white-space: nowrap; /* Evita que el número de teléfono salte a la siguiente línea */
+			}
+			.contact-info a {
+				color: #fff;
+				text-decoration: none;
+				transition: color 0.3s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				display: inline-block;
+			}
+			.contact-info a:active,
+			.contact-info a.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.contact-info a:hover {
+					color: #f39c12;
+					text-decoration: none;
+				}
+			}
+			.social-icons {
+				display: flex;
+				gap: 15px;
+				margin-top: 25px;
+			}
+			.social-icons a {
+				color: #f39c12;
+				font-size: 1.5em;
+				display: inline-block; /* Ensure transform works */
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.social-icons a:hover {
+					color: #fff;
+					transform: scale(1.2) translate3d(0, 0, 0);
+				}
+			}
+			.social-icons a:active,
+			.social-icons a.active-press {
+				transform: scale(0.95) translate3d(0, 1px, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* Respuesta táctil rápida y suave */
+			}
+			.footer-map-container {
+				position: relative;
+			}
+			.footer-map-container img {
+				width: 100%;
+				height: auto;
+			}
+			.get-directions {
+				margin-top: 20px;
+			}
+
+			/* Animación Ripple adaptada */
+			@keyframes ripple {
+				0% {
+					transform: scale(1);
+					opacity: 0.8;
+				}
+				100% {
+					transform: scale(1.3, 1.5);
+					opacity: 0;
+				}
+			}
+
+			.get-directions a {
+				display: inline-block;
+				padding: 12px 25px;
+				border: 1px solid #f39c12;
+				color: #fff;
+				text-decoration: none;
+				border-radius: 5px;
+				/* Aceleración de Hardware */
+				will-change: transform, box-shadow;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			@media (hover: hover) {
+				.get-directions a:hover {
+					background-color: #f39c12;
+					border-color: #f39c12;
+					transform: translate3d(0, -2px, 0);
+					box-shadow: 0 4px 10px rgba(243, 156, 18, 0.2);
+				}
+			}
+
+			.get-directions a:active,
+			.get-directions a.active-press {
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+				transition:
+					transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.get-directions a:active,
+				.get-directions a.active-press {
+					transform: scale(0.95) translate3d(0, 0, 0);
+				}
+			}
+			.footer-bottom {
+				border-top: 1px solid #cf0621;
+				padding-top: 20px;
+				margin-top: 50px;
+				text-align: center;
+				font-size: 0.9em;
+			}
+			.footer-bottom-links a {
+				color: #f39c12;
+				margin: 0 10px;
+				text-decoration: none;
+				transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				display: inline-block;
+			}
+			.footer-bottom-links a:active,
+			.footer-bottom-links a.active-press {
+				transform: scale(0.95) translate3d(0, 0, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.footer-bottom-links a:hover {
+					text-decoration: underline;
+				}
+			}
+			.footer-bottom-logos {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+				margin-top: 10px;
+			}
+			.footer-bottom-logos img {
+				height: 40px;
+				filter: grayscale(100%);
+				opacity: 0.6;
+			}
+
+			/* --- NUEVOS ESTILOS: RECORRIDO VIRTUAL --- */
+			.virtual-tour-section {
+				padding: 80px 20px;
+				background-color: #ffffff;
+				text-align: center;
+			}
+
+			.virtual-tour-container {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			/* El .levels-title se reutiliza para el título de esta sección */
+
+			.unity-box {
+				position: relative;
+				border-radius: 12px;
+				overflow: hidden;
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+				margin-top: 60px; /* Separación del título */
+			}
+
+			#unity-teaser {
+				background: url('img/20250806_092322.jpg') no-repeat center center;
+				background-size: cover;
+				height: 500px;
+				display: flex;
+				align-items: center;
+				text-align: left;
+				color: white;
+			}
+
+			#unity-teaser::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					to right,
+					rgba(0, 0, 0, 0.8) 0%,
+					rgba(0, 0, 0, 0.6) 40%,
+					rgba(0, 0, 0, 0) 70%
+				);
+				z-index: 1;
+			}
+
+			.unity-overlay-content {
+				position: relative;
+				z-index: 2;
+				padding: 40px 60px;
+				max-width: 50%;
+				text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+			}
+
+			.unity-overlay-content h4 {
+				font-family: 'Heuristica', serif;
+				font-size: 3em;
+				font-weight: bold;
+				margin: 0 0 15px 0;
+				color: #f39c12; /* Color de acento del sitio */
+			}
+
+			.unity-overlay-content p {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.15em;
+				line-height: 1.6;
+				margin-bottom: 25px;
+			}
+
+			.unity-start-btn {
+				background-color: #f39c12;
+				color: white;
+				border: none;
+				padding: 15px 30px;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1em;
+				font-weight: 500;
+				border-radius: 5px;
+				cursor: pointer;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				/* Aceleración de Hardware */
+				will-change: transform, box-shadow;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			@media (hover: hover) {
+				.unity-start-btn:hover {
+					background-color: #cf0621; /* Color primario del sitio */
+					transform: translate3d(0, -2px, 0);
+					box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+				}
+				.unity-start-btn:active,
+				.unity-start-btn.active-press {
+					background-color: #cf0621;
+				}
+			}
+			.unity-start-btn:active,
+			.unity-start-btn.active-press {
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				transition:
+					transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.unity-start-btn:active,
+				.unity-start-btn.active-press {
+					transform: scale(0.95) translate3d(0, 0, 0);
+				}
+			}
+
+			#unity-game-container {
+				background: #1c1c1c; /* Fondo oscuro para el juego */
+				padding: 0;
+				height: 600px;
+			}
+
+			#unity-iframe {
+				display: block;
+				border: none;
+				width: 100%;
+				height: 100%; /* Ocupa el 100% del contenedor padre */
+			}
+
+			.unity-close-btn {
+				position: absolute;
+				top: 15px;
+				right: 15px;
+				background: rgba(0, 0, 0, 0.5);
+				color: white;
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				font-size: 1.2em;
+				cursor: pointer;
+				z-index: 10;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				/* Aceleración de Hardware */
+				will-change: transform;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+
+			@media (hover: hover) {
+				.unity-close-btn:hover {
+					background: #cf0621;
+					border-color: #cf0621;
+					transform: scale(1.1) translate3d(0, 0, 0);
+				}
+				.unity-close-btn:active,
+				.unity-close-btn.active-press {
+					background: #cf0621;
+					border-color: #cf0621;
+				}
+			}
+			.unity-close-btn:active,
+			.unity-close-btn.active-press {
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* Respuesta táctil rápida y suave */
+			}
+
+			/* --- INICIO: CÓDIGO DE BOTONES --- */
+			.view-more-container {
+				display: flex;
+				justify-content: center;
+				gap: 20px;
+				flex-wrap: wrap; /* Para que se vea bien en móvil */
+				margin-top: 30px; /* Reduje el margen superior */
+			}
+			.view-more-btn {
+				background-color: transparent;
+				color: #ffffff;
+				background-color: #f39c12;
+				border: 2px solid #f39c12;
+				padding: 12px 35px;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				font-weight: bold;
+				border-radius: 50px;
+				cursor: pointer;
+				text-decoration: none; /* Añadido para que sirva en enlaces */
+				display: inline-block; /* Para botones <a> */
+				/* Aceleración de Hardware */
+				will-change: transform, box-shadow;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				transition:
+					transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+					background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.view-more-btn:hover {
+					color: #ffffff;
+					background-color: #cf0621;
+					border: 2px solid #cf0621;
+					transform: translate3d(0, -3px, 0);
+					box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+				}
+				.view-more-btn:active,
+				.view-more-btn.active-press {
+					background-color: #cf0621;
+					border: 2px solid #cf0621;
+				}
+			}
+			.view-more-btn:active,
+			.view-more-btn.active-press {
+				transform: scale(0.95) translate3d(0, 2px, 0);
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				transition:
+					transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			@media (hover: hover) {
+				.view-more-btn:active,
+				.view-more-btn.active-press {
+					transform: scale(0.95) translate3d(0, -1px, 0);
+				}
+			}
+			/* --- FIN: CÓDIGO DE BOTONES --- */
+
+			/* --- SECCIÓN CONTACTO HOME --- */
+			.contact-home-section {
+				padding: 100px 20px;
+				background-color: #f4f6f8; /* Unificado con Niveles */
+				text-align: center;
+				border-top: 1px solid #e0e0e0; /* Separador sutil */
+			}
+			.contact-home-container {
+				max-width: 800px;
+				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.contact-home-icon-box {
+				width: 80px;
+				height: 80px;
+				background-color: #fff;
+				border-radius: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+				margin-bottom: 25px;
+				color: #f39c12;
+				font-size: 2em;
+			}
+			.contact-home-title {
+				font-family: 'Heuristica', serif;
+				font-size: 3em;
+				color: #cf0621;
+				margin: 0 0 15px 0;
+			}
+			.contact-home-text {
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.2em;
+				color: #666;
+				margin-bottom: 35px;
+				line-height: 1.6;
+				max-width: 600px;
+			}
+
+			/* --- FIN DE NUEVOS ESTILOS --- */
+
+			/* Responsive */
+			/* --- Responsive Brand Text & Icon Logic --- */
+			.brand-text-desktop {
+				display: inline;
+				white-space: nowrap;
+			}
+			.brand-text-mobile {
+				display: none;
+			}
+
+			/* --- Responsive Design Professional --- */
+
+			/* Brand Text Switch for Intermediate Screens */
+			@media (max-width: 1000px) {
+				.brand-text-desktop {
+					display: none;
+				}
+				.brand-text-mobile {
+					display: inline;
+					font-weight: bold;
+					font-size: 1.2em;
+				}
+				.header-main .logo span {
+					font-size: 1.2em; /* Increase size for INSM */
+				}
+			}
+
+			/* --- TABLET (Portrait & Landscape) --- */
+			@media (min-width: 601px) and (max-width: 1366px) and (pointer: coarse) {
+				.college-section,
+				.levels-section,
+				.projects-section,
+				.testimonials-section,
+				.virtual-tour-section,
+				.contact-home-section,
+				.footer {
+					padding-left: 40px;
+					padding-right: 40px;
+				}
+			}
+
+			/* Tablet & Small Desktop (max-width: 992px) */
+			@media (max-width: 992px) {
+				.hero-content h1 {
+					font-size: 5em;
+				}
+				/* Padding de contenedores unificado vía secciones */
+				.footer-container {
+					flex-direction: column;
+					gap: 50px;
+					align-items: center;
+				}
+				.footer-column {
+					width: 100%;
+					align-items: center;
+					text-align: center;
+				}
+				.footer-column h3 {
+					margin-bottom: 20px;
+				}
+				.footer-column ul li {
+					margin-bottom: 12px;
+				}
+				.footer-column-wrapper {
+					max-width: 100%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+				}
+				.footer-column h3::after {
+					margin: 8px auto 0 auto;
+				}
+				.social-icons {
+					justify-content: center;
+				}
+
+				/* Recorrido Virtual - HIDE on Tablet and Mobile */
+				.virtual-tour-section {
+					display: none !important;
+				}
+
+				/* Testimonios Tablet Optimization */
+				.testimonials-grid {
+					grid-template-columns: 1fr;
+					gap: 40px;
+				}
+				.testimonial-images {
+					display: none; /* Hidden to focus on text content in tablet/mobile */
+				}
+				.testimonial-text {
+					text-align: center;
+					max-width: 800px;
+					margin: 0 auto;
+				}
+				.testimonial-quote {
+					font-size: 1.8em;
+				}
+				.quote-icon {
+					left: 50%;
+					transform: translateX(-50%);
+					top: -40px;
+				}
+				.testimonial-controls {
+					justify-content: center;
+					margin-top: 30px;
+				}
+
+				/* Ajustes del Dock para tablet */
+				.bottom-dock {
+					padding: 10px 15px;
+					gap: 5px;
+				}
+				.dock-item {
+					width: 40px;
+					height: 40px;
+				}
+			}
+
+			/* Mobile & Tablet Portrait (max-width: 768px) */
+			@media (max-width: 768px) {
+				/* Header */
+				.header-main {
+					padding: 15px 20px;
+				}
+				.header-main nav ul li:not(:last-child) {
+					display: none;
+				}
+				.header-main .menu-icon {
+					display: block;
+				}
+				.brand-text-desktop {
+					display: none;
+				}
+				.brand-text-mobile {
+					display: inline;
+					font-size: 1.2em;
+					font-weight: bold;
+				}
+
+				.header-main .logo span {
+					font-size: 0.9em;
+					max-width: 200px;
+					line-height: 1.2;
+				}
+
+				/* Hero Section - Centered for Impact */
+				.hero-section {
+					padding: 0 20px 0 8%;
+					justify-content: center;
+					align-items: flex-start;
+					text-align: left;
+				}
+				.hero-content h1 {
+					font-size: 3.5em;
+				}
+				.hero-content p {
+					align-items: flex-start;
+					margin: 0;
+				}
+				.hero-arrow {
+					margin-top: 5px;
+					align-self: flex-start;
+				}
+
+				/* Section Spacing - Relaxed for Mobile */
+				.college-section,
+				.levels-section,
+				.projects-section,
+				.testimonials-section,
+				.virtual-tour-section,
+				.contact-home-section,
+				.footer {
+					padding: 60px 20px;
+				}
+
+				/* Stacked Layouts */
+				.college-container {
+					flex-direction: column;
+					gap: 40px;
+				}
+				.college-text {
+					padding-right: 0;
+					text-align: center;
+				}
+				.college-features {
+					display: table; /* shrinks to fit content */
+					margin: 0 auto 30px auto; /* centers the table */
+					text-align: left; /* keeps bullets and text aligned */
+				}
+
+				/* Gallery Mobile Optimization */
+				.college-gallery {
+					display: none; /* Hide on mobile as requested */
+				}
+
+				/* Levels & Testimonials */
+				.level-grid {
+					grid-template-columns: 1fr;
+					gap: 40px;
+				}
+				.level-image {
+					order: -1; /* Image first on mobile */
+				}
+				/* Testimonials - Mobile fine-tuning */
+				.testimonial-quote {
+					font-size: 1.4em; /* Slightly smaller font for mobile */
+				}
+				.testimonial-controls {
+					margin-top: 10px;
+					position: relative;
+					z-index: 5;
+				}
+
+				/* Projects Grid - Adaptado para Tablet Portrait (2 columnas) y Mobile (1 columna) */
+				.projects-grid {
+					grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				}
+				.projects-header {
+					flex-direction: column;
+					gap: 20px;
+					text-align: center;
+				}
+				.projects-header h3 {
+					font-size: 2.5em;
+				}
+
+			/* Mobile (max-width: 600px) */
+			@media (max-width: 600px) {
+				.footer-container {
+					gap: 45px; /* Más compacto para móvil */
+				}
+				.footer-column h3 {
+					margin-bottom: 15px;
+				}
+				.footer-column ul li {
+					margin-bottom: 10px;
+				}
+				.contact-info p {
+					margin-bottom: 8px;
+				}
+			}
+
+			/* Small Mobile (max-width: 480px) */
+			@media (max-width: 480px) {
+				/* Typography Adjustments */
+				.college-text h2,
+				.levels-title h3,
+				.projects-header h3,
+				.contact-home-title {
+					font-size: 2em;
+				}
+				.level-info h4 {
+					font-size: 2em;
+				}
+
+				/* Buttons Full Width */
+				.view-more-container {
+					flex-direction: column;
+					width: 100%;
+					gap: 15px;
+				}
+				.view-more-btn {
+					width: 100%;
+					text-align: center;
+					box-sizing: border-box;
+				}
+
+				/* Unity Buttons */
+				.unity-start-btn {
+					width: 100%;
+					box-sizing: border-box;
+				}
+			}
+		</style>
+		<link rel="icon" href="img/favicon.ico" type="image/ico" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		/>
+	</head>
+	<body ontouchstart="">
+		<header>
+			<div class="header-main">
+				<div class="logo">
+					<a href="index.html">
+						<img src="img/favicon.ico" alt="Logo INSM" />
+						<span class="brand-text-desktop">Instituto Nuestra Señora de la Merced</span>
+						<span class="brand-text-mobile">INSM</span>
+					</a>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="NuestroColegio.html">Nuestro Colegio</a></li>
+						<li><a href="Proyectos.html">Proyectos</a></li>
+						<li><a href="Contacto.html">Contacto</a></li>
+						<li class="menu-icon" onclick="toggleSideMenu()"><i class="fas fa-bars"></i></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<div class="dropdown-menu" id="dropdownMenu">
+			<div class="mobile-menu-header">
+				<div class="mobile-menu-logo">
+					<img src="img/logo.png" alt="Logo INSM" />
+					<span>INSM</span>
+				</div>
+				<button class="close-menu-btn" onclick="toggleMenu()">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+
+			<ul class="mobile-menu-list">
+				<li>
+					<a href="#nuestro-colegio" onclick="toggleMenu()">
+						<span>Nuestro Colegio</span>
+						<i class="fas fa-chevron-right"></i>
+					</a>
+				</li>
+				<li>
+					<a href="#niveles" onclick="toggleMenu()">
+						<span>Niveles</span>
+						<i class="fas fa-chevron-right"></i>
+					</a>
+				</li>
+				<li>
+					<a href="#proyectos" onclick="toggleMenu()">
+						<span>Proyectos</span>
+						<i class="fas fa-chevron-right"></i>
+					</a>
+				</li>
+				<li>
+					<a href="#testimonios" onclick="toggleMenu()">
+						<span>Testimonios</span>
+						<i class="fas fa-chevron-right"></i>
+					</a>
+				</li>
+			</ul>
+
+			<div class="mobile-menu-highlight">
+				<h4>Más opciones</h4>
+				<a href="#contacto-home" onclick="toggleMenu()">
+					<span>Contacto</span>
+					<i class="fas fa-chevron-right"></i>
+				</a>
+				<!-- Elemento destacado en rojo -->
+				<a href="Contacto.html" class="highlight-red" onclick="toggleMenu()">
+					<span>Inscripciones</span>
+					<i class="fas fa-chevron-right"></i>
+				</a>
+			</div>
+		</div>
+
+		<main>
+			<section class="hero-section">
+				<div class="hero-content">
+					<h1>
+						<span class="hero-line-1">Listos</span>
+						<span class="hero-line-2">para la vida</span>
+					</h1>
+					<p>
+						<a
+							href="#nuestro-colegio"
+							style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;"
+						>
+							Descubrí por qué las familias nos eligen
+							<span class="hero-arrow"></span>
+						</a>
+					</p>
+				</div>
+			</section>
+
+			<section id="nuestro-colegio" class="college-section">
+				<div class="college-container">
+					<div class="college-text">
+						<h2>Nuestro Colegio</h2>
+						<p>
+							Descubre una comunidad educativa comprometida con la excelencia académica y los
+							valores mercedarios. Un espacio donde cada estudiante es protagonista de su propio
+							aprendizaje.
+						</p>
+
+						<ul class="college-features">
+							<li>Formación integral en todos los niveles</li>
+							<li>Compromiso con la solidaridad y cooperativismo</li>
+							<li>Proyectos enfocados en el desarrollo comunitario</li>
+							<li>Convivencia basada en el respeto y la empatía</li>
+							<li>Eventos institucionales de alto impacto</li>
+						</ul>
+
+						<a href="NuestroColegio.html" class="view-more-btn">Más Información</a>
+					</div>
+
+					<div class="college-gallery">
+						<div class="gallery-col col-1">
+							<img src="img/entrada.png" alt="entradas" />
+							<img src="img/20250806_092322.jpg" alt="Convivencia" />
+							<img src="img/Cooperativa 1.jpg" alt="Cooperativa" />
+						</div>
+						<div class="gallery-col col-2">
+							<img src="img/Historia.jpg" alt="Cuidado Ambiente" />
+							<img src="img/Cooperativa- bolsas.jpg" alt="Cooperativa Bolsas" />
+							<img src="img/sala2.jpg" alt="Cooperativa 2" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="niveles" class="levels-section">
+				<div class="levels-container">
+					<div class="levels-title">
+						<h2>Conocé</h2>
+						<h3>Nuestros Niveles</h3>
+					</div>
+					<div class="level-tabs">
+						<button class="level-tab active" data-level="inicial">Inicial</button>
+						<button class="level-tab" data-level="primario">Primario</button>
+						<button class="level-tab" data-level="secundario">Secundario</button>
+						<button class="level-tab" data-level="terciario">Terciario</button>
+					</div>
+					<div id="levels-content">
+						<div class="level-content active" data-level-content="inicial">
+							<div class="level-grid">
+								<div class="level-image">
+									<img src="img/entrada.png" alt="Nivel Inicial" />
+								</div>
+								<div class="level-info">
+									<h4>Inicial</h4>
+									<div class="age">Edades 3-5</div>
+									<p>
+										Acompañamos las primeras experiencias educativas con cuidado, juego y valores.
+									</p>
+									<a href="NivelInicial.html" class="arrow-link"
+										>Ver más <i class="fas fa-arrow-right"></i
+									></a>
+								</div>
+							</div>
+						</div>
+						<div class="level-content" data-level-content="primario">
+							<div class="level-grid">
+								<div class="level-image">
+									<img src="img/IMG-20250414-WA0023.jpg" alt="Nivel Primario" />
+								</div>
+								<div class="level-info">
+									<h4>Primario</h4>
+									<div class="age">Edades 6-12</div>
+									<p>
+										Educamos integralmente, promoviendo aprendizajes, valores y el desarrollo
+										personal.
+									</p>
+									<a href="NivelPrimario.html" class="arrow-link">Ver más <i class="fas fa-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="level-content" data-level-content="secundario">
+							<div class="level-grid">
+								<div class="level-image"><img src="img/VIAJES.jpg" alt="Nivel Secundario" /></div>
+								<div class="level-info">
+									<h4>Secundario</h4>
+									<div class="age">Edades 13-18</div>
+									<p>Formamos jóvenes críticos, responsables y comprometidos con su futuro.</p>
+									<a href="NivelSecundario.html" class="arrow-link">Ver más <i class="fas fa-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="level-content" data-level-content="terciario">
+							<div class="level-grid">
+								<div class="level-image">
+									<img src="img/DIA del profesor.jpg" alt="Nivel Terciario" />
+								</div>
+								<div class="level-info">
+									<h4>Terciario</h4>
+									<div class="age">Formación Profesional</div>
+									<p>Formamos docentes con valores e identidad mercedaria.</p>
+									<a href="NivelTerciario.html" class="arrow-link">Ver más <i class="fas fa-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="level-controls" id="level-controls">
+						<button id="prev-level" class="testimonial-btn">
+							<i class="fas fa-arrow-left"></i>
+						</button>
+						<button id="pause-level" class="testimonial-btn">
+							<i class="fas fa-pause"></i>
+						</button>
+						<button id="next-level" class="testimonial-btn">
+							<i class="fas fa-arrow-right"></i>
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section id="proyectos" class="projects-section">
+				<div class="projects-container">
+					<div class="projects-header">
+						<h3>Proyectos</h3>
+						<a href="Proyectos.html" class="arrow-link">
+							Ver más <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+					<div class="projects-grid" id="home-projects-grid"></div>
+				</div>
+			</section>
+
+			<section id="testimonios" class="testimonials-section">
+				<div class="testimonials-container">
+					<div class="testimonials-grid">
+						<div class="testimonial-text">
+							<i class="fas fa-quote-left quote-icon"></i>
+							<div id="testimonial-text-container">
+								<div class="testimonial-slide active" data-testimonial="1">
+									<p class="testimonial-quote">
+										"La experiencia que tuve en esta escuela fue transformadora. No solo aprendí,
+										sino que crecí como persona."
+									</p>
+									<p class="testimonial-author">Anónimo 1</p>
+									<p class="testimonial-role">Egresado 2022</p>
+								</div>
+								<div class="testimonial-slide" data-testimonial="2">
+									<p class="testimonial-quote">
+										"Los profesores son apasionados y dedicados. Realmente se preocupan por el éxito
+										de cada estudiante."
+									</p>
+									<p class="testimonial-author">Anónimo 2</p>
+									<p class="testimonial-role">Egresado 2021</p>
+								</div>
+								<div class="testimonial-slide" data-testimonial="3">
+									<p class="testimonial-quote">
+										"Hice amigos para toda la vida y adquirí herramientas que me sirven todos los
+										días en la universidad.Hice amigos para toda la vida y adquirí herramientas que
+										me sirven todos los días en la universidad."
+									</p>
+									<p class="testimonial-author">Anónimo 3</p>
+									<p class="testimonial-role">Egresado 2023</p>
+								</div>
+							</div>
+							<div class="testimonial-controls">
+								<button id="prev-testimonial" class="testimonial-btn">
+									<i class="fas fa-arrow-left"></i>
+								</button>
+								<button id="pause-testimonial" class="testimonial-btn">
+									<i class="fas fa-pause"></i>
+								</button>
+								<button id="next-testimonial" class="testimonial-btn">
+									<i class="fas fa-arrow-right"></i>
+								</button>
+							</div>
+						</div>
+						<div class="testimonial-images">
+							<img
+								src="img/usuario_default.png"
+								alt="Testimonio 1"
+								class="testimonial-img"
+								data-testimonial-img="1"
+							/>
+							<img
+								src="img/usuario_default.png"
+								alt="Testimonio 2"
+								class="testimonial-img"
+								data-testimonial-img="2"
+							/>
+							<img
+								src="img/usuario_default.png"
+								alt="Testimonio 3"
+								class="testimonial-img"
+								data-testimonial-img="3"
+							/>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="virtual-tour" class="virtual-tour-section">
+				<div class="virtual-tour-container">
+					<div class="levels-title">
+						<h2>UNA PROPUESTA INNOVADORA</h2>
+						<h3>Recorrido Virtual</h3>
+					</div>
+
+					<div id="unity-teaser" class="unity-box">
+						<div class="unity-overlay-content">
+							<h4>Explorá Nuestro Colegio en 3D</h4>
+							<p>
+								Iniciá un recorrido interactivo por nuestras instalaciones desde la comodidad de tu
+								casa. Descubrí cada rincón como si estuvieras aquí.
+							</p>
+							<button id="start-tour-btn" class="unity-start-btn">
+								Comenzar Recorrido <i class="fas fa-play" style="margin-left: 8px"></i>
+							</button>
+						</div>
+					</div>
+
+					<div id="unity-game-container" class="unity-box" style="display: none">
+						<button id="close-tour-btn" class="unity-close-btn" title="Cerrar recorrido">
+							<i class="fas fa-times"></i>
+						</button>
+						<iframe
+							id="unity-iframe"
+							data-src="PrismaWeb/index.html"
+							src=""
+							width="100%"
+							height="600"
+							frameborder="0"
+							allowfullscreen="true"
+							scrolling="no"
+						>
+						</iframe>
+					</div>
+
+					<div class="view-more-container" id="unity-controls" style="display: none">
+						<button id="fullscreen-btn" class="view-more-btn">
+							<i class="fas fa-expand" style="margin-right: 8px"></i>Pantalla Completa
+						</button>
+						<a
+							href="https://inmerced.netlify.app/"
+							target="_blank"
+							class="view-more-btn"
+							style="text-decoration: none"
+						>
+							Ver Video Recorrido <i class="fas fa-external-link-alt" style="margin-left: 8px"></i>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<section id="contacto-home" class="contact-home-section">
+				<div class="contact-home-container">
+					<div class="contact-home-icon-box">
+						<i class="far fa-paper-plane"></i>
+					</div>
+					<h2 class="contact-home-title">¿Querés saber más?</h2>
+					<p class="contact-home-text">
+						Elegir también es animarse<br />
+						Estamos a tu disposición para responder todas tus inquietudes. Contactate con la secretaria
+						para poder recibir atención personalizada.
+					</p>
+					<a href="Contacto.html" class="view-more-btn"> Contactanos </a>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-column contact-info">
+					<div class="footer-column-wrapper">
+						<h3>Contactanos</h3>
+						<p><strong>Nivel Inicial:</strong> <a href="tel:+543576408967">+54 (3576) 408-967</a></p>
+						<p><strong>Nivel Primario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+						<p>
+							<strong>Nivel Secundario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a>
+						</p>
+						<p><strong>Nivel Terciario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+						<div class="social-icons">
+							<a href="https://www.facebook.com/insm.nivelsuperior.1/?locale=es_LA" target="_blank"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a href="https://www.youtube.com/@INSM.DIGITAL" target="_blank"
+								><i class="fab fa-youtube"></i
+							></a>
+							<a href="https://www.tiktok.com/@insm.digital" target="_blank"
+								><i class="fab fa-tiktok"></i
+							></a>
+							<a href="https://www.instagram.com/mercedariasarroyito/" target="_blank"
+								><i class="fab fa-instagram"></i
+							></a>
+						</div>
+					</div>
+				</div>
+				<div class="footer-column">
+					<div class="footer-column-wrapper">
+						<h3>Enlaces Útiles</h3>
+						<ul>
+							<li><a href="NivelInicial.html">Nivel Inicial</a></li>
+							<li><a href="NivelPrimario.html">Nivel Primario</a></li>
+							<li><a href="NivelSecundario.html">Nivel Secundario</a></li>
+							<li><a href="NivelTerciario.html">Nivel Terciario</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-column">
+					<div class="footer-column-wrapper">
+						<h3>Encuentranos</h3>
+						<p>
+							9 de Julio 465, Arroyito, Córdoba. Tradición y excelencia mercedaria.
+						</p>
+						<div class="get-directions">
+							<a href="https://maps.app.goo.gl/aSiY8qYsQPtb2uJy7" target="_blank">Obtener Direcciones</a>
+						</div>
+						<div class="footer-map-container"></div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<div class="footer-bottom-links">
+					<span>© 1985 INSM</span>
+					<span>|</span>
+					<a href="#">Políticas & Manuales</a>
+					<span>|</span>
+					<a href="#">Privacidad</a>
+					<span>|</span>
+					<a href="#">Cookies</a>
+				</div>
+				<div class="footer-bottom-links" style="margin-top: 8px;">
+					<span>Desarrollada por <span style="color: #f39c12;">Nazareno</span> y <span style="color: #f39c12;">Eugenio</span></span>
+				</div>
+				<div class="footer-bottom-logos"></div>
+			</div>
+		</footer>
+
+		<div class="side-menu" id="sideMenu">
+			<div class="side-menu-overlay" onclick="toggleSideMenu()"></div>
+			<div class="side-menu-content">
+				<div class="side-menu-header">
+					<h3>Índice de Sección</h3>
+				</div>
+				<ul class="side-menu-links">
+					<li>
+						<a href="#nuestro-colegio">
+							<i class="fas fa-university"></i> Nuestro Colegio
+						</a>
+					</li>
+					<li>
+						<a href="#niveles">
+							<i class="fas fa-layer-group"></i> Nuestros Niveles
+						</a>
+					</li>
+					<li>
+						<a href="#proyectos">
+							<i class="fas fa-project-diagram"></i> Proyectos
+						</a>
+					</li>
+					<li>
+						<a href="#testimonios">
+							<i class="fas fa-comments"></i> Testimonios
+						</a>
+					</li>
+					<li>
+						<a href="#contacto-home">
+							<i class="fas fa-envelope"></i> Contactanos
+						</a>
+					</li>
+				</ul>
+
+				<div class="side-menu-shortcuts">
+					<h4>Accesos Globales</h4>
+					<div class="shortcut-grid">
+						<a href="index.html" class="shortcut-item">
+							<i class="fas fa-home"></i> Inicio
+						</a>
+						<a href="NuestroColegio.html" class="shortcut-item">
+							<i class="fas fa-university"></i> Nuestro Colegio
+						</a>
+						<a href="Proyectos.html" class="shortcut-item">
+							<i class="fas fa-project-diagram"></i> Proyectos
+						</a>
+						<a href="Contacto.html" class="shortcut-item">
+							<i class="fas fa-envelope"></i> Contacto
+						</a>
+					</div>
+				</div>
+
+				<div class="side-menu-footer">
+					<a href="Contacto.html" class="back-home-btn">Inscripciones 2026</a>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// --- Animación Hero (Letra por Letra) ---
+			function runHeroAnimation() {
+				const heroContent = document.querySelector('.hero-content');
+				if (!heroContent) return;
+
+				const heroH1 = heroContent.querySelector('h1');
+				const paragraph = heroContent.querySelector('p');
+
+				if (!heroH1 || !paragraph) return;
+
+				// Hacer visibles los contenedores
+				heroH1.style.visibility = 'visible';
+				paragraph.style.visibility = 'visible';
+
+				// Solo envolver letras si no se ha hecho antes
+				if (heroH1.querySelectorAll('.letter').length === 0) {
+					const wrapLetters = (node) => {
+						if (node.nodeType === Node.TEXT_NODE) {
+							const text = node.textContent.trim();
+							if (!text) return;
+							const fragment = document.createDocumentFragment();
+							[...node.textContent].forEach((char) => {
+								const span = document.createElement('span');
+								span.textContent = char;
+								span.className = 'letter';
+								fragment.appendChild(span);
+							});
+							node.parentNode.replaceChild(fragment, node);
+						} else if (node.nodeType === Node.ELEMENT_NODE) {
+							Array.from(node.childNodes).forEach(wrapLetters);
+						}
+					};
+					wrapLetters(heroH1);
+				}
+
+				// Reiniciar y Aplicar Animación con Stagger
+				const letters = heroH1.querySelectorAll('.letter');
+				let delay = 100;
+				const stagger = 40;
+
+				letters.forEach((letter) => {
+					letter.style.animation = 'none';
+					void letter.offsetWidth; // Force reflow
+					letter.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay}ms both`;
+					delay += stagger;
+				});
+
+				paragraph.style.animation = 'none';
+				void paragraph.offsetWidth; // Force reflow
+				paragraph.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay + 200}ms both`;
+			}
+
+			document.addEventListener('DOMContentLoaded', runHeroAnimation);
+
+			// --- Lógica del Nuevo Menú Lateral (Índice) ---
+			function toggleSideMenu() {
+				const sideMenu = document.getElementById('sideMenu');
+				const linksContainer = document.querySelector('.side-menu-links');
+				if (sideMenu) {
+					const isActive = sideMenu.classList.toggle('active');
+
+					// Bloqueo de scroll en HTML y BODY para máxima compatibilidad
+					document.documentElement.classList.toggle('no-scroll');
+					document.body.classList.toggle('no-scroll');
+
+					if (isActive && linksContainer) {
+						// Asegurar que el scrollbar se reconozca inmediatamente
+						linksContainer.scrollTop = 1;
+						linksContainer.scrollTop = 0;
+					}
+				}
+			}
+
+			// --- Lógica del Menú Desplegable (Móvil) ---
+			function toggleMenu() {
+				const menu = document.getElementById('dropdownMenu');
+				if (menu) {
+					menu.classList.toggle('show');
+				}
+			}
+
+			// Cerrar menús con tecla Escape
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') {
+					const menu = document.getElementById('dropdownMenu');
+					if (menu && menu.classList.contains('show')) {
+						menu.classList.remove('show');
+					}
+
+					const sideMenu = document.getElementById('sideMenu');
+					if (sideMenu && sideMenu.classList.contains('active')) {
+						sideMenu.classList.remove('active');
+						document.documentElement.classList.remove('no-scroll');
+						document.body.classList.remove('no-scroll');
+					}
+				}
+			});
+
+			// --- Efecto Parallax / Zoom al hacer Scroll (Hero Section) ---
+			document.addEventListener(
+				'scroll',
+				() => {
+					const sideMenu = document.getElementById('sideMenu');
+					if (sideMenu && sideMenu.classList.contains('active')) return;
+
+					const heroSection = document.querySelector('.hero-section');
+					if (!heroSection) return;
+
+					const scrollPosition = Math.max(0, window.scrollY);
+					const windowHeight = window.innerHeight;
+
+					// Solo calcular si estamos cerca del Hero (optimización)
+					if (scrollPosition <= windowHeight) {
+						// Zoom lineal suave: escala de forma constante y fluida
+						const scale = 1 + scrollPosition * 0.00015;
+						heroSection.style.setProperty('--hero-scale', scale);
+					}
+				},
+				{ passive: true }
+			);
+
+			// --- Lógica para la Sección de Niveles ---
+			document.addEventListener('DOMContentLoaded', function () {
+				const levelTabs = document.querySelectorAll('.level-tab');
+				const levelContents = document.querySelectorAll('.level-content');
+				const prevLevelBtn = document.getElementById('prev-level');
+				const nextLevelBtn = document.getElementById('next-level');
+				const pauseLevelBtn = document.getElementById('pause-level');
+
+				let currentLevel = 0;
+				let levelInterval;
+				let isLevelPlaying = true;
+
+				function showLevel(index) {
+					currentLevel = index;
+					levelTabs.forEach((tab, i) => {
+						tab.classList.toggle('active', i === index);
+					});
+					levelContents.forEach((content, i) => {
+						content.classList.toggle('active', i === index);
+					});
+				}
+
+				function startLevelRotation() {
+					stopLevelRotation();
+					if (window.innerWidth <= 768 && isLevelPlaying) {
+						levelInterval = setInterval(() => {
+							currentLevel = (currentLevel + 1) % levelTabs.length;
+							showLevel(currentLevel);
+						}, 5000);
+					}
+				}
+
+				function stopLevelRotation() {
+					clearInterval(levelInterval);
+				}
+
+				levelTabs.forEach((tab, index) => {
+					tab.addEventListener('click', () => {
+						showLevel(index);
+						if (isLevelPlaying) startLevelRotation();
+					});
+				});
+
+				if (prevLevelBtn) {
+					prevLevelBtn.addEventListener('click', () => {
+						currentLevel = (currentLevel - 1 + levelTabs.length) % levelTabs.length;
+						showLevel(currentLevel);
+						if (isLevelPlaying) startLevelRotation();
+					});
+				}
+
+				if (nextLevelBtn) {
+					nextLevelBtn.addEventListener('click', () => {
+						currentLevel = (currentLevel + 1) % levelTabs.length;
+						showLevel(currentLevel);
+						if (isLevelPlaying) startLevelRotation();
+					});
+				}
+
+				if (pauseLevelBtn) {
+					pauseLevelBtn.addEventListener('click', () => {
+						if (isLevelPlaying) {
+							stopLevelRotation();
+							pauseLevelBtn.innerHTML = '<i class="fas fa-play"></i>';
+							isLevelPlaying = false;
+						} else {
+							isLevelPlaying = true;
+							startLevelRotation();
+							pauseLevelBtn.innerHTML = '<i class="fas fa-pause"></i>';
+						}
+					});
+				}
+
+				// Iniciar rotación si es móvil
+				startLevelRotation();
+
+				// Reiniciar rotación al cambiar el tamaño de ventana (por si pasa a tablet/móvil)
+				window.addEventListener('resize', () => {
+					if (window.innerWidth <= 768) {
+						if (isLevelPlaying) startLevelRotation();
+					} else {
+						stopLevelRotation();
+					}
+				});
+			});
+
+			// --- Lógica para la Sección de Testimonios ---
+			const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+			const testimonialImages = document.querySelectorAll('.testimonial-img');
+			const prevBtn = document.getElementById('prev-testimonial');
+			const nextBtn = document.getElementById('next-testimonial');
+			const pauseBtn = document.getElementById('pause-testimonial');
+			let currentTestimonial = 0;
+			const totalTestimonials = testimonialSlides.length;
+			let isPlaying = true;
+			let autoRotateInterval;
+			let isNavigating = false; // Bandera de seguridad para tiempos muertos
+
+			function showTestimonial(index) {
+				testimonialSlides.forEach((slide, i) => {
+					slide.classList.toggle('active', i === index);
+				});
+
+				// Ajustar altura del contenedor dinámicamente según el testimonio activo
+				const container = document.getElementById('testimonial-text-container');
+				const activeSlide = testimonialSlides[index];
+				if (container && activeSlide) {
+					requestAnimationFrame(() => {
+						container.style.height = activeSlide.offsetHeight + 'px';
+					});
+				}
+
+				testimonialImages.forEach((img, i) => {
+					const pos = (i - index + totalTestimonials) % totalTestimonials;
+					if (pos === 0) {
+						img.style.transform = 'translateX(25%) scale(1)';
+						img.style.opacity = '1';
+						img.style.zIndex = '3';
+					} else if (pos === 1) {
+						img.style.transform = 'translateX(50%) scale(0.9)';
+						img.style.opacity = '0.5';
+						img.style.zIndex = '2';
+					} else {
+						img.style.transform = 'translateX(0) scale(0.8)';
+						img.style.opacity = '0.3';
+						img.style.zIndex = '1';
+					}
+				});
+			}
+
+			// Navegación con seguridad de desfase
+			const nextSlide = () => {
+				if (isNavigating) return;
+				isNavigating = true;
+				setTimeout(() => (isNavigating = false), 600);
+
+				currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+				showTestimonial(currentTestimonial);
+				if (isPlaying) startAutoRotate();
+			};
+
+			const prevSlide = () => {
+				if (isNavigating) return;
+				isNavigating = true;
+				setTimeout(() => (isNavigating = false), 600);
+
+				currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+				showTestimonial(currentTestimonial);
+				if (isPlaying) startAutoRotate();
+			};
+
+			// Navegación al tocar imágenes
+			testimonialImages.forEach((img, i) => {
+				img.style.cursor = 'pointer';
+				img.addEventListener('click', () => {
+					// Si el mouse se soltó después de un arrastre, no hacer nada
+					if (wasDragged) {
+						wasDragged = false;
+						return;
+					}
+
+					if (isNavigating) return;
+					const index = parseInt(img.dataset.testimonialImg) - 1;
+					if (index !== currentTestimonial) {
+						isNavigating = true;
+						setTimeout(() => (isNavigating = false), 600);
+						currentTestimonial = index;
+						showTestimonial(currentTestimonial);
+						if (isPlaying) startAutoRotate();
+					}
+				});
+			});
+
+			// Soporte para Deslizar (Swipe) en imágenes
+			const imagesContainer = document.querySelector('.testimonial-images');
+			let startPos = 0;
+			let isDragging = false;
+			let wasDragged = false;
+
+			imagesContainer.addEventListener('mousedown', (e) => {
+				if (e.target.tagName !== 'IMG') return;
+				startPos = e.clientX;
+				isDragging = true;
+				wasDragged = false;
+				imagesContainer.style.cursor = 'grabbing';
+			});
+
+			window.addEventListener('mouseup', (e) => {
+				if (!isDragging) return;
+				isDragging = false;
+				if (imagesContainer) imagesContainer.style.cursor = 'default';
+				
+				const diff = e.clientX - startPos;
+				if (Math.abs(diff) > 10) wasDragged = true;
+				
+				if (diff < -40) {
+					nextSlide();
+				} else if (diff > 40) {
+					prevSlide();
+				}
+			});
+
+			imagesContainer.addEventListener(
+				'touchstart',
+				(e) => {
+					startPos = e.touches[0].clientX;
+				},
+				{ passive: true }
+			);
+
+			imagesContainer.addEventListener('touchend', (e) => {
+				const diff = e.changedTouches[0].clientX - startPos;
+				if (diff < -30) {
+					nextSlide();
+				} else if (diff > 30) {
+					prevSlide();
+				}
+			});
+
+			window.addEventListener('resize', () => {
+				const container = document.getElementById('testimonial-text-container');
+				const activeSlide = testimonialSlides[currentTestimonial];
+				if (container && activeSlide) {
+					container.style.height = activeSlide.offsetHeight + 'px';
+				}
+			});
+
+			function startAutoRotate() {
+				stopAutoRotate();
+				autoRotateInterval = setInterval(nextSlide, 5000);
+			}
+
+			function stopAutoRotate() {
+				clearInterval(autoRotateInterval);
+			}
+
+			nextBtn.addEventListener('click', nextSlide);
+			prevBtn.addEventListener('click', prevSlide);
+
+			// Prevenir el arrastre predeterminado (Ghost Images) en TODAS las imágenes y enlaces
+			// Usamos delegación de eventos para capturar incluso el contenido cargado dinámicamente (como Proyectos)
+			document.addEventListener('dragstart', (e) => {
+				if (e.target.tagName === 'IMG' || e.target.closest('.projects-card')) {
+					e.preventDefault();
+				}
+			});
+
+			pauseBtn.addEventListener('click', () => {
+				if (isPlaying) {
+					stopAutoRotate();
+					pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+					isPlaying = false;
+				} else {
+					startAutoRotate();
+					pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+					isPlaying = true;
+				}
+			});
+
+			showTestimonial(currentTestimonial);
+			startAutoRotate();
+
+			// Recalcular altura del testimonio activo para evitar recortes cuando se cargan las fuentes o se inicializa el DOM
+			document.addEventListener('DOMContentLoaded', () => {
+				const container = document.getElementById('testimonial-text-container');
+				const activeSlide = testimonialSlides[currentTestimonial];
+				if (container && activeSlide) {
+					container.style.height = activeSlide.offsetHeight + 'px';
+				}
+			});
+
+			window.addEventListener('load', () => {
+				const container = document.getElementById('testimonial-text-container');
+				const activeSlide = testimonialSlides[currentTestimonial];
+				if (container && activeSlide) {
+					container.style.height = activeSlide.offsetHeight + 'px';
+				}
+			});
+
+			if (document.fonts) {
+				document.fonts.ready.then(() => {
+					const container = document.getElementById('testimonial-text-container');
+					const activeSlide = testimonialSlides[currentTestimonial];
+					if (container && activeSlide) {
+						container.style.height = activeSlide.offsetHeight + 'px';
+					}
+				});
+			}
+
+			// --- Lógica para la Sección de Recorrido Virtual ---
+			const unityTeaser = document.getElementById('unity-teaser');
+			const unityGameContainer = document.getElementById('unity-game-container');
+			const startBtn = document.getElementById('start-tour-btn');
+			const closeBtn = document.getElementById('close-tour-btn');
+			const unityIframe = document.getElementById('unity-iframe');
+
+			// --- INICIO: NUEVOS ELEMENTOS ---
+			const unityControls = document.getElementById('unity-controls'); // Contenedor de botones
+			const fullscreenBtn = document.getElementById('fullscreen-btn'); // Botón de pantalla completa
+			// --- FIN: NUEVOS ELEMENTOS ---
+
+			const gameSrc = unityIframe.dataset.src;
+
+			if (startBtn) {
+				startBtn.addEventListener('click', function () {
+					// Esperamos 250ms para completar visualmente la transición e iniciar la experiencia
+					setTimeout(() => {
+						unityTeaser.style.display = 'none';
+						unityGameContainer.style.display = 'block';
+						unityControls.style.display = 'flex'; // <-- MOSTRAR CONTROLES
+
+						if (unityIframe.getAttribute('src') !== gameSrc) {
+							unityIframe.setAttribute('src', gameSrc);
+						}
+					}, 250);
+				});
+			}
+
+			if (closeBtn) {
+				closeBtn.addEventListener('click', function () {
+					// Esperamos 250ms para completar visualmente la transición y cerrar la experiencia
+					setTimeout(() => {
+						unityGameContainer.style.display = 'none';
+						unityControls.style.display = 'none'; // <-- OCULTAR CONTROLES
+						unityTeaser.style.display = 'flex';
+						unityIframe.setAttribute('src', '');
+					}, 250);
+				});
+			}
+
+			// --- INICIO: SCRIPT DE PANTALLA COMPLETA (AHORA SÍ) ---
+			if (fullscreenBtn) {
+				fullscreenBtn.addEventListener('click', function () {
+					const unityIframeEl = document.getElementById('unity-iframe');
+
+					// Buscamos la 'unityInstance' que expusimos en el Paso 1
+					if (
+						unityIframeEl &&
+						unityIframeEl.contentWindow &&
+						unityIframeEl.contentWindow.unityInstance
+					) {
+						// ¡Esta es la línea clave!
+						// Llama a la función interna de Unity para poner pantalla completa
+						unityIframeEl.contentWindow.unityInstance.SetFullscreen(1);
+					} else {
+						console.error(
+							"No se pudo encontrar 'unityInstance' en el iframe. ¿Te acordaste de modificar el index.html de Unity para que diga 'window.unityInstance = unityInstance'?"
+						);
+						// Fallback (el método que no te gustó) por si algo falla
+						if (unityIframeEl.requestFullscreen) {
+							unityIframeEl.requestFullscreen();
+						}
+					}
+				});
+			}
+			// --- FIN: SCRIPT DE PANTALLA COMPLETA ---
+
+			// --- Lógica para cargar los 3 últimos proyectos en el Home ---
+			const homeProjectsGrid = document.getElementById('home-projects-grid');
+
+			// Función para medir y procesar palabras largas con precisión dinámica
+			function processLongWords(text, fontStyle, containerWidth) {
+				if (!text) return '';
+				const canvas = document.createElement('canvas');
+				const context = canvas.getContext('2d');
+				context.font = fontStyle;
+
+				// El margen de seguridad (padding real de la tarjeta + espacio para el guion)
+				const safeWidth = containerWidth - 85;
+
+				return text
+					.split(' ')
+					.map((word) => {
+						const metrics = context.measureText(word);
+						// REGLA: Si la palabra no cabe en una línea vacía del contenedor actual, aplicamos guiones
+						if (metrics.width > safeWidth) {
+							let parts = [];
+							for (let i = 0; i < word.length; i += 5) {
+								parts.push(word.substring(i, i + 5));
+							}
+							return parts.join('&shy;');
+						}
+						return word;
+					})
+					.join(' ');
+			}
+
+			if (homeProjectsGrid) {
+				fetch('templates/data/index-proyectos.json')
+					.then((response) => {
+						if (!response.ok) {
+							console.error('Error: No se pudo cargar el archivo templates/data/index-proyectos.json');
+							throw new Error('Error al cargar proyectos');
+						}
+						return response.json();
+					})
+					.then((projects) => {
+						projects.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+						// En tablets portrait (entre 768px y 992px) mostramos 4 tarjetas para un diseño 2x2 prolijo
+						const isTabletPortrait = window.innerWidth >= 768 && window.innerWidth <= 992;
+						const numProjects = isTabletPortrait ? 4 : 3;
+						const recent = projects.slice(0, numProjects);
+
+						// Calculamos el ancho actual de una tarjeta basado en el grid real
+						const gridWidth = homeProjectsGrid.offsetWidth;
+
+						// Determinamos columnas reales para el procesamiento de texto (coincidiendo con CSS)
+						let cols = 1;
+						if (window.innerWidth <= 768) {
+							// En tablet portrait/mobile usamos minmax(280px, 1fr) que da 2 cols en tablet
+							cols = Math.floor(gridWidth / 280) || 1;
+						} else {
+							cols = Math.floor(gridWidth / 350) || 1;
+						}
+						const cardWidth = gridWidth / cols;
+
+						homeProjectsGrid.innerHTML = '';
+
+						recent.forEach((proj) => {
+							// Validación de campos críticos del JSON
+							const required = ['id', 'title', 'image', 'date', 'summary', 'displayDate'];
+							required.forEach(field => {
+								if (proj[field] === undefined || proj[field] === null) {
+									console.error(`Error: El proyecto con ID '${proj.id || 'desconocido'}' no tiene el campo '${field}' definido.`);
+								}
+							});
+
+							const card = document.createElement('a');
+							card.href = `templates/Proyecto.html?id=${proj.id}`;
+							card.className = 'projects-card';
+
+							const maxChars = 200;
+							let summary = proj.summary || '';
+							if (summary.length > maxChars) {
+								summary = summary.substring(0, maxChars).trim() + '...';
+							}
+
+							// Medición usando la tipografía Heuristica real del sitio
+							const safeTitle = processLongWords(proj.title || 'Sin Título', 'bold 28px Heuristica', cardWidth);
+							const safeSummary = processLongWords(summary, '16px Heuristica', cardWidth);
+
+							card.innerHTML = `
+                                <img src="${proj.image || ''}" alt="${proj.title || ''}" loading="lazy">
+                                <div class="projects-card-content">
+                                    <p class="date">${proj.displayDate || ''}</p>
+                                    <h4>${safeTitle}</h4>
+                                    <p>${safeSummary}</p>
+                                </div>
+                            `;
+							homeProjectsGrid.appendChild(card);
+						});
+					})
+					.catch((err) => console.error('Error detallado en la carga de proyectos home:', err));
+			}
+
+			// --- Lógica para la Transición entre Páginas ---
+			if ('history' in window && 'scrollRestoration' in history) {
+				history.scrollRestoration = 'manual';
+			}
+
+			window.addEventListener('pageshow', function (event) {
+				if (event.persisted) {
+					// Si la página se carga desde el historial (bfcache)
+					document.body.classList.remove('fade-out');
+					// Forzamos el reinicio de la animación de entrada
+					document.body.style.animation = 'none';
+					void document.body.offsetWidth;
+					document.body.style.animation = '';
+					// Reiniciar animaciones del Hero
+					runHeroAnimation();
+				}
+			});
+
+			document.addEventListener('DOMContentLoaded', () => {
+				runHeroAnimation();
+				
+				// Verificación de IDs Críticos del DOM
+				const criticalIDs = [
+					'home-projects-grid', 'dropdownMenu', 'unity-teaser', 
+					'unity-game-container', 'start-tour-btn', 'unity-iframe',
+					'testimonial-text-container'
+				];
+				criticalIDs.forEach(id => {
+					if (!document.getElementById(id)) {
+						console.error(`Error: El contenedor esencial con ID '${id}' no fue encontrado en el DOM.`);
+					}
+				});
+
+				// Handler genérico de feedback táctil (.active-press) de alta fidelidad para móviles, tablets y pc
+				let activePressEl = null;
+				let pressStartX = 0;
+				let pressStartY = 0;
+				let pressStartTime = 0;
+				let activePressTimeout = null;
+
+				document.addEventListener('pointerdown', (e) => {
+					const pressable = e.target.closest('.projects-card, .level-tab, .testimonial-btn, .unity-start-btn, .unity-close-btn, .view-more-btn, .shortcut-item, .back-home-btn, .side-menu-links li a, .social-icons a, .get-directions a, .header-main nav ul li a, .header-main .logo a, .header-main .menu-icon, .arrow-link, .close-menu-btn, .mobile-menu-list li a, .mobile-menu-highlight a, .footer-column ul li a, .contact-info a, .footer-bottom-links a');
+					if (!pressable) return;
+
+					activePressEl = pressable;
+					pressStartX = e.clientX;
+					pressStartY = e.clientY;
+					pressStartTime = Date.now();
+
+					// Añadimos feedback táctil instantáneo
+					activePressEl.classList.add('active-press');
+
+					if (activePressTimeout) {
+						clearTimeout(activePressTimeout);
+						activePressTimeout = null;
+					}
+				});
+
+				document.addEventListener('pointermove', (e) => {
+					if (!activePressEl) return;
+
+					// Si hay movimiento significativo (arrastre/scroll de más de 10px), cancelamos el estado visual
+					const deltaX = Math.abs(e.clientX - pressStartX);
+					const deltaY = Math.abs(e.clientY - pressStartY);
+					if (deltaX > 10 || deltaY > 10) {
+						activePressEl.classList.remove('active-press');
+						activePressEl = null;
+						if (activePressTimeout) {
+							clearTimeout(activePressTimeout);
+							activePressTimeout = null;
+						}
+					}
+				});
+
+				document.addEventListener('pointerup', () => {
+					if (!activePressEl) return;
+
+					// Garantizamos un ciclo total de 100ms (snappy y veloz) desde touchstart para toques rápidos
+					const elapsed = Date.now() - pressStartTime;
+					const remaining = Math.max(0, 100 - elapsed);
+
+					const el = activePressEl;
+					activePressTimeout = setTimeout(() => {
+						el.classList.remove('active-press');
+					}, remaining);
+					activePressEl = null;
+				});
+
+				document.addEventListener('pointercancel', () => {
+					if (!activePressEl) return;
+					activePressEl.classList.remove('active-press');
+					activePressEl = null;
+					if (activePressTimeout) {
+						clearTimeout(activePressTimeout);
+						activePressTimeout = null;
+					}
+				});
+
+				// Delegación de eventos para transición suave entre páginas (incluye proyectos dinámicos)
+				document.addEventListener('click', (e) => {
+					const link = e.target.closest('a');
+					if (!link) return;
+
+					const href = link.getAttribute('href');
+					if (
+						href &&
+						!href.startsWith('#') &&
+						!link.onclick &&
+						!href.includes('mailto:') &&
+						!href.includes('tel:') &&
+						link.getAttribute('target') !== '_blank'
+					) {
+						// Ignorar si el usuario presionó una tecla de modificación para abrir en nueva pestaña
+						if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+
+						e.preventDefault();
+
+						// El fade-out comienza de inmediato al hacer click para máxima respuesta táctil
+						document.body.classList.add('fade-out');
+
+						// Esperamos 250ms exactos para completar la transición de opacidad antes de cambiar de url
+						setTimeout(() => {
+							window.location.href = href;
+						}, 250);
+					}
+				});
+
+				// Manejo de clicks en los enlaces del menú lateral (ejecución instantánea para evitar freeze)
+				const sideMenuLinks = document.querySelectorAll('.side-menu-links li a');
+				sideMenuLinks.forEach(link => {
+					link.addEventListener('click', (e) => {
+						e.preventDefault();
+						const targetId = link.getAttribute('href');
+						
+						// Cerrar el menú lateral
+						toggleSideMenu();
+						
+						// Desplazarse suavemente al elemento destino
+						const targetEl = document.querySelector(targetId);
+						if (targetEl) {
+							targetEl.scrollIntoView({ behavior: 'smooth' });
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

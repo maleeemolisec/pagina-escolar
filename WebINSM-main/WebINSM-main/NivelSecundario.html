@@ -1,0 +1,2710 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Insm - Nivel Secundario</title>
+        <style>
+            /* --- Fuentes --- */
+            @font-face {
+                font-family: 'Heuristica';
+                src: url('fonts/Heuristica-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Heuristica';
+                src: url('fonts/Heuristica-Bold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'ProximaNova';
+                src: url('fonts/ProximaNova-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            :root {
+                --staff-item-w: 288px;
+                --staff-item-h: 486px;
+                --staff-active-w: 320px;
+                --staff-active-h: 540px;
+                --staff-gap: 30px;
+            }
+
+            /* --- Estilos Generales y Transiciones --- */
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            html {
+                scroll-behavior: smooth;
+                scrollbar-gutter: stable; /* RESERVA EL ESPACIO PARA EVITAR EL SALTO DEL CONTENIDO AL BLOQUEAR EL SCROLL */
+                overscroll-behavior-y: none; /* Evita que el fondo se separe y rebote de forma extraña */
+            }
+            body {
+                margin: 0;
+                font-family: 'Heuristica', serif;
+                color: #333;
+                background-color: #f4f6f8;
+                animation: fadeInPage 0.5s ease-in-out;
+            }
+            body.fade-out {
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            body.no-scroll,
+            html.no-scroll {
+                overflow: hidden !important;
+                touch-action: none;
+            }
+            @keyframes fadeInPage {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            /* --- CORRECCIÓN DE SCROLL --- */
+            section {
+                scroll-margin-top: 80px; /* Al ras del header para el inicio de la sección blanca */
+            }
+            .content-block {
+                scroll-margin-top: 130px; /* Deja espacio visual arriba para no quedar pegado al título */
+            }
+
+            /* --- Header --- */
+            .header-main {
+                background-color: rgba(26, 79, 141, 0.25);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                color: white;
+                padding: 15px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            .header-main .logo a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: white;
+                font-size: 1.5em;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            /* --- Responsive Brand Text & Icon Logic --- */
+            .brand-text-desktop {
+                display: inline;
+                white-space: nowrap;
+            }
+            .brand-text-mobile {
+                display: none;
+            }
+            .header-main .logo img {
+                height: 50px;
+                margin-right: 10px;
+            }
+            .header-main nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 25px;
+                align-items: center;
+            }
+            .header-main nav ul li:not(:last-child)::after {
+                content: '│';
+                color: rgba(130, 163, 189, 0.8);
+                margin-left: 25px;
+                font-weight: bold;
+            }
+            .header-main nav ul li a {
+                text-decoration: none;
+                color: white;
+                font-family: 'ProximaNova', sans-serif;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                transition: color 0.3s ease;
+                position: relative;
+                padding-bottom: 5px;
+            }
+            .header-main nav ul li:not(:last-child) a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            .header-main nav ul li:not(:last-child) a:hover::after {
+                transform: scaleX(1);
+            }
+            .header-main nav ul li a:hover {
+                color: #f39c12;
+            }
+            .header-main .menu-icon {
+                font-size: 1.3em;
+                cursor: pointer;
+            }
+
+            /* --- Hero Section --- */
+            .hero-section {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                height: 100dvh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 8%;
+                box-sizing: border-box;
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+                overflow: hidden; /* Necesario para el zoom del fondo */
+            }
+
+            /* Imagen de Fondo con Zoom */
+            .hero-section::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('img/20250806_092322.jpg') no-repeat center center;
+                background-size: cover;
+                z-index: 0;
+                transform: scale(var(--hero-scale, 1));
+                will-change: transform;
+                transition: transform 0.3s ease-out;
+            }
+
+            /* Gradiente Oscuro */
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, rgba(70, 68, 68, 0.5), rgba(0, 0, 0, 0));
+                z-index: 1;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .hero-line-1,
+            .hero-line-2 {
+                display: block;
+            }
+
+            .hero-content p {
+                font-size: 1.05em;
+                margin-top: 5px;
+                max-width: 500px;
+                color: white;
+                font-style: italic;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                cursor: pointer;
+                visibility: hidden; /* Hidden initially, shown by JS */
+            }
+
+            .hero-content h1 {
+                font-size: 5.5em;
+                margin: 0;
+                line-height: 1.1;
+                font-weight: normal;
+                color: white;
+                visibility: hidden; /* Hidden initially, shown by JS */
+            }
+
+            @keyframes riseIn {
+                0% {
+                    transform: translateY(120%) scaleY(1.05);
+                    opacity: 0;
+                }
+                60% {
+                    transform: translateY(-6%) scaleY(0.95);
+                    opacity: 1;
+                }
+                80% {
+                    transform: translateY(2%) scaleY(1.02);
+                }
+                100% {
+                    transform: translateY(0) scaleY(1);
+                    opacity: 1; /* Ensure text remains visible */
+                }
+            }
+
+            .letter {
+                display: inline-block;
+                opacity: 0;
+                white-space: pre;
+            }
+
+            .hero-arrow {
+                width: 145px;
+                height: 2px;
+                background-color: white;
+                position: relative;
+                transition: width 0.8s ease;
+                align-self: flex-start;
+                transform-origin: left;
+            }
+
+            .hero-arrow::after {
+                content: '';
+                position: absolute;
+                right: -8px;
+                top: -4px;
+                width: 0;
+                height: 0;
+                border-left: 10px solid white;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                transition: transform 0.3s ease;
+            }
+
+            .hero-content p:hover .hero-arrow {
+                width: 165px;
+            }
+
+            .hero-content p:hover .hero-arrow::after {
+                transform: scale(1.2);
+            }
+
+            /* --- Sección Principal de Contenido (FULL SCREEN) --- */
+            .main-content-section {
+                padding: 100px 20px; /* Padding reducido laterales */
+                background-color: #ffffff;
+            }
+            .content-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                gap: 100px; /* Separación vertical entre secciones */
+            }
+            .main-text {
+                font-family: 'ProximaNova', sans-serif;
+                line-height: 1.8;
+                color: #555;
+                display: flex;
+                flex-direction: column;
+                gap: 60px;
+                width: 100%;
+            }
+            .content-block h2 {
+                font-family: 'Heuristica', serif;
+                font-size: 2.6em;
+                color: #cf0621;
+                margin: 0 0 20px 0;
+                font-weight: normal;
+                line-height: 1.1; /* Elimina el aire invisible superior heredado */
+                border-bottom: 2px solid #f39c12;
+                padding-bottom: 10px;
+                display: inline-block;
+                position: relative;
+                z-index: 20;
+            }
+
+            /* Garantizar espaciado uniforme ignorando márgenes internos finales */
+            .content-block > :last-child {
+                margin-bottom: 0 !important;
+            }
+
+            /* --- Estilo: Bienvenida --- */
+            .director-section {
+                display: flex;
+                align-items: center; 
+                gap: 40px;
+                margin-top: 28px;
+            }
+            .director-text { flex: 1; }
+            .director-image {
+                width: 300px;
+                height: 400px;
+                object-fit: cover;
+                border-radius: 8px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            }
+            .director-signature { font-size: 1.1em; font-weight: bold; margin-top: 15px; display: block;}
+
+            /* --- NUEVO ESTILO: Especialidades (Tarjetas Dark Style - Minimalista Blanco) --- */
+
+            /* Párrafo introductorio */
+            .specialties-intro {
+                font-size: 1.1em;
+                line-height: 1.8;
+                margin-bottom: 40px;
+                color: #555;
+                text-align: left;
+                max-width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .specialties-showcase {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+                justify-content: center;
+            }
+
+            @media (max-width: 1024px) {
+                .specialties-showcase {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* Tarjeta Base */
+            .card-specialty {
+                position: relative;
+                height: 380px;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                text-decoration: none;
+                color: white;
+                /* Animación para cuando aparezca la sombra */
+                transition: box-shadow 0.4s ease;
+            }
+
+            /* Sombra activada únicamente al hacer hover sobre el BOTÓN en Escritorio */
+            @media (min-width: 1025px) {
+                .card-specialty:has(.view-more-btn:hover) {
+                    box-shadow: 0 40px 80px -10px rgba(0, 0, 0, 0.9);
+                }
+            }
+
+            /* Rutas de imagen locales */
+            .card-bg-informatica {
+                background: url('img/sala2.jpg') no-repeat center center;
+                background-size: cover;
+            }
+
+            .card-bg-humanidades {
+                background: url('img/HUERTA1.jpg') no-repeat center center;
+                background-size: cover
+            }
+
+            /* Capa oscura (Overlay) Muy oscura para resaltar el texto */
+            .card-specialty::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; width: 100%; height: 100%;
+                z-index: 1;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%);
+                opacity: 0.85; /* Mucho más oscuro */
+            }
+
+            /* Contenido interno */
+            .card-specialty-content {
+                position: relative;
+                z-index: 2;
+                padding: 35px 30px 0 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+            }
+
+            /* Título */
+            .card-specialty h3 {
+                font-family: 'Heuristica', serif;
+                font-size: 2.7em;
+                margin: 0 auto 10px auto;
+                width: 100%;
+                font-weight: normal;
+                color: white;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+                line-height: 1.1;
+            }
+
+            /* Descripción */
+            .card-specialty p {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.15em;
+                font-weight: normal;
+                line-height: 1.4;
+                margin: 0 auto 20px auto;
+                color: white;
+                max-width: 90%;
+                width: 100%;
+                opacity: 1;
+            }
+
+            /* Botón Ver Plan */
+            .view-more-btn {
+                background-color: #f39c12;
+                color: #ffffff;
+                border: 2px solid #f39c12;
+                padding: 8px 22px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.0em;
+                font-weight: bold;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                margin: 0 auto;
+            }
+            @media (min-width: 1025px) {
+                .view-more-btn:hover {
+                    background-color: #cf0621;
+                    border-color: #cf0621;
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                }
+            }
+
+            /* --- Estilo: Requerimientos --- */
+            .requirements-list {
+                list-style: none;
+                padding: 0;
+            }
+            .requirements-list li {
+                margin-bottom: 15px;
+                padding-left: 30px;
+                position: relative;
+                font-size: 1.1em;
+            }
+            .requirements-list li::before {
+                content: '\f00c';
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 900;
+                color: #cf0621;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            /* --- Estilo: AEC --- */
+            .aec-container {
+                text-align: center;
+                background-color: #f4f4f4;
+                padding: 70px 40px 60px; /* Compensación óptica: más aire arriba */
+                border-radius: 8px;
+            }
+            .aec-container h2 {
+                margin-top: 0 !important; /* Elimina cualquier espacio extra arriba del título */
+            }
+            .aec-buttons-container {
+                margin-bottom: 0 !important; /* Elimina cualquier espacio extra debajo de las tarjetas */
+            }
+            .aec-btn {
+                display: inline-flex;
+                align-items: center;
+                padding: 15px 30px;
+                margin-top: 20px;
+                background-color: #f4f6f8;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                text-decoration: none;
+                color: #333;
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            .aec-btn i {
+                font-size: 1.5em;
+                margin-right: 15px;
+                color: #cf0621;
+            }
+            .aec-btn span {
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                line-height: 1.2;
+            }
+            .aec-btn small {
+                display: block;
+                font-weight: normal;
+                color: #666;
+                font-size: 0.8em;
+            }
+            @media (min-width: 1025px) {
+                .aec-btn:hover {
+                    background-color: #ffffff;
+                    border-color: #cf0621;
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    color: #333;
+                }
+            }
+
+            /* --- Menú Lateral de Navegación Rápida (Slider) --- */
+            .side-menu {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: 2000;
+                visibility: hidden;
+                pointer-events: none;
+                overflow: hidden;
+                transition: visibility 0.6s; /* Permite que la animación de salida termine antes de ocultar */
+            }
+
+            .side-menu.active {
+                visibility: visible;
+                pointer-events: all;
+                transition: none; /* Aparece instantáneamente al activar */
+            }
+
+            .side-menu-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                opacity: 0;
+                transition: opacity 0.6s ease; /* Sincronizado con el panel */
+            }
+
+            .side-menu.active .side-menu-overlay {
+                opacity: 1;
+            }
+
+            .side-menu-content {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 400px;
+                height: 100%;
+                height: 100dvh;
+                background: #ffffff;
+                transform: translateX(110%);
+                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Curva más suave y orgánica */
+                padding: 40px;
+                box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15);
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                overflow: hidden; /* BLOQUEO DE SCROLL EN EL PANEL PRINCIPAL */
+            }
+
+            .side-menu.active .side-menu-content {
+                transform: translateX(0);
+            }
+
+            .side-menu-header {
+                margin-bottom: 30px;
+                border-bottom: 2px solid #f39c12;
+                padding-bottom: 15px;
+                flex-shrink: 0;
+            }
+
+            .side-menu-header h3 {
+                font-family: 'Heuristica', serif;
+                font-size: 1.8em;
+                color: #cf0621;
+                margin: 0;
+                font-weight: normal;
+            }
+
+            .side-menu-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                flex-grow: 1; 
+                overflow-y: auto; /* SE MUESTRA SOLO SI ES NECESARIO */
+                overflow-x: hidden;
+                padding-right: 10px;
+                scrollbar-width: thin; /* Firefox */
+                scrollbar-color: #f39c12 #f4f6f8; /* Firefox */
+                scrollbar-gutter: stable; /* RESERVA EL ESPACIO PARA EVITAR SALTOS */
+            }
+
+            /* --- Scrollbar personalizada visible SIN interacción cuando es necesaria --- */
+            .side-menu-links::-webkit-scrollbar {
+                width: 8px;
+                display: block !important;
+            }
+            .side-menu-links::-webkit-scrollbar-track {
+                background: #f4f6f8 !important; /* Fondo sólido para evitar que el SO la oculte */
+                border-radius: 10px;
+            }
+            .side-menu-links::-webkit-scrollbar-thumb {
+                background-color: #f39c12 !important;
+                border-radius: 10px;
+                border: 2px solid #f4f6f8;
+            }
+
+            .side-menu-links li {
+                margin-bottom: 8px;
+                opacity: 0;
+                transform: translateX(40px);
+                transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* --- Ocultar Accesos Globales en Desktop y Tablet (ya están en el header) --- */
+            @media (min-width: 769px) {
+                .side-menu-shortcuts,
+                .side-menu-footer {
+                    display: none;
+                }
+            }
+
+            .side-menu.active .side-menu-links li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            /* Delays restaurados para animación escalonada */
+            .side-menu.active .side-menu-links li:nth-child(1) { transition-delay: 0.15s; }
+            .side-menu.active .side-menu-links li:nth-child(2) { transition-delay: 0.20s; }
+            .side-menu.active .side-menu-links li:nth-child(3) { transition-delay: 0.25s; }
+            .side-menu.active .side-menu-links li:nth-child(4) { transition-delay: 0.30s; }
+            .side-menu.active .side-menu-links li:nth-child(5) { transition-delay: 0.35s; }
+            .side-menu.active .side-menu-links li:nth-child(6) { transition-delay: 0.40s; }
+            .side-menu.active .side-menu-links li:nth-child(7) { transition-delay: 0.45s; }
+            .side-menu.active .side-menu-links li:nth-child(8) { transition-delay: 0.50s; }
+            .side-menu-links li a {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                padding: 12px 15px;
+                text-decoration: none;
+                color: #555;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.1em;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+            }
+
+            .side-menu-links li a i {
+                width: 24px;
+                text-align: center;
+                color: #f39c12;
+                font-size: 1.2em;
+            }
+
+            /* --- HOVERS: Solo para Computadoras --- */
+            @media (hover: hover) {
+                .side-menu-links li a:hover {
+                    background-color: #f4f6f8;
+                    color: #cf0621;
+                    padding-left: 20px;
+                }
+                .side-menu-links li a:hover i {
+                    color: #cf0621;
+                    transform: scale(1.2);
+                }
+                .shortcut-item:hover {
+                    background: #ffffff;
+                    border-color: #cf0621;
+                    color: #cf0621;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 10px rgba(207, 6, 33, 0.1);
+                }
+                .shortcut-item:hover i {
+                    color: #cf0621;
+                }
+                .back-home-btn:hover {
+                    background-color: #cf0621;
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(207, 6, 33, 0.2);
+                }
+            }
+
+            /* Feedback táctil suave para móviles y tablets */
+            .side-menu-links li a:active,
+            .shortcut-item:active,
+            .back-home-btn:active {
+                background-color: #f0f0f0;
+                opacity: 0.8;
+            }
+
+            /* --- Accesos Rápidos Globales --- */
+            .side-menu-shortcuts {
+                margin-top: auto; /* ANCLAJE AL FONDO */
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+                flex-shrink: 0;
+            }
+
+            .side-menu-shortcuts h4 {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.85em;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #999;
+                margin: 0 0 15px 0;
+            }
+
+            .shortcut-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .shortcut-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px;
+                background: #f8f9fa;
+                border-radius: 10px;
+                text-decoration: none;
+                color: #666;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.9em;
+                transition: all 0.3s ease;
+                border: 1px solid transparent;
+                min-height: 54px; /* Unifica el tamaño vertical */
+                box-sizing: border-box;
+            }
+
+            .shortcut-item i { color: #f39c12; font-size: 1.1em; flex-shrink: 0; }
+
+            .side-menu-footer {
+                margin-top: 20px;
+                flex-shrink: 0;
+            }
+
+            .back-home-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 14px;
+                background-color: #f39c12;
+                color: white;
+                text-decoration: none;
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+            }
+
+            /* Adaptabilidad de tamaños finales */
+            @media (max-width: 1024px) { 
+                .side-menu-content { width: 380px; padding: 30px; } 
+            }
+            @media (max-width: 768px) { 
+                .side-menu-content { width: 340px; padding: 25px; } 
+            }
+            @media (max-width: 480px) { 
+                .side-menu-content { width: 88%; padding: 20px; } 
+            }
+
+            /* --- Menú desplegable global --- */
+
+            .back-home-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 14px;
+                background-color: #f39c12;
+                color: white;
+                text-decoration: none;
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+            }
+
+            .back-home-btn:hover {
+                background-color: #cf0621;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(207, 6, 33, 0.2);
+            }
+
+            /* Adaptabilidad */
+            @media (max-width: 1024px) { 
+                .side-menu-content { width: 380px; padding: 30px; } 
+            }
+            @media (max-width: 768px) { 
+                .side-menu-content { width: 340px; padding: 25px; } 
+            }
+            @media (max-width: 480px) { 
+                .side-menu-content { width: 88%; padding: 20px; } 
+            }
+
+            /* --- Menú desplegable global --- */
+            .dropdown-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(26, 79, 141, 0.25);
+                backdrop-filter: blur(5px);
+                z-index: 1000;
+                display: none;
+                opacity: 0;
+                transform: translateY(-100%);
+                transition: all 0.3s ease-in-out;
+            }
+            .dropdown-menu.show {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .dropdown-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .dropdown-header .logo {
+                display: flex;
+                align-items: center;
+                font-size: 1.5em;
+                font-weight: bold;
+                color: white;
+            }
+            .dropdown-header .logo img {
+                height: 50px;
+                margin-right: 10px;
+            }
+            .close-menu {
+                color: white;
+                font-size: 1.5em;
+                cursor: pointer;
+                background: none;
+                border: none;
+            }
+            .menu-content {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1px;
+                height: calc(100vh - 80px);
+                background-color: rgba(150, 150, 150, 0.25);
+                backdrop-filter: blur(5px);
+            }
+            .menu-section {
+                background-color: rgba(150, 150, 150, 0.25);
+                backdrop-filter: blur(5px);
+                padding: 30px 20px;
+                display: flex;
+                flex-direction: column;
+            }
+            .menu-section h3 {
+                color: #cf0621;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.4em;
+                margin: 0 0 20px 0;
+                font-weight: bold;
+                padding-bottom: 10px;
+                position: relative;
+                display: inline-block;
+                cursor: pointer;
+            }
+            .menu-section h3::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 0;
+                height: 2px;
+                background-color: #f39c12;
+                transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+            }
+            .menu-section h3:hover::after {
+                width: 100%;
+            }
+            .menu-section ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                flex-grow: 1;
+            }
+            .menu-section ul li {
+                margin-bottom: 12px;
+            }
+            .menu-section ul li a {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1em;
+                transition: color 0.2s ease;
+                background: none;
+                padding: 0;
+            }
+            .menu-section ul li a:hover {
+                color: #f39c12;
+                text-decoration: underline;
+            }
+
+            /* --- Footer --- */
+            .footer {
+                background-color: #cf0621;
+                color: #ffffff;
+                padding: 80px 20px 20px 20px;
+                font-family: 'ProximaNova', sans-serif;
+                position: relative;
+            }
+            .footer-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                max-width: 1200px;
+                margin: 0 auto;
+                width: 100%;
+                gap: 30px;
+            }
+            .footer-column {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            .footer-column-wrapper {
+                width: 100%;
+                max-width: 400px;
+            }
+            .footer-column h3 {
+                color: #f39c12;
+                font-size: 1.4em;
+                margin-bottom: 25px;
+                position: relative;
+                font-weight: normal;
+                font-family: 'Heuristica', serif;
+                white-space: nowrap;
+            }
+            .footer-column h3::after {
+                content: '';
+                display: block;
+                width: 50px;
+                height: 2px;
+                background-color: #cf0621;
+                margin-top: 8px;
+            }
+            .footer-column ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .footer-column ul li {
+                margin-bottom: 15px;
+            }
+            .footer-column ul li a {
+                color: #fff;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            @media (hover: hover) {
+                .footer-column ul li a:hover {
+                    color: #f39c12;
+                    text-decoration: none;
+                }
+            }
+            .contact-info p {
+                margin: 0 0 10px 0;
+                line-height: 1.5;
+                white-space: nowrap; /* Evita que el número de teléfono salte a la siguiente línea */
+            }
+            .contact-info a {
+                color: #fff;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            @media (hover: hover) {
+                .contact-info a:hover {
+                    color: #f39c12;
+                    text-decoration: none;
+                }
+            }
+            .social-icons {
+                display: flex;
+                gap: 15px;
+                margin-top: 25px;
+            }
+            .social-icons a {
+                color: #f39c12;
+                font-size: 1.5em;
+                transition: all 0.3s ease;
+                display: inline-block; /* Ensure transform works */
+            }
+            @media (hover: hover) {
+                .social-icons a:hover {
+                    color: #fff;
+                    transform: scale(1.2);
+                }
+            }
+            .footer-map-container {
+                position: relative;
+            }
+            .footer-map-container img {
+                width: 100%;
+                height: auto;
+            }
+            .get-directions {
+                margin-top: 20px;
+            }
+
+            /* Animación Ripple adaptada */
+            @keyframes ripple {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.8;
+                }
+                100% {
+                    transform: scale(1.3, 1.5);
+                    opacity: 0;
+                }
+            }
+
+            .get-directions a {
+                display: inline-block;
+                padding: 12px 25px;
+                border: 1px solid #f39c12;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition:
+                    background-color 0.3s ease,
+                    border-color 0.3s ease;
+            }
+
+            @media (hover: hover) {
+                .get-directions a:hover {
+                    background-color: #f39c12;
+                    border-color: #f39c12;
+                }
+            }
+            .footer-bottom {
+                border-top: 1px solid #cf0621;
+                padding-top: 20px;
+                margin-top: 50px;
+                text-align: center;
+                font-size: 0.9em;
+            }
+            .footer-bottom-links a {
+                color: #f39c12;
+                margin: 0 10px;
+                text-decoration: none;
+            }
+            @media (hover: hover) {
+                .footer-bottom-links a:hover {
+                    text-decoration: underline;
+                }
+            }
+            .footer-bottom-logos {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                margin-top: 10px;
+            }
+            .footer-bottom-logos img {
+                height: 40px;
+                filter: grayscale(100%);
+                opacity: 0.6;
+            }
+
+            /* --- Estilo: Uniforme (Inspirado en Áreas Curriculares) --- */
+            .uniform-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                width: 100%;
+            }
+            .uniform-card {
+                background-color: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 30px;
+                text-align: center;
+                transition: all 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                box-shadow: none;
+                /* Lógica Flex para 3 columnas por defecto */
+                flex: 0 0 calc((100% - 40px) / 3);
+                box-sizing: border-box;
+            }
+
+            /* Responsive para Uniforme */
+            @media (max-width: 900px) {
+                .uniform-card {
+                    flex: 0 0 calc((100% - 20px) / 2);
+                }
+            }
+            @media (max-width: 600px) {
+                .uniform-card {
+                    flex: 0 0 100%;
+                }
+            }
+            .uniform-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                border-color: #cf0621;
+            }
+            .uniform-card i {
+                width: 80px;
+                height: 80px;
+                background-color: #f39c12;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2.2em;
+                color: #fff;
+                transition: all 0.3s ease;
+                margin-bottom: 5px;
+            }
+            .uniform-card:hover i {
+                background-color: #cf0621;
+                transform: scale(1.1);
+            }
+            
+            /* --- Soporte Táctil: Uniforme --- */
+            .uniform-card.touch-active {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                border-color: #cf0621;
+            }
+            .uniform-card.touch-active i {
+                background-color: #cf0621;
+                transform: scale(1.1);
+            }
+            .uniform-card h3 {
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                color: #555;
+                font-size: 1.4em;
+                margin: 5px 0 10px 0;
+            }
+            .uniform-card ul {
+                list-style: none;
+                padding: 0;
+                margin: 0 auto;
+                text-align: left;
+                display: inline-block;
+                width: auto;
+            }
+            .uniform-card ul li {
+                margin-bottom: 10px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1em;
+                line-height: 1.5;
+                padding-left: 20px;
+                position: relative;
+                color: #6b6b6b;
+            }
+            .uniform-card ul li::before {
+                content: '•';
+                color: #cf0621;
+                font-size: 1.2em;
+                position: absolute;
+                left: 0;
+                top: -2px;
+            }
+
+            /* --- Estilo: Áreas Curriculares --- */
+            .curricular-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                width: 100%;
+            }
+            .curricular-card {
+                background-color: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                flex: 0 0 calc((100% - 80px) / 5);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                box-sizing: border-box;
+                cursor: default;
+                padding: 20px;
+            }
+            .curricular-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                border-color: #cf0621;
+            }
+            .curricular-card i {
+                font-size: 2em;
+                color: #f39c12;
+                transition: color 0.3s ease;
+            }
+            .curricular-card:hover i {
+                color: #cf0621;
+            }
+            
+            /* --- Soporte Táctil: Áreas Curriculares --- */
+            .curricular-card.touch-active {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                border-color: #cf0621;
+            }
+            .curricular-card.touch-active i {
+                color: #cf0621;
+            }
+            .curricular-card h3 {
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                color: #555;
+                font-size: 1.1em;
+                margin: 0;
+                text-align: center;
+            }
+
+            /* Responsive: Áreas Curriculares */
+            @media (max-width: 1200px) {
+                .curricular-card {
+                    flex: 0 0 calc((100% - 60px) / 4);
+                }
+            }
+            @media (max-width: 900px) {
+                .curricular-card {
+                    flex: 0 0 calc((100% - 40px) / 3);
+                }
+            }
+            @media (max-width: 600px) {
+                .curricular-card {
+                    flex: 0 0 calc((100% - 20px) / 2);
+                }
+            }
+            @media (max-width: 400px) {
+                .curricular-card {
+                    flex: 0 0 100%;
+                }
+            }
+
+            /* --- Estilo: Nuestro Personal (Refined Strip Carousel) --- */
+            .staff-carousel-track.notransition,
+            .staff-carousel-track.notransition .staff-carousel-item {
+                transition: none !important;
+            }
+            
+            /* DESKTOP LAYOUT (Default / Original) */
+            .staff-layout-grid {
+                display: grid;
+                grid-template-columns: 35% 65%;
+                gap: 0; 
+                margin-top: -28px;
+                margin-bottom: -55px; /* Elimina el espacio vacío inferior para igualar separación entre secciones */
+                height: 650px; 
+                position: relative;
+                width: 100%;
+            }
+
+            .staff-left-panel {
+                padding: 40px 40px 40px 0px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background: #ffffff;
+                z-index: 10;
+            }
+
+            .staff-active-info {
+                margin-bottom: 40px;
+                opacity: 1;
+                transition: opacity 0.3s ease;
+            }
+
+            .staff-active-info h3 {
+                font-family: 'Heuristica', serif;
+                font-size: 3.2em;
+                color: #333;
+                margin: 0 0 15px 0;
+                line-height: 1.1;
+            }
+
+            .staff-active-info span {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.3em;
+                color: #f39c12;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                display: block;
+                position: relative;
+                padding-left: 15px;
+            }
+            .staff-active-info span::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 4px;
+                height: 100%;
+                background-color: #cf0621;
+            }
+
+            .staff-nav-controls {
+                display: flex;
+                gap: 15px;
+            }
+
+            .staff-nav-btn {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #f0f0f0;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: #333;
+                font-size: 1.1em;
+            }
+
+            @media (min-width: 1025px) {
+                .staff-nav-btn:hover {
+                    background-color: #cf0621;
+                    color: white;
+                }
+            }
+
+            .staff-nav-btn i.fa-pause,
+            .staff-nav-btn i.fa-play {
+                font-size: 0.85em; /* Reduce el tamaño para que no se vea tan grueso */
+                opacity: 0.9;      /* Suaviza un poco el peso visual */
+            }
+
+            .staff-carousel-viewport {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+            }
+
+            .staff-carousel-track {
+                display: flex;
+                height: 100%; 
+                align-items: center;
+                transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+                will-change: transform;
+                padding-left: 60px; /* Padding Desktop Original */
+            }
+
+            .staff-carousel-item {
+                flex: 0 0 var(--staff-item-w); 
+                width: var(--staff-item-w);
+                height: var(--staff-item-h); 
+                margin-right: var(--staff-gap); /* FIXED GAP */
+                position: relative;
+                transition: all 0.5s ease;
+                opacity: 0.3; 
+                border-radius: 16px; 
+                overflow: hidden;
+            }
+
+            .staff-carousel-item.active {
+                flex: 0 0 var(--staff-active-w);
+                width: var(--staff-active-w);
+                height: var(--staff-active-h);
+                margin-right: var(--staff-gap); /* FIXED GAP */
+                opacity: 1;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
+                z-index: 5;
+            }
+
+            .staff-carousel-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 16px;
+            }
+
+            
+
+            /* --- TABLET (Portrait & Landscape) --- */
+            @media (min-width: 601px) and (max-width: 1366px) and (pointer: coarse) {
+                .main-content-section {
+                    padding-left: 40px;
+                    padding-right: 40px;
+                }
+            }
+
+            /* --- MOBILE / TABLET VERTICAL (< 1024px) --- */
+            @media (max-width: 1024px) {
+                :root {
+                    /* TABLET: Tamaño intermedio para mejor armonía */
+                    --staff-item-w: 340px;
+                    --staff-item-h: 574px;
+                    --staff-active-w: 380px;
+                    --staff-active-h: 641px;
+                }
+            }
+
+            @media (max-width: 600px) {
+                :root {
+                    /* MÓVIL: Reducido para encajar bajo el header sin solapamiento */
+                    --staff-item-w: 210px;
+                    --staff-item-h: 355px;
+                    --staff-active-w: 240px;
+                    --staff-active-h: 405px;
+                }
+            }
+
+            @media (max-width: 1024px) {
+                body {
+                    padding: 0; /* Eliminado padding superior para quitar espacio blanco bajo el header */
+                }
+                
+            @media (max-width: 1000px) {
+                .brand-text-desktop { display: none; }
+                .brand-text-mobile { display: inline; font-weight: bold; font-size: 1.2em; }
+                .header-main .logo span { font-size: 1.2em; }
+            }
+
+                .aec-container {
+                    padding: 70px 20px 60px; /* Compensación óptica: más aire arriba */
+                }
+
+                .aec-container h2 {
+                    display: table; /* Ajustar al ancho del texto para que el subrayado sea correcto */
+                    text-align: center;
+                    margin: 0 auto 20px auto;
+                    border-bottom: 2px solid #f39c12; /* Restaurar subrayado estándar */
+                    padding-bottom: 10px; /* Restaurar espaciado estándar */
+                }
+
+                .aec-container p {
+                    text-align: center;
+                }
+
+                .aec-buttons-container {
+                    gap: 5px !important;
+                }
+
+                .content-block h2 {
+                    text-align: center;
+                    display: table;
+                    margin: 0 auto 20px auto; /* Reducido de 30px a 20px para consistencia */
+                    border-bottom: 2px solid #f39c12;
+                    position: relative;
+                }
+
+                .director-section {
+                    margin-top: 0; /* Elimina el margen superior innecesario en móviles al apilarse */
+                }
+                .content-block h2::after {
+                    display: none; /* Quitamos la línea centrada de móvil */
+                }
+
+                .staff-layout-grid {
+                    display: flex;
+                    flex-direction: column; /* Imágenes arriba, Texto abajo */
+                    gap: 30px;
+                    height: auto;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                }
+
+                .staff-carousel-viewport {
+                    order: 1; /* Imágenes primero */
+                    height: 680px; /* Ajustado para tarjeta de 641px + sombras */
+                    overflow: visible; /* Permitir ver las laterales */
+                }
+
+                .staff-carousel-track {
+                    padding-left: 0; /* Centrado por JS */
+                }
+
+                .staff-left-panel {
+                    order: 2; /* Texto después */
+                    padding: 0 20px 0 20px;
+                    align-items: center;
+                    text-align: center;
+                    background: transparent;
+                }
+
+                .staff-active-info h3 { font-size: 2.5em; }
+                
+                .staff-active-info {
+                    margin-bottom: 20px; /* Aumentado levemente de 15px a 25px */
+                }
+
+                .staff-active-info span { 
+                    padding-left: 0;
+                }
+                .staff-active-info span::before { display: none; }
+                
+                .staff-nav-controls {
+                    justify-content: center;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .staff-layout-grid {
+                    gap: 15px;
+                    padding-top: 0; /* Sin padding extra para mantener distancia del título */
+                }
+                .staff-carousel-viewport {
+                    height: 440px; /* Altura compacta */
+                }
+                .staff-active-info h3 {
+                    font-size: 2.2em;
+                }
+            }
+
+            /* Responsive */
+            @media (max-width: 992px) {
+                .hero-content h1 {
+                    font-size: 5em;
+                }
+                .footer-container {
+                    flex-direction: column;
+                    gap: 50px;
+                    align-items: center;
+                }
+                .footer-column {
+                    width: 100%;
+                    align-items: center;
+                    text-align: center;
+                }
+                .footer-column h3 {
+                    margin-bottom: 20px;
+                }
+                .footer-column ul li {
+                    margin-bottom: 12px;
+                }
+                .footer-column-wrapper {
+                    max-width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .footer-column h3::after {
+                    margin: 8px auto 0 auto;
+                }
+                .social-icons {
+                    justify-content: center;
+                }
+            }
+
+            @media (max-width: 768px) {
+                /* Hero Section - Centered for Impact */
+                .hero-section {
+                    padding: 0 20px 0 8%;
+                    justify-content: center;
+                    align-items: flex-start;
+                    text-align: left;
+                }
+                .hero-content h1 {
+                    font-size: 3.5em;
+                }
+                .hero-content p {
+                    align-items: flex-start;
+                    margin: 0;
+                }
+                .hero-arrow {
+                    margin-top: 5px;
+                    align-self: flex-start;
+                }
+
+                .content-container { gap: 40px; }
+                .director-section { flex-direction: column; gap: 20px; }
+                .director-image { width: 100%; height: auto; margin-top: 0; }
+                .header-main nav ul li:not(:last-child) { display: none; }
+                .menu-content { grid-template-columns: repeat(2, 1fr); }
+
+                /* Ajustes Especialidades en Móvil */
+                .card-specialty { height: 300px; }
+                .card-specialty h3 { font-size: 2em; }
+                .card-specialty p { font-size: 1em; }
+                .view-more-btn { 
+                    padding: 6px 18px; 
+                    font-size: 0.9em; 
+                    width: auto; 
+                    max-width: 80%;
+                }
+
+                /* Evitar desborde del Header */
+                .header-main {
+                    padding: 15px 20px;
+                }
+                .header-main .menu-icon {
+                    display: block;
+                }
+                .brand-text-desktop {
+                    display: none;
+                }
+                .brand-text-mobile {
+                    display: inline;
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+                .header-main .logo span {
+                    font-size: 0.9em;
+                    max-width: 200px;
+                    line-height: 1.2;
+                }
+                .header-main .logo img {
+                    height: 45px;
+                }
+
+                /* Footer Responsive */
+                .footer {
+                    padding: 60px 20px;
+                }
+                
+                /* Ajustes del Dock para móvil */
+                .bottom-dock { padding: 10px 15px; gap: 5px; }
+                .dock-item { width: 40px; height: 40px; }
+            }
+
+            /* Mobile (max-width: 600px) */
+            @media (max-width: 600px) {
+                .footer-container {
+                    gap: 45px; /* Más compacto para móvil */
+                }
+                .footer-column h3 {
+                    margin-bottom: 15px;
+                }
+                .footer-column ul li {
+                    margin-bottom: 10px;
+                }
+                .contact-info p {
+                    margin-bottom: 8px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .menu-content { grid-template-columns: 1fr; }
+                .hero-content h1 { font-size: 2.8em; }
+            }
+        </style>
+        <link rel="icon" href="img/favicon.ico" type="image/ico" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+    </head>
+    <body>
+        <header>
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/favicon.ico" alt="Logo INSM" />
+                        <span class="brand-text-desktop">Instituto Nuestra Señora de la Merced</span>
+                        <span class="brand-text-mobile">INSM</span>
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="NuestroColegio.html">Nuestro Colegio</a></li>
+                        <li><a href="Proyectos.html">Proyectos</a></li>
+                        <li><a href="Contacto.html">Contacto</a></li>
+                        <li class="menu-icon" onclick="toggleSideMenu()"><i class="fas fa-bars"></i></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="dropdown-menu" id="dropdownMenu">
+            <div class="dropdown-header">
+                <div class="logo">
+                    <img src="img/logo.png" alt="Logo INSM" />
+                </div>
+                <button class="close-menu" onclick="toggleMenu()">✕</button>
+            </div>
+            <div class="menu-content">
+                <div class="menu-section">
+                    <h3>Inicial</h3>
+                    <ul>
+                        <li><a href="NivelInicial.html">Admisiones</a></li>
+                        <li><a href="NivelInicial.html">Sala de 3</a></li>
+                        <li><a href="NivelInicial.html">Sala de 4</a></li>
+                        <li><a href="NivelInicial.html">Sala de 5</a></li>
+                        <li><a href="NivelInicial.html">Aranceles</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h3>Primaria</h3>
+                    <ul>
+                        <li><a href="NivelPrimario.html">Admisiones</a></li>
+                        <li><a href="NivelPrimario.html">Académico</a></li>
+                        <li><a href="NivelPrimario.html">Co-Curricular</a></li>
+                        <li><a href="NivelPrimario.html">Vida Escolar</a></li>
+                        <li><a href="NivelPrimario.html">Aranceles</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h3>Secundaria</h3>
+                    <ul>
+                        <li><a href="NivelSecundario.html">Admisiones</a></li>
+                        <li><a href="NivelSecundario.html">Académico</a></li>
+                        <li><a href="NivelSecundario.html">Enriquecimiento</a></li>
+                        <li><a href="NivelSecundario.html">Vida Escolar</a></li>
+                        <li><a href="NivelSecundario.html">Aranceles</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h3>Terciario</h3>
+                    <ul>
+                        <li><a href="NivelTerciario.html">Admisiones</a></li>
+                        <li><a href="NivelTerciario.html">Académico</a></li>
+                        <li><a href="NivelTerciario.html">Enriquecimiento</a></li>
+                        <li><a href="NivelTerciario.html">Vida Escolar</a></li>
+                        <li><a href="NivelTerciario.html">Aranceles</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h3>Deportes</h3>
+                    <ul>
+                        <li><a href="#">Fútbol</a></li>
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Volleyball</a></li>
+                        <li><a href="#">Atletismo</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h3>Sobre Nosotros</h3>
+                    <ul>
+                        <li><a href="NuestroColegio.html">Historia del Colegio</a></li>
+                        <li><a href="NuestroColegio.html">Misión y Valores</a></li>
+                        <li><a href="NuestroColegio.html">Políticas y Manuales</a></li>
+                        <li><a href="NuestroColegio.html">Informes de Inspección</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h3>Noticias y Eventos</h3>
+                    <ul>
+                        <li><a href="Noticias.html">Centro de Noticias</a></li>
+                        <li><a href="Noticias.html">Publicaciones</a></li>
+                        <li><a href="Noticias.html">Eventos</a></li>
+                        <li><a href="Noticias.html">Galería de Videos</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="Contacto.html">Información General</a></li>
+                        <li><a href="Contacto.html">Ubicación</a></li>
+                        <li><a href="Contacto.html">Teléfonos</a></li>
+                        <li><a href="Contacto.html">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>
+                        <span class="hero-line-1">Nivel</span>
+                        <span class="hero-line-2">Secundario</span>
+                    </h1>
+                    <p>
+                        <a href="https://www.google.com" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+                            Inscripciones Abiertas para el Ciclo 2026<span class="hero-arrow"></span>
+                        </a>
+                    </p>
+                </div>
+            </section>
+
+            <section class="main-content-section" id="bienvenida">
+                <div class="content-container">
+                    <div class="main-text">
+                        
+                        <div class="content-block">
+                            <h2>Bienvenida de la Directora</h2>
+                            <div class="director-section">
+                                <div class="director-text">
+                                    <p class="specialties-intro">
+                                        El Nivel Secundario en nuestro colegio es un tiempo emocionante y enriquecedor,
+                                        lleno de diversión. Nuestros maestros trabajan arduamente para inspirar a los
+                                        niños y despertar su curiosidad, creatividad e imaginación. A medida que avanzan,
+                                        los alumnos comienzan a hacer que las cosas sucedan por sí mismos y se deleitan
+                                        con las oportunidades de ser aventureros.
+                                    </p>
+                                    <p class="specialties-intro">
+                                        Ayudamos a nuestros alumnos a convertirse en jóvenes innovadores, dinámicos,
+                                        flexibles y resilientes, equipados para los desafíos del siglo XXI. Una visita a
+                                        nuestro sitio web le proporcionará una gran cantidad de información, pero venga a
+                                        visitarnos en persona para conocernos mejor y satisfacer sus necesidades.
+                                    </p>
+                                    <p class="director-signature">
+                                        <strong>Marisa Brisio</strong>
+                                    </p>
+                                </div>
+                                <img
+                                    src="img/usuario_default.png"
+                                    alt="Foto del Director de Nivel Secundario"
+                                    class="director-image"
+                                />
+                            </div>
+                        </div>
+
+                        <div id="especialidades" class="content-block">
+                            <h2>Nuestras Especialidades</h2>
+                            <p class="specialties-intro">
+                                El ciclo orientado permite a los estudiantes profundizar en áreas específicas,
+                                desarrollando competencias clave para su futuro universitario y profesional.
+                            </p>
+
+                            <div class="specialties-showcase">
+                                <div class="card-specialty card-bg-informatica">
+                                    <div class="card-specialty-content">
+                                        <h3>Informática</h3>
+                                        <p>Programación, Robótica y Desarrollo de Software para el mundo digital.</p>
+                                        <a href="info/Plan de Estudios - Informática.pdf" target="_blank" class="view-more-btn">Ver Plan</a>
+                                    </div>
+                                </div>
+
+                                <div class="card-specialty card-bg-humanidades">
+                                    <div class="card-specialty-content">
+                                        <h3>Humanidades</h3>
+                                        <p>Ciencias Sociales, Comunicación y Ciudadanía con pensamiento crítico.</p>
+                                        <a href="info/Plan de Estudios - Ciencias Sociales y Humanidades..pdf" target="_blank" class="view-more-btn">Ver Plan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="areas-curriculares" class="content-block">
+                            <h2>Áreas Curriculares</h2>
+                            <p class="specialties-intro">
+                                Trabajamos con un plan educativo completo que incluye:
+                            </p>
+                            <div class="curricular-grid">
+                                <div class="curricular-card">
+                                    <i class="fas fa-book"></i>
+                                    <h3>Lengua y Literatura</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-calculator"></i>
+                                    <h3>Matemática</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-flask"></i>
+                                    <h3>Ciencias Naturales</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-globe-americas"></i>
+                                    <h3>Ciencias Sociales</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-language"></i>
+                                    <h3>Inglés</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-running"></i>
+                                    <h3>Educación Física</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-palette"></i>
+                                    <h3>Artes Visuales</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-music"></i>
+                                    <h3>Música</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-laptop-code"></i>
+                                    <h3>Tecnologías</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-users"></i>
+                                    <h3>Religión y ESI</h3>
+                                </div>
+                                <div class="curricular-card">
+                                    <i class="fas fa-users"></i>
+                                    <h3>Religión y ESI</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ingles" class="content-block">
+                            <h2>Inglés por Niveles</h2>
+                            <p class="specialties-intro" style="margin-bottom: 15px;">
+                                Entendemos que cada estudiante tiene un ritmo de aprendizaje único. Por ello, nuestra escuela maneja un 
+                                <strong>sistema adaptativo para el inglés</strong>. 
+                            </p>
+                            <p class="specialties-intro">
+                                En lugar de clases tradicionales por año escolar, los alumnos son agrupados en cursos según su conocimiento 
+                                y manejo real de la lengua, permitiendo un avance más efectivo y personalizado.
+                            </p>
+                        </div>
+
+                        <div id="uniforme" class="content-block">
+                            <h2>Uniforme Escolar</h2>
+                            <p class="specialties-intro">
+                                El uso del uniforme representa la identidad de nuestra comunidad educativa y fomenta el sentido de pertenencia.
+                            </p>
+                            <div class="uniform-grid">
+                                <!-- Tarjeta Mujeres -->
+                                <div class="uniform-card">
+                                    <i class="fas fa-female"></i>
+                                    <h3>Mujeres</h3>
+                                    <ul>
+                                        <li>Pollera gris largo a la rodilla.</li>
+                                        <li>Remera de piqué con escudo bordado.</li>
+                                        <li>Pullover escote en V azul bordado.</li>
+                                        <li>Abrigo azul (campera).</li>
+                                        <li>Zapatos negros o zapatillas lisas.</li>
+                                        <li>Cabello recogido (cinta azul).</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tarjeta Varones -->
+                                <div class="uniform-card">
+                                    <i class="fas fa-male"></i>
+                                    <h3>Varones</h3>
+                                    <ul>
+                                        <li>Pantalón gris de vestir.</li>
+                                        <li>Remera de piqué con escudo bordado.</li>
+                                        <li>Pullover escote en V azul bordado.</li>
+                                        <li>Abrigo azul (campera).</li>
+                                        <li>Medias azules y zapatos negros.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tarjeta Gimnasia -->
+                                <div class="uniform-card">
+                                    <i class="fas fa-running"></i>
+                                    <h3>Gimnasia</h3>
+                                    <ul>
+                                        <li>Joggin gris (pantalón o bermuda).</li>
+                                        <li>Remera oficial del colegio.</li>
+                                        <li>Buzo gris con escudo.</li>
+                                        <li>Zapatillas deportivas.</li>
+                                        <li>Bolsa de higiene completa.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="personal" class="content-block">
+                            <h2>Nuestro Personal</h2>
+                            
+                            <div class="staff-layout-grid">
+                                <div class="staff-left-panel">
+                                    <div class="staff-active-info" id="staffInfoBox">
+                                        <h3 id="staffActiveName">Marisa Brisio</h3>
+                                        <span id="staffActiveRole">Directora</span>
+                                    </div>
+                                    
+                                    <div class="staff-nav-controls">
+                                        <button class="staff-nav-btn" id="btnPrevStaff"><i class="fas fa-arrow-left"></i></button>
+                                        <button class="staff-nav-btn" id="btnPauseStaff"><i class="fas fa-pause"></i></button>
+                                        <button class="staff-nav-btn" id="btnNextStaff"><i class="fas fa-arrow-right"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="staff-carousel-viewport" id="staffViewport">
+                                    <div class="staff-carousel-track" id="staffTrack">
+                                        <div class="staff-carousel-item" data-name="Marisa Brisio" data-role="Profesora de Matemáticas">
+                                            <img src="img/usuario_default.png" alt="Marisa Brisio" class="staff-carousel-img">
+                                        </div>
+                                        <div class="staff-carousel-item" data-name="Adela" data-role="Secretaria">
+                                            <img src="img/usuario_default.png" alt="Adela" class="staff-carousel-img">
+                                        </div>
+                                        <div class="staff-carousel-item" data-name="Prof. Juan Pérez" data-role="Coordinador de Curso">
+                                            <img src="img/usuario_default.png" alt="Prof. Juan Pérez" class="staff-carousel-img">
+                                        </div>
+                                        <div class="staff-carousel-item" data-name="Lic. María García" data-role="Gabinete Psicopedagógico">
+                                            <img src="img/usuario_default.png" alt="Lic. María García" class="staff-carousel-img">
+                                        </div>
+                                        <div class="staff-carousel-item" data-name="Prof. Carlos López" data-role="Educación Física">
+                                            <img src="img/usuario_default.png" alt="Prof. Carlos López" class="staff-carousel-img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="requerimientos" class="content-block">
+                            <h2>Requerimientos de Inscripción</h2>
+                            <p class="specialties-intro" style="margin-bottom: 15px;">Para formar parte de nuestra comunidad educativa, es necesario presentar la siguiente documentación:</p>
+                            <ul class="requirements-list">
+                                <li>Fotocopia del DNI del alumno y de los padres/tutores.</li>
+                                <li>Partida de Nacimiento actualizada.</li>
+                                <li>Certificado de estudios del nivel anterior (o constancia de alumno regular).</li>
+                                <li>Ficha de salud completada y firmada por un médico.</li>
+                                <li>Informe de libre deuda (si proviene de gestión privada).</li>
+                            </ul>
+                        </div>
+
+                        <div id="aec" class="content-block aec-container">
+                            <h2>Documentación Institucional</h2>
+                            <p class="specialties-intro" style="text-align: center; margin-bottom: 20px;">
+                                Promovemos un ambiente de respeto y armonía. Te invitamos a leer nuestros acuerdos de convivencia y la reglamentación escolar vigentes para el ciclo lectivo y la reglamentación escolar.
+                            </p>
+                            <div class="aec-buttons-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                                <a href="info/A. E. C. 2025.pdf" target="_blank" class="aec-btn">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>
+                                        AEC 2025
+                                        <small>Descargar PDF</small>
+                                    </span>
+                                </a>
+                                <a href="info/Acuerdos I. Sobre Evaluación 2025.pdf" target="_blank" class="aec-btn">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>
+                                        Reglamentación
+                                        <small>Descargar PDF</small>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-column contact-info">
+                    <div class="footer-column-wrapper">
+                        <h3>Contactanos</h3>
+                        <p><strong>Nivel Inicial:</strong> <a href="tel:+543576408967">+54 (3576) 408-967</a></p>
+                        <p><strong>Nivel Primario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+                        <p>
+                            <strong>Nivel Secundario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a>
+                        </p>
+                        <p><strong>Nivel Terciario:</strong> <a href="tel:+543576421440">+54 (3576) 421-440</a></p>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/insm.nivelsuperior.1/?locale=es_LA" target="_blank"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="https://www.youtube.com/@INSM.DIGITAL" target="_blank"
+                                ><i class="fab fa-youtube"></i
+                            ></a>
+                            <a href="https://www.tiktok.com/@insm.digital" target="_blank"
+                                ><i class="fab fa-tiktok"></i
+                            ></a>
+                            <a href="https://www.instagram.com/mercedariasarroyito/" target="_blank"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-column-wrapper">
+                        <h3>Enlaces Útiles</h3>
+                        <ul>
+                            <li><a href="NivelInicial.html">Nivel Inicial</a></li>
+                            <li><a href="NivelPrimario.html">Nivel Primario</a></li>
+                            <li><a href="NivelSecundario.html">Nivel Secundario</a></li>
+                            <li><a href="NivelTerciario.html">Nivel Terciario</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-column-wrapper">
+                        <h3>Encuentranos</h3>
+                        <p>
+                            9 de Julio 465, Arroyito, Córdoba. Tradición y excelencia mercedaria.
+                        </p>
+                        <div class="get-directions">
+                            <a href="https://maps.app.goo.gl/aSiY8qYsQPtb2uJy7" target="_blank">Obtener Direcciones</a>
+                        </div>
+                        <div class="footer-map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <span>© 1985 INSM</span>
+                    <span>|</span>
+                    <a href="#">Políticas & Manuales</a>
+                    <span>|</span>
+                    <a href="#">Privacidad</a>
+                    <span>|</span>
+                    <a href="#">Cookies</a>
+                </div>
+                <div class="footer-bottom-links" style="margin-top: 8px;">
+                    <span>Desarrollada por <span style="color: #f39c12;">Nazareno</span> y <span style="color: #f39c12;">Eugenio</span></span>
+                </div>
+                <div class="footer-bottom-logos"></div>
+            </div>
+        </footer>
+
+        <div class="side-menu" id="sideMenu">
+            <div class="side-menu-overlay" onclick="toggleSideMenu()"></div>
+            <div class="side-menu-content">
+                <div class="side-menu-header">
+                    <h3>Índice de Sección</h3>
+                </div>
+                <ul class="side-menu-links">
+                    <li>
+                        <a href="#bienvenida" onclick="toggleSideMenu()">
+                            <i class="fas fa-hand-holding-heart"></i> Bienvenida de la Directora
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#especialidades" onclick="toggleSideMenu()">
+                            <i class="fas fa-graduation-cap"></i> Nuestras Especialidades
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#areas-curriculares" onclick="toggleSideMenu()">
+                            <i class="fas fa-book"></i> Áreas Curriculares
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ingles" onclick="toggleSideMenu()">
+                            <i class="fas fa-language"></i> Inglés por Niveles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#uniforme" onclick="toggleSideMenu()">
+                            <i class="fas fa-tshirt"></i> Uniforme Escolar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#personal" onclick="toggleSideMenu()">
+                            <i class="fas fa-users-cog"></i> Nuestro Personal
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#requerimientos" onclick="toggleSideMenu()">
+                            <i class="fas fa-clipboard-list"></i> Requerimientos de Inscripción
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#aec" onclick="toggleSideMenu()">
+                            <i class="fas fa-file-pdf"></i> Documentación Institucional
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="side-menu-shortcuts">
+                    <h4>Accesos Globales</h4>
+                    <div class="shortcut-grid">
+                        <a href="index.html" class="shortcut-item">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                        <a href="NuestroColegio.html" class="shortcut-item">
+                            <i class="fas fa-university"></i> Nuestro Colegio
+                        </a>
+                        <a href="Proyectos.html" class="shortcut-item">
+                            <i class="fas fa-project-diagram"></i> Proyectos
+                        </a>
+                        <a href="Contacto.html" class="shortcut-item">
+                            <i class="fas fa-envelope"></i> Contacto
+                        </a>
+                    </div>
+                </div>
+
+                <div class="side-menu-footer">
+                    <a href="Contacto.html" class="back-home-btn">Inscripciones 2026</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // --- Animación Hero (Letra por Letra) ---
+            function runHeroAnimation() {
+                const heroContent = document.querySelector('.hero-content');
+                if (!heroContent) return;
+
+                const heroH1 = heroContent.querySelector('h1');
+                const paragraph = heroContent.querySelector('p');
+
+                if (!heroH1 || !paragraph) return;
+
+                // Hacer visibles los contenedores
+                heroH1.style.visibility = 'visible';
+                paragraph.style.visibility = 'visible';
+
+                // Solo envolver letras si no se ha hecho antes
+                if (heroH1.querySelectorAll('.letter').length === 0) {
+                    const wrapLetters = (node) => {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            const text = node.textContent.trim();
+                            if (!text) return;
+                            
+                            const fragment = document.createDocumentFragment();
+                            [...node.textContent].forEach((char) => {
+                                const span = document.createElement('span');
+                                span.textContent = char;
+                                span.className = 'letter';
+                                fragment.appendChild(span);
+                            });
+                            node.parentNode.replaceChild(fragment, node);
+                        } else if (node.nodeType === Node.ELEMENT_NODE) {
+                            Array.from(node.childNodes).forEach(wrapLetters);
+                        }
+                    };
+                    wrapLetters(heroH1);
+                }
+
+                // Reiniciar y Aplicar Animación con Stagger
+                const letters = heroH1.querySelectorAll('.letter');
+                let delay = 100;
+                const stagger = 40;
+
+                letters.forEach((letter) => {
+                    letter.style.animation = 'none';
+                    void letter.offsetWidth; // Force reflow
+                    letter.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay}ms both`;
+                    delay += stagger;
+                });
+
+                // Animar el párrafo al final
+                paragraph.style.animation = 'none';
+                void paragraph.offsetWidth; // Force reflow
+                paragraph.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay + 200}ms both`;
+            }
+
+            document.addEventListener('DOMContentLoaded', runHeroAnimation);
+
+            // --- Efecto Parallax / Zoom al hacer Scroll (Hero Section) ---
+            document.addEventListener('scroll', () => {
+                const sideMenu = document.getElementById('sideMenu');
+                if (sideMenu && sideMenu.classList.contains('active')) return;
+
+                const heroSection = document.querySelector('.hero-section');
+                if (!heroSection) return;
+
+                const scrollPosition = Math.max(0, window.scrollY);
+                const windowHeight = window.innerHeight;
+
+                // Solo calcular si estamos cerca del Hero (optimización)
+                if (scrollPosition <= windowHeight) {
+                    const scale = 1 + scrollPosition * 0.00015;
+                    heroSection.style.setProperty('--hero-scale', scale);
+                }
+            }, { passive: true });
+
+            // --- Lógica del Nuevo Menú Lateral (Índice) ---
+            function toggleSideMenu() {
+                const sideMenu = document.getElementById('sideMenu');
+                const linksContainer = document.querySelector('.side-menu-links');
+                if (sideMenu) {
+                    const isActive = sideMenu.classList.toggle('active');
+                    
+                    // Bloqueo de scroll en HTML y BODY para máxima compatibilidad
+                    document.documentElement.classList.toggle('no-scroll');
+                    document.body.classList.toggle('no-scroll');
+
+                    if (isActive && linksContainer) {
+                        // Asegurar que el scrollbar se reconozca inmediatamente
+                        linksContainer.scrollTop = 1;
+                        linksContainer.scrollTop = 0;
+                    }
+                }
+            }
+
+            // Asignar el evento al icono de menú del header
+            document.addEventListener('DOMContentLoaded', () => {
+                const menuIcon = document.querySelector('.header-main .menu-icon');
+                if (menuIcon) {
+                    menuIcon.removeAttribute('onclick');
+                    menuIcon.addEventListener('click', toggleSideMenu);
+                }
+            });
+
+            // Cerrar con tecla Escape
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    const sideMenu = document.getElementById('sideMenu');
+                    if (sideMenu && sideMenu.classList.contains('active')) {
+                        sideMenu.classList.remove('active');
+                        document.documentElement.classList.remove('no-scroll');
+                        document.body.classList.remove('no-scroll');
+                    }
+                }
+            });
+
+            // --- Lógica del Menú Desplegable (Global) ---
+            function toggleMenu() {
+                const menu = document.getElementById('dropdownMenu');
+                menu.classList.toggle('show');
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    const menu = document.getElementById('dropdownMenu');
+                    menu.classList.remove('show');
+                }
+            });
+
+            // --- Lógica para la Transición entre Páginas ---
+            if ('history' in window && 'scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted) {
+                    // Si la página se carga desde el historial (bfcache)
+                    document.body.classList.remove('fade-out');
+                    
+                    // Forzamos el reinicio de la animación de entrada
+                    document.body.style.animation = 'none';
+                    void document.body.offsetWidth;
+                    document.body.style.animation = '';
+                    
+                    runHeroAnimation();
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const links = document.querySelectorAll('a');
+                links.forEach((link) => {
+                    link.addEventListener('click', function (e) {
+                        const href = this.getAttribute('href');
+                        if (href && !href.startsWith('#') && !link.onclick && !href.includes('mailto:') && !href.includes('tel:') && this.getAttribute('target') !== '_blank') {
+                            // Ignorar si el usuario presionó una tecla de modificación para abrir en nueva pestaña
+                            if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+
+                            e.preventDefault();
+                            // Esperamos 120ms para que la animación física de pulsado se complete visualmente
+                            setTimeout(() => {
+                                document.body.classList.add('fade-out');
+                                setTimeout(() => {
+                                    window.location.href = href;
+                                }, 500); // 500ms exactos para completar la transición de opacidad en CSS
+                            }, 120);
+                        }
+                    });
+                });
+            });
+
+            // ==============================================
+            //  LÓGICA CARRUSEL "STYLE INSM" (Infinito)
+            // ==============================================
+            document.addEventListener('DOMContentLoaded', () => {
+                const track = document.getElementById('staffTrack');
+                const btnPrev = document.getElementById('btnPrevStaff');
+                const btnNext = document.getElementById('btnNextStaff');
+                const btnPause = document.getElementById('btnPauseStaff');
+
+                const infoBox = document.getElementById('staffInfoBox');
+                const activeName = document.getElementById('staffActiveName');
+                const activeRole = document.getElementById('staffActiveRole');
+
+                if (!track) return;
+
+                const originalItems = Array.from(document.querySelectorAll('.staff-carousel-item'));
+                if (originalItems.length === 0) return;
+
+                // Propiedades Dinámicas (Leídas de CSS)
+                let itemWidth, itemGap, activeItemWidth, step;
+
+                const updateDimensions = () => {
+                    const style = getComputedStyle(document.documentElement);
+                    itemWidth = parseFloat(style.getPropertyValue('--staff-item-w'));
+                    itemGap = parseFloat(style.getPropertyValue('--staff-gap'));
+                    activeItemWidth = parseFloat(style.getPropertyValue('--staff-active-w'));
+                    step = itemWidth + itemGap;
+                };
+
+                updateDimensions();
+
+                // Clones para infinito
+                originalItems.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    clone.classList.add('clone');
+                    clone.removeAttribute('id'); 
+                    track.appendChild(clone);
+                });
+                originalItems.slice().reverse().forEach(item => {
+                    const clone = item.cloneNode(true);
+                    clone.classList.add('clone');
+                    clone.removeAttribute('id');
+                    track.insertBefore(clone, track.firstChild);
+                });
+
+                let allItems = Array.from(document.querySelectorAll('.staff-carousel-item'));
+                const totalOriginals = originalItems.length;
+                
+                let currentIndex = totalOriginals; 
+                let isNavigating = false;
+                let autoPlayInterval;
+                let isPlaying = true;
+
+                // Función para obtener Offset según dispositivo
+                const getOffset = () => {
+                    if (window.innerWidth <= 1024) {
+                        // Modo Móvil/Tablet: Centrado Absoluto
+                        const viewport = document.querySelector('.staff-carousel-viewport');
+                        const vw = viewport.clientWidth;
+                        // Centrar el Item Activo (320px)
+                        return (vw / 2) - (activeItemWidth / 2);
+                    } else {
+                        // Modo Desktop: Padding CSS controla el inicio (0 offset extra JS)
+                        return 0;
+                    }
+                };
+
+                const updateCarousel = () => {
+                    const currentItem = allItems[currentIndex];
+                    const offset = getOffset();
+                    
+                    // Cálculo de posición
+                    // Desktop: 0 - index * step (Padding CSS 60px lo empuja)
+                    // Mobile: CenterOffset - index * step (Padding CSS 0)
+                    track.style.transform = `translateX(${offset - (currentIndex * step)}px)`;
+
+                    allItems.forEach(i => i.classList.remove('active'));
+                    if(currentItem) currentItem.classList.add('active');
+
+                    if (currentItem) {
+                        infoBox.style.opacity = '0';
+                        setTimeout(() => {
+                            activeName.textContent = currentItem.dataset.name;
+                            activeRole.textContent = currentItem.dataset.role;
+                            infoBox.style.opacity = '1';
+                        }, 200);
+                    }
+                };
+
+                // Inicializar
+                updateCarousel();
+
+                // Listener Resize para ajustar centrado en móvil
+                window.addEventListener('resize', () => {
+                    track.classList.add('notransition');
+                    updateDimensions();
+                    updateCarousel();
+                    track.offsetHeight;
+                    track.classList.remove('notransition');
+                });
+
+                const nextSlide = () => {
+                    if (isNavigating) return;
+                    isNavigating = true;
+                    setTimeout(() => isNavigating = false, 600);
+
+                    currentIndex++;
+                    updateCarousel();
+                };
+
+                const prevSlide = () => {
+                    if (isNavigating) return;
+                    isNavigating = true;
+                    setTimeout(() => isNavigating = false, 600);
+
+                    currentIndex--;
+                    updateCarousel();
+                };
+
+                track.addEventListener('transitionend', (e) => {
+                    if (e.target !== track || e.propertyName !== 'transform') return;
+                    
+                    let snap = false;
+                    let nextIndex = currentIndex;
+                    if (currentIndex >= totalOriginals * 2) {
+                        nextIndex = currentIndex - totalOriginals;
+                        snap = true;
+                    } else if (currentIndex < totalOriginals) {
+                        nextIndex = currentIndex + totalOriginals;
+                        snap = true;
+                    }
+                    if (snap) {
+                        track.classList.add('notransition');
+                        currentIndex = nextIndex;
+                        updateCarousel();
+                        void track.offsetWidth;
+                        track.classList.remove('notransition');
+                    }
+                });
+
+                btnNext.addEventListener('click', () => {
+                    nextSlide();
+                    if(isPlaying) resetTimer();
+                });
+
+                btnPrev.addEventListener('click', () => {
+                    prevSlide();
+                    if(isPlaying) resetTimer();
+                });
+
+                btnPause.addEventListener('click', () => {
+                    const icon = btnPause.querySelector('i');
+                    if(isPlaying) {
+                        clearInterval(autoPlayInterval);
+                        isPlaying = false;
+                        icon.classList.remove('fa-pause');
+                        icon.classList.add('fa-play');
+                    } else {
+                        startTimer();
+                        isPlaying = true;
+                        icon.classList.remove('fa-play');
+                        icon.classList.add('fa-pause');
+                    }
+                });
+
+                const startTimer = () => {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = setInterval(nextSlide, 4000);
+                };
+
+                const resetTimer = () => {
+                    clearInterval(autoPlayInterval);
+                    startTimer();
+                };
+
+                const viewport = document.getElementById('staffViewport');
+                let startPos = 0;
+                let isDragging = false;
+                let wasDragged = false; // Bandera para evitar clics accidentales
+
+                allItems.forEach((item) => {
+                    item.style.cursor = 'pointer';
+                    item.addEventListener('click', () => {
+                        // Si el mouse se soltó después de un arrastre, no hacer nada
+                        if (wasDragged) {
+                            wasDragged = false;
+                            return;
+                        }
+
+                        if (isNavigating) return;
+                        
+                        const clickedIndex = allItems.indexOf(item);
+                        if (clickedIndex !== currentIndex) {
+                            isNavigating = true;
+                            setTimeout(() => isNavigating = false, 600);
+
+                            currentIndex = clickedIndex;
+                            updateCarousel();
+                            if(isPlaying) resetTimer();
+                        }
+                    });
+                });
+
+                if (viewport) {
+                    viewport.addEventListener('mousedown', (e) => {
+                        // Solo permitir arrastre si comienza sobre una imagen
+                        if (e.target.tagName !== 'IMG') return;
+
+                        startPos = e.clientX;
+                        isDragging = true;
+                        wasDragged = false;
+                        viewport.style.cursor = 'grabbing';
+                    });
+                    
+                    window.addEventListener('mouseup', (e) => {
+                        if(!isDragging) return;
+                        isDragging = false;
+                        if (viewport) viewport.style.cursor = 'default';
+                        
+                        const diff = e.clientX - startPos;
+                        
+                        // Si hubo movimiento real, marcamos como arrastrado
+                        if (Math.abs(diff) > 10) {
+                            wasDragged = true;
+                        }
+
+                        if (diff < -40) { 
+                            nextSlide();
+                            if(isPlaying) resetTimer();
+                        } else if (diff > 40) { 
+                            prevSlide();
+                            if(isPlaying) resetTimer();
+                        }
+                    });
+
+                    viewport.addEventListener('touchstart', (e) => {
+                        startPos = e.touches[0].clientX;
+                    }, {passive: true});
+
+                    viewport.addEventListener('touchend', (e) => {
+                        const diff = e.changedTouches[0].clientX - startPos;
+                        if (diff < -40) {
+                            nextSlide();
+                            if(isPlaying) resetTimer();
+                        } else if (diff > 40) {
+                            prevSlide();
+                            if(isPlaying) resetTimer();
+                        }
+                    });
+                }
+
+                allItems[currentIndex].classList.add('active');
+                startTimer();
+            });
+
+            // --- Lógica de Selección Táctil para Tarjetas (Móvil/Tablet) ---
+            document.addEventListener('DOMContentLoaded', () => {
+                const isMobileView = () => window.innerWidth <= 1024 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+                if (!isMobileView()) return;
+
+                const cardSelectors = '.curricular-card, .uniform-card';
+                const allCards = document.querySelectorAll(cardSelectors);
+                let deselectTimeout = null;
+
+                const clearDeselectTimer = () => {
+                    if (deselectTimeout) {
+                        clearTimeout(deselectTimeout);
+                        deselectTimeout = null;
+                    }
+                };
+
+                document.addEventListener('click', (e) => {
+                    const card = e.target.closest(cardSelectors);
+                    
+                    if (!card) {
+                        allCards.forEach(c => c.classList.remove('touch-active'));
+                        clearDeselectTimer();
+                        return;
+                    }
+
+                    allCards.forEach(c => {
+                        if (c !== card) c.classList.remove('touch-active');
+                    });
+                    
+                    const wasActive = card.classList.contains('touch-active');
+                    clearDeselectTimer();
+
+                    if (!wasActive) {
+                        card.classList.add('touch-active');
+                        // Auto deseleccionar después de 3 segundos (3000ms)
+                        deselectTimeout = setTimeout(() => {
+                            card.classList.remove('touch-active');
+                        }, 3000);
+                    } else {
+                        card.classList.remove('touch-active');
+                    }
+                });
+
+                // Prevenir el arrastre predeterminado (Ghost Images) en TODAS las imágenes y tarjetas
+                document.addEventListener('dragstart', (e) => {
+                    if (e.target.tagName === 'IMG' || e.target.closest('.card-specialty, .curricular-card, .uniform-card, .staff-carousel-item')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

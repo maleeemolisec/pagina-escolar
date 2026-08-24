@@ -1,0 +1,27 @@
+{
+	"hero": {
+		"titleLine1": "Evento: Espejos",
+		"titleLine2": "de Cultura",
+		"backgroundImage": "../img/Cooperativa 1.jpg"
+	},
+	"general": {
+		"date": "5 de Diciembre 2024",
+		"summary": "\"El tradicional desfile de fin de año del Nivel Secundario se transforma en una noche mágica donde la moda, la música y el arte se unen para celebrar el cierre del ciclo lectivo.\"",
+		"detail": "El evento \"Donde nace la magia\" nació como un desfile de ropa realizado por estudiantes de toda la escuela, pero con el tiempo fue creciendo e incorporando nuevas expresiones artísticas. En esta edición, además del desfile, se sumaron la banda escolar y distintas actuaciones que reflejaron el talento y la creatividad de nuestros alumnos.<br><br>Fue una velada para compartir en familia, acompañar a los estudiantes y disfrutar de un cierre de año cargado de emociones, movimiento y espíritu mercedario.",
+		"image": "../img/20240531_163148[1].jpg"
+	},
+	"academic": {
+		"value1": "Nivel Secundario",
+		"value2": "Comunidad Educativa",
+		"value3": "Arte y Baile",
+		"icon3": "fas fa-music"
+	},
+	"gallery": [
+		"../img/Colacion.jpg",
+		"../img/Convivencia.jpg",
+		"../img/DEPORTE.jpg",
+		"../img/Deporte 1.jpg",
+		"../img/Historia.jpg",
+		"../img/21 de septiembre.jpg"
+	]
+}
