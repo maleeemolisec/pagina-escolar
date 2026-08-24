@@ -1071,6 +1071,24 @@
 				color: #f39c12;
 			}
 
+			.projects-intro-box {
+				background: linear-gradient(135deg, #fff8ef 0%, #fff3d7 100%);
+				border: 1px solid rgba(243, 156, 18, 0.35);
+				border-radius: 18px;
+				padding: 28px 30px;
+				margin-bottom: 32px;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+			}
+
+			.projects-intro-box p {
+				margin: 0;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 1.1em;
+				line-height: 1.8;
+				color: #333;
+				text-align: left;
+			}
+
 			.projects-grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -2533,6 +2551,11 @@
 							Ver más <i class="fas fa-arrow-right"></i>
 						</a>
 					</div>
+					<div class="projects-intro-box">
+						<p>
+							A lo largo del año y durante el recorrido por el nivel secundario, la institución lleva adelante diferentes proyectos, actividades y eventos que permiten a los estudiantes participar, aprender y compartir experiencias, fortaleciendo el vínculo con la comunidad educativa.
+						</p>
+					</div>
 					<div class="projects-grid" id="home-projects-grid"></div>
 				</div>
 			</section>
@@ -3321,10 +3344,8 @@
 					.then((projects) => {
 						projects.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-						// En tablets portrait (entre 768px y 992px) mostramos 4 tarjetas para un diseño 2x2 prolijo
-						const isTabletPortrait = window.innerWidth >= 768 && window.innerWidth <= 992;
-						const numProjects = isTabletPortrait ? 4 : 3;
-						const recent = projects.slice(0, numProjects);
+						// Mostrar todos los proyectos en la home para que no queden ocultos
+						const recent = projects;
 
 						// Calculamos el ancho actual de una tarjeta basado en el grid real
 						const gridWidth = homeProjectsGrid.offsetWidth;

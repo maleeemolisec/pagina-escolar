@@ -40,6 +40,40 @@
 				}
 			}
 
+			.edition-selector {
+				display: none;
+				padding: 2rem 0 0;
+			}
+
+			.edition-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.9rem;
+				justify-content: center;
+				margin-top: 1.5rem;
+			}
+
+			.edition-item {
+				background: #fff;
+				border: 1px solid rgba(207, 6, 33, 0.12);
+				color: #333;
+				padding: 0.9rem 1.2rem;
+				border-radius: 12px;
+				font-family: 'ProximaNova', sans-serif;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all 0.25s ease;
+				box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+			}
+
+			.edition-item:hover,
+			.edition-item.active {
+				background: #cf0621;
+				color: #fff;
+				transform: translateY(-2px);
+				box-shadow: 0 12px 22px rgba(207, 6, 33, 0.18);
+			}
+
 			/* --- Menú Lateral de Navegación Rápida (Slider) --- */
 			.side-menu {
 				position: fixed;
@@ -1358,6 +1392,16 @@
 							<img id="general-image" src="" alt="Imagen Principal del Proyecto">
 						</div>
 					</div>
+				</div>
+			</section>
+
+			<section id="edition-selector" class="edition-selector">
+				<div class="section-container">
+					<div class="section-title" style="text-align: center;">
+						<h2>Ediciones</h2>
+						<h3 id="edition-group-name">Proyecto</h3>
+					</div>
+					<div id="edition-list" class="edition-list"></div>
 				</div>
 			</section>
 
