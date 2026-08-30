@@ -1,19 +1,19 @@
 {
 	"hero": {
-		"titleLine1": "Evento: Donde ",
-		"titleLine2": "nace la magia",
+		"titleLine1": "Donde nace",
+		"titleLine2": "la magia",
 		"backgroundImage": "../img/Cooperativa 1.jpg"
 	},
 	"general": {
 		"date": "27 Noviembre 2025",
-		"summary": "\"El tradicional desfile de fin de año del Nivel Secundario se transforma en una noche mágica donde la moda, la música y el arte se unen para celebrar el cierre del ciclo lectivo.\"",
-		"detail": "El evento \"Donde nace la magia\" nació como un desfile de ropa realizado por estudiantes de toda la escuela, pero con el tiempo fue creciendo e incorporando nuevas expresiones artísticas. En esta edición, además del desfile, se sumaron la banda escolar y distintas actuaciones que reflejaron el talento y la creatividad de nuestros alumnos.<br><br>Fue una velada para compartir en familia, acompañar a los estudiantes y disfrutar de un cierre de año cargado de emociones, movimiento y espíritu mercedario.",
+		"summary": "\"Una mirada nostálgica a la tradición de los eventos escolares de cierre de año, donde se reunían creatividad, música, arte y la comunidad educativa en una noche especial.\"",
+		"detail": "El evento \"Donde nace la magia\" es un recuerdo vivo de la tradición escolar: un encuentro que reunió a estudiantes, familias y docentes para celebrar el cierre del ciclo lectivo con arte, movimiento y mucho espíritu mercedario. Con el paso de los años, esta propuesta se convirtió en una cita memorable para la comunidad.<br><br>En la actualidad, se lo revaloriza como un archivo emotivo de la historia del colegio, en el que se reconoce la continuidad de una tradición que sigue viva en la memoria colectiva.",
 		"image": "../img/20250805_124634[1].jpg"
 	},
 	"academic": {
-		"value1": "Nivel Secundario",
-		"value2": "Comunidad Educativa",
-		"value3": "Arte y Baile",
+		"value1": "Tradición escolar",
+		"value2": "Memoria colectiva",
+		"value3": "Arte y cultura",
 		"icon3": "fas fa-music"
 	},
 	"gallery": [

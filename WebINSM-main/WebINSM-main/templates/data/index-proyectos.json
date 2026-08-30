@@ -1,34 +1,26 @@
 [
     {
         "id": "evento_2025",
-        "title": "Evento: Donde nace la magia",
+        "title": "Archivo institucional: Donde nace la magia",
         "date": "2025-11-27",
         "displayDate": "27 de Noviembre",
-        "summary": "El tradicional desfile de fin de año se transformó en una noche mágica con moda, música y actuaciones de toda la escuela.",
-        "image": "img/Cooperativa 1.jpg"
-    },
-    {
-        "id": "evento_2024",
-        "title": "Evento: Espejos de Cultura",
-        "date": "2024-12-5",
-        "displayDate": "5 de Diciembre",
-        "summary": "El tradicional desfile de fin de año se transformó en una noche mágica con moda, música y actuaciones de toda la escuela.",
+        "summary": "Un recorrido nostálgico por la tradición de los eventos de cierre de año, donde la comunidad celebraba la creatividad, la música y el espíritu escolar.",
         "image": "img/Cooperativa 1.jpg"
     },
     {
         "id": "evento_2023",
-        "title": "Evento: Fashion Blooms",
+        "title": "Eventos anteriores: Fashion Blooms",
         "date": "2023-12-6",
         "displayDate": "6 de Diciembre",
-        "summary": "El tradicional desfile de fin de año se transformó en una noche mágica con moda, música y actuaciones de toda la escuela.",
+        "summary": "Un recuerdo de los primeros años de esta tradición: moda, arte y gran participación de la comunidad escolar.",
         "image": "img/historia.jpg"
     },
     {
-        "id": "revista_eme_2025",
-        "title": "Revista EME · Edición N° 17",
+        "id": "revista-eme",
+        "title": "Revista EME",
         "date": "2025-11-19",
-        "displayDate": "19 de Noviembre",
-        "summary": "La Promoción 2025 de Humanidades produjo la edición N° 17 de la Revista EME, reflejando meses de trabajo, reflexión y producción colectiva.",
+        "displayDate": "Ediciones N° 17 y N° 16",
+        "summary": "Proyecto editorial de la especialidad de Humanidades. Conocé todas las ediciones de la Revista EME realizadas por las distintas promociones.",
         "image": "img/Screenshot 2025-12-22 161503.png"
     },
     {
@@ -38,13 +30,5 @@
         "displayDate": "7 de Noviembre",
         "summary": "La Promoción 2024 de Informática realizó cortometrajes basados en cuentos argentinos en el marco del proyecto Premios Torres.",
         "image": "img/Screenshot 2025-12-23 120617.png"
-    },
-    {
-        "id": "revista_eme_2024",
-        "title": "Revista EME · Edición N° 16",
-        "date": "2024-11-20",
-        "displayDate": "20 de Noviembre",
-        "summary": "La Promoción 2024 de Humanidades produjo la edición N° 16 de la Revista EME, reflejando meses de trabajo, reflexión y producción colectiva.",
-        "image": "img/Cooperativa 1.jpg"
     }
 ]
