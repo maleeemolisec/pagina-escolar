@@ -16,11 +16,11 @@
         "image": "img/historia.jpg"
     },
     {
-        "id": "revista_eme_2025",
-        "title": "Revista EME · Edición N° 17",
+        "id": "revista-eme",
+        "title": "Revista EME",
         "date": "2025-11-19",
-        "displayDate": "19 de Noviembre",
-        "summary": "La Promoción 2025 de Humanidades presentó la edición N° 17 de la Revista EME con trabajos de reflexión, creatividad y producción colectiva.",
+        "displayDate": "Ediciones N° 17 y N° 16",
+        "summary": "Proyecto editorial de la especialidad de Humanidades. Conocé todas las ediciones de la Revista EME realizadas por las distintas promociones.",
         "image": "img/Screenshot 2025-12-22 161503.png"
     },
     {
@@ -30,13 +30,5 @@
         "displayDate": "7 de Noviembre",
         "summary": "La Promoción 2024 de Informática realizó cortometrajes basados en cuentos argentinos en el marco del proyecto Premios Torres.",
         "image": "img/Screenshot 2025-12-23 120617.png"
-    },
-    {
-        "id": "revista_eme_2024",
-        "title": "Revista EME · Edición N° 16",
-        "date": "2024-11-20",
-        "displayDate": "20 de Noviembre",
-        "summary": "La Promoción 2024 de Humanidades trabajó en la edición N° 16 de la Revista EME, una producción editorial con mirada propia y trabajo colectivo.",
-        "image": "img/Cooperativa 1.jpg"
     }
 ]
