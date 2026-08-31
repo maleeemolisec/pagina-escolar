@@ -13,14 +13,33 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            validateProjectData(data, projectId);
-            loadProjectData(data);
+            const resolvedData = resolveProjectCollection(data);
+            validateProjectData(resolvedData, projectId);
+            loadProjectData(resolvedData);
             initVisualEffects();
         })
         .catch(error => {
             console.error('Error en la carga del proyecto:', error);
         });
 });
+
+// FUNCIÓN: Si el JSON es una "colección" (varias ediciones, ej. Revista EME),
+// selecciona la edición pedida en la URL (?edition=0,1,2...) y la combina
+// con los metadatos generales de la colección para que el resto del loader
+// funcione exactamente igual que con un proyecto simple.
+function resolveProjectCollection(data) {
+    if (data && data.groupType === 'collection' && Array.isArray(data.items) && data.items.length) {
+        const selectedIndex = Number(new URLSearchParams(window.location.search).get('edition')) || 0;
+        const selectedItem = data.items[selectedIndex] || data.items[0];
+        const merged = { ...selectedItem };
+        merged.groupName = data.groupName || selectedItem.title;
+        merged.groupType = 'collection';
+        merged.items = data.items;
+        merged.selectedEditionIndex = data.items.indexOf(selectedItem);
+        return merged;
+    }
+    return data;
+}
 
 // FUNCIÓN: Validar la estructura del JSON
 function validateProjectData(data, id) {
@@ -87,6 +106,9 @@ function loadProjectData(data) {
     
     const icon3 = document.getElementById('academic-icon-3');
     if(icon3 && data.academic?.icon3) icon3.className = data.academic.icon3;
+
+    // --- Sección 3.5: Selector de ediciones (solo si el proyecto es una colección) ---
+    renderEditionSelector(data);
 
     // ============================================================
     // SECCIONES OPCIONALES (Galería, Videos, Recursos)
@@ -162,6 +184,38 @@ function loadProjectData(data) {
 
     // --- ACTUALIZAR MENÚ LATERAL (ÍNDICE) ---
     updateSideMenu();
+}
+
+// FUNCIÓN: Mostrar los botones para cambiar de edición dentro de una colección
+// (ej. Revista EME: Edición N° 17 / Edición N° 16)
+function renderEditionSelector(data) {
+    const selector = document.getElementById('edition-selector');
+    const list = document.getElementById('edition-list');
+    const groupName = document.getElementById('edition-group-name');
+
+    if (!(data.groupType === 'collection' && Array.isArray(data.items) && data.items.length > 1)) {
+        if (selector) selector.style.display = 'none';
+        return;
+    }
+
+    if (selector) selector.style.display = 'block';
+    if (groupName) groupName.textContent = data.groupName || 'Ediciones';
+
+    if (list) {
+        list.innerHTML = '';
+        data.items.forEach((item, index) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'edition-item' + (index === (data.selectedEditionIndex || 0) ? ' active' : '');
+            btn.textContent = item.title || `Edición ${index + 1}`;
+            btn.addEventListener('click', () => {
+                const url = new URL(window.location.href);
+                url.searchParams.set('edition', index);
+                window.location.href = url.toString();
+            });
+            list.appendChild(btn);
+        });
+    }
 }
 
 // FUNCIÓN: Generar dinámicamente los links del slider según secciones visibles
