@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const projectId = params.get('id') || 'feria-ciencias';
 
-    fetch(`data/proyectos/${projectId}.json`)
+    const projectDataUrl = new URL(`data/proyectos/${projectId}.json`, window.location.href);
+    fetch(projectDataUrl)
         .then(response => {
             if (!response.ok) {
                 console.error(`Error: No se pudo cargar el archivo de datos JSON para el proyecto '${projectId}'`);

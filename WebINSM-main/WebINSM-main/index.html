@@ -1072,12 +1072,28 @@
 			}
 
 			.projects-intro-box {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 24px;
 				background: linear-gradient(135deg, #fff8ef 0%, #fff3d7 100%);
 				border: 1px solid rgba(243, 156, 18, 0.35);
 				border-radius: 18px;
 				padding: 28px 30px;
 				margin-bottom: 32px;
 				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+			}
+
+			.projects-intro-copy {
+				flex: 1;
+			}
+
+			.projects-intro-copy h3 {
+				margin: 0 0 12px;
+				font-family: 'Heuristica', serif;
+				font-size: clamp(2rem, 2.3vw, 3rem);
+				line-height: 1.1;
+				color: #cf0621;
 			}
 
 			.projects-intro-box p {
@@ -1087,6 +1103,54 @@
 				line-height: 1.8;
 				color: #333;
 				text-align: left;
+			}
+
+			.projects-intro-actions {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			#home-projects-grid {
+				display: none !important;
+			}
+
+			.projects-section .btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				padding: 14px 26px;
+				border-radius: 999px;
+				font-family: 'ProximaNova', sans-serif;
+				font-size: 0.98rem;
+				font-weight: 700;
+				line-height: 1.2;
+				text-decoration: none;
+				transition: all 0.25s ease;
+				cursor: pointer;
+				white-space: nowrap;
+			}
+
+			.projects-section .btn-primary {
+				background: linear-gradient(135deg, #d91e36 0%, #b80c28 100%);
+				color: #fff;
+				box-shadow: 0 10px 22px rgba(185, 20, 43, 0.24);
+			}
+
+			.projects-section .btn-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 14px 26px rgba(185, 20, 43, 0.28);
+			}
+
+			.projects-section .btn-primary:active {
+				transform: translateY(0);
+			}
+
+			.projects-section .btn-outline {
+				background: transparent;
+				color: #cf0621;
+				border: 1.5px solid rgba(207, 6, 33, 0.7);
 			}
 
 			.projects-grid {
@@ -2170,6 +2234,20 @@
 
 			/* Mobile & Tablet Portrait (max-width: 768px) */
 			@media (max-width: 768px) {
+				.projects-intro-box {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				.projects-intro-actions {
+					width: 100%;
+					justify-content: flex-start;
+				}
+				.projects-section .btn {
+					width: auto;
+					font-size: 0.92rem;
+					padding: 12px 18px;
+				}
+
 				/* Header */
 				.header-main {
 					padding: 15px 20px;
@@ -2546,16 +2624,20 @@
 
 			<section id="proyectos" class="projects-section">
 				<div class="projects-container">
-					<div class="projects-header">
-						<h3>Proyectos</h3>
-						<a href="Proyectos.html" class="arrow-link">
-							Ver más <i class="fas fa-arrow-right"></i>
-						</a>
-					</div>
 					<div class="projects-intro-box">
-						<p>
-							A lo largo del año y durante el recorrido por el nivel secundario, la institución lleva adelante diferentes proyectos, actividades y eventos que permiten a los estudiantes participar, aprender y compartir experiencias, fortaleciendo el vínculo con la comunidad educativa.
-						</p>
+						<div class="projects-intro-copy">
+							<div class="section-label">Innovación</div>
+							<h3>Proyectos que inspiran.</h3>
+							<p>
+								En el nivel secundario, acompañamos a cada estudiante en su crecimiento con proyectos, actividades y experiencias que inspiran, desafían y motivan a seguir adelante. Aquí se vive el aprendizaje con sentido, la creatividad con propósito y la comunidad con identidad.
+							</p>
+						</div>
+						<div class="projects-intro-actions">
+							<a href="Proyectos.html" class="btn btn-primary">
+								Ver proyectos
+								<i class="fas fa-arrow-right"></i>
+							</a>
+						</div>
 					</div>
 					<div class="projects-grid" id="home-projects-grid"></div>
 				</div>
@@ -3471,177 +3553,6 @@
 
 
         <!-- =================================================
-             PROYECTOS
-        ================================================== -->
-
-        <section id="proyectos">
-
-            <div class="container">
-
-
-                <div class="projects-header reveal">
-
-
-                    <div>
-
-                        <div class="section-label">
-                            Innovación
-                        </div>
-
-
-                        <h2 class="section-title">
-                            Proyectos que inspiran.
-                        </h2>
-
-                    </div>
-
-
-                    <a
-                        href="Proyectos.html"
-                        class="btn btn-primary"
-                    >
-
-                        Ver todos
-
-                        <i class="fas fa-arrow-right"></i>
-
-                    </a>
-
-                </div>
-
-
-                <div
-                    class="projects-grid"
-                    id="home-projects-grid"
-                >
-
-
-                    <!-- PROYECTO 1 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image">
-
-                            <img
-                                src="img/Cooperativa 1.jpg"
-                                alt="Proyecto cooperativo"
-                            >
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Comunidad
-                            </span>
-
-
-                            <h3>
-                                Cooperativa
-                            </h3>
-
-
-                            <p>
-
-                                Propuestas que promueven
-                                la solidaridad, el trabajo
-                                colaborativo y la participación.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- PROYECTO 2 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image">
-
-                            <img
-                                src="img/Cooperativa- bolsas.jpg"
-                                alt="Proyecto cooperativo"
-                            >
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Innovación
-                            </span>
-
-
-                            <h3>
-                                Proyectos institucionales
-                            </h3>
-
-
-                            <p>
-
-                                Experiencias que conectan
-                                los aprendizajes con
-                                necesidades reales
-                                de la comunidad.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- PROYECTO 3 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image">
-
-                            <img
-                                src="img/Historia.jpg"
-                                alt="Proyecto educativo"
-                            >
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Aprendizaje
-                            </span>
-
-
-                            <h3>
-                                Aprender haciendo
-                            </h3>
-
-
-                            <p>
-
-                                Actividades y experiencias
-                                que convierten el aprendizaje
-                                en una experiencia significativa.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
              TESTIMONIOS
         ================================================== -->
 
@@ -4275,70 +4186,9 @@
 			}
 
 			if (homeProjectsGrid) {
-				fetch('templates/data/index-proyectos.json')
-					.then((response) => {
-						if (!response.ok) {
-							console.error('Error: No se pudo cargar el archivo templates/data/index-proyectos.json');
-							throw new Error('Error al cargar proyectos');
-						}
-						return response.json();
-					})
-					.then((projects) => {
-						projects.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-						// Mostrar todos los proyectos en la home para que no queden ocultos
-						const recent = projects;
-
-						// Calculamos el ancho actual de una tarjeta basado en el grid real
-						const gridWidth = homeProjectsGrid.offsetWidth;
-
-						// Determinamos columnas reales para el procesamiento de texto (coincidiendo con CSS)
-						let cols = 1;
-						if (window.innerWidth <= 768) {
-							// En tablet portrait/mobile usamos minmax(280px, 1fr) que da 2 cols en tablet
-							cols = Math.floor(gridWidth / 280) || 1;
-						} else {
-							cols = Math.floor(gridWidth / 350) || 1;
-						}
-						const cardWidth = gridWidth / cols;
-
-						homeProjectsGrid.innerHTML = '';
-
-						recent.forEach((proj) => {
-							// Validación de campos críticos del JSON
-							const required = ['id', 'title', 'image', 'date', 'summary', 'displayDate'];
-							required.forEach(field => {
-								if (proj[field] === undefined || proj[field] === null) {
-									console.error(`Error: El proyecto con ID '${proj.id || 'desconocido'}' no tiene el campo '${field}' definido.`);
-								}
-							});
-
-							const card = document.createElement('a');
-							card.href = `templates/Proyecto.html?id=${proj.id}`;
-							card.className = 'projects-card';
-
-							const maxChars = 200;
-							let summary = proj.summary || '';
-							if (summary.length > maxChars) {
-								summary = summary.substring(0, maxChars).trim() + '...';
-							}
-
-							// Medición usando la tipografía Heuristica real del sitio
-							const safeTitle = processLongWords(proj.title || 'Sin Título', 'bold 28px Heuristica', cardWidth);
-							const safeSummary = processLongWords(summary, '16px Heuristica', cardWidth);
-
-							card.innerHTML = `
-                                <img src="${proj.image || ''}" alt="${proj.title || ''}" loading="lazy">
-                                <div class="projects-card-content">
-                                    <p class="date">${proj.displayDate || ''}</p>
-                                    <h4>${safeTitle}</h4>
-                                    <p>${safeSummary}</p>
-                                </div>
-                            `;
-							homeProjectsGrid.appendChild(card);
-						});
-					})
-					.catch((err) => console.error('Error detallado en la carga de proyectos home:', err));
+				homeProjectsGrid.innerHTML = '';
+				homeProjectsGrid.style.display = 'none';
+				return;
 			}
 
 			// --- Lógica para la Transición entre Páginas ---

@@ -1598,7 +1598,9 @@
                         });
 
                         const card = document.createElement('a');
-                        card.href = `templates/Proyecto.html?id=${proj.id}`;
+                        const projectUrl = new URL('templates/Proyecto.html', window.location.href);
+                        projectUrl.searchParams.set('id', proj.id);
+                        card.href = projectUrl.href;
                         card.className = 'projects-card'; 
 
                         const maxChars = 200;
@@ -1804,7 +1806,7 @@
                     });
                 };
 
-                fetch('templates/data/index-proyectos.json')
+                fetch(new URL('templates/data/index-proyectos.json', window.location.href))
                     .then(response => {
                         if (!response.ok) {
                             console.error('Error: No se pudo cargar el archivo templates/data/index-proyectos.json');
