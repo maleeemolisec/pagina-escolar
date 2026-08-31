@@ -1656,17 +1656,23 @@
 
                 /* Evitar desborde del Header */
                 .header-main {
-                    padding: 15px 20px;
+                    padding: 12px 16px;
                 }
                 .header-main .menu-icon {
-                    display: block;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 10px;
+                    background: rgba(255, 255, 255, 0.08);
                 }
                 .brand-text-desktop {
                     display: none;
                 }
                 .brand-text-mobile {
                     display: inline;
-                    font-size: 1.2em;
+                    font-size: 1.1em;
                     font-weight: bold;
                 }
                 .header-main .logo span {
@@ -1675,7 +1681,53 @@
                     line-height: 1.2;
                 }
                 .header-main .logo img {
-                    height: 45px;
+                    height: 42px;
+                    margin-right: 8px;
+                }
+                .side-menu-content {
+                    width: min(82vw, 320px);
+                    padding: 20px 18px 18px;
+                }
+                .side-menu-header {
+                    margin-bottom: 14px;
+                }
+                .side-menu-header h3 {
+                    font-size: 1.4em;
+                }
+                .side-menu-links {
+                    display: none;
+                }
+                .side-menu-shortcuts {
+                    margin-top: 8px;
+                    padding-top: 12px;
+                }
+                .side-menu-shortcuts h4 {
+                    display: none;
+                }
+                .shortcut-grid {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0;
+                }
+                .shortcut-item {
+                    padding: 16px 6px;
+                    border: none;
+                    border-bottom: 1px solid #ececec;
+                    border-radius: 0;
+                    background: transparent;
+                    font-size: 1.05em;
+                    font-weight: 600;
+                    color: #1f1f1f;
+                    min-height: 0;
+                }
+                .shortcut-item i {
+                    display: none;
+                }
+                .shortcut-item:last-child {
+                    border-bottom: none;
+                }
+                .side-menu-footer {
+                    display: none;
                 }
 
                 /* Footer Responsive */
@@ -1847,17 +1899,14 @@
                             <div class="director-section">
                                 <div class="director-text">
                                     <p class="specialties-intro">
-                                        El Nivel Secundario en nuestro colegio es un tiempo emocionante y enriquecedor,
-                                        lleno de diversión. Nuestros maestros trabajan arduamente para inspirar a los
-                                        niños y despertar su curiosidad, creatividad e imaginación. A medida que avanzan,
-                                        los alumnos comienzan a hacer que las cosas sucedan por sí mismos y se deleitan
-                                        con las oportunidades de ser aventureros.
+                                        El Nivel Primario es un espacio de formación integral en el que los estudiantes
+                                        consolidan el aprendizaje, desarrollan autonomía y fortalecen su pensamiento crítico.
+                                        Aquí se combina la rigurosidad académica con un acompañamiento cercano y cotidiano.
                                     </p>
                                     <p class="specialties-intro">
-                                        Ayudamos a nuestros alumnos a convertirse en jóvenes innovadores, dinámicos,
-                                        flexibles y resilientes, equipados para los desafíos del siglo XXI. Una visita a
-                                        nuestro sitio web le proporcionará una gran cantidad de información, pero venga a
-                                        visitarnos en persona para conocernos mejor y satisfacer sus necesidades.
+                                        A lo largo de estas etapas, los alumnos avanzan en la lectura, la escritura, la
+                                        resolución de problemas y el trabajo en equipo, siempre desde una mirada que valora
+                                        la creatividad, la responsabilidad y el respeto por el otro.
                                     </p>
                                     <p class="director-signature">
                                         <strong>Marisa Brisio</strong>
@@ -1941,11 +1990,7 @@
                                 </div>
                                 <div class="curricular-card">
                                     <i class="fas fa-users"></i>
-                                    <h3>Religión y ESI</h3>
-                                </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-users"></i>
-                                    <h3>Religión y ESI</h3>
+                                    <h3>Educación Ética y Ciudadana</h3>
                                 </div>
                             </div>
                         </div>
@@ -2029,16 +2074,16 @@
 
                                 <div class="staff-carousel-viewport" id="staffViewport">
                                     <div class="staff-carousel-track" id="staffTrack">
-                                        <div class="staff-carousel-item" data-name="Marisa Brisio" data-role="Profesora de Matemáticas">
+                                        <div class="staff-carousel-item" data-name="Marisa Brisio" data-role="Directora">
                                             <img src="img/usuario_default.png" alt="Marisa Brisio" class="staff-carousel-img">
                                         </div>
-                                        <div class="staff-carousel-item" data-name="Adela" data-role="Secretaria">
-                                            <img src="img/usuario_default.png" alt="Adela" class="staff-carousel-img">
+                                        <div class="staff-carousel-item" data-name="Adela" data-role="Secretaría">
+                                            <img src="img/adela.jpg" alt="Adela" class="staff-carousel-img">
                                         </div>
-                                        <div class="staff-carousel-item" data-name="Prof. Juan Pérez" data-role="Coordinador de Curso">
+                                        <div class="staff-carousel-item" data-name="Prof. Juan Pérez" data-role="Coordinación">
                                             <img src="img/usuario_default.png" alt="Prof. Juan Pérez" class="staff-carousel-img">
                                         </div>
-                                        <div class="staff-carousel-item" data-name="Lic. María García" data-role="Gabinete Psicopedagógico">
+                                        <div class="staff-carousel-item" data-name="Lic. María García" data-role="Psicopedagogía">
                                             <img src="img/usuario_default.png" alt="Lic. María García" class="staff-carousel-img">
                                         </div>
                                         <div class="staff-carousel-item" data-name="Prof. Carlos López" data-role="Educación Física">
@@ -2207,21 +2252,23 @@
                 </ul>
 
                 <div class="side-menu-shortcuts">
-                    <h4>Accesos Globales</h4>
-                    <div class="shortcut-grid">
-                        <a href="index.html" class="shortcut-item">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                        <a href="NuestroColegio.html" class="shortcut-item">
-                            <i class="fas fa-university"></i> Nuestro Colegio
-                        </a>
-                        <a href="Proyectos.html" class="shortcut-item">
-                            <i class="fas fa-project-diagram"></i> Proyectos
-                        </a>
-                        <a href="Contacto.html" class="shortcut-item">
-                            <i class="fas fa-envelope"></i> Contacto
-                        </a>
-                    </div>
+					<div class="shortcut-grid">
+						<a href="index.html" class="shortcut-item">
+							Inicio
+						</a>
+						<a href="NuestroColegio.html" class="shortcut-item">
+							Institución
+						</a>
+						<a href="NivelSecundario.html" class="shortcut-item">
+							Niveles
+						</a>
+						<a href="Proyectos.html" class="shortcut-item">
+							Proyectos
+						</a>
+						<a href="Contacto.html" class="shortcut-item">
+							Contacto
+						</a>
+					</div>
                 </div>
 
                 <div class="side-menu-footer">

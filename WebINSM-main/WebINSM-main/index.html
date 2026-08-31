@@ -1838,6 +1838,351 @@
                 display: none;
             }
 
+			/* --- Responsive Design Professional --- */
+
+			/* Brand Text Switch for Intermediate Screens */
+			@media (max-width: 1000px) {
+				.brand-text-desktop {
+					display: none;
+				}
+				.brand-text-mobile {
+					display: inline;
+					font-weight: bold;
+					font-size: 1.2em;
+				}
+				.header-main .logo span {
+					font-size: 1.2em; /* Increase size for INSM */
+				}
+			}
+
+			/* --- TABLET (Portrait & Landscape) --- */
+			@media (min-width: 601px) and (max-width: 1366px) and (pointer: coarse) {
+				.college-section,
+				.levels-section,
+				.projects-section,
+				.testimonials-section,
+				.virtual-tour-section,
+				.contact-home-section,
+				.footer {
+					padding-left: 40px;
+					padding-right: 40px;
+				}
+			}
+
+			/* Tablet & Small Desktop (max-width: 992px) */
+			@media (max-width: 992px) {
+				.hero-content h1 {
+					font-size: 5em;
+				}
+				/* Padding de contenedores unificado vía secciones */
+				.footer-container {
+					flex-direction: column;
+					gap: 50px;
+					align-items: center;
+				}
+				.footer-column {
+					width: 100%;
+					align-items: center;
+					text-align: center;
+				}
+				.footer-column h3 {
+					margin-bottom: 20px;
+				}
+				.footer-column ul li {
+					margin-bottom: 12px;
+				}
+				.footer-column-wrapper {
+					max-width: 100%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+				}
+				.footer-column h3::after {
+					margin: 8px auto 0 auto;
+				}
+				.social-icons {
+					justify-content: center;
+				}
+
+				/* Recorrido Virtual - HIDE on Tablet and Mobile */
+				.virtual-tour-section {
+					display: none !important;
+				}
+
+				/* Testimonios Tablet Optimization */
+				.testimonials-grid {
+					grid-template-columns: 1fr;
+					gap: 40px;
+				}
+				.testimonial-images {
+					display: none; /* Hidden to focus on text content in tablet/mobile */
+				}
+				.testimonial-text {
+					text-align: center;
+					max-width: 800px;
+					margin: 0 auto;
+				}
+				.testimonial-quote {
+					font-size: 1.8em;
+				}
+				.quote-icon {
+					left: 50%;
+					transform: translateX(-50%);
+					top: -40px;
+				}
+				.testimonial-controls {
+					justify-content: center;
+					margin-top: 30px;
+				}
+
+				/* Ajustes del Dock para tablet */
+				.bottom-dock {
+					padding: 10px 15px;
+					gap: 5px;
+				}
+				.dock-item {
+					width: 40px;
+					height: 40px;
+				}
+			}
+
+			/* Mobile & Tablet Portrait (max-width: 768px) */
+			@media (max-width: 768px) {
+				/* Header */
+				.header-main {
+					padding: 12px 16px;
+				}
+				.header-main nav ul li:not(:last-child) {
+					display: none;
+				}
+				.header-main .menu-icon {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 40px;
+					height: 40px;
+					border-radius: 10px;
+					background: rgba(255, 255, 255, 0.08);
+				}
+				.brand-text-desktop {
+					display: none;
+				}
+				.brand-text-mobile {
+					display: inline;
+					font-size: 1.1em;
+					font-weight: bold;
+				}
+
+				.header-main .logo span {
+					font-size: 0.9em;
+					max-width: 200px;
+					line-height: 1.2;
+				}
+				.header-main .logo img {
+					height: 42px;
+					margin-right: 8px;
+				}
+				.side-menu-content {
+					width: min(82vw, 320px);
+					padding: 20px 18px 18px;
+				}
+				.side-menu-header {
+					margin-bottom: 14px;
+				}
+				.side-menu-header h3 {
+					font-size: 1.4em;
+				}
+				.side-menu-links {
+					display: none;
+				}
+				.side-menu-shortcuts {
+					margin-top: 8px;
+					padding-top: 12px;
+				}
+				.side-menu-shortcuts h4 {
+					display: none;
+				}
+				.shortcut-grid {
+					display: flex;
+					flex-direction: column;
+					gap: 0;
+				}
+				.shortcut-item {
+					padding: 16px 6px;
+					border: none;
+					border-bottom: 1px solid #ececec;
+					border-radius: 0;
+					background: transparent;
+					font-size: 1.05em;
+					font-weight: 600;
+					color: #1f1f1f;
+					min-height: 0;
+				}
+				.shortcut-item i {
+					display: none;
+				}
+				.shortcut-item:last-child {
+					border-bottom: none;
+				}
+				.side-menu-footer {
+					display: none;
+				}
+
+				/* Hero Section - Centered for Impact */
+				.hero-section {
+					padding: 0 20px 0 8%;
+					justify-content: center;
+					align-items: flex-start;
+					text-align: left;
+				}
+				.hero-content h1 {
+					font-size: 3.5em;
+				}
+				.hero-content p {
+					align-items: flex-start;
+					margin: 0;
+				}
+				.hero-arrow {
+					margin-top: 5px;
+					align-self: flex-start;
+				}
+
+				/* Section Spacing - Relaxed for Mobile */
+				.college-section,
+				.levels-section,
+				.projects-section,
+				.testimonials-section,
+				.virtual-tour-section,
+				.contact-home-section,
+				.footer {
+					padding: 60px 20px;
+				}
+
+				/* Stacked Layouts */
+				.college-container {
+					flex-direction: column;
+					gap: 40px;
+				}
+				.college-text {
+					padding-right: 0;
+					text-align: center;
+				}
+				.college-features {
+					display: table; /* shrinks to fit content */
+					margin: 0 auto 30px auto; /* centers the table */
+					text-align: left; /* keeps bullets and text aligned */
+				}
+
+				/* Gallery Mobile Optimization */
+				.college-gallery {
+					display: none; /* Hide on mobile as requested */
+				}
+
+				/* Levels & Testimonials */
+				.level-grid {
+					grid-template-columns: 1fr;
+					gap: 40px;
+				}
+				.level-image {
+					order: -1; /* Image first on mobile */
+				}
+				/* Testimonials - Mobile fine-tuning */
+				.testimonial-quote {
+					font-size: 1.4em; /* Slightly smaller font for mobile */
+				}
+				.testimonial-controls {
+					margin-top: 10px;
+					position: relative;
+					z-index: 5;
+				}
+
+				/* Projects Grid - Adaptado para Tablet Portrait (2 columnas) y Mobile (1 columna) */
+				.projects-grid {
+					grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				}
+				.projects-header {
+					flex-direction: column;
+					gap: 20px;
+					text-align: center;
+				}
+				.projects-header h3 {
+					font-size: 2.5em;
+				}
+
+			/* Mobile (max-width: 600px) */
+			@media (max-width: 600px) {
+				.footer-container {
+					gap: 45px; /* Más compacto para móvil */
+				}
+				.footer-column h3 {
+					margin-bottom: 15px;
+				}
+				.footer-column ul li {
+					margin-bottom: 10px;
+				}
+				.contact-info p {
+					margin-bottom: 8px;
+				}
+			}
+
+			/* Small Mobile (max-width: 480px) */
+			@media (max-width: 480px) {
+				/* Typography Adjustments */
+				.college-text h2,
+				.levels-title h3,
+				.projects-header h3,
+				.contact-home-title {
+					font-size: 2em;
+				}
+				.level-info h4 {
+					font-size: 2em;
+				}
+
+				/* Buttons Full Width */
+				.view-more-container {
+					flex-direction: column;
+					width: 100%;
+					gap: 15px;
+				}
+				.view-more-btn {
+					width: 100%;
+					text-align: center;
+					box-sizing: border-box;
+				}
+
+				/* Unity Buttons */
+				.unity-start-btn {
+					width: 100%;
+					box-sizing: border-box;
+				}
+			}
+		</style>
+		<link rel="icon" href="img/favicon.ico" type="image/ico" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		/>
+	</head>
+	<body ontouchstart="">
+		<header>
+			<div class="header-main">
+				<div class="logo">
+					<a href="index.html">
+						<img src="img/favicon.ico" alt="Logo INSM" />
+						<span class="brand-text-desktop">Instituto Nuestra Señora de la Merced</span>
+						<span class="brand-text-mobile">INSM</span>
+					</a>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="NuestroColegio.html">Nuestro Colegio</a></li>
+						<li><a href="Proyectos.html">Proyectos</a></li>
+						<li><a href="Contacto.html">Contacto</a></li>
+						<li class="menu-icon" onclick="toggleSideMenu()"><i class="fas fa-bars"></i></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
 
             .menu-button {
 
@@ -2980,6 +3325,59 @@
 
                         </div>
 
+		<div class="side-menu" id="sideMenu">
+			<div class="side-menu-overlay" onclick="toggleSideMenu()"></div>
+			<div class="side-menu-content">
+				<div class="side-menu-header">
+					<h3>Índice de Sección</h3>
+				</div>
+				<ul class="side-menu-links">
+					<li>
+						<a href="#nuestro-colegio">
+							<i class="fas fa-university"></i> Nuestro Colegio
+						</a>
+					</li>
+					<li>
+						<a href="#niveles">
+							<i class="fas fa-layer-group"></i> Nuestros Niveles
+						</a>
+					</li>
+					<li>
+						<a href="#proyectos">
+							<i class="fas fa-project-diagram"></i> Proyectos
+						</a>
+					</li>
+					<li>
+						<a href="#testimonios">
+							<i class="fas fa-comments"></i> Testimonios
+						</a>
+					</li>
+					<li>
+						<a href="#contacto-home">
+							<i class="fas fa-envelope"></i> Contactanos
+						</a>
+					</li>
+				</ul>
+
+				<div class="side-menu-shortcuts">
+					<div class="shortcut-grid">
+						<a href="index.html" class="shortcut-item">
+							Inicio
+						</a>
+						<a href="NuestroColegio.html" class="shortcut-item">
+							Institución
+						</a>
+						<a href="NivelSecundario.html" class="shortcut-item">
+							Niveles
+						</a>
+						<a href="Proyectos.html" class="shortcut-item">
+							Proyectos
+						</a>
+						<a href="Contacto.html" class="shortcut-item">
+							Contacto
+						</a>
+					</div>
+				</div>
                     </div>
 
                 </div>
