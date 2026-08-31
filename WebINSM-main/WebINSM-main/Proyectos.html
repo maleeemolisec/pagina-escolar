@@ -1510,16 +1510,26 @@
                     const queryNorm = normalizeText(query);
                     const queryTokens = queryNorm.split(/\s+/).filter(t => t.length > 0);
                     if (queryTokens.length === 0) return true;
-                    
+
+                    const monthNames = [
+                        'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+                    ];
+
+                    const projectDateText = normalizeText(project.date || project.displayDate || '');
+                    const projectMonth = (project.date || '').split('-')[1] || '';
+                    const projectMonthName = projectMonth ? monthNames[Number(projectMonth) - 1] || '' : '';
                     const titleNorm = normalizeText(project.title || '');
                     const summaryNorm = normalizeText(project.summary || '');
+                    const allText = `${titleNorm} ${summaryNorm} ${projectDateText} ${projectMonthName}`;
                     
                     const titleWords = titleNorm.split(/\s+/).filter(w => w.length > 0);
                     const summaryWords = summaryNorm.split(/\s+/).filter(w => w.length > 0);
-                    const allWords = [...titleWords, ...summaryWords];
+                    const allWords = [...titleWords, ...summaryWords, ...monthNames, ...(projectDateText ? [projectDateText] : [])];
                     
                     return queryTokens.every(token => {
-                        if (titleNorm.includes(token) || summaryNorm.includes(token)) return true;
+                        const monthMatch = monthNames.includes(token) || token === projectMonth || token === projectMonthName;
+                        if (titleNorm.includes(token) || summaryNorm.includes(token) || projectDateText.includes(token) || allText.includes(token) || monthMatch) return true;
                         
                         return allWords.some(word => {
                             if (word.startsWith(token) || token.startsWith(word)) return true;
@@ -1588,7 +1598,9 @@
                         });
 
                         const card = document.createElement('a');
-                        card.href = `templates/Proyecto.html?id=${proj.id}`;
+                        const projectUrl = new URL('templates/Proyecto.html', window.location.href);
+                        projectUrl.searchParams.set('id', proj.id);
+                        card.href = projectUrl.href;
                         card.className = 'projects-card'; 
 
                         const maxChars = 200;
@@ -1794,7 +1806,7 @@
                     });
                 };
 
-                fetch('templates/data/index-proyectos.json')
+                fetch(new URL('templates/data/index-proyectos.json', window.location.href))
                     .then(response => {
                         if (!response.ok) {
                             console.error('Error: No se pudo cargar el archivo templates/data/index-proyectos.json');

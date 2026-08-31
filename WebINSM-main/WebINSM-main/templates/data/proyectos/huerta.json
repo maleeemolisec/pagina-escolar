@@ -1,0 +1,23 @@
+{
+  "hero": {
+    "titleLine1": "Proyecto",
+    "titleLine2": "Huerta",
+    "backgroundImage": "../img/HUERTA1.jpg"
+  },
+  "general": {
+    "date": "2025",
+    "summary": "Proyecto intensivo de huerta escolar desarrollado por estudiantes de segundo año, promoviendo el cuidado del medio ambiente, el trabajo colaborativo y la conexión con la naturaleza.",
+    "detail": "La huerta escolar se convirtió en un espacio de aprendizaje práctico donde los estudiantes desarrollaron tareas de siembra, cuidado y observación del proceso natural. A través de esta experiencia, se reforzaron valores como responsabilidad, paciencia, trabajo en equipo y respeto por el entorno.<br><br>El proyecto permitió integrar contenidos académicos con acciones concretas, generando una experiencia significativa que conectó la escuela con la vida cotidiana y la sostenibilidad.",
+    "image": "../img/HUERTA1.jpg"
+  },
+  "academic": {
+    "value1": "Segundo Año",
+    "value2": "Docentes del área curricular",
+    "value3": "Ciencias Naturales",
+    "icon3": "fas fa-seedling"
+  },
+  "gallery": [
+    "../img/HUERTA1.jpg",
+    "../img/Historia.jpg"
+  ]
+}

@@ -1,42 +1,66 @@
 [
     {
-        "id": "evento_2025",
-        "title": "Archivo institucional: Donde nace la magia",
-        "date": "2025-11-27",
-        "displayDate": "27 de Noviembre",
-        "summary": "Un recorrido nostálgico por la tradición de los eventos de cierre de año, donde la comunidad celebraba la creatividad, la música y el espíritu escolar.",
-        "image": "img/Cooperativa 1.jpg"
+        "id": "huerta",
+        "title": "Proyecto Huerta",
+        "date": "2025-03-15",
+        "displayDate": "2025",
+        "summary": "Proyecto de huerta escolar con trabajo colectivo, cuidado del entorno y conexión con la naturaleza.",
+        "image": "img/HUERTA1.jpg"
     },
     {
-        "id": "evento_2023",
-        "title": "Eventos anteriores: Fashion Blooms",
-        "date": "2023-12-6",
-        "displayDate": "6 de Diciembre",
-        "summary": "Un recuerdo de los primeros años de esta tradición: moda, arte y gran participación de la comunidad escolar.",
-        "image": "img/historia.jpg"
+        "id": "reciclaje",
+        "title": "Proyecto Reciclaje",
+        "date": "2024-08-20",
+        "displayDate": "2024",
+        "summary": "Iniciativa de sensibilización ambiental y reciclado promoviendo la responsabilidad social y la conciencia ecológica.",
+        "image": "img/Reciclaje.jpg"
     },
     {
-        "id": "revista_eme_2025",
-        "title": "Revista EME · Edición N° 17",
+        "id": "feria-ciencias",
+        "title": "Feria de Ciencias",
+        "date": "2025-10-12",
+        "displayDate": "2025",
+        "summary": "Exposición de proyectos creativos desarrollados por estudiantes.",
+        "image": "img/feria.jpg"
+    },
+    {
+        "id": "puertas-abiertas",
+        "title": "Jornada de Puertas Abiertas",
+        "date": "2025-05-18",
+        "displayDate": "2025",
+        "summary": "Evento institucional que invita a familias a participar de una exposición preparada por los alumnos sobre los trabajos realizados en el año.",
+        "image": "img/puertas_abiertas.jpg"
+    },
+    {
+        "id": "cem",
+        "title": "CEM",
+        "date": "2024-11-10",
+        "displayDate": "2024",
+        "summary": "Espacio donde los estudiantes participan, se organizan y proponen actividades para fortalecer la integración y la comunidad educativa.",
+        "image": "img/cem.jpg"
+    },
+    {
+        "id": "revista-eme",
+        "title": "Revista EME",
         "date": "2025-11-19",
-        "displayDate": "19 de Noviembre",
-        "summary": "La Promoción 2025 de Humanidades presentó la edición N° 17 de la Revista EME con trabajos de reflexión, creatividad y producción colectiva.",
+        "displayDate": "2025 - 2024",
+        "summary": "Proyecto editorial con diferentes ediciones que recoge reflexiones, relatos y trabajos de la especialidad de Humanidades.",
         "image": "img/Screenshot 2025-12-22 161503.png"
     },
     {
-        "id": "cortos_2024",
-        "title": "Premios Torres · Edición 2024",
+        "id": "premios-torres",
+        "title": "Premios Torres",
         "date": "2024-11-07",
-        "displayDate": "7 de Noviembre",
-        "summary": "La Promoción 2024 de Informática realizó cortometrajes basados en cuentos argentinos en el marco del proyecto Premios Torres.",
+        "displayDate": "2024",
+        "summary": "Proyecto audiovisual con distintas ediciones donde los estudiantes desarrollan relatos y cortometrajes inspirados en la literatura argentina.",
         "image": "img/Screenshot 2025-12-23 120617.png"
     },
     {
-        "id": "revista_eme_2024",
-        "title": "Revista EME · Edición N° 16",
-        "date": "2024-11-20",
-        "displayDate": "20 de Noviembre",
-        "summary": "La Promoción 2024 de Humanidades trabajó en la edición N° 16 de la Revista EME, una producción editorial con mirada propia y trabajo colectivo.",
+        "id": "desfiles",
+        "title": "Desfiles",
+        "date": "2025-11-27",
+        "displayDate": "2023 - 2025",
+        "summary": "Evento de cierre del año con moda, arte, música y expresiones culturales de la comunidad escolar.",
         "image": "img/Cooperativa 1.jpg"
     }
 ]

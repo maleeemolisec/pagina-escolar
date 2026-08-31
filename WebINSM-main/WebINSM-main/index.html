@@ -1948,6 +1948,20 @@
 
 			/* Mobile & Tablet Portrait (max-width: 768px) */
 			@media (max-width: 768px) {
+				.projects-intro-box {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				.projects-intro-actions {
+					width: 100%;
+					justify-content: flex-start;
+				}
+				.projects-section .btn {
+					width: auto;
+					font-size: 0.92rem;
+					padding: 12px 18px;
+				}
+
 				/* Header */
 				.header-main {
 					padding: 12px 16px;
@@ -2184,6 +2198,7 @@
 			</div>
 		</header>
 
+<<<<<<< Updated upstream
             .menu-button {
 
                 display: block;
@@ -2385,6 +2400,712 @@
         }
 
     </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header id="header">
+
+        <div class="header-main">
+
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <a href="index.html">
+
+                    <img
+                        src="img/favicon.ico"
+                        alt="Escudo Instituto Nuestra Señora de la Merced"
+                    >
+
+                    <span class="brand">
+                        Instituto Nuestra Señora de la Merced
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- NAVEGACIÓN -->
+
+            <nav>
+
+                <ul>
+
+                    <li>
+                        <a href="#colegio">
+                            Colegio
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#niveles">
+                            Niveles
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#proyectos">
+                            Proyectos
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#testimonios">
+                            Testimonios
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a
+                            href="Contacto.html"
+                            class="nav-button"
+                        >
+                            Contacto
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+
+            <!-- MENÚ CELULAR -->
+
+            <button
+                class="menu-button"
+                onclick="openMobileMenu()"
+                aria-label="Abrir menú"
+            >
+
+                <i class="fas fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENÚ MÓVIL
+    ====================================================== -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <button
+            class="mobile-menu-close"
+            onclick="closeMobileMenu()"
+            aria-label="Cerrar menú"
+        >
+
+            <i class="fas fa-xmark"></i>
+
+        </button>
+
+
+        <ul>
+
+            <li>
+                <a
+                    href="#colegio"
+                    onclick="closeMobileMenu()"
+                >
+                    Colegio
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="#niveles"
+                    onclick="closeMobileMenu()"
+                >
+                    Niveles
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="#proyectos"
+                    onclick="closeMobileMenu()"
+                >
+                    Proyectos
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="#testimonios"
+                    onclick="closeMobileMenu()"
+                >
+                    Testimonios
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="Contacto.html"
+                    onclick="closeMobileMenu()"
+                >
+                    Contacto
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+
+                <div class="hero-tag">
+
+                    <i class="fas fa-graduation-cap"></i>
+
+                    Comunidad educativa · Arroyito, Córdoba
+
+                </div>
+
+
+                <h1>
+
+                    Listos
+
+                    <span class="gold">
+                        para la vida.
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Una comunidad educativa que acompaña,
+                    inspira y forma personas preparadas
+                    para construir su propio futuro.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+
+                    <a
+                        href="#colegio"
+                        class="btn btn-primary"
+                    >
+
+                        Conocé nuestro colegio
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a
+                        href="#niveles"
+                        class="btn btn-outline"
+                    >
+
+                        Ver niveles
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-scroll">
+
+                <span class="scroll-line"></span>
+
+                Deslizá para descubrir
+
+            </div>
+
+        </section>
+
+			<section id="niveles" class="levels-section">
+				<div class="levels-container">
+					<div class="levels-title">
+						<h2>Conocé</h2>
+						<h3>Nuestros Niveles</h3>
+					</div>
+					<div class="level-tabs">
+						<button class="level-tab active" data-level="inicial">Inicial</button>
+						<button class="level-tab" data-level="primario">Primario</button>
+						<button class="level-tab" data-level="secundario">Secundario</button>
+						<button class="level-tab" data-level="terciario">Terciario</button>
+					</div>
+					<div id="levels-content">
+						<div class="level-content active" data-level-content="inicial">
+							<div class="level-grid">
+								<div class="level-image">
+									<img src="img/entrada.png" alt="Nivel Inicial" />
+								</div>
+								<div class="level-info">
+									<h4>Inicial</h4>
+									<div class="age">Edades 3-5</div>
+									<p>
+										Acompañamos las primeras experiencias educativas con cuidado, juego y valores.
+									</p>
+									<a href="NivelInicial.html" class="arrow-link"
+										>Ver más <i class="fas fa-arrow-right"></i
+									></a>
+								</div>
+							</div>
+						</div>
+						<div class="level-content" data-level-content="primario">
+							<div class="level-grid">
+								<div class="level-image">
+									<img src="img/IMG-20250414-WA0023.jpg" alt="Nivel Primario" />
+								</div>
+								<div class="level-info">
+									<h4>Primario</h4>
+									<div class="age">Edades 6-12</div>
+									<p>
+										Educamos integralmente, promoviendo aprendizajes, valores y el desarrollo
+										personal.
+									</p>
+									<a href="NivelPrimario.html" class="arrow-link">Ver más <i class="fas fa-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="level-content" data-level-content="secundario">
+							<div class="level-grid">
+								<div class="level-image"><img src="img/VIAJES.jpg" alt="Nivel Secundario" /></div>
+								<div class="level-info">
+									<h4>Secundario</h4>
+									<div class="age">Edades 13-18</div>
+									<p>Formamos jóvenes críticos, responsables y comprometidos con su futuro.</p>
+									<a href="NivelSecundario.html" class="arrow-link">Ver más <i class="fas fa-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="level-content" data-level-content="terciario">
+							<div class="level-grid">
+								<div class="level-image">
+									<img src="img/DIA del profesor.jpg" alt="Nivel Terciario" />
+								</div>
+								<div class="level-info">
+									<h4>Terciario</h4>
+									<div class="age">Formación Profesional</div>
+									<p>Formamos docentes con valores e identidad mercedaria.</p>
+									<a href="NivelTerciario.html" class="arrow-link">Ver más <i class="fas fa-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="level-controls" id="level-controls">
+						<button id="prev-level" class="testimonial-btn">
+							<i class="fas fa-arrow-left"></i>
+						</button>
+						<button id="pause-level" class="testimonial-btn">
+							<i class="fas fa-pause"></i>
+						</button>
+						<button id="next-level" class="testimonial-btn">
+							<i class="fas fa-arrow-right"></i>
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section id="proyectos" class="projects-section">
+				<div class="projects-container">
+					<div class="projects-intro-box">
+						<div class="projects-intro-copy">
+							<div class="section-label">Innovación</div>
+							<h3>Proyectos que inspiran.</h3>
+							<p>
+								En el nivel secundario, acompañamos a cada estudiante en su crecimiento con proyectos, actividades y experiencias que inspiran, desafían y motivan a seguir adelante. Aquí se vive el aprendizaje con sentido, la creatividad con propósito y la comunidad con identidad.
+							</p>
+						</div>
+						<div class="projects-intro-actions">
+							<a href="Proyectos.html" class="btn btn-primary">
+								Ver proyectos
+								<i class="fas fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+					<div class="projects-grid" id="home-projects-grid"></div>
+				</div>
+			</section>
+
+			<section id="testimonios" class="testimonials-section">
+				<div class="testimonials-container">
+					<div class="testimonials-grid">
+						<div class="testimonial-text">
+							<i class="fas fa-quote-left quote-icon"></i>
+							<div id="testimonial-text-container">
+								<div class="testimonial-slide active" data-testimonial="1">
+									<p class="testimonial-quote">
+										"La experiencia que tuve en esta escuela fue transformadora. No solo aprendí,
+										sino que crecí como persona."
+									</p>
+									<p class="testimonial-author">Anónimo 1</p>
+									<p class="testimonial-role">Egresado 2022</p>
+								</div>
+								<div class="testimonial-slide" data-testimonial="2">
+									<p class="testimonial-quote">
+										"Los profesores son apasionados y dedicados. Realmente se preocupan por el éxito
+										de cada estudiante."
+									</p>
+									<p class="testimonial-author">Anónimo 2</p>
+									<p class="testimonial-role">Egresado 2021</p>
+								</div>
+								<div class="testimonial-slide" data-testimonial="3">
+									<p class="testimonial-quote">
+										"Hice amigos para toda la vida y adquirí herramientas que me sirven todos los
+										días en la universidad.Hice amigos para toda la vida y adquirí herramientas que
+										me sirven todos los días en la universidad."
+									</p>
+									<p class="testimonial-author">Anónimo 3</p>
+									<p class="testimonial-role">Egresado 2023</p>
+								</div>
+							</div>
+							<div class="testimonial-controls">
+								<button id="prev-testimonial" class="testimonial-btn">
+									<i class="fas fa-arrow-left"></i>
+								</button>
+								<button id="pause-testimonial" class="testimonial-btn">
+									<i class="fas fa-pause"></i>
+								</button>
+								<button id="next-testimonial" class="testimonial-btn">
+									<i class="fas fa-arrow-right"></i>
+								</button>
+							</div>
+						</div>
+						<div class="testimonial-images">
+							<img
+								src="img/usuario_default.png"
+								alt="Testimonio 1"
+								class="testimonial-img"
+								data-testimonial-img="1"
+							/>
+							<img
+								src="img/usuario_default.png"
+								alt="Testimonio 2"
+								class="testimonial-img"
+								data-testimonial-img="2"
+							/>
+							<img
+								src="img/usuario_default.png"
+								alt="Testimonio 3"
+								class="testimonial-img"
+								data-testimonial-img="3"
+							/>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="virtual-tour" class="virtual-tour-section">
+				<div class="virtual-tour-container">
+					<div class="levels-title">
+						<h2>UNA PROPUESTA INNOVADORA</h2>
+						<h3>Recorrido Virtual</h3>
+					</div>
+
+
+                            <p>
+
+                                Formamos docentes con valores
+                                e identidad mercedaria.
+
+                            </p>
+
+
+                            <a
+                                href="NivelTerciario.html"
+                                class="level-link"
+                            >
+
+                                Conocer nivel
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROYECTOS
+        ================================================== -->
+
+        <section id="proyectos">
+
+            <div class="container">
+
+
+                <div class="projects-header reveal">
+
+
+                    <div>
+
+                        <div class="section-label">
+                            Innovación
+                        </div>
+
+
+                        <h2 class="section-title">
+                            Proyectos que inspiran.
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="Proyectos.html"
+                        class="btn btn-primary"
+                    >
+
+                        Ver todos
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="projects-grid"
+                    id="home-projects-grid"
+                >
+
+
+                    <!-- PROYECTO 1 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="img/Cooperativa 1.jpg"
+                                alt="Proyecto cooperativo"
+                            >
+
+                        </div>
+
+
+                        <div class="project-content">
+
+                            <span class="project-category">
+                                Comunidad
+                            </span>
+
+
+                            <h3>
+                                Cooperativa
+                            </h3>
+
+
+                            <p>
+
+                                Propuestas que promueven
+                                la solidaridad, el trabajo
+                                colaborativo y la participación.
+
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROYECTO 2 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="img/Cooperativa- bolsas.jpg"
+                                alt="Proyecto cooperativo"
+                            >
+
+                        </div>
+
+
+                        <div class="project-content">
+
+                            <span class="project-category">
+                                Innovación
+                            </span>
+
+
+                            <h3>
+                                Proyectos institucionales
+                            </h3>
+
+
+                            <p>
+
+                                Experiencias que conectan
+                                los aprendizajes con
+                                necesidades reales
+                                de la comunidad.
+
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROYECTO 3 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="img/Historia.jpg"
+                                alt="Proyecto educativo"
+                            >
+
+                        </div>
+
+
+                        <div class="project-content">
+
+                            <span class="project-category">
+                                Aprendizaje
+                            </span>
+
+
+                            <h3>
+                                Aprender haciendo
+                            </h3>
+
+
+                            <p>
+
+                                Actividades y experiencias
+                                que convierten el aprendizaje
+                                en una experiencia significativa.
+
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TESTIMONIOS
+        ================================================== -->
+
+        <section
+            id="testimonios"
+            class="testimonials"
+        >
+
+            <div class="container testimonial-grid">
+
+
+                <div class="testimonial-text reveal">
+
+                    <div class="section-label">
+                        Nuestra comunidad
+                    </div>
+
+
+                    <h2 class="section-title testimonial-title">
+
+                        Lo que queda
+                        después
+                        de la escuela.
+
+                    </h2>
+
+                </div>
+
+
+                <div class="testimonial-box reveal">
+
+                    <div>
+
+
+                        <div class="quote">
+
+                            <i class="fas fa-quote-left"></i>
+
+                        </div>
+
+
+                        <blockquote>
+
+                            “La experiencia que tuve
+                            en esta escuela fue
+                            transformadora. No solo
+                            aprendí, sino que crecí
+                            como persona.”
+
+                        </blockquote>
+
+
+                        <div class="testimonial-author">
+
+                            <strong>
+                                Anónimo
+                            </strong>
+
+                            <span>
+                                Egresado 2022
+                            </span>
+
+                        </div>
+=======
 
 </head>
 
@@ -3090,177 +3811,6 @@
 
 
         <!-- =================================================
-             PROYECTOS
-        ================================================== -->
-
-        <section id="proyectos">
-
-            <div class="container">
-
-
-                <div class="projects-header reveal">
-
-
-                    <div>
-
-                        <div class="section-label">
-                            Innovación
-                        </div>
-
-
-                        <h2 class="section-title">
-                            Proyectos que inspiran.
-                        </h2>
-
-                    </div>
-
-
-                    <a
-                        href="Proyectos.html"
-                        class="btn btn-primary"
-                    >
-
-                        Ver todos
-
-                        <i class="fas fa-arrow-right"></i>
-
-                    </a>
-
-                </div>
-
-
-                <div
-                    class="projects-grid"
-                    id="home-projects-grid"
-                >
-
-
-                    <!-- PROYECTO 1 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image">
-
-                            <img
-                                src="img/Cooperativa 1.jpg"
-                                alt="Proyecto cooperativo"
-                            >
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Comunidad
-                            </span>
-
-
-                            <h3>
-                                Cooperativa
-                            </h3>
-
-
-                            <p>
-
-                                Propuestas que promueven
-                                la solidaridad, el trabajo
-                                colaborativo y la participación.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- PROYECTO 2 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image">
-
-                            <img
-                                src="img/Cooperativa- bolsas.jpg"
-                                alt="Proyecto cooperativo"
-                            >
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Innovación
-                            </span>
-
-
-                            <h3>
-                                Proyectos institucionales
-                            </h3>
-
-
-                            <p>
-
-                                Experiencias que conectan
-                                los aprendizajes con
-                                necesidades reales
-                                de la comunidad.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- PROYECTO 3 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image">
-
-                            <img
-                                src="img/Historia.jpg"
-                                alt="Proyecto educativo"
-                            >
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Aprendizaje
-                            </span>
-
-
-                            <h3>
-                                Aprender haciendo
-                            </h3>
-
-
-                            <p>
-
-                                Actividades y experiencias
-                                que convierten el aprendizaje
-                                en una experiencia significativa.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
              TESTIMONIOS
         ================================================== -->
 
@@ -3324,6 +3874,7 @@
                             </span>
 
                         </div>
+>>>>>>> Stashed changes
 
 		<div class="side-menu" id="sideMenu">
 			<div class="side-menu-overlay" onclick="toggleSideMenu()"></div>
