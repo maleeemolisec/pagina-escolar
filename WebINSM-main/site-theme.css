@@ -219,6 +219,60 @@ li {
     font-family: 'DM Sans', sans-serif !important;
 }
 
+.level-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.level-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 92px;
+    padding: 18px;
+    border: 1px solid rgba(23, 54, 93, .1);
+    border-radius: 16px;
+    background: #fbfcfe;
+    color: var(--site-blue);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.level-contact-item i {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--site-blue);
+    color: var(--site-gold-light);
+    font-size: 1.1rem;
+}
+
+.level-contact-item span {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.level-contact-item strong {
+    color: var(--site-blue);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.level-contact-item small {
+    color: var(--site-muted);
+    overflow-wrap: anywhere;
+}
+
+.level-contact-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--site-gold);
+    box-shadow: 0 10px 24px rgba(23, 54, 93, .1);
+}
+
 body > main:has(.form-card) {
     max-width: 820px !important;
     margin: -42px auto 70px !important;
@@ -409,5 +463,9 @@ body > footer:not(.footer) a {
     .side-menu-content {
         width: 100% !important;
         padding: 90px 24px 24px !important;
+    }
+
+    .level-contact-grid {
+        grid-template-columns: 1fr;
     }
 }
