@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Insm - Nivel Inicial</title>
+        <title>Insm - Nivel Secundario</title>
         <style>
             /* --- Fuentes --- */
             @font-face {
@@ -1760,7 +1760,51 @@
                 .menu-content { grid-template-columns: 1fr; }
                 .hero-content h1 { font-size: 2.8em; }
             }
+            /* Menú móvil unificado con la portada */
+            @media (max-width: 768px) {
+                .side-menu-content {
+                    width: 100%;
+                    padding: 100px 30px 30px;
+                    background: #091c2c;
+                }
+
+                .side-menu-header {
+                    border-bottom-color: #f39c12;
+                }
+
+                .side-menu-header h3,
+                .side-menu-links li a,
+                .shortcut-item {
+                    color: white;
+                }
+
+                .side-menu-links li a:hover,
+                .shortcut-item:hover {
+                    background: rgba(255, 255, 255, 0.08);
+                    color: #f39c12;
+                }
+
+                .shortcut-item {
+                    background: rgba(255, 255, 255, 0.06);
+                }
+
+                .side-menu-shortcuts {
+                    border-top-color: rgba(255, 255, 255, 0.18);
+                }
+            }
+
+            /* Índice global compartido por todos los niveles */
+            .side-menu-content { background: #091c2c; color: white; }
+            .side-menu-header h3, .side-menu-links li a, .shortcut-item { color: white; }
+            .side-menu-shortcuts, .side-menu-footer { display: block; }
+            .side-menu-shortcuts { border-top-color: rgba(255, 255, 255, 0.18); }
+            .shortcut-item { background: rgba(255, 255, 255, 0.06); }
+            .side-menu-links li a:hover, .shortcut-item:hover { background: rgba(255, 255, 255, 0.12); color: #f39c12; }
+            .side-menu-links li a:hover i, .shortcut-item i { color: #f39c12; }
+            .side-menu-content .side-menu-links { scrollbar-color: #f39c12 #102d43; }
+            .side-menu-links::-webkit-scrollbar-track { background: #102d43 !important; }
         </style>
+        <link rel="stylesheet" href="site-theme.css" />
         <link rel="icon" href="img/favicon.ico" type="image/ico" />
         <link
             rel="stylesheet"
@@ -1880,13 +1924,8 @@
                 <div class="hero-content">
                     <h1>
                         <span class="hero-line-1">Nivel</span>
-                        <span class="hero-line-2">Inicial</span>
+                        <span class="hero-line-2">Secundario</span>
                     </h1>
-                    <p>
-                        <a href="https://www.google.com" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
-                            Inscripciones Abiertas para el Ciclo 2026<span class="hero-arrow"></span>
-                        </a>
-                    </p>
                 </div>
             </section>
 
@@ -1899,15 +1938,14 @@
                             <div class="director-section">
                                 <div class="director-text">
                                     <p class="specialties-intro">
-                                        El Nivel Inicial es una etapa fundamental de descubrimiento, juego y afecto.
-                                        En este espacio acompañamos a cada niño y niña en su primera experiencia escolar,
-                                        promoviendo la exploración, la curiosidad y la construcción de la confianza.
+                                        El Nivel Secundario es una etapa de gran crecimiento personal y académico, donde
+                                        los estudiantes fortalecen su identidad, su pensamiento crítico y su capacidad de
+                                        asumir nuevos desafíos con responsabilidad.
                                     </p>
                                     <p class="specialties-intro">
-                                        Trabajamos con una propuesta pedagógica cálida y activa, donde se fortalecen la
-                                        identidad, la autonomía, el lenguaje y el vínculo con la comunidad. Cada actividad
-                                        está pensada para acompañar el desarrollo integral de los alumnos desde los primeros
-                                        pasos de su trayectoria escolar.
+                                        En este tramo formativo buscamos acompañar a cada joven en la construcción de su
+                                        proyecto de vida, promoviendo la excelencia académica, el trabajo en equipo y la
+                                        participación activa en la vida escolar y comunitaria.
                                     </p>
                                     <p class="director-signature">
                                         <strong>Marisa Brisio</strong>
@@ -1915,7 +1953,7 @@
                                 </div>
                                 <img
                                     src="img/personal/marisa-brisio.jpg"
-                                    alt="Foto de la Directora de Nivel Inicial"
+                                    alt="Foto de la Directora de Nivel Secundario"
                                     class="director-image"
                                     onerror="this.onerror=null;this.src='img/usuario_default.png';"
                                 />
@@ -1923,24 +1961,26 @@
                         </div>
 
                         <div id="especialidades" class="content-block">
-                            <h2>Nuestras Salas</h2>
+                            <h2>Nuestras Especialidades</h2>
                             <p class="specialties-intro">
-                                Organizamos el Nivel Inicial por salas según la edad de cada niño y niña,
-                                acompañando su desarrollo con propuestas lúdicas y pedagógicas adecuadas a cada etapa.
+                                El ciclo orientado permite a los estudiantes profundizar en áreas específicas,
+                                desarrollando competencias clave para su futuro universitario y profesional.
                             </p>
 
                             <div class="specialties-showcase">
                                 <div class="card-specialty card-bg-informatica">
                                     <div class="card-specialty-content">
-                                        <h3>Sala de 3 años</h3>
-                                        <p>Primeros pasos en la exploración, el juego y la socialización.</p>
+                                        <h3>Informática</h3>
+                                        <p>Programación, Robótica y Desarrollo de Software para el mundo digital.</p>
+                                        <a href="info/Plan de Estudios - Informática.pdf" target="_blank" class="view-more-btn">Ver Plan</a>
                                     </div>
                                 </div>
 
                                 <div class="card-specialty card-bg-humanidades">
                                     <div class="card-specialty-content">
-                                        <h3>Sala de 4 y 5 años</h3>
-                                        <p>Desarrollo de la autonomía, el lenguaje y la preparación para la primaria.</p>
+                                        <h3>Humanidades</h3>
+                                        <p>Ciencias Sociales, Comunicación y Ciudadanía con pensamiento crítico.</p>
+                                        <a href="info/Plan de Estudios - Ciencias Sociales y Humanidades..pdf" target="_blank" class="view-more-btn">Ver Plan</a>
                                     </div>
                                 </div>
                             </div>
@@ -2075,29 +2115,13 @@
                                 <div class="staff-carousel-viewport" id="staffViewport">
                                     <div class="staff-carousel-track" id="staffTrack">
                                         <div class="staff-carousel-item" data-name="Marisa Brisio" data-role="Directora">
-<<<<<<< HEAD
-                                            <img src="img/usuario_default.png" alt="Marisa Brisio" class="staff-carousel-img">
-                                        </div>
-                                        <div class="staff-carousel-item" data-name="Adela" data-role="Secretaría">
-                                            <img src="img/adela.jpg" alt="Adela" class="staff-carousel-img">
-                                        </div>
-                                        <div class="staff-carousel-item" data-name="Prof. Juan Pérez" data-role="Coordinación">
-                                            <img src="img/usuario_default.png" alt="Prof. Juan Pérez" class="staff-carousel-img">
-                                        </div>
-                                        <div class="staff-carousel-item" data-name="Lic. María García" data-role="Psicopedagogía">
-                                            <img src="img/usuario_default.png" alt="Lic. María García" class="staff-carousel-img">
-=======
                                             <img src="img/personal/marisa-brisio.jpg" alt="Marisa Brisio" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
-                                        </div>
-                                        <div class="staff-carousel-item" data-name="Adela" data-role="Secretaría">
-                                            <img src="img/personal/adela.jpg" alt="Adela" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
                                         </div>
                                         <div class="staff-carousel-item" data-name="Prof. Juan Pérez" data-role="Coordinación">
                                             <img src="img/personal/juan-perez.jpg" alt="Prof. Juan Pérez" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
                                         </div>
                                         <div class="staff-carousel-item" data-name="Lic. María García" data-role="Psicopedagogía">
                                             <img src="img/personal/maria-garcia.jpg" alt="Lic. María García" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
->>>>>>> cambios-male
                                         </div>
                                         <div class="staff-carousel-item" data-name="Prof. Carlos López" data-role="Educación Física">
                                             <img src="img/personal/carlos-lopez.jpg" alt="Prof. Carlos López" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
@@ -2272,7 +2296,7 @@
 						<a href="NuestroColegio.html" class="shortcut-item">
 							Institución
 						</a>
-						<a href="NivelSecundario.html" class="shortcut-item">
+                        <a href="index.html#niveles" class="shortcut-item" onclick="window.location.href='index.html#niveles'; return false;">
 							Niveles
 						</a>
 						<a href="Proyectos.html" class="shortcut-item">
@@ -2299,11 +2323,11 @@
                 const heroH1 = heroContent.querySelector('h1');
                 const paragraph = heroContent.querySelector('p');
 
-                if (!heroH1 || !paragraph) return;
+                if (!heroH1) return;
 
                 // Hacer visibles los contenedores
                 heroH1.style.visibility = 'visible';
-                paragraph.style.visibility = 'visible';
+                if (paragraph) paragraph.style.visibility = 'visible';
 
                 // Solo envolver letras si no se ha hecho antes
                 if (heroH1.querySelectorAll('.letter').length === 0) {
@@ -2340,9 +2364,11 @@
                 });
 
                 // Animar el párrafo al final
-                paragraph.style.animation = 'none';
-                void paragraph.offsetWidth; // Force reflow
-                paragraph.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay + 200}ms both`;
+                if (paragraph) {
+                    paragraph.style.animation = 'none';
+                    void paragraph.offsetWidth; // Force reflow
+                    paragraph.style.animation = `riseIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) ${delay + 200}ms both`;
+                }
             }
 
             document.addEventListener('DOMContentLoaded', runHeroAnimation);

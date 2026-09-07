@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Instituto Nuestra Señora de la Merced - Comunidad educativa de Arroyito, Córdoba.">
+
+    <title>Instituto Nuestra Señora de la Merced | INSM</title>
+
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- ICONO -->
+    <link
+        rel="icon"
+        href="img/favicon.ico"
+        type="image/x-icon">
+
+
+    <style>
+
+        /* =====================================================
+           VARIABLES
+        ====================================================== */
+
+        :root {
+
+            --azul: #17365D;
+            --azul-oscuro: #0D243D;
+            --azul-claro: #28527A;
+
+            --rojo: #C8102E;
+            --rojo-oscuro: #9F0D25;
+
+            --dorado: #E5B72F;
+            --dorado-claro: #F4D66D;
+
+            --blanco: #FFFFFF;
+
+            --gris-fondo: #F6F8FA;
+            --gris: #667085;
+            --gris-oscuro: #344054;
+
+            --negro: #17202A;
+
+            --radio: 22px;
+
+            --sombra:
+                0 15px 45px rgba(23, 54, 93, 0.12);
+
+            --transicion:
+                0.3s ease;
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: var(--blanco);
+            color: var(--negro);
+            overflow-x: hidden;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 5%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(13, 36, 61, 0.96),
+                    rgba(23, 54, 93, 0.80)
+                );
+
+            transition: var(--transicion);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 5px 25px rgba(23, 54, 93, 0.12);
+
+            padding: 11px 5%;
+        }
+
+        .header-main {
+            width: min(1250px, 100%);
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .brand {
+            color: var(--blanco);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+
+            transition: var(--transicion);
+        }
+
+        header.scrolled .brand {
+            color: var(--azul);
+        }
+
+
+        /* =====================================================
+           NAVEGACIÓN
+        ====================================================== */
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+            align-items: center;
+
+            gap: 5px;
+        }
+
+        nav a {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 11px 16px;
+
+            border-radius: 30px;
+
+            color: var(--blanco);
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: var(--transicion);
+        }
+
+        header.scrolled nav a {
+            color: var(--azul);
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.13);
+            transform: translateY(-1px);
+        }
+
+        header.scrolled nav a:hover {
+            background: #EEF2F6;
+        }
+
+        .nav-button {
+            background: var(--rojo) !important;
+            color: white !important;
+            margin-left: 5px;
+        }
+
+        .nav-button:hover {
+            background: var(--dorado) !important;
+            color: var(--azul-oscuro) !important;
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           BOTÓN MENÚ MÓVIL
+        ====================================================== */
+
+        .menu-button {
+            display: none;
+
+            border: none;
+            background: transparent;
+
+            color: white;
+
+            font-size: 23px;
+
+            cursor: pointer;
+        }
+
+        header.scrolled .menu-button {
+            color: var(--azul);
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+            min-height: 100vh;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(8, 25, 40, 0.91) 0%,
+                    rgba(13, 36, 61, 0.75) 42%,
+                    rgba(13, 36, 61, 0.18) 100%
+                ),
+
+                url("img/entrada.png")
+                center center /
+                cover
+                no-repeat;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 150px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(255,255,255,1)
+                );
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            width: min(1250px, 90%);
+            margin: auto;
+
+            padding-top: 70px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           HERO TAG
+        ====================================================== */
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 9px 16px;
+
+            border-radius: 50px;
+
+            background:
+                rgba(23, 54, 93, 0.78);
+
+            border:
+                1px solid
+                rgba(229, 183, 47, 0.65);
+
+            backdrop-filter: blur(12px);
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            margin-bottom: 27px;
+        }
+
+        .hero-tag i {
+            color: var(--dorado);
+        }
+
+
+        /* =====================================================
+           HERO TÍTULO
+        ====================================================== */
+
+        .hero h1 {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: white;
+
+            font-size:
+                clamp(4rem, 8vw, 7.5rem);
+
+            line-height: 0.88;
+
+            letter-spacing: -4px;
+
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            display: block;
+        }
+
+        .hero h1 .gold {
+            color: var(--dorado);
+        }
+
+
+        /* =====================================================
+           HERO DESCRIPCIÓN
+        ====================================================== */
+
+        .hero-description {
+            max-width: 590px;
+
+            margin-top: 30px;
+
+            color:
+                rgba(255,255,255,0.84);
+
+            font-size: 18px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           BOTONES
+        ====================================================== */
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+
+            margin-top: 35px;
+        }
+
+        .btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            padding: 14px 23px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: var(--transicion);
+
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--rojo);
+            color: white;
+
+            border:
+                2px solid var(--rojo);
+        }
+
+        .btn-primary:hover {
+            background: var(--dorado);
+
+            border-color: var(--dorado);
+
+            color: var(--azul-oscuro);
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(229,183,47,0.30);
+        }
+
+        .btn-outline {
+            color: white;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.40);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--azul);
+        }
+
+
+        /* =====================================================
+           SCROLL
+        ====================================================== */
+
+        .hero-scroll {
+            position: absolute;
+
+            left: 5%;
+            bottom: 38px;
+
+            z-index: 3;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            color: white;
+
+            font-size: 12px;
+
+            opacity: .78;
+        }
+
+        .scroll-line {
+            width: 45px;
+            height: 1px;
+            background: white;
+        }
+
+
+        /* =====================================================
+           SECCIONES GENERALES
+        ====================================================== */
+
+        section {
+            padding: 110px 5%;
+        }
+
+        .container {
+            width: min(1200px, 100%);
+            margin: auto;
+        }
+
+        .section-label {
+            color: var(--rojo);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 13px;
+        }
+
+        .section-title {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: var(--azul);
+
+            font-size:
+                clamp(2.7rem, 5vw, 4.5rem);
+
+            line-height: 1;
+
+            letter-spacing: -2px;
+        }
+
+        .section-description {
+            color: var(--gris);
+
+            line-height: 1.7;
+
+            max-width: 650px;
+
+            margin-top: 20px;
+        }
+
+
+        /* =====================================================
+           NUESTRO COLEGIO
+        ====================================================== */
+
+        .college {
+            background: white;
+        }
+
+        .college-grid {
+            display: grid;
+
+            grid-template-columns:
+                .9fr 1.1fr;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+        .college-text > p {
+            margin-top: 25px;
+
+            color: var(--gris);
+
+            line-height: 1.8;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           CARACTERÍSTICAS
+        ====================================================== */
+
+        .features {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+            margin-top: 35px;
+        }
+
+        .feature {
+            padding: 22px;
+
+            background: var(--gris-fondo);
+
+            border-radius: 17px;
+
+            border:
+                1px solid transparent;
+
+            transition: var(--transicion);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+
+            background: white;
+
+            border-color:
+                rgba(229,183,47,0.35);
+
+            box-shadow: var(--sombra);
+        }
+
+        .feature-icon {
+            width: 43px;
+            height: 43px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(200,16,46,0.09);
+
+            color: var(--rojo);
+
+            margin-bottom: 14px;
+        }
+
+        .feature:nth-child(2) .feature-icon {
+            background:
+                rgba(229,183,47,0.15);
+
+            color: #B48A00;
+        }
+
+        .feature h3 {
+            color: var(--azul);
+
+            font-size: 15px;
+
+            margin-bottom: 6px;
+        }
+
+        .feature p {
+            color: var(--gris);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .college-button {
+            margin-top: 30px;
+        }
+
+
+        /* =====================================================
+           GALERÍA
+        ====================================================== */
+
+        .gallery {
+            position: relative;
+            height: 600px;
+        }
+
+        .gallery img {
+            position: absolute;
+
+            object-fit: cover;
+
+            border-radius: var(--radio);
+
+            box-shadow: var(--sombra);
+
+            transition: .5s ease;
+        }
+
+        .gallery img:hover {
+            transform:
+                translateY(-7px)
+                rotate(0deg)
+                !important;
+
+            z-index: 10;
+        }
+
+        .gallery img:nth-child(1) {
+            width: 65%;
+            height: 390px;
+
+            top: 0;
+            left: 0;
+
+            transform: rotate(-1deg);
+        }
+
+        .gallery img:nth-child(2) {
+            width: 52%;
+            height: 280px;
+
+            right: 0;
+            top: 100px;
+
+            z-index: 2;
+
+            transform: rotate(1deg);
+        }
+
+        .gallery img:nth-child(3) {
+            width: 58%;
+            height: 250px;
+
+            bottom: 0;
+            left: 14%;
+
+            z-index: 3;
+
+            transform: rotate(-1deg);
+        }
+
+
+        /* =====================================================
+           NIVELES
+        ====================================================== */
+
+        .levels {
+            background: var(--gris-fondo);
+        }
+
+        .levels-header {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: end;
+
+            margin-bottom: 45px;
+        }
+
+        .levels-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .level-card {
+            background: white;
+
+            border-radius: var(--radio);
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 30px
+                rgba(23,54,93,.06);
+
+            transition: var(--transicion);
+
+            border:
+                1px solid
+                rgba(23,54,93,.04);
+        }
+
+        .level-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra);
+        }
+
+        .level-image {
+            height: 230px;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .level-image::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 60%,
+                    rgba(13,36,61,.25)
+                );
+        }
+
+        .level-image img {
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: .6s ease;
+        }
+
+        .level-card:hover
+        .level-image img {
+            transform: scale(1.06);
+        }
+
+        .level-content {
+            padding: 25px;
+        }
+
+        .level-number {
+            color: var(--rojo);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 1.3px;
+        }
+
+        .level-card:nth-child(2)
+        .level-number {
+            color: #B48A00;
+        }
+
+        .level-content h3 {
+            color: var(--azul);
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 29px;
+
+            margin: 7px 0;
+        }
+
+        .level-age {
+            color: var(--gris);
+
+            font-size: 12px;
+
+            margin-bottom: 15px;
+        }
+
+        .level-content p {
+            color: var(--gris);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            min-height: 68px;
+        }
+
+        .level-link {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--azul);
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            margin-top: 20px;
+
+            transition: var(--transicion);
+        }
+
+        .level-link:hover {
+            color: var(--rojo);
+            gap: 13px;
+        }
+
+
+        /* =====================================================
+           PROYECTOS
+        ====================================================== */
+
+        .projects-header {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: end;
+
+            margin-bottom: 45px;
+        }
+
+        .projects-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .project-card {
+            border-radius: var(--radio);
+
+            overflow: hidden;
+
+            background: white;
+
+            box-shadow:
+                0 8px 30px
+                rgba(23,54,93,.07);
+
+            transition: var(--transicion);
+
+            border:
+                1px solid
+                rgba(23,54,93,.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+            box-shadow: var(--sombra);
+        }
+
+        .project-image {
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: .6s ease;
+        }
+
+        .project-card:hover
+        .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-category {
+            color: var(--rojo);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+        }
+
+        .project-content h3 {
+            color: var(--azul);
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 25px;
+
+            margin: 8px 0;
+        }
+
+        .project-content p {
+            color: var(--gris);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           INSCRIPCIONES
+        ====================================================== */
+
+        #inscripciones {
+            background: white;
+        }
+
+        .inscripciones-header {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: end;
+
+            margin-bottom: 45px;
+        }
+
+        .inscripciones-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .inscripcion-card {
+            border-radius: var(--radio);
+
+            background: white;
+
+            padding: 32px;
+
+            box-shadow:
+                0 8px 30px
+                rgba(23,54,93,.07);
+
+            border:
+                1px solid
+                rgba(23,54,93,.05);
+
+            transition: var(--transicion);
+        }
+
+        .inscripcion-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow: var(--sombra);
+        }
+
+        .inscripcion-card .project-category {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .inscripcion-card h3 {
+            color: var(--azul);
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 27px;
+
+            margin-bottom: 12px;
+        }
+
+        .inscripcion-card p {
+            color: var(--gris);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            min-height: 70px;
+        }
+
+        .inscripcion-card .btn {
+            margin-top: 22px;
+        }
+
+
+        /* =====================================================
+           TESTIMONIOS
+        ====================================================== */
+
+        .testimonials {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--azul-oscuro),
+                    var(--azul)
+                );
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            border:
+                90px solid
+                rgba(229,183,47,.06);
+
+            right: -150px;
+            top: -180px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 100px;
+
+            align-items: center;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .testimonial-title {
+            color: white;
+        }
+
+        .quote {
+            color: var(--dorado);
+
+            font-size: 45px;
+
+            margin-bottom: 20px;
+        }
+
+        .testimonial-box {
+            min-height: 300px;
+
+            padding: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            border-radius: var(--radio);
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            background:
+                rgba(255,255,255,.06);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-text blockquote {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(1.7rem, 3vw, 2.5rem);
+
+            line-height: 1.35;
+
+            color: white;
+        }
+
+        .testimonial-author {
+            margin-top: 30px;
+        }
+
+        .testimonial-author strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .testimonial-author span {
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           CONTACTO
+        ====================================================== */
+
+        .contact {
+            padding-bottom: 80px;
+        }
+
+        .contact-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--rojo),
+                    var(--rojo-oscuro)
+                );
+
+            border-radius: 30px;
+
+            padding: 70px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 40px;
+
+            color: white;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .contact-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            border:
+                60px solid
+                rgba(229,183,47,.12);
+
+            right: -100px;
+            top: -120px;
+        }
+
+        .contact-box h2 {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(2.5rem, 5vw, 4rem);
+
+            line-height: 1;
+
+            max-width: 600px;
+        }
+
+        .contact-box p {
+            margin-top: 15px;
+
+            color:
+                rgba(255,255,255,.78);
+        }
+
+        .contact-button {
+            background: white;
+
+            color: var(--rojo);
+
+            position: relative;
+
+            z-index: 2;
+
+            white-space: nowrap;
+        }
+
+        .contact-button:hover {
+            background: var(--dorado);
+
+            color: var(--azul-oscuro);
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+            background: #091C2C;
+
+            color: white;
+
+            padding:
+                70px 5% 25px;
+        }
+
+        .footer-grid {
+            width: min(1200px, 100%);
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr;
+
+            gap: 70px;
+        }
+
+        .footer-brand {
+            max-width: 360px;
+        }
+
+        .footer-logo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            width: 50px;
+            height: 50px;
+
+            object-fit: contain;
+        }
+
+        .footer-logo strong {
+            font-size: 15px;
+        }
+
+        .footer-brand p,
+        footer li {
+            color:
+                rgba(255,255,255,.60);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        footer h3 {
+            font-size: 15px;
+
+            margin-bottom: 20px;
+
+            color: white;
+        }
+
+        footer h3::after {
+            content: "";
+
+            display: block;
+
+            width: 30px;
+            height: 2px;
+
+            background: var(--dorado);
+
+            margin-top: 8px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 10px;
+        }
+
+        footer li a {
+            transition: var(--transicion);
+        }
+
+        footer li a:hover {
+            color: var(--dorado);
+        }
+
+
+        /* =====================================================
+           REDES
+        ====================================================== */
+
+        .social {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        .social a {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.08);
+
+            color: white;
+
+            transition: var(--transicion);
+        }
+
+        .social a:hover {
+            background: var(--rojo);
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =====================================================
+           FOOTER BOTTOM
+        ====================================================== */
+
+        .footer-bottom {
+            width: min(1200px, 100%);
+
+            margin:
+                60px auto 0;
+
+            padding-top: 22px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.1);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            color:
+                rgba(255,255,255,.42);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           ANIMACIONES
+        ====================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform:
+                translateY(35px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           MENÚ MÓVIL
+        ====================================================== */
+
+        .mobile-menu {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 2000;
+
+            background:
+                rgba(9,28,44,.97);
+
+            padding: 100px 30px 30px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+
+            top: 25px;
+            right: 25px;
+
+            border: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 10px;
+        }
+
+        .mobile-menu a {
+            display: block;
+
+            padding: 16px;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: 600;
+        }
+
+        .mobile-menu a:hover {
+            background:
+                rgba(255,255,255,.08);
+
+            color: var(--dorado);
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 1050px) {
+
+            .levels-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .college-grid {
+                grid-template-columns: 1fr;
+
+                gap: 50px;
+            }
+
+            .gallery {
+                max-width: 700px;
+
+                margin: auto;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+            .projects-grid,
+            .inscripciones-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+        }
+
+
+        /* =====================================================
+           MÓVIL
+        ====================================================== */
+
+        @media (max-width: 750px) {
+
+            header {
+                padding:
+                    13px 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .brand {
+                font-size: 14px;
+            }
+
+            .hero {
+                min-height: 90vh;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+
+                max-width: 300px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            section {
+                padding:
+                    80px 5%;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                height: 480px;
+            }
+
+            .gallery img:nth-child(1) {
+                height: 310px;
+            }
+
+            .gallery img:nth-child(2) {
+                height: 220px;
+            }
+
+            .gallery img:nth-child(3) {
+                height: 200px;
+            }
+
+            .levels-header,
+            .projects-header,
+            .inscripciones-header {
+                display: block;
+            }
+
+            .projects-header .btn {
+                margin-top: 25px;
+            }
+
+            .projects-grid,
+            .inscripciones-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                padding:
+                    45px 30px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+        }
+
+
+        /* =====================================================
+           MÓVIL PEQUEÑO
+        ====================================================== */
+
+        @media (max-width: 500px) {
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand {
+                max-width: 210px;
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .hero-scroll {
+                display: none;
+            }
+
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                height: 400px;
+            }
+
+            .gallery img:nth-child(1) {
+                width: 72%;
+                height: 250px;
+            }
+
+            .gallery img:nth-child(2) {
+                width: 55%;
+                height: 190px;
+
+                top: 70px;
+            }
+
+            .gallery img:nth-child(3) {
+                width: 65%;
+                height: 170px;
+            }
+
+            .testimonial-box {
+                padding: 30px;
+            }
+
+            .inscripcion-card {
+                padding: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header id="header">
+
+        <div class="header-main">
+
+            <div class="logo">
+
+                <a href="index.html">
+
+                    <img
+                        src="img/favicon.ico"
+                        alt="Escudo Instituto Nuestra Señora de la Merced">
+
+                    <span class="brand">
+                        Instituto Nuestra Señora de la Merced
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <nav>
+
+                <ul>
+
+                    <li>
+                        <a href="#colegio">
+                            Colegio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#niveles">
+                            Niveles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#proyectos">
+                            Proyectos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#inscripciones">
+                            Inscripciones
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#testimonios">
+                            Testimonios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            href="Contacto.html"
+                            class="nav-button">
+                            Contacto
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+
+            <button
+                class="menu-button"
+                onclick="openMobileMenu()"
+                aria-label="Abrir menú">
+
+                <i class="fas fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENÚ MÓVIL
+    ====================================================== -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu">
+
+        <button
+            class="mobile-menu-close"
+            onclick="closeMobileMenu()"
+            aria-label="Cerrar menú">
+
+            <i class="fas fa-xmark"></i>
+
+        </button>
+
+
+        <ul>
+
+            <li>
+                <a
+                    href="#colegio"
+                    onclick="closeMobileMenu()">
+                    Colegio
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#niveles"
+                    onclick="closeMobileMenu()">
+                    Niveles
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#proyectos"
+                    onclick="closeMobileMenu()">
+                    Proyectos
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#inscripciones"
+                    onclick="closeMobileMenu()">
+                    Inscripciones
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#testimonios"
+                    onclick="closeMobileMenu()">
+                    Testimonios
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="Contacto.html"
+                    onclick="closeMobileMenu()">
+                    Contacto
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-tag">
+
+                    <i class="fas fa-graduation-cap"></i>
+
+                    Comunidad educativa · Arroyito, Córdoba
+
+                </div>
+
+
+                <h1>
+
+                    Listos
+
+                    <span class="gold">
+                        para la vida.
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Una comunidad educativa que acompaña,
+                    inspira y forma personas preparadas
+                    para construir su propio futuro.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#colegio"
+                        class="btn btn-primary">
+
+                        Conocé nuestro colegio
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a
+                        href="#niveles"
+                        class="btn btn-outline">
+
+                        Ver niveles
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-scroll">
+
+                <span class="scroll-line"></span>
+
+                Deslizá para descubrir
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NUESTRO COLEGIO
+        ================================================== -->
+
+        <section
+            id="colegio"
+            class="college">
+
+            <div class="container college-grid">
+
+
+                <div class="college-text reveal">
+
+                    <div class="section-label">
+                        Nuestra identidad
+                    </div>
+
+
+                    <h2 class="section-title">
+
+                        Una comunidad
+                        que educa
+                        para la vida.
+
+                    </h2>
+
+
+                    <p>
+
+                        Somos una comunidad educativa
+                        comprometida con la excelencia
+                        académica y los valores mercedarios.
+
+                        Buscamos que cada estudiante sea
+                        protagonista de su propio aprendizaje.
+
+                    </p>
+
+
+                    <div class="features">
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+
+                            <h3>
+                                Formación integral
+                            </h3>
+
+                            <p>
+                                Educación para todos los niveles
+                                y etapas.
+                            </p>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                <i class="fas fa-people-group"></i>
+                            </div>
+
+                            <h3>
+                                Comunidad
+                            </h3>
+
+                            <p>
+                                Solidaridad, cooperación
+                                y compromiso.
+                            </p>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+
+                            <h3>
+                                Innovación
+                            </h3>
+
+                            <p>
+                                Proyectos que conectan
+                                aprendizaje y realidad.
+                            </p>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+
+                            <h3>
+                                Valores
+                            </h3>
+
+                            <p>
+                                Respeto, empatía
+                                y acompañamiento.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="NuestroColegio.html"
+                        class="btn btn-primary college-button">
+
+                        Conocé más
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="gallery reveal">
+
+                    <img
+                        src="img/entrada.png"
+                        alt="Entrada del Instituto Nuestra Señora de la Merced">
+
+                    <img
+                        src="img/20250806_092322.jpg"
+                        alt="Comunidad educativa">
+
+                    <img
+                        src="img/Cooperativa 1.jpg"
+                        alt="Proyecto cooperativo">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NIVELES
+        ================================================== -->
+
+        <section
+            id="niveles"
+            class="levels">
+
+            <div class="container">
+
+                <div class="levels-header reveal">
+
+                    <div>
+
+                        <div class="section-label">
+                            Educación
+                        </div>
+
+                        <h2 class="section-title">
+                            Nuestros niveles
+                        </h2>
+
+                    </div>
+
+
+                    <p class="section-description">
+
+                        Acompañamos a nuestros estudiantes
+                        desde sus primeros años hasta
+                        su formación profesional.
+
+                    </p>
+
+                </div>
+
+
+                <div class="levels-grid">
+
+
+                    <!-- INICIAL -->
+
+                    <article class="level-card reveal">
+
+                        <div class="level-image">
+
+                            <img
+                                src="img/entrada.png"
+                                alt="Nivel Inicial">
+
+                        </div>
+
+
+                        <div class="level-content">
+
+                            <span class="level-number">
+                                01 · INICIAL
+                            </span>
+
+                            <h3>
+                                Inicial
+                            </h3>
+
+                            <div class="level-age">
+                                Edades 3–5
+                            </div>
+
+                            <p>
+                                Acompañamos las primeras
+                                experiencias educativas con
+                                cuidado, juego y valores.
+                            </p>
+
+                            <a
+                                href="NivelInicial.html"
+                                class="level-link">
+
+                                Conocer nivel
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PRIMARIO -->
+
+                    <article class="level-card reveal">
+
+                        <div class="level-image">
+
+                            <img
+                                src="img/IMG-20250414-WA0023.jpg"
+                                alt="Nivel Primario">
+
+                        </div>
+
+
+                        <div class="level-content">
+
+                            <span class="level-number">
+                                02 · PRIMARIO
+                            </span>
+
+                            <h3>
+                                Primario
+                            </h3>
+
+                            <div class="level-age">
+                                Edades 6–12
+                            </div>
+
+                            <p>
+                                Educamos integralmente,
+                                promoviendo aprendizajes,
+                                valores y desarrollo personal.
+                            </p>
+
+                            <a
+                                href="NivelPrimario.html"
+                                class="level-link">
+
+                                Conocer nivel
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SECUNDARIO -->
+
+                    <article class="level-card reveal">
+
+                        <div class="level-image">
+
+                            <img
+                                src="img/VIAJES.jpg"
+                                alt="Nivel Secundario">
+
+                        </div>
+
+
+                        <div class="level-content">
+
+                            <span class="level-number">
+                                03 · SECUNDARIO
+                            </span>
+
+                            <h3>
+                                Secundario
+                            </h3>
+
+                            <div class="level-age">
+                                Edades 13–18
+                            </div>
+
+                            <p>
+                                Formamos jóvenes críticos,
+                                responsables y comprometidos
+                                con su futuro.
+                            </p>
+
+                            <a
+                                href="NivelSecundario.html"
+                                class="level-link">
+
+                                Conocer nivel
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- TERCIARIO -->
+
+                    <article class="level-card reveal">
+
+                        <div class="level-image">
+
+                            <img
+                                src="img/DIA del profesor.jpg"
+                                alt="Nivel Terciario">
+
+                        </div>
+
+
+                        <div class="level-content">
+
+                            <span class="level-number">
+                                04 · TERCIARIO
+                            </span>
+
+                            <h3>
+                                Terciario
+                            </h3>
+
+                            <div class="level-age">
+                                Formación profesional
+                            </div>
+
+                            <p>
+                                Formamos docentes con valores
+                                e identidad mercedaria.
+                            </p>
+
+                            <a
+                                href="NivelTerciario.html"
+                                class="level-link">
+
+                                Conocer nivel
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROYECTOS
+        ================================================== -->
+
+        <section id="proyectos">
+
+            <div class="container">
+
+                <div class="projects-header reveal">
+
+                    <div>
+
+                        <div class="section-label">
+                            Innovación
+                        </div>
+
+                        <h2 class="section-title">
+                            Proyectos que inspiran.
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="Proyectos.html"
+                        class="btn btn-primary">
+
+                        Ver todos
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="projects-grid">
+
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="img/Cooperativa 1.jpg"
+                                alt="Proyecto cooperativo">
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <span class="project-category">
+                                Comunidad
+                            </span>
+
+                            <h3>
+                                Cooperativa
+                            </h3>
+
+                            <p>
+                                Propuestas que promueven
+                                la solidaridad, el trabajo
+                                colaborativo y la participación.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="img/Cooperativa- bolsas.jpg"
+                                alt="Proyecto cooperativo">
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <span class="project-category">
+                                Innovación
+                            </span>
+
+                            <h3>
+                                Proyectos institucionales
+                            </h3>
+
+                            <p>
+                                Experiencias que conectan
+                                los aprendizajes con
+                                necesidades reales
+                                de la comunidad.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="img/Historia.jpg"
+                                alt="Proyecto educativo">
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <span class="project-category">
+                                Aprendizaje
+                            </span>
+
+                            <h3>
+                                Aprender haciendo
+                            </h3>
+
+                            <p>
+                                Actividades y experiencias
+                                que convierten el aprendizaje
+                                en una experiencia significativa.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             INSCRIPCIONES
+        ================================================== -->
+
+        <section id="inscripciones">
+
+            <div class="container">
+
+                <div class="inscripciones-header reveal">
+
+                    <div>
+
+                        <div class="section-label">
+                            Admisiones
+                        </div>
+
+                        <h2 class="section-title">
+                            Inscripciones abiertas
+                        </h2>
+
+                    </div>
+
+
+                    <p class="section-description">
+
+                        Sumate a nuestra comunidad educativa.
+                        Elegí la opción que corresponda y
+                        completá el formulario, nos pondremos
+                        en contacto a la brevedad.
+
+                    </p>
+
+                </div>
+
+
+                <div class="inscripciones-grid">
+
+
+                    <!-- PRIMER AÑO -->
+
+                    <article class="inscripcion-card reveal">
+
+                        <span class="project-category">
+                            Nivel Secundario
+                        </span>
+
+                        <h3>
+                            Primer Año 2027
+                        </h3>
+
+                        <p>
+                            Inscribí a tu hijo/a a Primer Año
+                            del Nivel Secundario, ciclo
+                            lectivo 2027.
+                        </p>
+
+                        <a
+                            href="InscripcionPrimerAno2027.html"
+                            class="btn btn-primary">
+
+                            Inscribirme
+
+                            <i class="fas fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+
+                    <!-- INFORMÁTICA -->
+
+                    <article class="inscripcion-card reveal">
+
+                        <span class="project-category">
+                            Especialidad
+                        </span>
+
+                        <h3>
+                            Informática
+                        </h3>
+
+                        <p>
+                            Anotate en la orientación de
+                            Informática del ciclo orientado
+                            de Nivel Secundario.
+                        </p>
+
+                        <a
+                            href="InscripcionInformatica.html"
+                            class="btn btn-primary">
+
+                            Inscribirme
+
+                            <i class="fas fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+
+                    <!-- HUMANIDADES -->
+
+                    <article class="inscripcion-card reveal">
+
+                        <span class="project-category">
+                            Especialidad
+                        </span>
+
+                        <h3>
+                            Humanidades
+                        </h3>
+
+                        <p>
+                            Anotate en la orientación de
+                            Humanidades del ciclo orientado
+                            de Nivel Secundario.
+                        </p>
+
+                        <a
+                            href="InscripcionHumanidades.html"
+                            class="btn btn-primary">
+
+                            Inscribirme
+
+                            <i class="fas fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TESTIMONIOS
+        ================================================== -->
+
+        <section
+            id="testimonios"
+            class="testimonials">
+
+            <div class="container testimonial-grid">
+
+
+                <div class="testimonial-text reveal">
+
+                    <div class="section-label">
+                        Nuestra comunidad
+                    </div>
+
+                    <h2 class="section-title testimonial-title">
+
+                        Lo que queda
+                        después
+                        de la escuela.
+
+                    </h2>
+
+                </div>
+
+
+                <div class="testimonial-box reveal">
+
+                    <div>
+
+                        <div class="quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+
+                        <blockquote>
+
+                            “La experiencia que tuve
+                            en esta escuela fue
+                            transformadora. No solo
+                            aprendí, sino que crecí
+                            como persona.”
+
+                        </blockquote>
+
+                        <div class="testimonial-author">
+
+                            <strong>
+                                Anónimo
+                            </strong>
+
+                            <span>
+                                Egresado 2022
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTACTO
+        ================================================== -->
+
+        <section class="contact">
+
+            <div class="container">
+
+                <div class="contact-box reveal">
+
+                    <div>
+
+                        <h2>
+                            ¿Querés formar parte
+                            de nuestra comunidad?
+                        </h2>
+
+                        <p>
+                            Conocé nuestras propuestas
+                            y contactanos.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="Contacto.html"
+                        class="btn contact-button">
+
+                        Contactanos
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    <img
+                        src="img/favicon.ico"
+                        alt="Escudo INSM">
+
+                    <strong>
+                        Instituto Nuestra Señora
+                        de la Merced
+                    </strong>
+
+                </div>
+
+
+                <p>
+
+                    Comunidad educativa comprometida
+                    con la formación integral, los valores
+                    mercedarios y el desarrollo de cada
+                    estudiante.
+
+                </p>
+
+
+                <div class="social">
+
+                    <a
+                        href="https://www.instagram.com/mercedariasarroyito/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.youtube.com/@INSM.DIGITAL"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube">
+
+                        <i class="fab fa-youtube"></i>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.tiktok.com/@insm.digital"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="TikTok">
+
+                        <i class="fab fa-tiktok"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Navegación
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="NuestroColegio.html">
+                            Nuestro Colegio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Proyectos.html">
+                            Proyectos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Contacto.html">
+                            Contacto
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Niveles
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="NivelInicial.html">
+                            Nivel Inicial
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="NivelPrimario.html">
+                            Nivel Primario
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="NivelSecundario.html">
+                            Nivel Secundario
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="NivelTerciario.html">
+                            Nivel Terciario
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 INSM · Todos los derechos reservados
+            </span>
+
+            <span>
+                Desarrollada por Nazareno y Eugenio
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        /* =====================================================
+           HEADER AL HACER SCROLL
+        ====================================================== */
+
+        const header =
+            document.getElementById("header");
+
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 60) {
+
+                header.classList.add("scrolled");
+
+            } else {
+
+                header.classList.remove("scrolled");
+
+            }
+
+        });
+
+
+        /* =====================================================
+           ANIMACIONES
+        ====================================================== */
+
+        const observer =
+            new IntersectionObserver(
+
+                (entries) => {
+
+                    entries.forEach((entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("show");
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: 0.12
+                }
+
+            );
+
+
+        document
+            .querySelectorAll(".reveal")
+            .forEach((element) => {
+
+                observer.observe(element);
+
+            });
+
+
+        /* =====================================================
+           MENÚ MÓVIL
+        ====================================================== */
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+
+        function openMobileMenu() {
+
+            mobileMenu.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        function closeMobileMenu() {
+
+            mobileMenu.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        /* =====================================================
+           CERRAR CON ESC
+        ====================================================== */
+
+        document.addEventListener("keydown", (event) => {
+
+            if (event.key === "Escape") {
+
+                closeMobileMenu();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

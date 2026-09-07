@@ -1099,8 +1099,8 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
 		/>
-		<!-- Google reCAPTCHA v3 -->
-		<script src="https://www.google.com/recaptcha/api.js?render=TU_SITE_KEY_AQUI"></script>
+		<!-- Formspree para envío de formularios -->
+		<link rel="stylesheet" href="site-theme.css" />
 	</head>
 	<body>
 		<!-- Header -->
@@ -1268,21 +1268,13 @@
 					</div>
 					<div class="contact-form-col" id="contact-form">
 						<h2>Envíanos un Mensaje</h2>
-						<form
-							id="contact-form-id"
-							action="https://formsubmit.co/ajax/eugenionavarro.sec@institutolamerced.edu.ar"
-							method="POST"
-						>
-							<input type="hidden" name="_captcha" value="false" />
-							<input type="hidden" name="_language" value="es" />
-							<input type="text" name="_honey" style="display: none" />
-
+						<form id="contact-form-id" action="https://formspree.io/f/xeaqaejn" method="POST">
 							<div class="form-group">
 								<label for="name">Nombre y Apellido</label>
 								<input
 									type="text"
 									id="name"
-									name="Nombre y Apellido"
+									name="name"
 									required
 									pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+"
 									oninvalid="this.setCustomValidity('Solo se permiten letras y espacios')"
@@ -1291,15 +1283,15 @@
 							</div>
 							<div class="form-group">
 								<label for="email">Correo de Contacto</label>
-								<input type="email" id="email" name="Correo de Contacto" required />
+								<input type="email" id="email" name="email" required />
 							</div>
 							<div class="form-group">
 								<label for="subject">Asunto</label>
-								<input type="text" id="subject" name="Asunto" required />
+								<input type="text" id="subject" name="subject" required />
 							</div>
 							<div class="form-group">
 								<label for="message">Mensaje</label>
-								<textarea id="message" name="Mensaje" required></textarea>
+								<textarea id="message" name="message" required></textarea>
 							</div>
 
 							<button type="submit" class="submit-btn" id="submit-btn">Enviar Mensaje</button>
@@ -1639,7 +1631,7 @@
 				currentYearEl.textContent = new Date().getFullYear();
 			}
 
-			// --- Envío de Formulario AJAX ---
+			// --- Envío de Formulario con Formspree ---
 			const contactFormAjax = document.getElementById('contact-form-id');
 			const submitBtn = document.getElementById('submit-btn');
 			const responseDiv = document.getElementById('response-message');
@@ -1652,57 +1644,34 @@
 					responseDiv.style.display = 'none';
 					responseDiv.className = 'response-message';
 
-					if (typeof grecaptcha === 'undefined') {
-						console.error('Error: El servicio de Google reCAPTCHA no está cargado.');
-						responseDiv.textContent = 'Error de seguridad. Por favor, recarga la página.';
+					const formData = new FormData(contactFormAjax);
+
+					fetch(contactFormAjax.action, {
+						method: 'POST',
+						body: formData,
+						headers: {
+							'Accept': 'application/json'
+						}
+					})
+					.then((response) => {
+						if (response.ok) {
+							responseDiv.textContent = '¡Gracias! Tu mensaje ha sido enviado con éxito.';
+							responseDiv.classList.add('response-success');
+							contactFormAjax.reset();
+						} else {
+							responseDiv.textContent = 'Hubo un problema. Por favor, intenta de nuevo.';
+							responseDiv.classList.add('response-error');
+						}
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+						responseDiv.textContent = 'Error de conexión. Por favor, intenta de nuevo.';
 						responseDiv.classList.add('response-error');
-						responseDiv.style.display = 'block';
+					})
+					.finally(() => {
 						submitBtn.disabled = false;
 						submitBtn.textContent = 'Enviar Mensaje';
-						return;
-					}
-
-					grecaptcha.ready(function () {
-						grecaptcha.execute('TU_SITE_KEY_AQUI', { action: 'submit' }).then(function (token) {
-							const formData = new FormData(contactFormAjax);
-							const data = Object.fromEntries(formData);
-							data['g-recaptcha-response'] = token;
-							const asuntoInput = document.getElementById('subject').value;
-							data['_subject'] = `Consulta desde el Sitio Web (${asuntoInput})`;
-
-							fetch(contactFormAjax.action, {
-								method: 'POST',
-								headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-								body: JSON.stringify(data),
-							})
-							.then((response) => {
-								if (response.ok) {
-									responseDiv.textContent = '¡Gracias! Tu mensaje ha sido enviado con éxito.';
-									responseDiv.classList.add('response-success');
-									contactFormAjax.reset();
-								} else {
-									console.error('Error en el envío del formulario (FormSubmit):', response);
-									throw new Error('Error en la respuesta del servidor');
-								}
-							})
-							.catch((error) => {
-								console.error('Error completo del objeto de red/API:', error);
-								responseDiv.textContent = 'Lo sentimos, hubo un problema. Por favor, reintenta.';
-								responseDiv.classList.add('response-error');
-							})
-							.finally(() => {
-								submitBtn.disabled = false;
-								submitBtn.textContent = 'Enviar Mensaje';
-								responseDiv.style.display = 'block';
-							});
-						}).catch(function(err) {
-							console.error('Error al generar el token de reCAPTCHA:', err);
-							responseDiv.textContent = 'Error de validación de seguridad.';
-							responseDiv.classList.add('response-error');
-							responseDiv.style.display = 'block';
-							submitBtn.disabled = false;
-							submitBtn.textContent = 'Enviar Mensaje';
-						});
+						responseDiv.style.display = 'block';
 					});
 				});
 			}

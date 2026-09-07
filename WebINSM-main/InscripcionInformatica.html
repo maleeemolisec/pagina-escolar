@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Inscripción Especialidad Informática | Instituto Nuestra Señora de la Merced</title>
+
+	<style>
+		@font-face {
+			font-family: 'Heuristica';
+			src: url('fonts/Heuristica-Bold.ttf') format('truetype');
+			font-weight: 700;
+		}
+		@font-face {
+			font-family: 'ProximaNova';
+			src: url('fonts/ProximaNova-Regular.ttf') format('truetype');
+			font-weight: 400;
+		}
+
+		:root {
+			--rojo: #cf0621;
+			--rojo-oscuro: #a30419;
+			--gris-texto: #333;
+			--gris-claro: #f7f7f7;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: 'ProximaNova', Arial, sans-serif;
+			color: var(--gris-texto);
+			background: var(--gris-claro);
+		}
+
+		h1, h2 {
+			font-family: 'Heuristica', Georgia, serif;
+		}
+
+		header {
+			background: #fff;
+			border-bottom: 1px solid #eee;
+			padding: 1rem 1.5rem;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		header .logo {
+			display: flex;
+			align-items: center;
+			gap: 0.6rem;
+			text-decoration: none;
+			color: var(--gris-texto);
+			font-weight: 700;
+		}
+
+		header .logo img {
+			height: 40px;
+		}
+
+		header a.volver {
+			color: var(--rojo);
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.95rem;
+		}
+
+		.hero {
+			background: linear-gradient(135deg, var(--rojo) 0%, var(--rojo-oscuro) 100%);
+			color: #fff;
+			padding: 3rem 1.5rem 2.5rem;
+			text-align: center;
+		}
+
+		.hero h1 {
+			margin: 0 0 0.6rem;
+			font-size: clamp(1.6rem, 4vw, 2.4rem);
+		}
+
+		.hero p {
+			max-width: 600px;
+			margin: 0 auto;
+			opacity: 0.95;
+			line-height: 1.5;
+		}
+
+		main {
+			max-width: 720px;
+			margin: -2rem auto 3rem;
+			padding: 0 1.2rem;
+		}
+
+		.form-card {
+			background: #fff;
+			border-radius: 16px;
+			box-shadow: 0 14px 34px rgba(0, 0, 0, 0.09);
+			padding: 2rem clamp(1.2rem, 4vw, 2.5rem);
+		}
+
+		fieldset {
+			border: none;
+			padding: 0;
+			margin: 0 0 1.8rem;
+		}
+
+		legend {
+			font-family: 'Heuristica', serif;
+			font-size: 1.15rem;
+			color: var(--rojo);
+			padding: 0 0 0.8rem;
+			border-bottom: 2px solid #f1d3d7;
+			width: 100%;
+			margin-bottom: 1.1rem;
+		}
+
+		.form-group {
+			margin-bottom: 1.1rem;
+		}
+
+		.form-row {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1rem;
+		}
+
+		@media (max-width: 560px) {
+			.form-row {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		label {
+			display: block;
+			font-weight: 600;
+			font-size: 0.9rem;
+			margin-bottom: 0.35rem;
+			color: #555;
+		}
+
+		input[type='text'],
+		input[type='email'],
+		input[type='tel'],
+		input[type='date'],
+		select,
+		textarea {
+			width: 100%;
+			padding: 0.7rem 0.85rem;
+			border: 1px solid #ddd;
+			border-radius: 10px;
+			font-family: inherit;
+			font-size: 0.95rem;
+			background: #fcfcfc;
+			transition: border-color 0.2s, box-shadow 0.2s;
+		}
+
+		input:focus,
+		select:focus,
+		textarea:focus {
+			outline: none;
+			border-color: var(--rojo);
+			box-shadow: 0 0 0 3px rgba(207, 6, 33, 0.12);
+		}
+
+		textarea {
+			min-height: 90px;
+			resize: vertical;
+		}
+
+		.radio-group {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.7rem;
+		}
+
+		.radio-option {
+			flex: 1 1 160px;
+			border: 1px solid #ddd;
+			border-radius: 10px;
+			padding: 0.7rem 0.9rem;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			cursor: pointer;
+			font-size: 0.92rem;
+			transition: border-color 0.2s, background 0.2s;
+		}
+
+		.radio-option:has(input:checked) {
+			border-color: var(--rojo);
+			background: #fdf0f1;
+		}
+
+		.radio-option input {
+			accent-color: var(--rojo);
+		}
+
+		.submit-btn {
+			width: 100%;
+			background: var(--rojo);
+			color: #fff;
+			border: none;
+			border-radius: 10px;
+			padding: 0.95rem;
+			font-size: 1rem;
+			font-weight: 700;
+			cursor: pointer;
+			transition: background 0.2s, transform 0.15s;
+		}
+
+		.submit-btn:hover {
+			background: var(--rojo-oscuro);
+		}
+
+		.submit-btn:disabled {
+			opacity: 0.65;
+			cursor: not-allowed;
+		}
+
+		.response-message {
+			display: none;
+			margin-top: 1rem;
+			padding: 0.85rem 1rem;
+			border-radius: 10px;
+			font-size: 0.92rem;
+			text-align: center;
+		}
+
+		.response-success {
+			background: #e6f7ec;
+			color: #1c7a3f;
+			border: 1px solid #b7e6c6;
+		}
+
+		.response-error {
+			background: #fdeceb;
+			color: #b1281c;
+			border: 1px solid #f4c3bd;
+		}
+
+		.hint {
+			font-size: 0.8rem;
+			color: #888;
+			margin-top: 0.3rem;
+		}
+
+		footer {
+			text-align: center;
+			padding: 1.5rem;
+			font-size: 0.85rem;
+			color: #999;
+		}
+	</style>
+	<link rel="stylesheet" href="site-theme.css" />
+</head>
+<body>
+	<header>
+		<a class="logo" href="index.html">
+			<img src="img/favicon.ico" alt="Logo INSM" />
+			<span>INSM</span>
+		</a>
+		<a class="volver" href="index.html">&larr; Volver al inicio</a>
+	</header>
+
+	<section class="hero">
+		<h1>Inscripción a la Especialidad de Informática</h1>
+		<p>
+			Completá este formulario si querés inscribirte en la orientación de Informática
+			del ciclo orientado de Nivel Secundario.
+		</p>
+	</section>
+
+	<main>
+		<div class="form-card">
+			<form id="inscripcion-form" action="https://formspree.io/f/xeaqaejn" method="POST">
+				<input type="hidden" name="subject" value="Inscripción Especialidad Informática - Nuevo formulario" />
+				<input type="hidden" name="captcha" value="false" />
+				<input type="hidden" name="language" value="es" />
+				<input type="text" name="honey" style="display: none" tabindex="-1" autocomplete="off" />
+
+				<fieldset>
+					<legend>Datos del/la estudiante</legend>
+					<div class="form-group">
+						<label for="alumno-nombre">Nombre y Apellido</label>
+						<input
+							type="text"
+							id="alumno-nombre"
+							name="Nombre y Apellido del/la estudiante"
+							required
+							pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+"
+							oninvalid="this.setCustomValidity('Solo se permiten letras y espacios')"
+							oninput="this.setCustomValidity('')"
+						/>
+					</div>
+					<div class="form-row">
+						<div class="form-group">
+							<label for="alumno-dni">DNI</label>
+							<input type="text" id="alumno-dni" name="DNI del/la estudiante" required pattern="[0-9]{7,8}" oninvalid="this.setCustomValidity('Ingresá un DNI válido, solo números')" oninput="this.setCustomValidity('')" />
+						</div>
+						<div class="form-group">
+							<label for="alumno-anio">Año que cursa actualmente</label>
+							<select id="alumno-anio" name="Año que cursa actualmente" required>
+								<option value="" disabled selected>Seleccioná una opción</option>
+								<option value="1er Año">1er Año</option>
+								<option value="2do Año">2do Año</option>
+								<option value="3er Año">3er Año</option>
+								<option value="4to Año (ingresante a la orientación)">4to Año (ingresante a la orientación)</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Datos de contacto</legend>
+					<div class="form-row">
+						<div class="form-group">
+							<label for="tutor-telefono">Teléfono de contacto</label>
+							<input type="tel" id="tutor-telefono" name="Teléfono de contacto" required />
+						</div>
+						<div class="form-group">
+							<label for="tutor-email">Correo electrónico</label>
+							<input type="email" id="tutor-email" name="Correo de contacto" required />
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Motivo de interés (opcional)</legend>
+					<div class="form-group">
+						<textarea name="Motivo de interés" placeholder="Contanos por qué te interesa la especialidad de Informática"></textarea>
+					</div>
+				</fieldset>
+
+				<button type="submit" class="submit-btn" id="submit-btn">Enviar inscripción</button>
+				<div id="response-message" class="response-message"></div>
+			</form>
+		</div>
+	</main>
+
+	<footer>
+		Instituto Nuestra Señora de la Merced &middot; Ante cualquier duda, escribinos desde la
+		<a href="Contacto.html" style="color: var(--rojo)">página de Contacto</a>.
+	</footer>
+
+	<script>
+		const form = document.getElementById('inscripcion-form');
+		const submitBtn = document.getElementById('submit-btn');
+		const responseDiv = document.getElementById('response-message');
+
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			submitBtn.disabled = true;
+			submitBtn.textContent = 'Enviando...';
+			responseDiv.style.display = 'none';
+			responseDiv.className = 'response-message';
+
+			const formData = new FormData(form);
+			const data = Object.fromEntries(formData);
+
+			fetch(form.action, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: JSON.stringify(data),
+			})
+				.then((response) => {
+					if (response.ok) {
+						responseDiv.textContent = '¡Gracias! Recibimos tu inscripción a Informática, nos pondremos en contacto a la brevedad.';
+						responseDiv.classList.add('response-success');
+						form.reset();
+					} else {
+						throw new Error('Error en la respuesta del servidor');
+					}
+				})
+				.catch(() => {
+					responseDiv.textContent = 'Lo sentimos, hubo un problema al enviar el formulario. Por favor, reintentá o escribinos por Contacto.';
+					responseDiv.classList.add('response-error');
+				})
+				.finally(() => {
+					submitBtn.disabled = false;
+					submitBtn.textContent = 'Enviar inscripción';
+					responseDiv.style.display = 'block';
+				});
+		});
+	</script>
+</body>
+</html>
