@@ -1,0 +1,23 @@
+{
+  "hero": {
+    "titleLine1": "Feria",
+    "titleLine2": "de Ciencias",
+    "backgroundImage": "../img/feria.jpg"
+  },
+  "general": {
+    "date": "2025",
+    "summary": "Feria de Ciencias donde los estudiantes presentaron proyectos de investigación, creatividad y aplicación práctica de conocimientos científicos.",
+    "detail": "La Feria de Ciencias es una instancia clave para que los alumnos compartan sus investigaciones, experiencias y propuestas creativas con la comunidad educativa. En este espacio se ponen en juego la curiosidad, el rigor científico y la capacidad de explicar ideas con claridad.<br><br>La actividad permite visibilizar el trabajo de investigación y motiva a los estudiantes a explorar, descubrir y comunicar conocimientos con sentido.",
+    "image": "../img/feria.jpg"
+  },
+  "academic": {
+    "value1": "Estudiantes del colegio",
+    "value2": "Equipo docente",
+    "value3": "Ciencia y tecnología",
+    "icon3": "fas fa-flask"
+  },
+  "gallery": [
+    "../img/feria.jpg",
+    "../img/Historia.jpg"
+  ]
+}

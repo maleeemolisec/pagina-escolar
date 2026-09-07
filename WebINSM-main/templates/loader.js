@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. OBTENER EL ID DEL PROYECTO
     const params = new URLSearchParams(window.location.search);
-    const projectId = params.get('id') || 'feria-ciencias'; 
+    const projectId = params.get('id') || 'feria-ciencias';
 
-    // 2. BUSCAR EL ARCHIVO JSON CORRESPONDIENTE
-    fetch(`data/proyectos/${projectId}.json`)
+    const projectDataUrl = new URL(`data/proyectos/${projectId}.json`, window.location.href);
+    fetch(projectDataUrl)
         .then(response => {
             if (!response.ok) {
                 console.error(`Error: No se pudo cargar el archivo de datos JSON para el proyecto '${projectId}'`);
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            const resolvedData = resolveProjectCollection(data);
+            const resolvedData = resolveProjectCollection(data, projectId);
             validateProjectData(resolvedData, projectId);
             loadProjectData(resolvedData);
             initVisualEffects();
@@ -23,21 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-// FUNCIÓN: Si el JSON es una "colección" (varias ediciones, ej. Revista EME),
-// selecciona la edición pedida en la URL (?edition=0,1,2...) y la combina
-// con los metadatos generales de la colección para que el resto del loader
-// funcione exactamente igual que con un proyecto simple.
-function resolveProjectCollection(data) {
+function resolveProjectCollection(data, projectId) {
     if (data && data.groupType === 'collection' && Array.isArray(data.items) && data.items.length) {
         const selectedIndex = Number(new URLSearchParams(window.location.search).get('edition')) || 0;
         const selectedItem = data.items[selectedIndex] || data.items[0];
         const merged = { ...selectedItem };
-        merged.groupName = data.groupName || selectedItem.title;
+        merged.groupName = data.groupName || selectedItem.title || projectId;
         merged.groupType = 'collection';
         merged.items = data.items;
-        merged.selectedEditionIndex = data.items.indexOf(selectedItem);
+        merged.selectedEditionIndex = selectedIndex;
         return merged;
     }
+
     return data;
 }
 
@@ -64,7 +60,6 @@ function validateProjectData(data, id) {
 
 // FUNCIÓN: Rellenar el HTML con los datos del JSON
 function loadProjectData(data) {
-    // Verificación de IDs Críticos del DOM
     const criticalIDs = [
         'hero-title-1', 'hero-title-2', 'hero-section', 'general-date', 
         'general-summary', 'general-detail', 'general-image',
@@ -77,38 +72,61 @@ function loadProjectData(data) {
         }
     });
 
-    // --- Sección 1: Hero (DOS LÍNEAS) ---
+    const heroData = data.hero || data.items?.[0]?.hero || {};
+    const generalData = data.general || data.items?.[0]?.general || {};
+    const academicData = data.academic || data.items?.[0]?.academic || {};
+
     const hTitle1 = document.getElementById('hero-title-1');
     const hTitle2 = document.getElementById('hero-title-2');
     
-    if(hTitle1) hTitle1.textContent = data.hero?.titleLine1 || '';
-    if(hTitle2) hTitle2.textContent = data.hero?.titleLine2 || '';
+    if(hTitle1) hTitle1.textContent = heroData.titleLine1 || data.groupName || '';
+    if(hTitle2) hTitle2.textContent = heroData.titleLine2 || '';
     
     const heroSection = document.getElementById('hero-section');
-    if(heroSection && data.hero?.backgroundImage) {
-        heroSection.style.backgroundImage = `url('${data.hero.backgroundImage}')`;
+    if(heroSection && heroData.backgroundImage) {
+        heroSection.style.backgroundImage = `url('${heroData.backgroundImage}')`;
     }
 
-    // --- Sección 2: General ---
-    setText('general-date', data.general?.date || '');
-    setText('general-summary', data.general?.summary || '');
+    setText('general-date', generalData.date || '');
+    setText('general-summary', generalData.summary || '');
     
     const detailDiv = document.getElementById('general-detail');
-    if(detailDiv) detailDiv.innerHTML = data.general?.detail || ''; 
+    if(detailDiv) detailDiv.innerHTML = generalData.detail || '';
 
     const genImg = document.getElementById('general-image');
-    if(genImg && data.general?.image) genImg.src = data.general.image;
+    if(genImg && generalData.image) genImg.src = generalData.image;
 
-    // --- Sección 3: Académica ---
-    setText('academic-val-1', data.academic?.value1 || '');
-    setText('academic-val-2', data.academic?.value2 || '');
-    setText('academic-val-3', data.academic?.value3 || '');
+    setText('academic-val-1', academicData.value1 || '');
+    setText('academic-val-2', academicData.value2 || '');
+    setText('academic-val-3', academicData.value3 || '');
     
     const icon3 = document.getElementById('academic-icon-3');
-    if(icon3 && data.academic?.icon3) icon3.className = data.academic.icon3;
+    if(icon3 && academicData.icon3) icon3.className = academicData.icon3;
 
-    // --- Sección 3.5: Selector de ediciones (solo si el proyecto es una colección) ---
-    renderEditionSelector(data);
+    const editionSelector = document.getElementById('edition-selector');
+    const editionList = document.getElementById('edition-list');
+    const editionGroupName = document.getElementById('edition-group-name');
+    if (data.groupType === 'collection' && Array.isArray(data.items) && data.items.length > 1) {
+        if (editionSelector) editionSelector.style.display = 'block';
+        if (editionGroupName) editionGroupName.textContent = data.groupName || 'Ediciones';
+        if (editionList) {
+            editionList.innerHTML = '';
+            data.items.forEach((item, index) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'edition-item' + (index === (data.selectedEditionIndex || 0) ? ' active' : '');
+                btn.textContent = item.title || `Edición ${index + 1}`;
+                btn.addEventListener('click', () => {
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('edition', index);
+                    window.location.href = url.toString();
+                });
+                editionList.appendChild(btn);
+            });
+        }
+    } else if (editionSelector) {
+        editionSelector.style.display = 'none';
+    }
 
     // ============================================================
     // SECCIONES OPCIONALES (Galería, Videos, Recursos)
@@ -184,38 +202,6 @@ function loadProjectData(data) {
 
     // --- ACTUALIZAR MENÚ LATERAL (ÍNDICE) ---
     updateSideMenu();
-}
-
-// FUNCIÓN: Mostrar los botones para cambiar de edición dentro de una colección
-// (ej. Revista EME: Edición N° 17 / Edición N° 16)
-function renderEditionSelector(data) {
-    const selector = document.getElementById('edition-selector');
-    const list = document.getElementById('edition-list');
-    const groupName = document.getElementById('edition-group-name');
-
-    if (!(data.groupType === 'collection' && Array.isArray(data.items) && data.items.length > 1)) {
-        if (selector) selector.style.display = 'none';
-        return;
-    }
-
-    if (selector) selector.style.display = 'block';
-    if (groupName) groupName.textContent = data.groupName || 'Ediciones';
-
-    if (list) {
-        list.innerHTML = '';
-        data.items.forEach((item, index) => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'edition-item' + (index === (data.selectedEditionIndex || 0) ? ' active' : '');
-            btn.textContent = item.title || `Edición ${index + 1}`;
-            btn.addEventListener('click', () => {
-                const url = new URL(window.location.href);
-                url.searchParams.set('edition', index);
-                window.location.href = url.toString();
-            });
-            list.appendChild(btn);
-        });
-    }
 }
 
 // FUNCIÓN: Generar dinámicamente los links del slider según secciones visibles

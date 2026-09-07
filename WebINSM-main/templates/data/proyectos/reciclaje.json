@@ -1,0 +1,23 @@
+{
+  "hero": {
+    "titleLine1": "Proyecto",
+    "titleLine2": "Reciclaje",
+    "backgroundImage": "../img/Reciclaje.jpg"
+  },
+  "general": {
+    "date": "2024",
+    "summary": "Proyecto de reciclaje y conciencia ambiental con foco en la reutilización de materiales y la educación para la sostenibilidad.",
+    "detail": "El proyecto de reciclaje promovió la reflexión sobre el consumo responsable y la importancia de cuidar los recursos naturales. Los estudiantes participaron en la clasificación y reutilización de materiales, desarrollando hábitos sostenibles y fortaleciendo la conciencia ecológica dentro de la comunidad escolar.<br><br>La iniciativa buscó acercar la problemática ambiental al ámbito educativo, mostrando que las acciones pequeñas realizadas en conjunto pueden generar grandes cambios.",
+    "image": "../img/Reciclaje.jpg"
+  },
+  "academic": {
+    "value1": "Comunidad escolar",
+    "value2": "Docentes y estudiantes",
+    "value3": "Educación ambiental",
+    "icon3": "fas fa-recycle"
+  },
+  "gallery": [
+    "../img/Reciclaje.jpg",
+    "../img/Convivencia.jpg"
+  ]
+}

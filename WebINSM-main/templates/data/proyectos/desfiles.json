@@ -1,0 +1,77 @@
+{
+  "groupName": "Desfiles",
+  "groupType": "collection",
+  "items": [
+    {
+      "id": "evento_2025",
+      "title": "Donde nace la magia 2025",
+      "date": "27 Noviembre 2025",
+      "summary": "El desfile de fin de año del Nivel Secundario se transformó en una noche mágica con moda, música y actuaciones de toda la escuela.",
+      "detail": "El evento \"Donde nace la magia\" nació como un desfile de ropa realizado por estudiantes de toda la escuela, pero con el tiempo fue creciendo e incorporando nuevas expresiones artísticas. En esta edición, además del desfile, se sumaron la banda escolar y distintas actuaciones que reflejaron el talento y la creatividad de nuestros alumnos.<br><br>Fue una velada para compartir en familia, acompañar a los estudiantes y disfrutar de un cierre de año cargado de emociones, movimiento y espíritu mercedario.",
+      "image": "../img/20250805_124634[1].jpg",
+      "hero": {
+        "titleLine1": "Evento: Donde ",
+        "titleLine2": "nace la magia",
+        "backgroundImage": "../img/Cooperativa 1.jpg"
+      },
+      "academic": {
+        "value1": "Nivel Secundario",
+        "value2": "Comunidad Educativa",
+        "value3": "Arte y Baile",
+        "icon3": "fas fa-music"
+      },
+      "gallery": [
+        "../img/Colacion.jpg",
+        "../img/Convivencia.jpg",
+        "../img/DEPORTE.jpg",
+        "../img/Deporte 1.jpg",
+        "../img/Historia.jpg",
+        "../img/21 de septiembre.jpg"
+      ]
+    },
+    {
+      "id": "evento_2024",
+      "title": "Espejos de Cultura 2024",
+      "date": "5 Diciembre 2024",
+      "summary": "Versión del desfile que incorporó diversidad cultural y expresiones artísticas del colegio.",
+      "detail": "La edición de 2024 del desfile continuó la tradición de reunir a la comunidad escolar en un evento de cierre de año con música, moda y actuaciones. Esta versión profundizó la presencia de la identidad cultural y artística del instituto, destacando el talento de los estudiantes.<br><br>La noche celebró la creatividad y el trabajo colectivo, dejando una marca especial en la comunidad educativa.",
+      "image": "../img/Cooperativa 1.jpg",
+      "hero": {
+        "titleLine1": "Evento: Espejos",
+        "titleLine2": "de Cultura",
+        "backgroundImage": "../img/Cooperativa 1.jpg"
+      },
+      "academic": {
+        "value1": "Nivel Secundario",
+        "value2": "Comunidad Educativa",
+        "value3": "Arte y Baile",
+        "icon3": "fas fa-music"
+      },
+      "gallery": [
+        "../img/Cooperativa 1.jpg"
+      ]
+    },
+    {
+      "id": "evento_2023",
+      "title": "Fashion Blooms 2023",
+      "date": "6 Diciembre 2023",
+      "summary": "Primera edición destacada del desfile escolar con una propuesta creativa y un gran cierre del ciclo lectivo.",
+      "detail": "En esta primera edición, el desfile se consolidó como una experiencia propia del colegio, reuniendo a estudiantes, familias y docentes en una noche de arte y creatividad. La propuesta combinó presentaciones de moda con actuaciones y una fuerte identidad escolar.<br><br>Con el tiempo, la idea fue creciendo y se transformó en una tradición que reúne a la comunidad en la celebración del cierre del año.",
+      "image": "../img/historia.jpg",
+      "hero": {
+        "titleLine1": "Evento: Fashion",
+        "titleLine2": "Blooms",
+        "backgroundImage": "../img/historia.jpg"
+      },
+      "academic": {
+        "value1": "Nivel Secundario",
+        "value2": "Comunidad Educativa",
+        "value3": "Arte y Baile",
+        "icon3": "fas fa-music"
+      },
+      "gallery": [
+        "../img/historia.jpg"
+      ]
+    }
+  ]
+}
