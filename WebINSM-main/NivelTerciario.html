@@ -1230,6 +1230,156 @@
                 top: -2px;
             }
 
+            /* --- Texto descriptivo dentro de tarjetas tipo uniform-card (Campos de Formación, Turno, etc.) --- */
+            .uniform-card p.field-desc {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.95em;
+                line-height: 1.6;
+                color: #6b6b6b;
+                text-align: left;
+                margin: 0;
+            }
+
+            /* --- Estilo: Plan de Estudio (Acordeón por año) --- */
+            .plan-years {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .plan-year {
+                background-color: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                overflow: hidden;
+                transition: border-color 0.3s ease;
+            }
+            .plan-year[open] {
+                border-color: #f39c12;
+            }
+            .plan-year summary {
+                cursor: pointer;
+                list-style: none;
+                padding: 18px 25px;
+                font-family: 'Heuristica', serif;
+                font-size: 1.3em;
+                color: #cf0621;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                user-select: none;
+            }
+            .plan-year summary::-webkit-details-marker {
+                display: none;
+            }
+            .plan-year summary::after {
+                content: '\f078';
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 900;
+                font-size: 0.7em;
+                color: #f39c12;
+                transition: transform 0.3s ease;
+            }
+            .plan-year[open] summary::after {
+                transform: rotate(180deg);
+            }
+            .plan-year-content {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                padding: 0 25px 25px 25px;
+                border-top: 1px solid #f4f4f4;
+                padding-top: 20px;
+            }
+            .plan-year-col {
+                flex: 1 1 220px;
+            }
+            .plan-year-col h4 {
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                color: #333;
+                font-size: 1em;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin: 0 0 10px 0;
+                padding-bottom: 6px;
+                border-bottom: 2px solid #f39c12;
+                display: inline-block;
+            }
+            .plan-year-col ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .plan-year-col ul li {
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.95em;
+                line-height: 1.5;
+                color: #666;
+                padding-left: 18px;
+                position: relative;
+                margin-bottom: 8px;
+            }
+            .plan-year-col ul li::before {
+                content: '•';
+                color: #cf0621;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            @media (max-width: 600px) {
+                .plan-year summary {
+                    font-size: 1.1em;
+                    padding: 15px 18px;
+                }
+                .plan-year-content {
+                    padding: 0 18px 20px 18px;
+                    gap: 20px;
+                }
+            }
+
+            /* --- Estilo: Proyectos y Experiencias Formativas --- */
+            .projects-list {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+            }
+            .project-item {
+                background-color: #fff;
+                border-left: 4px solid #cf0621;
+                border-radius: 6px;
+                padding: 20px 25px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+                transition: box-shadow 0.3s ease, transform 0.3s ease;
+            }
+            .project-item:hover {
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+                transform: translateY(-2px);
+            }
+            .project-item h4 {
+                margin: 0 0 8px 0;
+                font-family: 'ProximaNova', sans-serif;
+                font-weight: bold;
+                font-size: 1.1em;
+                color: #333;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .project-item h4 i {
+                color: #f39c12;
+                font-size: 1.1em;
+                width: 22px;
+                text-align: center;
+                flex-shrink: 0;
+            }
+            .project-item p {
+                margin: 0;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 0.98em;
+                line-height: 1.6;
+                color: #666;
+            }
+
             /* --- Estilo: Áreas Curriculares --- */
             .curricular-grid {
                 display: flex;
@@ -1938,14 +2088,31 @@
                             <div class="director-section">
                                 <div class="director-text">
                                     <p class="specialties-intro">
-                                        El Nivel Terciario ofrece una formación orientada a la especialización, la
-                                        preparación para la vida adulta y el desarrollo de competencias relevantes para el
-                                        futuro laboral y académico de nuestros estudiantes.
+                                        Bienvenidos al Instituto Nuestra Señora de la Merced, un espacio de formación
+                                        docente comprometido con quienes eligen la enseñanza como profesión. Cada día
+                                        nos proponemos formar educadores capaces de mirar a las infancias en toda su
+                                        diversidad, reconociendo en cada contexto una oportunidad genuina de enseñanza
+                                        y aprendizaje.
                                     </p>
                                     <p class="specialties-intro">
-                                        En este nivel promovemos la reflexión, la responsabilidad, el trabajo colaborativo
-                                        y la construcción de una sólida identidad profesional, acompañando a cada alumno en
-                                        su proceso de crecimiento y elección de futuro.
+                                        Elegir una carrera docente no es solo elegir una profesión, es animarse a
+                                        construir un <strong>PROYECTO DE VIDA</strong>. Por eso, en nuestro Instituto
+                                        acompañamos a cada estudiante no solo en la formación académica, sino en el
+                                        discernimiento de ese camino que eligieron recorrer, con la certeza de que
+                                        educar es una de las formas más profundas de transformar realidades.
+                                    </p>
+                                    <p class="specialties-intro">
+                                        Somos un Instituto de gestión privada que sostiene, desde su carisma
+                                        mercedario, valores como la libertad, la solidaridad y el compromiso.
+                                        Trabajamos en modalidad combinada, integrando lo presencial y lo virtual, para
+                                        acompañar las trayectorias de quienes eligen estudiar con nosotros desde
+                                        distintos lugares y realidades.
+                                    </p>
+                                    <p class="specialties-intro">
+                                        Si sentís que la docencia te llama, te invitamos a conocernos. Acá vas a
+                                        encontrar un equipo de formadores comprometidos y la convicción profunda de
+                                        que enseñar es, ante todo, un acto de amor. Los esperamos con las puertas
+                                        abiertas.
                                     </p>
                                     <p class="director-signature">
                                         <strong>Marisa Brisio</strong>
@@ -1960,124 +2127,357 @@
                             </div>
                         </div>
 
-                        <!-- TODO (equipo): reemplazar por las tecnicaturas/profesorados reales que dicta el Nivel Terciario -->
-                        <div id="especialidades" class="content-block">
-                            <h2>Nuestra Propuesta Académica</h2>
+                        <div id="historia" class="content-block">
+                            <h2>Nuestra Historia</h2>
                             <p class="specialties-intro">
-                                El Nivel Terciario ofrece formación superior orientada al desarrollo de
-                                competencias profesionales, combinando teoría y práctica.
+                                El Instituto de Formación Docente "Nuestra Señora de la Merced" nació del
+                                compromiso y la visión de un grupo de educadoras que, en un contexto social y
+                                político desafiante, comprendieron que la educación era el camino para construir un
+                                futuro más justo y esperanzador.
                             </p>
+                            <p class="specialties-intro">
+                                Corría el año 1976, en medio de un profundo cambio en el Sistema Educativo
+                                Argentino, cuando un grupo de docentes —las profesoras María Cristina Giménez de
+                                Medús, Rosalía Sachetto, Olga Martinatto de Vaula, Beatriz Guarch de Romero, junto a
+                                la Hermana Ernestina Pizarro— se reunieron con un sueño común: crear un espacio de
+                                formación docente en Arroyito. Fruto de ese compromiso, en 1977 comenzó a funcionar
+                                el Instituto de Formación Docente del Nivel Superior de las Hermanas Terceras
+                                Mercedarias del Niño Jesús, abriendo sus puertas con la carrera de Profesorado para
+                                la Enseñanza Primaria. Un año después, en 1978, se sumaron al equipo docente los
+                                profesores Luis Rinaudo, Gladis Anderson, Ana María Talamoni de Almaraz, Graciela
+                                Armando y el padre Gerardo Bruno, primer sacerdote en desempeñarse en el Instituto.
+                            </p>
+                            <p class="specialties-intro">
+                                A lo largo de estos años, los planes de estudio han cambiado, incorporando nuevos
+                                espacios curriculares, enfoques pedagógicos y profesionales comprometidos. En 2016,
+                                el Profesorado de Educación Inicial se sumó a la oferta académica, ampliando el
+                                compromiso con la formación integral de educadores para los niveles fundamentales
+                                del sistema educativo. Además de su Formación Docente Inicial, el Instituto ha sido
+                                un espacio de crecimiento para la comunidad en general, promoviendo propuestas para
+                                profesionales no docentes e impulsando numerosas instancias de capacitación continua
+                                para docentes en ejercicio.
+                            </p>
+                            <p class="specialties-intro">
+                                Inspirados en el carisma de Nuestra Señora de la Merced, asumimos la tarea educativa
+                                como un verdadero acto de liberación y servicio, promoviendo una formación docente
+                                que conjuga calidad pedagógica, compromiso social y una espiritualidad centrada en el
+                                amor, la entrega y la promoción de los más vulnerables. Hoy, a casi 50 años de su
+                                creación, el Instituto continúa siendo un faro de esperanza para quienes eligen el
+                                noble camino de enseñar como proyecto de vida.
+                            </p>
+                            <blockquote
+                                style="
+                                    text-align: center;
+                                    margin: 40px auto 0 auto;
+                                    max-width: 750px;
+                                    font-family: 'Heuristica', serif;
+                                    font-size: 1.35em;
+                                    font-style: italic;
+                                    color: #cf0621;
+                                    border: none;
+                                    padding: 0;
+                                "
+                            >
+                                “Formamos docentes desde el legado de quien creyó en la educación como camino de
+                                libertad.”
+                            </blockquote>
+                        </div>
 
-                            <div class="specialties-showcase">
-                                <div class="card-specialty card-bg-informatica">
-                                    <div class="card-specialty-content">
-                                        <h3>[Nombre de la carrera 1]</h3>
-                                        <p>[Completar con la descripción real de la carrera.]</p>
-                                    </div>
+                        <div id="areas-curriculares" class="content-block">
+                            <h2>Campos de Formación</h2>
+                            <p class="specialties-intro">
+                                El plan de estudios del Profesorado de Educación Primaria se organiza en tres
+                                campos de formación, articulados entre sí a lo largo de toda la carrera:
+                            </p>
+                            <div class="uniform-grid">
+                                <div class="uniform-card">
+                                    <i class="fas fa-landmark"></i>
+                                    <h3>Formación General</h3>
+                                    <p class="field-desc">
+                                        Brinda los marcos teóricos, filosóficos, históricos, políticos y sociales
+                                        necesarios para comprender y fundamentar la tarea educativa, así como para
+                                        participar activamente en la cultura contemporánea.
+                                    </p>
                                 </div>
-
-                                <div class="card-specialty card-bg-humanidades">
-                                    <div class="card-specialty-content">
-                                        <h3>[Nombre de la carrera 2]</h3>
-                                        <p>[Completar con la descripción real de la carrera.]</p>
-                                    </div>
+                                <div class="uniform-card">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <h3>Formación Específica</h3>
+                                    <p class="field-desc">
+                                        Aporta los saberes propios de la Educación Primaria: didácticas de las
+                                        distintas áreas curriculares (Lengua, Matemática, Ciencias Sociales,
+                                        Ciencias Naturales, entre otras), psicología del desarrollo y del
+                                        aprendizaje, y los marcos curriculares vigentes para el nivel.
+                                    </p>
+                                </div>
+                                <div class="uniform-card">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <h3>Formación en la Práctica Profesional</h3>
+                                    <p class="field-desc">
+                                        Acompaña al estudiante desde el primer año en un recorrido gradual por las
+                                        instituciones educativas, integrando teoría y práctica a través de la
+                                        observación, la ayudantía, la residencia y la reflexión sobre la propia
+                                        experiencia docente.
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="areas-curriculares" class="content-block">
-                            <h2>Áreas Curriculares</h2>
+                        <div id="plan-estudio" class="content-block">
+                            <h2>Plan de Estudio</h2>
                             <p class="specialties-intro">
-                                Trabajamos con un plan educativo completo que incluye:
+                                El Profesorado de Educación Primaria tiene una duración de 4 años y otorga el
+                                título de Profesor/a de Educación Primaria, con validez nacional. Está pensado para
+                                formar docentes capaces de enseñar en el Nivel Primario con solidez académica,
+                                sensibilidad pedagógica y compromiso con las infancias en toda su diversidad.
                             </p>
-                            <div class="curricular-grid">
-                                <div class="curricular-card">
-                                    <i class="fas fa-book"></i>
-                                    <h3>Lengua y Literatura</h3>
+
+                            <div class="uniform-grid" style="margin-bottom: 40px">
+                                <div class="uniform-card">
+                                    <i class="fas fa-clock"></i>
+                                    <h3>Turno</h3>
+                                    <p class="field-desc" style="text-align: center">
+                                        Vespertino, de 14:30 hs a 21 hs (dependiendo del año de formación).
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-calculator"></i>
-                                    <h3>Matemática</h3>
+                                <div class="uniform-card">
+                                    <i class="fas fa-laptop-house"></i>
+                                    <h3>Modalidad Combinada</h3>
+                                    <p class="field-desc" style="text-align: center">
+                                        50% presencialidad y 50% sincrónico/asincrónico en la Práctica Docente y la
+                                        Formación Específica.
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-flask"></i>
-                                    <h3>Ciencias Naturales</h3>
+                                <div class="uniform-card">
+                                    <i class="fas fa-wifi"></i>
+                                    <h3>Formación General</h3>
+                                    <p class="field-desc" style="text-align: center">
+                                        30% presencialidad y 70% sincrónico/asincrónico en los espacios de
+                                        Formación General.
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-globe-americas"></i>
-                                    <h3>Ciencias Sociales</h3>
+                            </div>
+
+                            <p class="specialties-intro" style="margin-bottom: 20px">
+                                Recorré año por año los espacios curriculares de la carrera:
+                            </p>
+                            <div class="plan-years">
+                                <details class="plan-year" open>
+                                    <summary>Primer Año</summary>
+                                    <div class="plan-year-content">
+                                        <div class="plan-year-col">
+                                            <h4>Asignaturas</h4>
+                                            <ul>
+                                                <li>Pedagogía</li>
+                                                <li>Psicología y Educación</li>
+                                                <li>Argentina en el Mundo Contemporáneo</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Taller</h4>
+                                            <ul>
+                                                <li>Lenguaje Digital y Audiovisual</li>
+                                                <li>Lenguaje Corporal</li>
+                                                <li>Desarrollo del Pensamiento Matemático</li>
+                                                <li>Oralidad, Lectura y Escritura</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Seminario</h4>
+                                            <ul>
+                                                <li>Práctica Docente I: Contextos y Prácticas Educativas</li>
+                                                <li>Problemáticas Socioantropológicas en Educación</li>
+                                                <li>Lengua Extranjera: Inglés I</li>
+                                                <li>Formación General Teológica</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <details class="plan-year">
+                                    <summary>Segundo Año</summary>
+                                    <div class="plan-year-content">
+                                        <div class="plan-year-col">
+                                            <h4>Asignaturas</h4>
+                                            <ul>
+                                                <li>Filosofía y Educación</li>
+                                                <li>Didáctica General</li>
+                                                <li>Matemática y su Didáctica I</li>
+                                                <li>Lengua y su Didáctica</li>
+                                                <li>Ciencias Naturales y su Didáctica I</li>
+                                                <li>Ciencias Sociales y su Didáctica I</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Taller</h4>
+                                            <ul>
+                                                <li>Lenguaje Artístico Expresivo</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Seminario</h4>
+                                            <ul>
+                                                <li>
+                                                    Práctica Docente II: Escuelas, Historias Documentadas y
+                                                    Cotidianeidad
+                                                </li>
+                                                <li>Sujetos de la Educación y Convivencia Escolar</li>
+                                                <li>Lengua Extranjera: Inglés II</li>
+                                                <li>Educación Religiosa Escolar I</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <details class="plan-year">
+                                    <summary>Tercer Año</summary>
+                                    <div class="plan-year-content">
+                                        <div class="plan-year-col">
+                                            <h4>Asignaturas</h4>
+                                            <ul>
+                                                <li>Historia y Política de la Educación</li>
+                                                <li>Literatura en el Nivel Primario</li>
+                                                <li>Matemática y su Didáctica II</li>
+                                                <li>Ciencias Naturales y su Didáctica II</li>
+                                                <li>Ciencias Sociales y su Didáctica II</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Taller</h4>
+                                            <ul>
+                                                <li>Educación Artístico Expresivo</li>
+                                                <li>TIC y la Enseñanza</li>
+                                                <li>Taller de Ciencias en la Escuela</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Seminario</h4>
+                                            <ul>
+                                                <li>Práctica Docente III: El Aula, Espacio del Aprender y del Enseñar</li>
+                                                <li>Alfabetización Inicial</li>
+                                                <li>Lengua Extranjera: Inglés III</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <details class="plan-year">
+                                    <summary>Cuarto Año</summary>
+                                    <div class="plan-year-content">
+                                        <div class="plan-year-col">
+                                            <h4>Taller</h4>
+                                            <ul>
+                                                <li>Educación Física en el Nivel Primario</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Seminario</h4>
+                                            <ul>
+                                                <li>
+                                                    Práctica Docente IV y su Residencia: Recrear las Prácticas
+                                                    Docentes
+                                                </li>
+                                                <li>Ética y Construcción Ciudadana</li>
+                                                <li>Problemáticas y Desafíos del Nivel Primario</li>
+                                                <li>Educación Sexual Integral</li>
+                                                <li>Educación Religiosa Escolar II</li>
+                                                <li>Educación Rural</li>
+                                            </ul>
+                                        </div>
+                                        <div class="plan-year-col">
+                                            <h4>Trabajo de Campo</h4>
+                                            <ul>
+                                                <li>Integración final de saberes en terreno</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+
+                        <div id="proyectos" class="content-block">
+                            <h2>Proyectos y Experiencias Formativas</h2>
+                            <p class="specialties-intro">
+                                Además del plan de estudios, el Profesorado enriquece la formación de sus
+                                estudiantes con proyectos situados que integran teoría y práctica:
+                            </p>
+                            <div class="projects-list">
+                                <div class="project-item">
+                                    <h4><i class="fas fa-school"></i> Prácticas Docentes en Escuelas Asociadas</h4>
+                                    <p>
+                                        En escuelas urbanas, de gestión estatal y privada, y rurales. Un proceso
+                                        dinámico, situado y territorial que, bajo el modelo de coworking educativo,
+                                        redefine el rol docente fomentando redes abiertas, trabajo interdisciplinario
+                                        y corresponsabilidad en el diseño de la enseñanza.
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-language"></i>
-                                    <h3>Inglés</h3>
+                                <div class="project-item">
+                                    <h4><i class="fas fa-hands-helping"></i> Práctica en Educación No Formal: Casita Municipal</h4>
+                                    <p>
+                                        Para que las estudiantes reconozcan las diversas formas en que lo educativo
+                                        se manifiesta fuera del ámbito escolar y amplíen su sensibilidad pedagógica
+                                        a través del contacto con niños, niñas y jóvenes en situación de
+                                        vulnerabilidad social.
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-running"></i>
-                                    <h3>Educación Física</h3>
+                                <div class="project-item">
+                                    <h4><i class="fas fa-book-reader"></i> Feria Municipal del Libro "Inés Dávila de Olocco"</h4>
+                                    <p>
+                                        Un espacio que cada año fortalece el encuentro entre la comunidad, la
+                                        literatura y las instituciones educativas. Las estudiantes asumen el rol de
+                                        mediadoras de lectura, poniendo en práctica experiencias literarias
+                                        significativas para la niñez.
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-palette"></i>
-                                    <h3>Artes Visuales</h3>
+                                <div class="project-item">
+                                    <h4><i class="fas fa-lightbulb"></i> TRANSFORMAR@CBA 2026</h4>
+                                    <p>
+                                        Trabajos interdisciplinarios en la Feria de Ciencias, Tecnologías, Arte y
+                                        Movimiento, las Olimpiadas de Matemática y el Festival de la Palabra, entre
+                                        otras propuestas.
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-music"></i>
-                                    <h3>Música</h3>
+                                <div class="project-item">
+                                    <h4><i class="fas fa-comments"></i> Ateneos Didácticos</h4>
+                                    <p>
+                                        Instancias de análisis y reflexión sobre una problemática o temática de las
+                                        prácticas realizadas, situada, contextualizada y relevante por su potencial
+                                        formativo.
+                                    </p>
                                 </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-laptop-code"></i>
-                                    <h3>Tecnologías</h3>
-                                </div>
-                                <div class="curricular-card">
-                                    <i class="fas fa-users"></i>
-                                    <h3>Educación Ética y Ciudadana</h3>
+                                <div class="project-item">
+                                    <h4><i class="fas fa-child"></i> El Recreo Escolar como Unidad de Análisis</h4>
+                                    <p>
+                                        Diseño y elaboración de una propuesta de juego destinada a implementarse en
+                                        un recreo de una escuela asociada.
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
                         <div id="uniforme" class="content-block">
-                            <h2>Uniforme Escolar</h2>
+                            <h2>Uniforme Institucional</h2>
                             <p class="specialties-intro">
-                                El uso del uniforme representa la identidad de nuestra comunidad educativa y fomenta el sentido de pertenencia.
+                                El uso del uniforme representa la identidad de nuestra comunidad educativa y fomenta
+                                el sentido de pertenencia.
                             </p>
                             <div class="uniform-grid">
-                                <!-- Tarjeta Mujeres -->
-                                <div class="uniform-card">
-                                    <i class="fas fa-female"></i>
-                                    <h3>Mujeres</h3>
-                                    <ul>
-                                        <li>Pollera gris largo a la rodilla.</li>
-                                        <li>Remera de piqué con escudo bordado.</li>
-                                        <li>Pullover escote en V azul bordado.</li>
-                                        <li>Abrigo azul (campera).</li>
-                                        <li>Zapatos negros o zapatillas lisas.</li>
-                                        <li>Cabello recogido (cinta azul).</li>
-                                    </ul>
-                                </div>
-
-                                <!-- Tarjeta Varones -->
-                                <div class="uniform-card">
-                                    <i class="fas fa-male"></i>
-                                    <h3>Varones</h3>
-                                    <ul>
-                                        <li>Pantalón gris de vestir.</li>
-                                        <li>Remera de piqué con escudo bordado.</li>
-                                        <li>Pullover escote en V azul bordado.</li>
-                                        <li>Abrigo azul (campera).</li>
-                                        <li>Medias azules y zapatos negros.</li>
-                                    </ul>
-                                </div>
-
-                                <!-- Tarjeta Gimnasia -->
-                                <div class="uniform-card">
-                                    <i class="fas fa-running"></i>
-                                    <h3>Gimnasia</h3>
-                                    <ul>
-                                        <li>Joggin gris (pantalón o bermuda).</li>
-                                        <li>Remera oficial del colegio.</li>
-                                        <li>Buzo gris con escudo.</li>
-                                        <li>Zapatillas deportivas.</li>
-                                        <li>Bolsa de higiene completa.</li>
-                                    </ul>
+                                <div class="uniform-card" style="flex: 0 0 320px">
+                                    <img
+                                        src="img/uniforme-profesorado-primaria.jpg"
+                                        alt="Uniforme del Profesorado de Educación Primaria"
+                                        style="
+                                            width: 180px;
+                                            border-radius: 8px;
+                                            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                                            margin-bottom: 5px;
+                                        "
+                                        onerror="this.style.display='none';"
+                                    />
+                                    <h3>Profesorado de Educación Primaria</h3>
+                                    <p class="field-desc" style="text-align: center">
+                                        Delantal azul con vivos rojos y blancos, bolsillos identificados con el
+                                        escudo institucional.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -2128,6 +2528,72 @@
                                 <li>Ficha de salud completada y firmada por un médico.</li>
                                 <li>Informe de libre deuda (si proviene de gestión privada).</li>
                             </ul>
+                        </div>
+
+                        <div id="inscripcion" class="content-block aec-container">
+                            <h2>Inscripción al Nivel Terciario</h2>
+                            <p class="specialties-intro" style="text-align: center; margin-bottom: 20px">
+                                Completá el formulario de inscripción para comenzar tu recorrido en el Nivel Terciario.
+                            </p>
+                            <div class="aec-buttons-container" style="display: flex; justify-content: center">
+                                <a
+                                    href="https://docs.google.com/forms/d/1xt7aPX2Oa3Y1zMAE_WTurqIfjGB4llwlqvk6LcSqWEw/edit"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="aec-btn"
+                                >
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <span>
+                                        Completar inscripción
+                                        <small>Acceder al formulario</small>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="contacto-superior" class="content-block aec-container">
+                            <h2>Contacto e Inscripción</h2>
+                            <p class="specialties-intro" style="text-align: center; margin-bottom: 20px">
+                                ¿Querés sumarte al Profesorado de Educación Primaria? Escribinos o seguinos en
+                                nuestras redes.
+                            </p>
+                            <div
+                                class="aec-buttons-container"
+                                style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap"
+                            >
+                                <a href="mailto:mercednivelsuperior@gmail.com.ar" class="aec-btn">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>
+                                        Email
+                                        <small>mercednivelsuperior@gmail.com.ar</small>
+                                    </span>
+                                </a>
+                                <a href="tel:+543576463872" class="aec-btn">
+                                    <i class="fas fa-phone"></i>
+                                    <span>
+                                        Teléfono
+                                        <small>3576-463872</small>
+                                    </span>
+                                </a>
+                                <a href="https://www.instagram.com/profesorado_insm" target="_blank" class="aec-btn">
+                                    <i class="fab fa-instagram"></i>
+                                    <span>
+                                        Instagram
+                                        <small>@profesorado_insm</small>
+                                    </span>
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/insm.nivelsuperior.1/?locale=es_LA"
+                                    target="_blank"
+                                    class="aec-btn"
+                                >
+                                    <i class="fab fa-facebook-f"></i>
+                                    <span>
+                                        Facebook
+                                        <small>Insm Nivel Superior</small>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
 
                         <div id="aec" class="content-block aec-container">
@@ -2239,18 +2705,28 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#especialidades" onclick="toggleSideMenu()">
-                            <i class="fas fa-graduation-cap"></i> Nuestras Especialidades
+                        <a href="#historia" onclick="toggleSideMenu()">
+                            <i class="fas fa-landmark"></i> Nuestra Historia
                         </a>
                     </li>
                     <li>
                         <a href="#areas-curriculares" onclick="toggleSideMenu()">
-                            <i class="fas fa-book"></i> Áreas Curriculares
+                            <i class="fas fa-book"></i> Campos de Formación
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#plan-estudio" onclick="toggleSideMenu()">
+                            <i class="fas fa-file-pdf"></i> Plan de Estudio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#proyectos" onclick="toggleSideMenu()">
+                            <i class="fas fa-lightbulb"></i> Proyectos
                         </a>
                     </li>
                     <li>
                         <a href="#uniforme" onclick="toggleSideMenu()">
-                            <i class="fas fa-tshirt"></i> Uniforme Escolar
+                            <i class="fas fa-tshirt"></i> Uniforme Institucional
                         </a>
                     </li>
                     <li>
@@ -2261,6 +2737,16 @@
                     <li>
                         <a href="#requerimientos" onclick="toggleSideMenu()">
                             <i class="fas fa-clipboard-list"></i> Requerimientos de Inscripción
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#inscripcion" onclick="toggleSideMenu()">
+                            <i class="fas fa-user-edit"></i> Inscripción al Nivel Terciario
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contacto-superior" onclick="toggleSideMenu()">
+                            <i class="fas fa-envelope"></i> Contacto e Inscripción
                         </a>
                     </li>
                     <li>

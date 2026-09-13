@@ -344,13 +344,25 @@
 		<a href="Contacto.html" style="color: var(--rojo)">página de Contacto</a>.
 	</footer>
 
+	<script type="module" src="auth.js"></script>
 	<script>
 		const form = document.getElementById('inscripcion-form');
 		const submitBtn = document.getElementById('submit-btn');
 		const responseDiv = document.getElementById('response-message');
 
-		form.addEventListener('submit', function (e) {
+		form.addEventListener('submit', async function (e) {
 			e.preventDefault();
+
+			try {
+				const user = await window.obtenerUsuarioInstitucional();
+				form.dataset.usuarioAutenticado = user.email;
+			} catch (error) {
+				responseDiv.textContent = error.message || 'No se pudo verificar la cuenta institucional.';
+				responseDiv.className = 'response-message response-error';
+				responseDiv.style.display = 'block';
+				return;
+			}
+
 			submitBtn.disabled = true;
 			submitBtn.textContent = 'Enviando...';
 			responseDiv.style.display = 'none';

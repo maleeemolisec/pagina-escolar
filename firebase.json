@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "WebINSM-main",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
