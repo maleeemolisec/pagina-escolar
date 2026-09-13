@@ -1484,23 +1484,25 @@
                 body {
                     padding: 0; /* Eliminado padding superior para quitar espacio blanco bajo el header */
                 }
-                
+            }
+
             @media (max-width: 1000px) {
                 .brand-text-desktop { display: none; }
                 .brand-text-mobile { display: inline; font-weight: bold; font-size: 1.2em; }
                 .header-main .logo span { font-size: 1.2em; }
             }
 
+            @media (max-width: 1024px) {
                 .aec-container {
-                    padding: 70px 20px 60px; /* Compensación óptica: más aire arriba */
+                    padding: 70px 20px 60px;
                 }
 
                 .aec-container h2 {
-                    display: table; /* Ajustar al ancho del texto para que el subrayado sea correcto */
+                    display: table;
                     text-align: center;
                     margin: 0 auto 20px auto;
-                    border-bottom: 2px solid #f39c12; /* Restaurar subrayado estándar */
-                    padding-bottom: 10px; /* Restaurar espaciado estándar */
+                    border-bottom: 2px solid #f39c12;
+                    padding-bottom: 10px;
                 }
 
                 .aec-container p {
@@ -1514,21 +1516,22 @@
                 .content-block h2 {
                     text-align: center;
                     display: table;
-                    margin: 0 auto 20px auto; /* Reducido de 30px a 20px para consistencia */
+                    margin: 0 auto 20px auto;
                     border-bottom: 2px solid #f39c12;
                     position: relative;
                 }
 
                 .director-section {
-                    margin-top: 0; /* Elimina el margen superior innecesario en móviles al apilarse */
+                    margin-top: 0;
                 }
+
                 .content-block h2::after {
-                    display: none; /* Quitamos la línea centrada de móvil */
+                    display: none;
                 }
 
                 .staff-layout-grid {
                     display: flex;
-                    flex-direction: column; /* Imágenes arriba, Texto abajo */
+                    flex-direction: column;
                     gap: 30px;
                     height: auto;
                     margin-top: 0;
@@ -1536,34 +1539,39 @@
                 }
 
                 .staff-carousel-viewport {
-                    order: 1; /* Imágenes primero */
-                    height: 680px; /* Ajustado para tarjeta de 641px + sombras */
-                    overflow: visible; /* Permitir ver las laterales */
+                    order: 1;
+                    height: 680px;
+                    overflow: visible;
                 }
 
                 .staff-carousel-track {
-                    padding-left: 0; /* Centrado por JS */
+                    padding-left: 0;
                 }
 
                 .staff-left-panel {
-                    order: 2; /* Texto después */
-                    padding: 0 20px 0 20px;
+                    order: 2;
+                    padding: 0 20px;
                     align-items: center;
                     text-align: center;
                     background: transparent;
                 }
 
-                .staff-active-info h3 { font-size: 2.5em; }
-                
-                .staff-active-info {
-                    margin-bottom: 20px; /* Aumentado levemente de 15px a 25px */
+                .staff-active-info h3 {
+                    font-size: 2.5em;
                 }
 
-                .staff-active-info span { 
+                .staff-active-info {
+                    margin-bottom: 20px;
+                }
+
+                .staff-active-info span {
                     padding-left: 0;
                 }
-                .staff-active-info span::before { display: none; }
-                
+
+                .staff-active-info span::before {
+                    display: none;
+                }
+
                 .staff-nav-controls {
                     justify-content: center;
                 }
@@ -1804,7 +1812,6 @@
             .side-menu-content .side-menu-links { scrollbar-color: #f39c12 #102d43; }
             .side-menu-links::-webkit-scrollbar-track { background: #102d43 !important; }
         </style>
-        <link rel="stylesheet" href="site-theme.css" />
         <link rel="icon" href="img/favicon.ico" type="image/ico" />
         <link
             rel="stylesheet"
@@ -1812,6 +1819,9 @@
         />
     </head>
     <body>
+                        }
+                        .content-block h2::after {
+                            display: none; /* Quitamos la línea centrada de móvil */
         <header>
             <div class="header-main">
                 <div class="logo">
@@ -1830,15 +1840,12 @@
                     </ul>
                 </nav>
             </div>
-        </header>
 
         <div class="dropdown-menu" id="dropdownMenu">
-            <div class="dropdown-header">
                 <div class="logo">
                     <img src="img/logo.png" alt="Logo INSM" />
                 </div>
                 <button class="close-menu" onclick="toggleMenu()">✕</button>
-            </div>
             <div class="menu-content">
                 <div class="menu-section">
                     <h3>Inicial</h3>
@@ -1959,6 +1966,8 @@
                                 />
                             </div>
                         </div>
+                                                    height: 680px; /* Ajustado para tarjeta de 641px + sombras */
+                                                    overflow: visible; /* Permitir ver las laterales */
 
                         <div id="especialidades" class="content-block">
                             <h2>Nuestros Ciclos</h2>
@@ -1982,6 +1991,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div id="areas-curriculares" class="content-block">

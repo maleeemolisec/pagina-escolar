@@ -2,6 +2,51 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=marisa.0">
+
+    <title>Instituto Nuestra Señora de la Merced</title>
+
+    <!-- Firebase -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+            import {
+                getAuth,
+                onAuthStateChanged,
+                signOut
+            } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBIlFCbi0z0IfNvaasgvz_paXQeBuRmE_A",
+        authDomain: "autenticacion-6d1e2.firebaseapp.com",
+        projectId: "autenticacion-6d1e2",
+        storageBucket: "autenticacion-6d1e2.firebasestorage.app",
+        messagingSenderId: "187192153766",
+        appId: "1:187192153766:web:cdb1a3f6105208e3288667",
+        measurementId: "G-BRPR34SX27"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+            const auth = getAuth(app);
+            const DOMINIO_INSTITUCIONAL = "@institutolamerced.edu.ar";
+
+            onAuthStateChanged(auth, async (user) => {
+                if (!user) {
+                    return;
+                }
+
+                const email = (user.email || "").toLowerCase();
+
+                if (!email.endsWith(DOMINIO_INSTITUCIONAL)) {
+                    alert("Solo se permiten cuentas institucionales.");
+                    await signOut(auth);
+                }
+            });
+    </script>
 
     <meta charset="UTF-8">
 
@@ -1748,7 +1793,6 @@
 
 </head>
 
-
 <body>
 
 
@@ -2916,7 +2960,7 @@
             </span>
 
             <span>
-                Desarrollada por Nazareno y Eugenio
+                Desarrollada por Uma Stampanone, Malena Molina y Morena Suarez
             </span>
 
         </div>

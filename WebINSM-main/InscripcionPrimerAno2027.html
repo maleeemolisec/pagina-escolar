@@ -342,25 +342,6 @@
 				</fieldset>
 
 				<fieldset>
-					<legend>Especialidad de interés (opcional)</legend>
-					<div class="radio-group">
-						<label class="radio-option">
-							<input type="radio" name="Especialidad de interés" value="Informática" />
-							Informática
-						</label>
-						<label class="radio-option">
-							<input type="radio" name="Especialidad de interés" value="Humanidades" />
-							Humanidades
-						</label>
-						<label class="radio-option">
-							<input type="radio" name="Especialidad de interés" value="Aún no lo decidí" checked />
-							Aún no lo decidí
-						</label>
-					</div>
-					<p class="hint">La elección definitiva de especialidad se realiza en años superiores del ciclo orientado.</p>
-				</fieldset>
-
-				<fieldset>
 					<legend>Observaciones (opcional)</legend>
 					<div class="form-group">
 						<textarea name="Observaciones" placeholder="Contanos si hay algo que debamos saber (por ejemplo, hermanos que ya asisten al colegio, alguna condición médica, etc.)"></textarea>
@@ -378,13 +359,25 @@
 		<a href="Contacto.html" style="color: var(--rojo)">página de Contacto</a>.
 	</footer>
 
+	<script type="module" src="auth.js"></script>
 	<script>
 		const form = document.getElementById('inscripcion-form');
 		const submitBtn = document.getElementById('submit-btn');
 		const responseDiv = document.getElementById('response-message');
 
-		form.addEventListener('submit', function (e) {
+		form.addEventListener('submit', async function (e) {
 			e.preventDefault();
+
+			try {
+				const user = await window.obtenerUsuarioInstitucional();
+				form.dataset.usuarioAutenticado = user.email;
+			} catch (error) {
+				responseDiv.textContent = error.message || 'No se pudo verificar la cuenta institucional.';
+				responseDiv.className = 'response-message response-error';
+				responseDiv.style.display = 'block';
+				return;
+			}
+
 			submitBtn.disabled = true;
 			submitBtn.textContent = 'Enviando...';
 			responseDiv.style.display = 'none';
