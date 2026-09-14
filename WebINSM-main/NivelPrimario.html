@@ -331,11 +331,30 @@
             /* --- Estilo: Bienvenida --- */
             .director-section {
                 display: flex;
-                align-items: center; 
+                align-items: flex-start;
                 gap: 40px;
                 margin-top: 28px;
             }
             .director-text { flex: 1; }
+            .director-paragraph {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 18px;
+            }
+            .director-paragraph .specialties-intro {
+                flex: 1;
+                margin-bottom: 0;
+            }
+            .director-inline-image {
+                width: 110px;
+                height: 110px;
+                min-width: 110px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 3px solid #e5b72f;
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+            }
             .director-image {
                 width: 300px;
                 height: 400px;
@@ -1944,18 +1963,36 @@
                             <h2>Bienvenida de la Directora</h2>
                             <div class="director-section">
                                 <div class="director-text">
-                                    <p class="specialties-intro" style="font-size: 1.55em; line-height: 1.6;">
-                                        Queremos que cada niño encuentre en nuestra escuela un lugar donde aprender,
-                                        descubrir, compartir y sentirse acompañado.
-                                    </p>
-                                    <p class="specialties-intro">
-                                        <strong>Roxana Calleri</strong><br>
-                                        Directora
-                                    </p>
-                                    <p class="specialties-intro" style="font-size: 1.55em; line-height: 1.6;">
-                                        Los esperamos para conocer nuestra propuesta y descubrir juntos todo lo que
-                                        podemos construir en comunidad.
-                                    </p>
+                                    <div class="director-paragraph">
+                                        <div class="director-inline-copy">
+                                            <p class="specialties-intro" style="font-size: 1.55em; line-height: 1.6;">
+                                                Queremos que cada niño encuentre en nuestra escuela un lugar donde aprender,
+                                                descubrir, compartir y sentirse acompañado.
+                                            </p>
+                                            <p class="specialties-intro">
+                                                <strong>Roxana Calleri</strong><br>
+                                                Directora
+                                            </p>
+                                        </div>
+                                        <img
+                                            src="img/Roxana Calleri.webp"
+                                            alt="Roxana Calleri"
+                                            class="director-inline-image"
+                                            onerror="this.onerror=null;this.src='img/usuario_default.png';"
+                                        />
+                                    </div>
+                                    <div class="director-paragraph">
+                                        <p class="specialties-intro" style="font-size: 1.55em; line-height: 1.6;">
+                                            Los esperamos para conocer nuestra propuesta y descubrir juntos todo lo que
+                                            podemos construir en comunidad.
+                                        </p>
+                                        <img
+                                            src="img/Claudia Bertinotti.webp"
+                                            alt="Claudia Bertinotti"
+                                            class="director-inline-image"
+                                            onerror="this.onerror=null;this.src='img/usuario_default.png';"
+                                        />
+                                    </div>
                                     <p class="specialties-intro">
                                         <strong>Claudia Bertinotti</strong><br>
                                         Vicedirectora
@@ -2106,10 +2143,10 @@
                                 <div class="staff-carousel-viewport" id="staffViewport">
                                     <div class="staff-carousel-track" id="staffTrack">
                                         <div class="staff-carousel-item" data-name="Roxana Calleri" data-role="Directora">
-                                            <img src="img/personal/roxana-calleri.jpg" alt="Roxana Calleri" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
+                                            <img src="img/Roxana Calleri.webp" alt="Roxana Calleri" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
                                         </div>
                                         <div class="staff-carousel-item" data-name="Claudia Bertinotti" data-role="Vicedirectora">
-                                            <img src="img/personal/claudia-bertinotti.jpg" alt="Claudia Bertinotti" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
+                                            <img src="img/Claudia Bertinotti.webp" alt="Claudia Bertinotti" class="staff-carousel-img" onerror="this.onerror=null;this.src='img/usuario_default.png';">
                                         </div>
                                     </div>
                                 </div>
@@ -2496,27 +2533,33 @@
 
                 updateDimensions();
 
-                // Clones para infinito
-                originalItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    clone.classList.add('clone');
-                    clone.removeAttribute('id'); 
-                    track.appendChild(clone);
-                });
-                originalItems.slice().reverse().forEach(item => {
-                    const clone = item.cloneNode(true);
-                    clone.classList.add('clone');
-                    clone.removeAttribute('id');
-                    track.insertBefore(clone, track.firstChild);
-                });
-
                 let allItems = Array.from(document.querySelectorAll('.staff-carousel-item'));
                 const totalOriginals = originalItems.length;
-                
-                let currentIndex = totalOriginals; 
+                let currentIndex = totalOriginals;
                 let isNavigating = false;
                 let autoPlayInterval;
                 let isPlaying = true;
+
+                if (totalOriginals <= 2) {
+                    currentIndex = 0;
+                } else {
+                    // Clones para infinito
+                    originalItems.forEach(item => {
+                        const clone = item.cloneNode(true);
+                        clone.classList.add('clone');
+                        clone.removeAttribute('id'); 
+                        track.appendChild(clone);
+                    });
+                    originalItems.slice().reverse().forEach(item => {
+                        const clone = item.cloneNode(true);
+                        clone.classList.add('clone');
+                        clone.removeAttribute('id');
+                        track.insertBefore(clone, track.firstChild);
+                    });
+
+                    allItems = Array.from(document.querySelectorAll('.staff-carousel-item'));
+                    currentIndex = totalOriginals;
+                }
 
                 // Función para obtener Offset según dispositivo
                 const getOffset = () => {
@@ -2572,6 +2615,7 @@
                     setTimeout(() => isNavigating = false, 600);
 
                     currentIndex++;
+                    if (currentIndex >= totalOriginals) currentIndex = 0;
                     updateCarousel();
                 };
 
@@ -2581,29 +2625,32 @@
                     setTimeout(() => isNavigating = false, 600);
 
                     currentIndex--;
+                    if (currentIndex < 0) currentIndex = totalOriginals - 1;
                     updateCarousel();
                 };
 
-                track.addEventListener('transitionend', (e) => {
-                    if (e.target !== track || e.propertyName !== 'transform') return;
-                    
-                    let snap = false;
-                    let nextIndex = currentIndex;
-                    if (currentIndex >= totalOriginals * 2) {
-                        nextIndex = currentIndex - totalOriginals;
-                        snap = true;
-                    } else if (currentIndex < totalOriginals) {
-                        nextIndex = currentIndex + totalOriginals;
-                        snap = true;
-                    }
-                    if (snap) {
-                        track.classList.add('notransition');
-                        currentIndex = nextIndex;
-                        updateCarousel();
-                        void track.offsetWidth;
-                        track.classList.remove('notransition');
-                    }
-                });
+                if (totalOriginals > 2) {
+                    track.addEventListener('transitionend', (e) => {
+                        if (e.target !== track || e.propertyName !== 'transform') return;
+                        
+                        let snap = false;
+                        let nextIndex = currentIndex;
+                        if (currentIndex >= totalOriginals * 2) {
+                            nextIndex = currentIndex - totalOriginals;
+                            snap = true;
+                        } else if (currentIndex < totalOriginals) {
+                            nextIndex = currentIndex + totalOriginals;
+                            snap = true;
+                        }
+                        if (snap) {
+                            track.classList.add('notransition');
+                            currentIndex = nextIndex;
+                            updateCarousel();
+                            void track.offsetWidth;
+                            track.classList.remove('notransition');
+                        }
+                    });
+                }
 
                 btnNext.addEventListener('click', () => {
                     nextSlide();

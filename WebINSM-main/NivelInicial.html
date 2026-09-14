@@ -1449,6 +1449,10 @@
                 border-radius: 16px;
             }
 
+            #personal .staff-nav-controls {
+                display: none;
+            }
+
             
 
             /* --- TABLET (Portrait & Landscape) --- */
@@ -2540,6 +2544,18 @@
 
                 const originalItems = Array.from(document.querySelectorAll('.staff-carousel-item'));
                 if (originalItems.length === 0) return;
+
+                if (originalItems.length === 1) {
+                    const soleItem = originalItems[0];
+                    soleItem.classList.add('active');
+                    activeName.textContent = soleItem.dataset.name;
+                    activeRole.textContent = soleItem.dataset.role;
+                    infoBox.style.opacity = '1';
+                    btnPrev.style.display = 'none';
+                    btnNext.style.display = 'none';
+                    btnPause.style.display = 'none';
+                    return;
+                }
 
                 // Propiedades Dinámicas (Leídas de CSS)
                 let itemWidth, itemGap, activeItemWidth, step;
