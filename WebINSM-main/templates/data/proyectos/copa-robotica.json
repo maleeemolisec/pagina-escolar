@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "titleLine1": "Copa",
+    "titleLine2": "Robótica",
+    "backgroundImage": "../img/copa_edu.jpg"
+  },
+  "general": {
+    "date": "2026",
+    "summary": "Copa Robótica Educabot, una iniciativa nacional, inclusiva y gratuita que impulsa la robótica, la innovación y la colaboración entre jóvenes estudiantes.",
+    "detail": "La Copa Robótica Educabot es una iniciativa nacional, inclusiva y gratuita que impulsa a los jóvenes argentinos a través de la robótica, la innovación y la colaboración. Está abierta a estudiantes con o sin experiencia previa, de escuelas públicas y privadas de todo el país, con equipos de cinco estudiantes y la participación de un mentor docente. En nuestra institución, alumnos de 4°, 5° y 6° de la especialidad de Informática participan representando el trabajo conjunto entre creatividad, programación y pensamiento computacional.<br><br>La competencia se desarrolla en distintas etapas: desafíos online, programación a distancia, semifinales provinciales y final nacional. El equipo ganador tiene la oportunidad de representar a la Argentina en el FIRST Global Challenge 2027, reafirmando el valor de la robótica como puente entre aprendizaje, cooperación y excelencia educativa.",
+    "image": "../img/copa_edu.jpg"
+  },
+  "academic": {
+    "value1": "4°, 5° y 6°",
+    "value2": "Especialidad Informática",
+    "value3": "Robótica y programación",
+    "icon3": "fas fa-robot"
+  },
+  "gallery": [
+    "../img/copa_edu.jpg",
+    "../img/copa_rob1.png",
+    "../img/copa_rob2.jpeg"
+  ]
+}
