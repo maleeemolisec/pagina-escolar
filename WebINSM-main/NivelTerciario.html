@@ -1555,10 +1555,65 @@
 
             .staff-carousel-viewport {
                 height: 100%;
+                max-height: 560px;
                 width: 100%;
-                overflow: hidden;
+                overflow-y: auto;
+                overflow-x: hidden;
                 position: relative;
-                display: flex;
+                display: block;
+                background: #ffffff;
+                border: 1px solid #d8dde6;
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+                scrollbar-width: thin;
+                scrollbar-color: #c8102e #eef1f4;
+            }
+
+            .staff-carousel-viewport::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            .staff-carousel-viewport::-webkit-scrollbar-track {
+                background: #eef1f4;
+            }
+
+            .staff-carousel-viewport::-webkit-scrollbar-thumb {
+                background: #c8102e;
+                border-radius: 8px;
+            }
+
+            .docentes-superior-tabla {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                font-family: 'DM Sans', sans-serif;
+            }
+
+            .docentes-superior-tabla thead th {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background: var(--site-blue, #17365d);
+                color: #ffffff;
+                padding: 12px 10px;
+                text-align: left;
+                font-weight: 700;
+                border-bottom: 2px solid var(--site-gold, #e5b72f);
+            }
+
+            .docentes-superior-tabla tbody td {
+                padding: 10px 12px;
+                border-bottom: 1px solid #d9dde3;
+                color: var(--site-ink, #17202a);
+                vertical-align: top;
+            }
+
+            .docentes-superior-tabla tbody tr:nth-child(even) {
+                background: #f9fafb;
+            }
+
+            .docentes-superior-tabla tbody tr:hover {
+                background: #eef4f8;
             }
 
             .staff-carousel-track {
