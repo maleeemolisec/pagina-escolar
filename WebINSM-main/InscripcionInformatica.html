@@ -374,11 +374,13 @@
 				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
 				body: JSON.stringify(data),
 			})
-				.then((response) => {
+				.then(async (response) => {
 					if (response.ok) {
 						responseDiv.textContent = '¡Gracias! Recibimos tu inscripción a Informática, nos pondremos en contacto a la brevedad.';
 						responseDiv.classList.add('response-success');
 						form.reset();
+						await window.cerrarSesionInstitucional();
+						window.location.reload();
 					} else {
 						throw new Error('Error en la respuesta del servidor');
 					}
