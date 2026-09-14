@@ -1345,6 +1345,94 @@
                 left: 0;
                 top: 0;
             }
+
+            /* --- Estilo: Tabla de docentes con scroll --- */
+            .teachers-table-wrapper {
+                background: #fff;
+                border: 1px solid #dfe5ea;
+                border-radius: 18px;
+                box-shadow: 0 6px 20px rgba(17, 35, 54, 0.06);
+                padding: 18px 18px 12px;
+            }
+            .teachers-scroll {
+                max-height: 420px;
+                overflow-y: auto;
+                border: 1px solid #edf1f5;
+                border-radius: 12px;
+                background: #f9fafc;
+                scrollbar-width: thin;
+                scrollbar-color: #cf0621 #edf1f5;
+            }
+            .teachers-scroll::-webkit-scrollbar {
+                width: 12px;
+            }
+            .teachers-scroll::-webkit-scrollbar-track {
+                background: #edf1f5;
+                border-radius: 10px;
+            }
+            .teachers-scroll::-webkit-scrollbar-thumb {
+                background: linear-gradient(180deg, #cf0621, #f39c12);
+                border-radius: 10px;
+                border: 2px solid #edf1f5;
+            }
+            .teachers-table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+                min-width: 620px;
+                font-family: 'ProximaNova', sans-serif;
+            }
+            .teachers-table thead th {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+                background: #102d43;
+                color: #fff;
+                font-family: 'Heuristica', serif;
+                font-size: 1.08em;
+                letter-spacing: 0.04em;
+                text-transform: none;
+                padding: 14px 16px;
+                text-align: left;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+            }
+            .teachers-table tbody td {
+                padding: 12px 16px;
+                vertical-align: top;
+                border-bottom: 1px solid #edf1f5;
+                color: #444;
+                font-size: 0.97em;
+                line-height: 1.5;
+            }
+            .teachers-table tbody tr:nth-child(even) td {
+                background: rgba(16, 45, 67, 0.02);
+            }
+            .teachers-table tbody tr:hover td {
+                background: rgba(243, 156, 18, 0.06);
+            }
+            .teachers-table .num-col {
+                width: 70px;
+                text-align: center;
+                font-weight: bold;
+                color: #102d43;
+            }
+            .teachers-table .name-col {
+                min-width: 270px;
+                font-weight: 600;
+                color: #1a2d3d;
+            }
+            .teachers-table .subjects-col {
+                min-width: 320px;
+            }
+            .teachers-table .subjects-col span {
+                display: inline-block;
+                background: rgba(16, 45, 67, 0.05);
+                border-radius: 999px;
+                padding: 5px 10px;
+                margin: 2px 6px 2px 0;
+                color: #374b5d;
+                font-size: 0.9em;
+            }
             @media (max-width: 600px) {
                 .plan-year summary {
                     font-size: 1.1em;
@@ -1353,6 +1441,12 @@
                 .plan-year-content {
                     padding: 0 18px 20px 18px;
                     gap: 20px;
+                }
+                .teachers-table-wrapper {
+                    padding: 12px 10px 10px;
+                }
+                .teachers-scroll {
+                    max-height: 350px;
                 }
             }
 
@@ -2465,6 +2559,97 @@
                                         </div>
                                     </div>
                                 </details>
+                            </div>
+                        </div>
+
+                        <div id="docentes-superior" class="content-block">
+                            <h2>Docentes de Nivel Superior</h2>
+                            <div class="teachers-table-wrapper">
+                                <div class="teachers-scroll">
+                                    <table class="teachers-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="num-col">N°</th>
+                                                <th class="name-col">Apellido y Nombre</th>
+                                                <th class="subjects-col">Espacios Curriculares</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="num-col">1</td>
+                                                <td class="name-col">ALDERETE, MARINA ANDREA</td>
+                                                <td class="subjects-col"><span>Didáctica General</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">2</td>
+                                                <td class="name-col">BIANCHI, MARCELA NARCIZA</td>
+                                                <td class="subjects-col"><span>Práctica docente IV</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">3</td>
+                                                <td class="name-col">DE YONG, MARÍA MACARENA</td>
+                                                <td class="subjects-col"><span>Educación Sexual Integral</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">4</td>
+                                                <td class="name-col">DELLAROSSA, ANTONELA MERCEDES</td>
+                                                <td class="subjects-col">
+                                                    <span>Ciencias Naturales y su Didáctica I</span>
+                                                    <span>Ciencias Naturales y su Didáctica II</span>
+                                                    <span>Taller de Ciencias</span>
+                                                    <span>Tutorías y Ateneos de Cs. Naturales</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">5</td>
+                                                <td class="name-col">DIAZ, NANCY MARIEL</td>
+                                                <td class="subjects-col">
+                                                    <span>Lenguaje Artístico Expresivo</span>
+                                                    <span>Educación Artístico Expresiva</span>
+                                                    <span>Psicología y Educación</span>
+                                                    <span>Filosofía y Educación</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">6</td>
+                                                <td class="name-col">GARBELLOTTO, TANIA LORENA</td>
+                                                <td class="subjects-col">
+                                                    <span>Alfabetización Inicial</span>
+                                                    <span>Tutorías y Ateneos de Cs. Naturales</span>
+                                                    <span>Problemáticas y Desafíos del Nivel Primario</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">7</td>
+                                                <td class="name-col">GASTALDELLO, MARISA BEL DE VALLE</td>
+                                                <td class="subjects-col">
+                                                    <span>Seminario de Ruralidad</span>
+                                                    <span>Trabajo de Campo</span>
+                                                    <span>Inglés I</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">8</td>
+                                                <td class="name-col">GONZALEZ RENÉE, LOURDES</td>
+                                                <td class="subjects-col">
+                                                    <span>Inglés II</span>
+                                                    <span>Inglés III</span>
+                                                    <span>Didáctica de la Práctica</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">9</td>
+                                                <td class="name-col">MARTÍNEZ, MÓNICA</td>
+                                                <td class="subjects-col"><span>Práctica docente III</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="num-col">10</td>
+                                                <td class="name-col">PEREZ, GABRIELA</td>
+                                                <td class="subjects-col"><span>Formación General</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 

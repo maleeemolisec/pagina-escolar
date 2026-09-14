@@ -2,13 +2,13 @@
 	"hero": {
 		"titleLine1": "Donde nace",
 		"titleLine2": "la magia",
-		"backgroundImage": "../img/Cooperativa 1.jpg"
+			   "backgroundImage": "../../../img/Cooperativa 1.jpg"
 	},
 	"general": {
 		"date": "27 Noviembre 2025",
 		"summary": "\"Una mirada nostálgica a la tradición de los eventos escolares de cierre de año, donde se reunían creatividad, música, arte y la comunidad educativa en una noche especial.\"",
 		"detail": "El evento \"Donde nace la magia\" es un recuerdo vivo de la tradición escolar: un encuentro que reunió a estudiantes, familias y docentes para celebrar el cierre del ciclo lectivo con arte, movimiento y mucho espíritu mercedario. Con el paso de los años, esta propuesta se convirtió en una cita memorable para la comunidad.<br><br>En la actualidad, se lo revaloriza como un archivo emotivo de la historia del colegio, en el que se reconoce la continuidad de una tradición que sigue viva en la memoria colectiva.",
-		"image": "../img/20250805_124634[1].jpg"
+			  "image": "../../../img/20250805_124634[1].jpg"
 	},
 	"academic": {
 		"value1": "Tradición escolar",
@@ -17,11 +17,11 @@
 		"icon3": "fas fa-music"
 	},
 	"gallery": [
-		"../img/Colacion.jpg",
-		"../img/Convivencia.jpg",
-		"../img/DEPORTE.jpg",
-		"../img/Deporte 1.jpg",
-		"../img/Historia.jpg",
-		"../img/21 de septiembre.jpg"
+			  "../../../img/Colacion.jpg",
+			  "../../../img/Convivencia.jpg",
+			  "../../../img/DEPORTE.jpg",
+			  "../../../img/Deporte 1.jpg",
+			  "../../../img/Historia.jpg",
+			  "../../../img/21 de septiembre.jpg"
 	]
 }

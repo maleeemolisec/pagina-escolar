@@ -2,18 +2,34 @@
   "hero": {
     "titleLine1": "CEM",
     "titleLine2": "Comunidad educativa",
+<<<<<<< HEAD
     "backgroundImage": "../img/cem.png"
+=======
+    "backgroundImage": "../../../img/cem.jpg"
+>>>>>>> c492081 (Actualizacion)
   },
   "general": {
     "date": "2024",
     "summary": "Proyecto institucional que articula la participación de la comunidad, la formación y la construcción de espacios de encuentro y reflexión compartida.",
     "detail": "CEM se presenta como una propuesta de integración y participación dentro de la comunidad educativa. A través de distintas actividades y encuentros, se fortalece la relación entre estudiantes, docentes y familias, promoviendo una experiencia educativa más cercana y participativa.<br><br>La propuesta pone el foco en la construcción colectiva de proyectos y experiencias que fortalezcan el sentido de pertenencia y la identidad institucional.",
+<<<<<<< HEAD
     "image": "../img/cem.png"
+=======
+    "image": "../../../img/cem.jpg"
+>>>>>>> c492081 (Actualizacion)
   },
   "academic": {
     "value1": "Comunidad escolar",
     "value2": "Docentes y familias",
     "value3": "Participación",
     "icon3": "fas fa-users"
+<<<<<<< HEAD
   }
+=======
+  },
+  "gallery": [
+    "../../../img/cem.jpg",
+    "../../../img/Convivencia.jpg"
+  ]
+>>>>>>> c492081 (Actualizacion)
 }

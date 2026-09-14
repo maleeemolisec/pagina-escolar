@@ -2,13 +2,13 @@
 	"hero": {
 		"titleLine1": "Archivo institucional",
 		"titleLine2": "Eventos de años anteriores",
-		"backgroundImage": "../img/Cooperativa 1.jpg"
+			   "backgroundImage": "../../../img/Cooperativa 1.jpg"
 	},
 	"general": {
 		"date": "5 de Diciembre 2024",
 		"summary": "\"Años anteriores nos recuerdan una tradición escolar muy querida: encuentros artísticos, celebraciones comunitarias y momentos de orgullo institucional.\"",
 		"detail": "En estas ediciones previas, la escuela abría sus puertas para celebrar a la comunidad con música, arte, creatividad y participación de estudiantes y familias. Los eventos de cierre de año se convirtieron en recuerdos compartidos y en una prueba del sentido de pertenencia que atraviesa al colegio.<br><br>Hoy estos momentos se valoran como un archivo vivo de la historia institucional, cargado de nostalgia, cariño y orgullo mercedario.",
-		"image": "../img/20240531_163148[1].jpg"
+			  "image": "../../../img/20240531_163148[1].jpg"
 	},
 	"academic": {
 		"value1": "Historia escolar",
@@ -17,11 +17,11 @@
 		"icon3": "fas fa-heart"
 	},
 	"gallery": [
-		"../img/Colacion.jpg",
-		"../img/Convivencia.jpg",
-		"../img/DEPORTE.jpg",
-		"../img/Deporte 1.jpg",
-		"../img/Historia.jpg",
-		"../img/21 de septiembre.jpg"
+			  "../../../img/Colacion.jpg",
+			  "../../../img/Convivencia.jpg",
+			  "../../../img/DEPORTE.jpg",
+			  "../../../img/Deporte 1.jpg",
+			  "../../../img/Historia.jpg",
+			  "../../../img/21 de septiembre.jpg"
 	]
 }

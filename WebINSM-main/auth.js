@@ -19,6 +19,7 @@ const firebaseConfig = {
 
 const auth = getAuth(initializeApp(firebaseConfig));
 const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
 const DOMINIO_INSTITUCIONAL = "@institutolamerced.edu.ar";
 
 let currentUser = null;
@@ -37,9 +38,8 @@ function validarUsuarioInstitucional(user) {
 }
 
 window.obtenerUsuarioInstitucional = async function () {
-  if (currentUser) {
-    return validarUsuarioInstitucional(currentUser);
-  }
+  currentUser = null;
+  await signOut(auth);
 
   const result = await signInWithPopup(auth, provider);
   const user = result.user;
@@ -50,4 +50,9 @@ window.obtenerUsuarioInstitucional = async function () {
     await signOut(auth);
     throw error;
   }
+};
+
+window.cerrarSesionInstitucional = async function () {
+  currentUser = null;
+  await signOut(auth);
 };

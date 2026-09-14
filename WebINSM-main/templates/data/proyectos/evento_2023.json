@@ -2,13 +2,13 @@
 	"hero": {
 		"titleLine1": "Eventos anteriores",
 		"titleLine2": "Fashion Blooms",
-		"backgroundImage": "../img/historia.jpg"
+			   "backgroundImage": "../../../img/Historia.jpg"
 	},
 	"general": {
 		"date": "6 de Diciembre 2023",
 		"summary": "\"Un recuerdo nostálgico de una de las primeras ediciones de los eventos de cierre de año, donde la moda, el arte y la participación escolar se fusionaron en una propuesta muy especial.\"",
 		"detail": "En sus primeros años, este evento comenzó como una propuesta de cierre de ciclo con un fuerte componente artístico y comunitario. La presencia de estudiantes, familias y docentes convirtió la noche en un momento de encuentro y celebración, dejando un legado de creatividad y memoria escolar.<br><br>Hoy se recuerda como una de las primeras instancias en las que el colegio dio lugar a la expresión artística, la creatividad y la unión de la comunidad mercedaria.",
-		"image": "../img/20250805_124634[1].jpg"
+			  "image": "../../../img/20250805_124634[1].jpg"
 	},
 	"academic": {
 		"value1": "Archivo escolar",
@@ -17,11 +17,11 @@
 		"icon3": "fas fa-music"
 	},
 	"gallery": [
-		"../img/Colacion.jpg",
-		"../img/Convivencia.jpg",
-		"../img/DEPORTE.jpg",
-		"../img/Deporte 1.jpg",
-		"../img/Historia.jpg",
-		"../img/21 de septiembre.jpg"
+			  "../../../img/Colacion.jpg",
+			  "../../../img/Convivencia.jpg",
+			  "../../../img/DEPORTE.jpg",
+			  "../../../img/Deporte 1.jpg",
+			  "../../../img/Historia.jpg",
+			  "../../../img/21 de septiembre.jpg"
 	]
 }

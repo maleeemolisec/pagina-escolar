@@ -2,13 +2,13 @@
     "hero": {
         "titleLine1": "Revista EME",
         "titleLine2": "Edición N° 17",
-        "backgroundImage": "../img/revista_eme_2025.png"
+        "backgroundImage": "../../../img/revista_eme_2025.png"
     },
     "general": {
         "date": "19 de Noviembre de 2025",
         "summary": "\"La edición N° 17 de la Revista EME fue producida por la Promoción 2025 de Humanidades, como resultado de un proceso colectivo de investigación, escritura y producción editorial.\"",
         "detail": "A lo largo de este proyecto, los alumnos redactaron y desarrollaron temáticas que los representaron, reflejando sus miradas, inquietudes y aprendizajes construidos durante el año.<br><br>El trabajo fue acompañado y guiado por las profesoras Milagros Bergonzo e Ivana Lario, cuyo apoyo resultó fundamental en cada etapa del proceso. Esta edición consolida la revista como una expresión editorial del trabajo, la creatividad y la identidad de la promoción.",
-        "image": "../img/agredecimientos_revista_eme_2025.png"
+        "image": "../../../img/agredecimientos_revista_eme_2025.png"
     },
     "academic": {
         "value1": "Promoción 2025 Humanidades",
@@ -17,11 +17,11 @@
         "icon3": "fas fa-book-open"
     },
     "gallery": [
-        "../img/tapa_revista_eme_2025.png",
-        "../img/contratapa_revista_eme_2025.png",
-        "../img/img1_eme_2025.png",
-        "../img/img2_eme_2025.png",
-        "../img/img3_eme_2025.png"
+        "../../../img/tapa_revista_eme_2025.png",
+        "../../../img/contratapa_revista_eme_2025.png",
+        "../../../img/img1_eme_2025.png",
+        "../../../img/img2_eme_2025.png",
+        "../../../img/img3_eme_2025.png"
     ],
     "resources": [
         {

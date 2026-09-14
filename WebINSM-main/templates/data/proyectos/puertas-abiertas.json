@@ -1,17 +1,35 @@
 {
   "hero": {
     "titleLine1": "Jornada de",
+<<<<<<< HEAD
     "titleLine2": "Puertas Abiertas"
+=======
+    "titleLine2": "Puertas Abiertas",
+    "backgroundImage": "../../../img/puertas_abiertas.jpg"
+>>>>>>> c492081 (Actualizacion)
   },
   "general": {
     "date": "2025",
     "summary": "Evento institucional pensado para abrir las puertas del colegio y compartir con familias y comunidad la propuesta educativa, las instalaciones y la vida del establecimiento.",
+<<<<<<< HEAD
     "detail": "La Jornada de Puertas Abiertas invita a la comunidad a recorrer el colegio, conocer sus espacios, dialogar con docentes y familiarizarse con la identidad institucional. Es una oportunidad para mostrar el trabajo diario, los proyectos y la cultura escolar con la que se forman los estudiantes.<br><br>La actividad fortalece el vínculo entre familia, comunidad y escuela, y permite que cada participante conozca de cerca la experiencia educativa del Instituto."
+=======
+    "detail": "La Jornada de Puertas Abiertas invita a la comunidad a recorrer el colegio, conocer sus espacios, dialogar con docentes y familiarizarse con la identidad institucional. Es una oportunidad para mostrar el trabajo diario, los proyectos y la cultura escolar con la que se forman los estudiantes.<br><br>La actividad fortalece el vínculo entre familia, comunidad y escuela, y permite que cada participante conozca de cerca la experiencia educativa del Instituto.",
+    "image": "../../../img/puertas_abiertas.jpg"
+>>>>>>> c492081 (Actualizacion)
   },
   "academic": {
     "value1": "Familias y comunidad",
     "value2": "Equipo docente",
     "value3": "Comunidad educativa",
     "icon3": "fas fa-door-open"
+<<<<<<< HEAD
   }
+=======
+  },
+  "gallery": [
+    "../../../img/puertas_abiertas.jpg",
+    "../../../img/Convivencia.jpg"
+  ]
+>>>>>>> c492081 (Actualizacion)
 }
